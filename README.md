@@ -8,8 +8,13 @@ The following figure illustrates various pipelines for migrating models, dependi
   <img src="figs/overview.png" alt="Research domain model" width="700"/>
 </div>
 
-# Requirements
+This project runs with Python 3.9+. You can clone the repository and install the requirements.txt
 
+```bash
+$ pip install requirements.txt
+```
+
+Check some [examples here](examples)
 
 
 
