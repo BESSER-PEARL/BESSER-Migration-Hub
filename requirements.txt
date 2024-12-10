@@ -1,3 +1,6 @@
 Jinja2==3.1.2
 besser==1.4.1
 openpyxl==3.1.5
+pandas==2.2.2
+openai==1.35.14
+jsonify==0.5

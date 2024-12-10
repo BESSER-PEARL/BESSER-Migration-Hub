@@ -1,5 +1,6 @@
 from besser.BUML.metamodel.structural import DomainModel
 from migrator.parsers.mendix import mendix_to_buml
+from migrator.parsers.powerapps import powerapps_to_buml
 
 class ModelMigrator:
     """Represents the migration process for a model from a low-code platform (LCP) to BESSER.
@@ -16,10 +17,11 @@ class ModelMigrator:
         module_name (str): The name of the module.
     """
 
-    def __init__(self, lcp: str, model_path: str, module_name: str):
+    def __init__(self, lcp: str, model_path: str, module_name: str, openai_token: str):
         self.lcp: str = lcp
         self.model_path: str = model_path
         self.module_name: str = module_name
+        self.openai_token: str = openai_token
 
     # Getter and Setter for lcp
     @property
@@ -61,6 +63,12 @@ class ModelMigrator:
             domain_model : DomainModel = mendix_to_buml(
                                             json_path=self.model_path,
                                             module_name=self.module_name
+                                            )
+        elif self.lcp == "powerapps":
+            domain_model : DomainModel = powerapps_to_buml(
+                                            image_path=self.model_path,
+                                            csv_paths=self.module_name,
+                                            openai_token=self.openai_token
                                             )
         else:
             raise ValueError("Low code platform not supported")

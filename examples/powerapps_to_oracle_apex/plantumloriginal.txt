@@ -1,0 +1,22 @@
+@startuml
+
+class cr2a7_library {
+    address: str
+    cr2a7_has: str
+}
+
+class cr2a7_book {
+    title: str
+    pages: int
+    release: str
+}
+
+class cr2a7_author {
+    name: str
+    memberType: str
+}
+
+cr2a7_library "1" -- "*" cr2a7_book : contains >
+cr2a7_book "1" -- "*" cr2a7_author : written by >
+
+@enduml
