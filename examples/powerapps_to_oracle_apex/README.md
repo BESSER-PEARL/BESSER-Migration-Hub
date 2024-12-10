@@ -1,27 +1,45 @@
 # Migrating a data model from Mendix to PowerApps
 
-This is an example of migrating a simple library data model designed in Mendix:
+This is an example of migrating a simple library data model designed in PowerApps:
 
 <div align="center">
-  <img src="../../figs/mendix_model.png" alt="Mendix model" width="400"/>
+  <img src="library.png" alt="PowerApps model" width="400"/>
 </div>
 
-Using the [MPR Dump feature of Mendix](https://docs.mendix.com/refguide/mx-command-line-tool/dump-mpr/), export your project in JSON format.
+Additionally, we exported the individual tables as CSV files using PowerApps' export functionalities. 
 
-Then, transform the data model using the JSON file into a B-UML model as shown below.
+Then, transform the data model using the image and the csv files into a B-UML model as shown below.
 
 ```python
 from besser.BUML.metamodel.structural import DomainModel
 from migrator import ModelMigrator
 
 # Parse json Mendix model to B-UML model
-model_migrator: ModelMigrator  = ModelMigrator(lcp="mendix", 
-                                            model_path="library.json", 
-                                            module_name="MyFirstModule")
+import configparser
+
+from besser.BUML.metamodel.structural import DomainModel
+from besser.utilities import buml_code_builder
+from besser.generators.sql.sql_generator import SQLGenerator
+from migrator import ModelMigrator
+
+# Load configuration
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# Access the token
+openai_token = config['DEFAULT']['OPENAI_TOKEN']
+
+
+# Parse screenshot of PowerApps model with csv files of tables to B-UML model
+model_migrator: ModelMigrator  = ModelMigrator(lcp="powerapps", 
+                                            model_path="library.png",
+                                            module_name=["author.csv", "book.csv", "library.csv"],
+                                            openai_token = openai_token
+                                            )
 buml_model: DomainModel = model_migrator.domain_model()
 ```
 
-Where `model_path` is the path of the JSON file, `module_name` the name of the module containing the domain model, and `buml_model` is the B-UML model obtained.
+Where `image_path` is the path of the JSON file, `module_name` is a list of paths to the exported CSV files, and `buml_model` is the B-UML model obtained.
 
 If you need the Python base code for your B-UML model, for example, to modify or complete the data model, you can use this function:
 
@@ -33,20 +51,20 @@ buml_code_builder.domain_model_to_code(model=buml_model, file_path="output/buml_
 
 The file [output/buml_model.py](output/buml_model.py) will be generated, containing the code to define the model in B-UML.
 
-Now that we have the B-UML model, we can use a generator to transform it and obtain the data model for importing into another LCP. For example, let's use the spreadsheet generator.
+Now that we have the B-UML model, we can use a generator to transform it and obtain the data model for importing into another LCP. For example, let's use the SQL generator and choose "oracle" as the sql_dialect.
 
 ```python
-from migrator.generators.spreadsheet import SpreadSheetGenerator
+from besser.generators.sql.sql_generator import SQLGenerator
 
-# Generate Spreadsheet
-generator = SpreadSheetGenerator(model=buml_model)
+# Generate the Oracle SQL code
+generator = SQLGenerator(model=buml_model, sql_dialect="oracle")
 generator.generate()
 ```
 
-The [model.xlsx](output/model.xlsx) should be generated. You can check the complete code for this example in the [migrate.py](migrate.py) script.
+The [tables.sql](output/tables.sql) should be generated. You can check the complete code for this example in the [migrate.py](migrate.py) script.
 
-This spreadsheet can be imported into other LCPs, such as PowerApps, to generate a data model as shown below. Note that the model lacks associations, which must be manually added by the user.
+This SQL file with the oracle dialect can be imported into Oracle Apex to generate a data model as shown below.
 
 <div align="center">
-  <img src="../../figs/powerapps_model.png" alt="PowerApps model" width="400"/>
+  <img src="../../figs/oracle_apex_model.png" alt="PowerApps model" width="300"/>
 </div>
