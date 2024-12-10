@@ -1,8 +1,5 @@
 import configparser
 
-import sys
-sys.path.append("C:/Users/conrardy/Desktop/git/BESSER-Migration-Hub")
-
 from besser.BUML.metamodel.structural import DomainModel
 from besser.utilities import buml_code_builder
 from besser.generators.sql.sql_generator import SQLGenerator
