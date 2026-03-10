@@ -2,19 +2,44 @@
 
 This repository host a solution based on [BESSER](https://github.com/BESSER-PEARL/BESSER.git) to improve the interoperability of Low Code Platforms (LCPs) by (semi)automatically migrating models specified in one platform to another one.
 
-The following figure illustrates various pipelines for migrating models, depending on the LCP's export/import capabilities and supported data formats.
+The following figure illustrates the migration pipelines supported by the framework, depending on the LCP export/import capabilities and supported formats, covering both structural (domain model) and GUI model migration.
 
 <div align="center">
   <img src="figs/overview.png" alt="Research domain model" width="700"/>
 </div>
 
-This project runs with Python 3.9+. You can clone the repository and install the requirements.txt
+This project targets **Python 3.9+** (3.11 is recommended) and uses the
+[BESSER](https://github.com/BESSER-PEARL/BESSER.git) library to perform
+model migrations between low‑code platforms.
+
+### Getting started
 
 ```bash
-$ pip install requirements.txt
+# clone the repo
+git clone https://github.com/your-org/BESSER-Migration-Hub.git
+cd BESSER-Migration-Hub
+
+# create and activate a virtual environment (example uses venv)
+python -m venv .venv
+# Windows
+.\.venv\Scripts\activate
+# macOS/Linux
+source .venv/bin/activate
+
+# install runtime dependencies
+pip install -r requirements.txt
+
+# install BESSER
+pip install besser
 ```
 
-Check some [examples here](examples)
+After installing, you can run one of the example converters such as
+`migrator/converters/mendix_to_apex.py` or explore the `migrator`/`examples`
+folders.
+
+Refer to the `examples` directory for sample input files and usage
+scenarios.
+
 
 
 
