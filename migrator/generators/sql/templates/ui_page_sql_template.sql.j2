@@ -1,0 +1,353 @@
+prompt --application/set_environment
+set define off verify off feedback off
+whenever sqlerror exit sql.sqlcode rollback
+--------------------------------------------------------------------------------
+--
+-- Oracle APEX export file
+--
+-- You should run this script using a SQL client connected to the database as
+-- the owner (parsing schema) of the application or as a database user with the
+-- APEX_ADMINISTRATOR_ROLE role.
+--
+-- This export file has been automatically generated. Modifying this file is not
+-- supported by Oracle and can lead to unexpected application and/or instance
+-- behavior now or in the future.
+--
+-- NOTE: Calls to apex_application_install override the defaults below.
+--
+--------------------------------------------------------------------------------
+begin
+wwv_flow_imp.import_begin (
+p_version_yyyy_mm_dd=>'2024.11.30',
+p_release=>'24.2.6',
+p_default_workspace_id=>63287066999237619267,
+p_default_application_id=>{{app_id}},
+p_default_id_offset=>0,
+p_default_owner=>'WKSP_{{workspace_name|replace('_', '')|upper}}'
+);
+end;
+/
+
+prompt APPLICATION {{app_id}} - {{gui_model.name}}
+
+begin
+null;
+end;
+/
+
+prompt --application/pages/delete_000{{screen_number}}
+begin
+wwv_flow_imp_page.remove_page (p_flow_id=>wwv_flow.g_flow_id, p_page_id=>{{screen_number}});
+end;
+/
+
+
+
+{%-if screen %}
+
+
+
+prompt --application/pages/page_000{{screen_number}}
+begin
+wwv_flow_imp_page.create_page(
+ p_id=>{{screen_number}},
+{%- for component in screen.view_elements %}
+        {%- if component is is_List%}
+            {%- for source in component.list_sources%}
+                {%- if source is is_ModelElement%}
+                {# dataSourceClass may be an object OR a string #}
+                  {% if source.dataSourceClass is string %}
+                     {% set ds_name = source.dataSourceClass %}
+                  {% else %}
+                     {% set ds_name = source.dataSourceClass.name %}
+                  {% endif %}
+                     {% set data_source_name_lower = ds_name[0].lower() + ds_name[1:] %}
+                     {% set data_source_name_upper = ds_name[0].upper() + ds_name[1:] %}
+
+p_name=>'{{data_source_name_upper}}',
+p_alias=>'{{ data_source_name_upper | upper }}1',
+p_step_title=>'{{data_source_name_upper}}',
+p_autocomplete_on_off=>'OFF',
+p_page_template_options=>'#DEFAULT#',
+p_protection_level=>'C',
+p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'<p>To find data enter a search term into the search dialog, or click on the column headings to limit the records returned.</p>',
+'',
+'<p>You can perform numerous functions by clicking the <strong>Actions</strong> button. This includes selecting the columns that are displayed / hidden and their display sequence, plus numerous data and format functions.  You can also define additiona'
+||'l views of the data using the chart, group by, and pivot options.</p>',
+'',
+'<p>If you want to save your customizations select report, or click download to unload the data. Enter you email address and time frame under subscription to be sent the data on a regular basis.<p>',
+'',
+'<p>For additional information click Help at the bottom of the Actions menu.</p> ',
+'',
+'<p>Click the <strong>Reset</strong> button to reset the interactive report back to the default settings.</p>')),
+p_page_component_map=>'18'
+);
+
+
+wwv_flow_imp_page.create_page_plug(
+p_id => {{plug_id}},
+p_plug_name=>'{{data_source_name_upper}}s',
+p_region_template_options=>'#DEFAULT#',
+p_plug_display_sequence=>10,
+p_query_type=>'TABLE',
+p_query_table=>'{{ data_source_name_upper | upper }}',
+p_include_rowid_column=>false,
+p_plug_source_type=>'NATIVE_IR',
+p_prn_page_header=>'{{data_source_name_upper}}'
+);
+
+-- for row in list
+wwv_flow_imp_page.create_worksheet(
+p_name=>'{{data_source_name_upper}}'
+,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
+,p_no_data_found_message=>'No data found.'
+,p_base_pk1=>'{{ data_source_name_upper | upper }}_ID'
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_pagination_display_pos=>'BOTTOM_RIGHT'
+,p_report_list_mode=>'TABS'
+,p_lazy_loading=>false
+,p_show_detail_link=>'C'
+,p_show_notify=>'Y'
+,p_download_formats=>'CSV:HTML:XLSX:PDF'
+,p_enable_mail_download=>'Y'
+,p_detail_link=>'f?p=&APP_ID.:{{screen_number + 1}}:&APP_SESSION.::&DEBUG.:RP:P{{screen_number + 1}}_{{ data_source_name_upper | upper }}_ID:\#{{ data_source_name_upper | upper }}_ID#\'
+{%- for component in screen.view_elements %}
+    {%- if component is is_Button %}
+        {%- if component.buttonType.name == 'RaisedButton' and component.actionType.name == 'Edit'%}
+                    {%- if not component.styling %}
+
+,p_detail_link_text=>'<button class="t-Button t-Button--warning t-Button--small">{{ component.label[0].upper() + component.label[1:] }}</button>'
+            {%- else %}
+
+,p_detail_link_text=>'<button style="
+            {%- if component.styling.position%}
+            {%- set component_styling_position= component.styling.position.p_type%}
+               {%- if component.styling.position.p_type.name %}
+            position: {{ component.styling.position.p_type.name | lower }};
+               {%- endif %}
+               {%- if component.styling.position.top %}
+            top: {{ component.styling.position.top }};
+               {%- endif %}
+               {%- if component.styling.position.left %}
+            left: {{ component.styling.position.left }};
+               {%- endif %}
+               {%- if component.styling.position.bottom %}
+            bottom: {{component.styling.position.bottom}};
+               {%- endif %}
+               {%- if component.styling.position.right %}
+            right: {{component.styling.position.right}};
+               {%- endif %}
+               {%- if component.styling.position.z_index %}
+            z-index: {{component.styling.position.z_index}};
+               {%- endif%}
+               {%- if component.styling.position.alignment %}
+            text-align: {{component.styling.position.alignment}};
+               {%- endif%}
+            {%- endif%}
+            {%- if component.styling.color%}
+               {%- if component.styling.color.background_color%}
+            background-color: {{component.styling.color.background_color}};
+               {%- endif %}
+               {%- if component.styling.color.text_color%}
+            color: {{component.styling.color.text_color}};
+               {%- endif %}
+               {%- if component.styling.color.border_color%}
+            border: {{component.styling.color.border_color}};
+               {%- endif %}
+            {%- endif %}
+            {%- if component.styling.size%}
+              {%- set unit = component.styling.size.unit_size.value if component.styling.size.unit_size%}
+               {%- if component.styling.size.width%}
+            width: {{component.styling.size.width}}{{unit}};
+               {%- endif %}
+               {%- if component.styling.size.height%}
+            height: {{component.styling.size.height}}{{unit}};
+               {%- endif %}
+               {%- if component.styling.size.padding%}
+            padding: {{component.styling.size.padding}}{{unit}};
+               {%- endif %}
+               {%- if component.styling.size.font_size%}
+            font-size: {{component.styling.size.font_size}}{{unit}};
+                {%- endif %}
+                {%- if component.styling.size.margin %}
+            margin: {{ component.styling.size.margin }}{{unit}};
+               {%- endif %}
+            {%- endif %}
+">{{ component.label[0].upper() + component.label[1:] }}</button>'
+            {%- endif %}
+       {%- endif %}
+   {%- endif %}
+{%- endfor %}
+
+,p_owner=>'ATEFEH.NIRUMAND@LIST.LU'
+,p_internal_uid=>76608987145708126528
+);
+
+
+wwv_flow_imp_page.create_worksheet_column(
+p_db_column_name=>'{{ data_source_name_upper | upper }}_ID'
+,p_display_order=>0
+,p_is_primary_key=>'Y'
+,p_column_identifier=>'A'
+,p_column_label=>'{{ data_source_name_upper}} ID'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN_ESCAPE_SC'
+,p_heading_alignment=>'LEFT'
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+
+{% set ns_list = namespace(fields=[]) -%}
+{%- for component in screen.view_elements %}
+    {%- if component is is_List%}
+        {%- for source in component.list_sources%}
+            {%- if source is is_ModelElement%}
+                {%- set source_name= source.dataSourceClass%}
+                {%- set fieldsList = source.fields|list %}
+                    {% for field in fieldsList%}
+                    {# 🔑 Strip table prefix if present (Library.Address → Address) #}
+                    {% set col_name = field.name.split('.')[-1] %}
+                    {% set _ = ns_list.fields.append(col_name) -%}
+
+wwv_flow_imp_page.create_worksheet_column(
+p_db_column_name=>'{{col_name | upper}}'
+,p_display_order=>{{ loop.index0 + 2 }}
+,p_column_identifier=>'{{ chr(65 + loop.index0 + 1) }}'
+{% if component.styling%}
+,p_column_label=>'<div style="
+    color:{{ component.styling.color.text_color if component.styling.color }};
+    width:80px;
+    height:100px;
+    font-size:{{ component.styling.size.font_size if component.styling.size }}px;
+    font-weight:bold;
+    position: relative;
+    text-align: {{ component.styling.position.alignment if component.styling.position else center }};
+    z-index: 0; ">{{col_name[0].upper() + col_name[1:]}}</div>'
+{% else%}
+,p_column_label=>'{{col_name[0].upper() + col_name[1:]}}'
+{% endif %}
+,p_column_link=>'f?p=&APP_ID.:6:&APP_SESSION.::&DEBUG.:6,RR:IR_{{ data_source_name_upper | upper }}_ID:\#{{col_name | upper}}#\'
+{% if not component.styling%}
+,p_column_linktext=>'#{{col_name | upper}}#'
+{% else %}
+,p_column_linktext=>'<div style="
+    color:{{ component.styling.color.text_color if component.styling.color }};
+    width:120px;
+    height:20px;
+    font-size:{{ component.styling.size.font_size if component.styling.size }}px;
+    position: relative;
+    text-align: {{ component.styling.position.alignment if component.styling.position else center }};
+    z-index: 0; ">#{{col_name | upper}}#</div>'
+{% endif%}
+,p_column_type=>'{{ types[field.type .__class__.__name__] }}'
+{% if not component.styling%}
+,p_heading_alignment=>'LEFT'
+{% else %}
+,p_heading_alignment=>'{{component.styling.position.alignment | upper if component.styling.position else CENTER}}'
+{% endif %}
+,p_tz_dependent=>'N'
+,p_use_as_row_header=>'N'
+);
+
+                    {% endfor%}
+            {%- endif %}
+        {%- endfor %}
+    {%- endif%}
+{%- endfor%}
+
+
+
+
+
+wwv_flow_imp_page.create_worksheet_rpt(
+p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'766090505'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'{{ ns_list.fields | map("upper") | join(":") }}'
+,p_sort_column_1=>'{{ ns_list.fields[0] | upper }}'
+,p_sort_direction_1=>'ASC'
+);
+
+
+{%- for component in screen.view_elements %}
+    {%- if component is is_Button %}
+        {%- if component.buttonType.name == 'FloatingActionButton' and component.actionType.name == 'Add'%}
+
+wwv_flow_imp_page.create_page_button(
+p_button_sequence=>10,
+p_button_plug_id=>{{plug_id}},
+p_button_name=>'{{component.label | upper}}'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#{{ (component.css_classes | join(' ') | replace('btn-', '')) | upper }}#'
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'{{component.label[0].upper() + component.label[1:]}}'
+,p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'
+,p_button_redirect_url=>'f?p=&APP_ID.:{{screen_number + 1}}:&APP_SESSION.::&DEBUG.:{{screen_number + 1}}::'
+);
+
+
+       {%- endif %}
+   {%- endif %}
+{%- endfor %}
+
+
+wwv_flow_imp_page.create_page_plug(
+p_plug_name=>'Breadcrumb'
+,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>2531463326621247859
+,p_plug_display_sequence=>20
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>4072363345357175094
+);
+
+
+wwv_flow_imp_page.create_page_da_event(
+
+ p_id=>{{action_id}},  -- give it a unique ID
+ p_name=>'Edit Report - Dialog Closed',
+ p_event_sequence=>10,
+ p_triggering_element_type=>'REGION',
+ p_triggering_region_id=>{{plug_id}},
+ p_bind_type=>'bind',
+ p_execution_type=>'IMMEDIATE',
+ p_bind_event_type=>'apexafterclosedialog'
+);
+
+wwv_flow_imp_page.create_page_da_action(
+
+
+ p_id=>{{action_id}},  -- unique ID for the action
+ p_event_id=>{{action_id}},  -- link to parent DA event
+ p_event_result=>'TRUE',
+ p_action_sequence=>10,
+ p_execute_on_page_init=>'N',
+ p_action=>'NATIVE_REFRESH',
+ p_affected_elements_type=>'REGION',
+ p_affected_region_id=>{{plug_id}}
+);
+
+                {%- endif %}
+            {%- endfor %}
+        {%- endif %}
+{%- endfor %}
+
+
+{%- endif %}
+
+end;
+/
+
+prompt --application/end_environment
+begin
+wwv_flow_imp.import_end(p_auto_install_sup_obj => nvl(wwv_flow_application_install.get_auto_install_sup_obj, false)
+);
+commit;
+end;
+/
+set verify on feedback on define on
+prompt  ...done
