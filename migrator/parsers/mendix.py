@@ -92,12 +92,28 @@ def mendix_to_buml(json_path: str, module_name: str, encoding: str = "utf-16") -
         print("The JSON file is empty or does not exist.")
         return None
 
-    try:
-        with open(json_path, "r", encoding=encoding) as json_file:
-            data = json.load(json_file)
-    except (json.JSONDecodeError, OSError) as e:
-        print(f"Error reading JSON file: {e}")
+    tried_encodings = ["utf-8", "utf-16", "utf-16-le", "utf-16-be"]
+
+    data = None
+    for enc in tried_encodings:
+        try:
+            with open(json_path, "r", encoding=enc) as json_file:
+                data = json.load(json_file)
+            print(f"✅ Successfully loaded JSON using encoding: {enc}")
+            break
+        except UnicodeDecodeError as e:
+            print(f"⚠️ UnicodeDecodeError for {enc}: {e}")
+        except json.JSONDecodeError as e:
+            print(f"❌ JSONDecodeError with {enc}: {e}")
+            return None
+        except Exception as e:  # broad-exception-caught
+            print(f"❌ Unknown error with {enc}: {e}")
+            return None
+
+    if data is None:
+        print("❌ Failed to decode the JSON file with all tried encodings.")
         return None
+
 
     mx_model, enums = {}, []
     for unit in data.get("units", []):
