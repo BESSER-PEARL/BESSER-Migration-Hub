@@ -18,7 +18,9 @@ def mendix_to_buml_datatype(mendix_datetype: str) -> str:
     type_mapping = {
         "DomainModels$StringAttributeType": StringType,
         "DomainModels$IntegerAttributeType": IntegerType,
-        "DomainModels$DateTimeAttributeType": DateType
+        "DomainModels$DateTimeAttributeType": DateType,
+        "DomainModels$BooleanAttributeType": BooleanType,
+        "DomainModels$DecimalAttributeType": FloatType,
     }
     return type_mapping.get(mendix_datetype, "")
 
