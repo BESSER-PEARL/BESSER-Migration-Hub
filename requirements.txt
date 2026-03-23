@@ -1,6 +1,6 @@
 anyio>=3.0
 Jinja2==3.1.2
-besser==6.4.4
+besser==6.5.2
 openpyxl==3.1.5
 pandas==2.2.2
 openai==1.35.14
