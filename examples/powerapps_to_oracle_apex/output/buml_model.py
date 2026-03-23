@@ -54,7 +54,7 @@ contains: BinaryAssociation = BinaryAssociation(
 
 # Domain Model
 domain_model = DomainModel(
-    name="Domain Model",
+    name="DomainModel",
     types={cr2a7_book, cr2a7_library, cr2a7_author},
     associations={has, contains},
     generalizations={}
