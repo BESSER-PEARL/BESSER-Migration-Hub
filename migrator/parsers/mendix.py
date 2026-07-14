@@ -5,11 +5,27 @@ from besser.BUML.metamodel.structural import *
 def primitive_data_types() -> set[PrimitiveDataType]:
     return {PrimitiveDataType("int"), PrimitiveDataType("str"), PrimitiveDataType("datetime")}
 
+def _get_enum_literal_name(literal: dict) -> str:
+    """Extracts the display name for a Mendix enumeration literal.
+
+    Mendix prefixes some enum values with '_' to avoid reserved-word
+    conflicts (e.g. '_New').  We prefer the human-readable caption
+    (English translation) when available; otherwise we strip any
+    leading underscore from the internal name.
+    """
+    caption = literal.get("caption")
+    if caption:
+        for t in caption.get("translations", []):
+            if t.get("languageCode") == "en_US" and t.get("text"):
+                return t["text"]
+    name = literal.get("name", "")
+    return name.lstrip("_") if name.startswith("_") else name
+
 def build_enums(enums: list[dict[str, Any]]) -> set[Enumeration]:
     """Builds enumerations from Mendix JSON data."""
     enumerations = set()
     for enum in enums:
-        literals = {EnumerationLiteral(name=literal.get("name")) for literal in enum.get("values", [])}
+        literals = {EnumerationLiteral(name=_get_enum_literal_name(literal)) for literal in enum.get("values", [])}
         enumerations.add(Enumeration(name=enum.get("name"), literals=literals))
     return enumerations
 

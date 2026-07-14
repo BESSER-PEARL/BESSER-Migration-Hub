@@ -334,11 +334,24 @@ def extract_data_lists(unit):
                         if not entity_name == "UnnamedEntity":
                             data_source_class_name = entity_name.split('.')[1]
 
+
+
+                    # Try to derive a meaningful name
+                    name = (
+                         data_source_class_name
+                         or (fields[0] if fields else None)
+                         or (unit.get("entity") if isinstance(unit, dict) else None)
+                    )
+
+                    # Final fallback
+                    if not name or not str(name).strip():
+                         name = "DataSource"
+
                     data_source = DataSourceElement(
-                        name="",
+                        name=name.strip(),
                         dataSourceClass=data_source_class_name,
                         fields=fields
-                    )
+                   )
                     list_sources.add(data_source)
 
 

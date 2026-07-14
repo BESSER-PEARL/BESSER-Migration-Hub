@@ -18,8 +18,8 @@ whenever sqlerror exit sql.sqlcode rollback
 --------------------------------------------------------------------------------
 begin
 wwv_flow_imp.import_begin (
-p_version_yyyy_mm_dd=>'2024.11.30',
-p_release=>'24.2.6',
+p_version_yyyy_mm_dd=>'{{apex_version}}',
+p_release=>'{{apex_release}}',
 p_default_workspace_id=>63287066999237619267,
 p_default_application_id=>{{app_id}},
 p_default_id_offset=>0,
@@ -63,9 +63,10 @@ wwv_flow_imp_page.create_page(
                   {% endif %}
                      {% set data_source_name_lower = ds_name[0].lower() + ds_name[1:] %}
                      {% set data_source_name_upper = ds_name[0].upper() + ds_name[1:] %}
+                     {% set pk_column = 'ID' %}
 
 p_name=>'{{data_source_name_upper}}',
-p_alias=>'{{ data_source_name_upper | upper }}1',
+p_alias=>'{{ data_source_name_upper | upper }}_P{{ screen_number }}',
 p_step_title=>'{{data_source_name_upper}}',
 p_autocomplete_on_off=>'OFF',
 p_page_template_options=>'#DEFAULT#',
@@ -102,7 +103,7 @@ wwv_flow_imp_page.create_worksheet(
 p_name=>'{{data_source_name_upper}}'
 ,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
 ,p_no_data_found_message=>'No data found.'
-,p_base_pk1=>'{{ data_source_name_upper | upper }}_ID'
+,p_base_pk1=>'{{ pk_column }}'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_report_list_mode=>'TABS'
@@ -111,7 +112,7 @@ p_name=>'{{data_source_name_upper}}'
 ,p_show_notify=>'Y'
 ,p_download_formats=>'CSV:HTML:XLSX:PDF'
 ,p_enable_mail_download=>'Y'
-,p_detail_link=>'f?p=&APP_ID.:{{screen_number + 1}}:&APP_SESSION.::&DEBUG.:RP:P{{screen_number + 1}}_{{ data_source_name_upper | upper }}_ID:\#{{ data_source_name_upper | upper }}_ID#\'
+,p_detail_link=>'f?p=&APP_ID.:{{screen_number + 1}}:&APP_SESSION.::&DEBUG.:RP:P{{screen_number + 1}}_{{ pk_column }}:\#{{ pk_column }}#\'
 {%- for component in screen.view_elements %}
     {%- if component is is_Button %}
         {%- if component.buttonType.name == 'RaisedButton' and component.actionType.name == 'Edit'%}
@@ -181,16 +182,16 @@ p_name=>'{{data_source_name_upper}}'
 {%- endfor %}
 
 ,p_owner=>'ATEFEH.NIRUMAND@LIST.LU'
-,p_internal_uid=>76608987145708126528
+,p_internal_uid=>{{worksheet_uid}}
 );
 
 
 wwv_flow_imp_page.create_worksheet_column(
-p_db_column_name=>'{{ data_source_name_upper | upper }}_ID'
+p_db_column_name=>'{{ pk_column }}'
 ,p_display_order=>0
 ,p_is_primary_key=>'Y'
 ,p_column_identifier=>'A'
-,p_column_label=>'{{ data_source_name_upper}} ID'
+,p_column_label=>'ID'
 ,p_column_type=>'NUMBER'
 ,p_display_text_as=>'HIDDEN_ESCAPE_SC'
 ,p_heading_alignment=>'LEFT'
@@ -204,14 +205,30 @@ p_db_column_name=>'{{ data_source_name_upper | upper }}_ID'
         {%- for source in component.list_sources%}
             {%- if source is is_ModelElement%}
                 {%- set source_name= source.dataSourceClass%}
+                {%- if source_name is string %}{%- set ds_class_name = source_name %}{%- else %}{%- set ds_class_name = source_name.name %}{%- endif %}
+                {%- set ds_cls = model.get_class_by_name(ds_class_name) %}
                 {%- set fieldsList = source.fields|list %}
                     {% for field in fieldsList%}
                     {# 🔑 Strip table prefix if present (Library.Address → Address) #}
                     {% set col_name = field.name.split('.')[-1] %}
-                    {% set _ = ns_list.fields.append(col_name) -%}
+                    {% set db_col_name = col_name | oracle_col_name %}
+                    {# ── Guard: only emit columns that actually exist in the target table.
+                       Columns from related / parent classes (e.g. Address from Hospital
+                       on a Department page, or FamilyName from Person on a Doctor page)
+                       are silently skipped to prevent ORA-00904 at runtime. ── #}
+                    {% set ns_valid = namespace(ok=(db_col_name == 'id')) %}
+                    {% if not ns_valid.ok and ds_cls %}
+                        {% for attr in ds_cls.attributes %}
+                            {% if (attr.name | oracle_col_name) == db_col_name %}{% set ns_valid.ok = true %}{% endif %}
+                        {% endfor %}
+                    {% elif not ds_cls %}
+                        {% set ns_valid.ok = true %}
+                    {% endif %}
+                    {% if ns_valid.ok %}
+                    {% set _ = ns_list.fields.append(db_col_name) -%}
 
 wwv_flow_imp_page.create_worksheet_column(
-p_db_column_name=>'{{col_name | upper}}'
+p_db_column_name=>'{{db_col_name | upper}}'
 ,p_display_order=>{{ loop.index0 + 2 }}
 ,p_column_identifier=>'{{ chr(65 + loop.index0 + 1) }}'
 {% if component.styling%}
@@ -227,9 +244,9 @@ p_db_column_name=>'{{col_name | upper}}'
 {% else%}
 ,p_column_label=>'{{col_name[0].upper() + col_name[1:]}}'
 {% endif %}
-,p_column_link=>'f?p=&APP_ID.:6:&APP_SESSION.::&DEBUG.:6,RR:IR_{{ data_source_name_upper | upper }}_ID:\#{{col_name | upper}}#\'
+,p_column_link=>'f?p=&APP_ID.:6:&APP_SESSION.::&DEBUG.:6,RR:IR_{{ pk_column }}:\#{{db_col_name | upper}}#\'
 {% if not component.styling%}
-,p_column_linktext=>'#{{col_name | upper}}#'
+,p_column_linktext=>'#{{db_col_name | upper}}#'
 {% else %}
 ,p_column_linktext=>'<div style="
     color:{{ component.styling.color.text_color if component.styling.color }};
@@ -238,7 +255,7 @@ p_db_column_name=>'{{col_name | upper}}'
     font-size:{{ component.styling.size.font_size if component.styling.size }}px;
     position: relative;
     text-align: {{ component.styling.position.alignment if component.styling.position else center }};
-    z-index: 0; ">#{{col_name | upper}}#</div>'
+    z-index: 0; ">#{{db_col_name | upper}}#</div>'
 {% endif%}
 ,p_column_type=>'{{ types[field.type .__class__.__name__] }}'
 {% if not component.styling%}
@@ -250,6 +267,7 @@ p_db_column_name=>'{{col_name | upper}}'
 ,p_use_as_row_header=>'N'
 );
 
+                    {% endif %}{# end ns_valid.ok #}
                     {% endfor%}
             {%- endif %}
         {%- endfor %}
@@ -321,7 +339,7 @@ wwv_flow_imp_page.create_page_da_event(
 wwv_flow_imp_page.create_page_da_action(
 
 
- p_id=>{{action_id}},  -- unique ID for the action
+ p_id=>{{action_da_id}},  -- unique ID for the action (different from event ID)
  p_event_id=>{{action_id}},  -- link to parent DA event
  p_event_result=>'TRUE',
  p_action_sequence=>10,

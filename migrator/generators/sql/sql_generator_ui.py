@@ -1,5 +1,6 @@
 import os
-import random
+import re
+import uuid
 from jinja2 import Environment, FileSystemLoader
 from besser.BUML.metamodel.structural import DomainModel
 from besser.generators import GeneratorInterface
@@ -11,6 +12,33 @@ from besser.BUML.metamodel.gui.graphical_ui import (
     Screen,
 )
 from besser.utilities.utils import sort_by_timestamp
+
+
+def camel_to_snake(name):
+    """Convert a camelCase or PascalCase name to snake_case."""
+    s1 = re.sub(r'([A-Z]+)([A-Z][a-z])', r'\1_\2', name)
+    return re.sub(r'([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
+
+
+# Oracle reserved words that must be renamed as column identifiers.
+# Must stay in sync with ORACLE_RESERVED_COLUMN_MAP in oracle_apex_sql_generator.
+_ORACLE_RESERVED_COLS = {
+    'comment': 'comment_text',
+    'level':   'level_num',
+    'number':  'num_value',
+    'file':    'file_name',
+    'lock':    'lock_flag',
+}
+
+
+def oracle_col_name(name: str) -> str:
+    """camelCase → snake_case, then apply Oracle reserved-word renaming.
+
+    Mirrors _col_name() in OracleApexSQLGenerator so that page column
+    references always match the actual DDL column names.
+    """
+    snake = camel_to_snake(name)
+    return _ORACLE_RESERVED_COLS.get(snake, snake)
 
 
 class UIPagesSQLGenerator(GeneratorInterface):
@@ -69,6 +97,8 @@ class UIPagesSQLGenerator(GeneratorInterface):
         output_file_name: str,
         output_dir: str = None,
         sql_dialect: str = None,
+        apex_version: str = '2024.11.30',
+        apex_release: str = '24.2.6',
     ):
         super().__init__(model, output_dir)
         self.sql_dialect = sql_dialect
@@ -80,6 +110,8 @@ class UIPagesSQLGenerator(GeneratorInterface):
         self.screen = screen
         self.screen_number = screen_number
         self.output_file_name = output_file_name
+        self.apex_version = apex_version
+        self.apex_release = apex_release
 
     def generate(self):
         """
@@ -95,14 +127,23 @@ class UIPagesSQLGenerator(GeneratorInterface):
             os.path.abspath(__file__)), "templates")
         env = Environment(loader=FileSystemLoader(templates_path),
                           trim_blocks=True, lstrip_blocks=True)
-        template = env.get_template('ui_page_sql_template.sql.j2')
         env.tests['is_Button'] = self.is_button
         env.tests['is_List'] = self.is_list
         env.tests['is_ModelElement'] = self.is_model_element
         env.globals['chr'] = chr
+        env.filters['camel_to_snake'] = camel_to_snake
+        env.filters['oracle_col_name'] = oracle_col_name
+        template = env.get_template('ui_page_sql_template.sql.j2')
 
-        random_id = random.randint(1000, 9999)
-        action_random_id = random.randint(1000, 9999)
+        # Use UUID-derived large integers so IDs are unique across all
+        # generated pages and cannot clash with existing APEX metadata IDs.
+        def _uid() -> int:
+            return int(uuid.uuid4().hex[:14], 16)   # 56-bit unique int
+
+        plug_id        = _uid()
+        action_event_id = _uid()   # DA event
+        action_da_id    = _uid()   # DA action (must differ from event ID)
+        worksheet_uid   = _uid()   # worksheet internal_uid
 
         if not self.gui_model.modules:
             raise ValueError("GUI model has no modules")
@@ -122,9 +163,13 @@ class UIPagesSQLGenerator(GeneratorInterface):
                 workspace_name=self.workspace_name,
                 user_name=self.user_name,
                 types=self.TYPES,
-                plug_id=random_id,
-                action_id=action_random_id,
+                plug_id=plug_id,
+                action_id=action_event_id,
+                action_da_id=action_da_id,
+                worksheet_uid=worksheet_uid,
                 sql_dialect=self.sql_dialect,
+                apex_version=self.apex_version,
+                apex_release=self.apex_release,
             )
             f.write(generated_code)
             #print("Code generated in the location: " + file_path)
