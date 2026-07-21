@@ -2,3 +2,12 @@
 Pipfile
 Pipfile.lock
 .env
+.venv/
+
+# python
+__pycache__/
+*.pyc
+
+# node / frontend
+node_modules/
+webapp/frontend/dist/
