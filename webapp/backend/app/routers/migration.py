@@ -100,6 +100,15 @@ async def create_pivot(
     except pivot_service.PivotError as exc:
         store.delete(session.id)
         raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except ModuleNotFoundError as exc:
+        store.delete(session.id)
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "The migration engine is not installed. Run `pip install -r requirements.txt` "
+                f"before retrying. Missing module: {exc.name}."
+            ),
+        ) from exc
 
     return PivotResponse(
         session_id=session.id,

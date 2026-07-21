@@ -10,10 +10,21 @@ interface Props {
 export default function FileDropzone({ accept, multiple, files, onChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [drag, setDrag] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const accepted = new Set(accept.map((extension) => extension.toLowerCase()));
 
   const add = (incoming: FileList | null) => {
     if (!incoming) return;
-    const list = Array.from(incoming);
+    const list = Array.from(incoming).filter((file) => {
+      const extension = `.${file.name.split(".").pop()?.toLowerCase() ?? ""}`;
+      return accepted.has(extension);
+    });
+    if (list.length !== incoming.length) {
+      setError(`Please upload only ${accept.join(", ")} files.`);
+    } else {
+      setError(null);
+    }
+    if (list.length === 0) return;
     onChange(multiple ? [...files, ...list] : list.slice(0, 1));
   };
 
@@ -39,6 +50,7 @@ export default function FileDropzone({ accept, multiple, files, onChange }: Prop
           onChange={(e) => { add(e.target.files); e.target.value = ""; }}
         />
       </div>
+      {error && <div className="alert error">{error}</div>}
       {files.length > 0 && (
         <ul className="file-list">
           {files.map((f, i) => (
