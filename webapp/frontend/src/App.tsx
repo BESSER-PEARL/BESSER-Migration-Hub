@@ -156,6 +156,7 @@ export default function App() {
           onSelect={setTargetId}
           loading={busy}
           error={stepError}
+          hasDomainModel={pivot?.summary.classes !== null && pivot?.summary.classes !== undefined}
           onBack={() => { setStepError(null); setStep(2); }}
           onGenerate={runGenerate}
         />

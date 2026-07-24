@@ -7,12 +7,13 @@ interface Props {
   onSelect: (id: string) => void;
   loading: boolean;
   error: string | null;
+  hasDomainModel: boolean;
   onBack: () => void;
   onGenerate: () => void;
 }
 
 export default function TargetStep({
-  targets, selectedId, onSelect, loading, error, onBack, onGenerate,
+  targets, selectedId, onSelect, loading, error, hasDomainModel, onBack, onGenerate,
 }: Props) {
   const selected = targets.find((t) => t.id === selectedId) || null;
 
@@ -28,10 +29,22 @@ export default function TargetStep({
           <PlatformCard
             key={t.id}
             name={t.label}
-            description={t.implemented ? t.output_desc : "Coming soon"}
-            badge={t.implemented ? undefined : { text: "Coming soon", kind: "soon" }}
+            description={
+              !t.implemented
+                ? "Coming soon"
+                : t.supports_data && !hasDomainModel
+                ? "Requires a data model"
+                : t.output_desc
+            }
+            badge={
+              !t.implemented
+                ? { text: "Coming soon", kind: "soon" }
+                : t.supports_data && !hasDomainModel
+                ? { text: "Data model needed", kind: "soon" }
+                : undefined
+            }
             selected={selectedId === t.id}
-            disabled={!t.implemented}
+            disabled={!t.implemented || (t.supports_data && !hasDomainModel)}
             onClick={() => onSelect(t.id)}
           />
         ))}

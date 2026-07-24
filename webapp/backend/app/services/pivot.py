@@ -8,6 +8,7 @@ import problem.
 from __future__ import annotations
 
 from pathlib import Path
+import shutil
 from typing import Any
 
 from ..platforms import get_source
@@ -44,7 +45,8 @@ def _domain_summary(model: Any) -> dict:
 
 
 def _gui_summary(model: Any) -> dict:
-    modules = list(getattr(model, "modules", []) or [])
+    raw_modules = getattr(model, "modules", []) or []
+    modules = list(raw_modules.values()) if isinstance(raw_modules, dict) else list(raw_modules)
     screens: list[Any] = []
     for m in modules:
         screens.extend(list(getattr(m, "screens", []) or []))
@@ -63,6 +65,38 @@ def _gui_summary(model: Any) -> dict:
         "widgets": widgets,
         "screen_names": sorted(screen_names),
     }
+
+
+def _build_screenshot_gui(session: Session, openai_token: str) -> tuple[Any, str, str | None]:
+    """Generate a GUI pivot model from uploaded screenshots with BESSER's LLM pipeline."""
+    from besser.BUML.notations.mockup_to_buml.mockup_to_buml import mockup_to_buml
+    from migrator.converters.fix_gui_model import fix_generated_gui_model
+    from migrator.converters.mockup_to_apex_eval import _load_module_attribute
+
+    output_dir = session.work_dir / "mockup_buml"
+    mockup_to_buml(
+        api_key=openai_token,
+        input_folder=str(session.uploads_dir),
+        output_folder=str(output_dir),
+    )
+
+    gui_file = output_dir / "gui_model" / "generated_gui_model.py"
+    if not gui_file.is_file():
+        raise PivotError(
+            "The screenshot pipeline did not produce a GUI model. "
+            "Check the screenshots and try again."
+        )
+
+    # LLM output can contain forward references and invalid enum names.
+    fix_generated_gui_model(str(gui_file))
+    try:
+        gui_model = _load_module_attribute(str(gui_file), "gui_model")
+    except Exception as exc:
+        raise PivotError(f"Generated GUI model could not be loaded: {exc}") from exc
+
+    filename = "gui_model.py"
+    shutil.copy2(gui_file, session.pivot_dir / filename)
+    return gui_model, filename, None
 
 
 # --------------------------------------------------------------------------- #
@@ -218,6 +252,18 @@ def build_pivot(
             downloads.append({
                 "artifact": "gui", "filename": "", "available": False,
                 "note": f"GUI extraction not implemented for {source.label}.",
+            })
+        elif source.transformation == "llm":
+            try:
+                gm, fname, note = _build_screenshot_gui(session, openai_token or "")
+            except PivotError:
+                raise
+            except Exception as exc:
+                raise PivotError(f"Screenshot GUI-model extraction failed: {exc}") from exc
+            session.gui_model = gm
+            summary.update(_gui_summary(gm))
+            downloads.append({
+                "artifact": "gui", "filename": fname, "available": True, "note": note,
             })
         else:
             try:

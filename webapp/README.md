@@ -16,7 +16,7 @@ webapp/
 ## The 5-step wizard
 
 1. **Source platform** — Mendix uses a *deterministic* transformation (dedicated
-   parsers); other platforms use an *LLM-based* transformation from screenshots.
+   parsers); screenshot-based sources use BESSER's *LLM-based mockup pipeline*.
 2. **Upload & scope** — upload the Mendix export JSON (or screenshots for the LLM
    path) and choose **data model / GUI model / both**. For Mendix the module list
    is auto-detected into a dropdown.
@@ -41,7 +41,9 @@ webapp/
 
 \* GUI-model download uses BESSER's GUI code-builder when it can serialize the
 model; otherwise a readable text dump is provided. Target generation is
-currently wired for the **domain** model.
+currently wired for the **domain** model; GUI-only migrations can still download
+the GUI pivot model. Screenshot GUI extraction uses BESSER's `mockup_to_buml`
+pipeline and the upstream GUI-model fixer.
 
 ## Running
 

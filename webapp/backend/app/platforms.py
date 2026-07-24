@@ -81,17 +81,17 @@ SOURCES: dict[str, SourcePlatform] = {
         transformation="llm",
         implemented=True,
         supports_data=True,
-        supports_gui=False,
+        supports_gui=True,
         accepted_extensions=[".png", ".jpg", ".jpeg"],
-        input_hint="Upload a screenshot of your data model. You may add the exported CSV files to improve accuracy.",
+        input_hint="Upload screenshots of the model or application screens. You may add exported CSV files to improve data-model accuracy.",
         allow_multiple=True,
         needs_module=False,
         needs_openai=True,
         allow_csv=True,
         banner=(
             "Power Apps has no full model export, so migration uses an "
-            "**LLM-based transformation**: a visual model reads your screenshot "
-            "(optionally helped by CSV exports) to reconstruct the data model. "
+            "**LLM-based transformation**: a visual model reads your screenshots "
+            "(optionally helped by CSV exports) to reconstruct the data and GUI models. "
             "Results are best-effort and can be reviewed before generation."
         ),
     ),
@@ -99,51 +99,51 @@ SOURCES: dict[str, SourcePlatform] = {
         id="outsystems",
         label="OutSystems",
         transformation="llm",
-        implemented=False,
-        supports_data=True,
-        supports_gui=False,
+        implemented=True,
+        supports_data=False,
+        supports_gui=True,
         accepted_extensions=[".png", ".jpg", ".jpeg"],
         input_hint="Upload screenshot(s) of your model.",
         allow_multiple=True,
         needs_openai=True,
         allow_csv=True,
         banner=(
-            "OutSystems would use an **LLM-based transformation** from screenshots. "
-            "This path is scaffolded but not wired yet."
+            "OutSystems uses an **LLM-based transformation** from screenshots. "
+            "The screenshot pipeline creates a GUI pivot model; data extraction is not available yet."
         ),
     ),
     "appian": SourcePlatform(
         id="appian",
         label="Appian",
         transformation="llm",
-        implemented=False,
-        supports_data=True,
-        supports_gui=False,
+        implemented=True,
+        supports_data=False,
+        supports_gui=True,
         accepted_extensions=[".png", ".jpg", ".jpeg"],
         input_hint="Upload screenshot(s) of your model.",
         allow_multiple=True,
         needs_openai=True,
         allow_csv=True,
         banner=(
-            "Appian would use an **LLM-based transformation** from screenshots. "
-            "This path is scaffolded but not wired yet."
+            "Appian uses an **LLM-based transformation** from screenshots. "
+            "The screenshot pipeline creates a GUI pivot model; data extraction is not available yet."
         ),
     ),
     "salesforce": SourcePlatform(
         id="salesforce",
         label="Salesforce",
         transformation="llm",
-        implemented=False,
-        supports_data=True,
-        supports_gui=False,
+        implemented=True,
+        supports_data=False,
+        supports_gui=True,
         accepted_extensions=[".png", ".jpg", ".jpeg"],
         input_hint="Upload screenshot(s) of your model.",
         allow_multiple=True,
         needs_openai=True,
         allow_csv=True,
         banner=(
-            "Salesforce would use an **LLM-based transformation** from screenshots. "
-            "This path is scaffolded but not wired yet."
+            "Salesforce uses an **LLM-based transformation** from screenshots. "
+            "The screenshot pipeline creates a GUI pivot model; data extraction is not available yet."
         ),
     ),
 }
