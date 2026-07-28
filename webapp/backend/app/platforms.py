@@ -156,12 +156,36 @@ SOURCES: dict[str, SourcePlatform] = {
 _ORACLE_APEX_TUTORIAL = """\
 ### Importing into Oracle APEX
 
-1. Open **SQL Workshop → SQL Scripts** in your APEX workspace.
-2. Click **Upload** and select the generated `tables_oracle_apex.sql`.
-3. Run the script to create the tables, constraints and enumeration checks.
-4. Create a new app with **Create App → From a File / existing tables**, and
-   point it at the tables you just created to scaffold pages.
-5. Review foreign keys and CHECK constraints in **Object Browser**.
+#### Stage 1: create the template APEX application
+
+1. This hub has already performed the `mendix_to_structure.py` step for you:
+   the downloaded pivot/domain model is the input used to create
+   `tables_oracle_apex.sql`.
+2. In your APEX workspace, open **SQL Workshop**, go to **SQL Scripts**, and
+   import `tables_oracle_apex.sql`.
+3. Select **Run Script**. When APEX asks whether it should create the
+   application and its pages, select **Yes**.
+4. Open the application that APEX created and export it using **Custom Export**
+   with **Split into multiple files** enabled. Zip the exported folder.
+
+#### Stage 2: generate and apply the GUI model
+
+1. Return to this hub's artifacts step and upload the exported APEX ZIP. The
+   hub accepts the `<export-name>/application/pages/...` layout and extracts
+   the workspace/user metadata automatically.
+2. Click **Generate GUI page SQL**. The hub runs the same page-generation logic
+   as `migrator/converters/mendix_to_apex.py` using the stored domain and GUI
+   pivot models.
+3. Download the generated page SQL ZIP, return to **SQL Workshop > SQL
+   Scripts**, import the generated SQL, and select **Run Script**.
+4. When APEX prompts you to create the application and its pages, select
+   **Yes**. This creates the final APEX application containing the migrated
+   GUI. Verify the pages, regions, buttons, and navigation.
+
+For screenshot-based sources, the interface first creates the GUI pivot model
+with BESSER's `mockup_to_buml` pipeline. The same two-stage APEX workflow then
+applies: create/export a template app, upload its split ZIP here, generate the
+GUI page SQL, and run that SQL to create the final app.
 """
 
 _POWERAPPS_TUTORIAL = """\
@@ -194,7 +218,7 @@ TARGETS: dict[str, TargetPlatform] = {
         generator="oracle_apex",
         output_desc="Oracle-compatible DDL (tables, identity PKs, FKs, enum CHECKs).",
         tutorial=_ORACLE_APEX_TUTORIAL,
-        note="GUI-page generation requires an existing APEX export to match against — coming soon.",
+        note="GUI page SQL requires a split APEX export. Follow the GUI-model instructions in the import guide.",
     ),
     "powerapps": TargetPlatform(
         id="powerapps",

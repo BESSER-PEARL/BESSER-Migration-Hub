@@ -166,6 +166,55 @@ def generate(session_id: str, body: GenerateRequest) -> GenerateResponse:
     )
 
 
+@router.post("/sessions/{session_id}/apex-export")
+async def upload_apex_export(session_id: str, file: UploadFile = File(...)) -> dict:
+    """Store and validate a split Oracle APEX export ZIP for GUI generation."""
+    session = store.get(session_id)
+    if session is None:
+        raise HTTPException(status_code=404, detail="Session not found.")
+
+    payload = await file.read()
+    if not payload or not zipfile.is_zipfile(io.BytesIO(payload)):
+        raise HTTPException(
+            status_code=422,
+            detail="Upload the APEX custom export as a ZIP file with split files enabled.",
+        )
+
+    export_root = session.work_dir / "apex_export"
+    export_root.mkdir(parents=True, exist_ok=True)
+    try:
+        with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+            for member in archive.infolist():
+                target = (export_root / member.filename).resolve()
+                if export_root.resolve() not in target.parents and target != export_root.resolve():
+                    raise HTTPException(status_code=422, detail="The APEX ZIP contains an unsafe path.")
+            archive.extractall(export_root)
+    except HTTPException:
+        raise
+    except zipfile.BadZipFile as exc:
+        raise HTTPException(status_code=422, detail="The APEX export ZIP is invalid.") from exc
+
+    from migrator.converters.besser_to_apex import get_apex_pages_dir
+
+    candidates = [export_root] + [p for p in export_root.rglob("*") if p.is_dir()]
+    apex_dir = next((p for p in candidates if _has_apex_pages_dir(p, get_apex_pages_dir)), None)
+    if apex_dir is None:
+        raise HTTPException(
+            status_code=422,
+            detail="No split APEX export pages folder was found in the ZIP.",
+        )
+    session.apex_export_dir = apex_dir
+    return {"filename": file.filename or "apex_export.zip", "ready": True}
+
+
+def _has_apex_pages_dir(path: Path, resolver) -> bool:
+    try:
+        resolver(str(path))
+        return True
+    except (FileNotFoundError, OSError):
+        return False
+
+
 @router.get("/sessions/{session_id}/download/artifacts")
 def download_artifacts(session_id: str, name: str = "all"):
     session = store.get(session_id)

@@ -39,6 +39,16 @@ webapp/
 | PostgreSQL / MySQL | `tables_<dialect>.sql` |
 | OutSystems / Appian | 🔜 |
 
+For Oracle APEX, the generated table script covers the data model. GUI page
+generation requires a split APEX export because page SQL must be matched to an
+existing application. The interface therefore uses two stages: first import
+the table SQL in **SQL Workshop > SQL Scripts**, run it, and accept APEX's
+prompt to create the template application and pages. Then export that app using
+**Custom Export** and **Split into multiple files**, upload the resulting ZIP in
+the artifacts step, generate the GUI page SQL, and run that SQL to create the
+final application. For screenshot sources, the same flow is used after
+`mockup_to_buml` creates the GUI pivot model.
+
 \* GUI-model download uses BESSER's GUI code-builder when it can serialize the
 model; otherwise a readable text dump is provided. Target generation is
 currently wired for the **domain** model; GUI-only migrations can still download

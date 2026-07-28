@@ -64,6 +64,17 @@ export async function generateArtifacts(
   );
 }
 
+export async function uploadApexExport(sessionId: string, file: File): Promise<void> {
+  const form = new FormData();
+  form.append("file", file);
+  await handle<{ ready: boolean }>(
+    await fetch(`/api/sessions/${sessionId}/apex-export`, {
+      method: "POST",
+      body: form,
+    })
+  );
+}
+
 export function pivotDownloadUrl(sessionId: string, artifact: string): string {
   return `/api/sessions/${sessionId}/download/pivot?artifact=${encodeURIComponent(artifact)}`;
 }

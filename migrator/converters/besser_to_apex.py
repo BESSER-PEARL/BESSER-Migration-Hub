@@ -11,6 +11,18 @@ def get_apex_pages_dir(apex_export_dir):
     Dynamically find the pages directory inside the APEX export structure,
     which contains two nested folders starting with 'f', then 'application/pages'.
     """
+    # Current APEX custom exports commonly contain:
+    #   <export-name>/application/pages/*.sql
+    # Support that layout as well as the older nested f*/f*/ layout.
+
+    direct_pages = os.path.join(apex_export_dir, "application/pages/")
+    if os.path.isdir(direct_pages):
+        return direct_pages
+
+    nested_pages = glob.glob(os.path.join(apex_export_dir, "*", "application", "pages"))
+    if nested_pages:
+        return nested_pages[0]
+
     # Look for the first folder starting with 'f'
     first_level_dirs = glob.glob(os.path.join(apex_export_dir, "f*"))
     if not first_level_dirs:
@@ -125,7 +137,8 @@ def _similarity(a: str, b: str) -> float:
 
 def _build_page_generator(library_model, gui_model, app_id, screen, screen_number,
                           workspace_name, user_name,
-                          apex_version='2024.11.30', apex_release='24.2.6'):
+                          apex_version='2024.11.30', apex_release='24.2.6',
+                          output_dir=None):
     return UIPagesSQLGenerator(
         model=library_model,
         gui_model=gui_model,
@@ -136,10 +149,12 @@ def _build_page_generator(library_model, gui_model, app_id, screen, screen_numbe
         user_name=user_name,
         apex_version=apex_version,
         apex_release=apex_release,
-        output_file_name=f"{screen.name}_generated.sql"
+        output_file_name=f"{screen.name}_generated.sql",
+        output_dir=output_dir,
     )
 
-def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, workspace_name, user_name):
+def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, workspace_name, user_name,
+                                 output_dir=None):
     """
     Walk through pages folder in exported APEX app, match screens in GUI model,
     generate SQL ONCE per screen, then remove it from further matching.
@@ -147,7 +162,7 @@ def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, work
 
 
     pages_dir = get_apex_pages_dir(apex_export_dir)
-
+    print(f"  APEX pages directory detected: {pages_dir}")
     # Build mutable screen lists per module
     module_screens = {
         module: list(module.screens)
@@ -223,6 +238,7 @@ def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, work
                         user_name=user_name,
                         apex_version=apex_version,
                         apex_release=apex_release,
+                        output_dir=output_dir,
                     )
                     sql_list_page_file.generate()
                     generated_screens.add(screen.name)
@@ -268,6 +284,7 @@ def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, work
                 user_name=user_name,
                 apex_version=apex_version,
                 apex_release=apex_release,
+                output_dir=output_dir,
             )
             sql_list_page_file.generate()
             generated_screens.add(screen.name)

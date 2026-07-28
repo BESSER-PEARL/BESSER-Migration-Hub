@@ -55,7 +55,11 @@ export default function TargetStep({
 
       <div className="actions">
         <button className="btn ghost" onClick={onBack} disabled={loading}>← Back</button>
-        <button className="btn primary" onClick={onGenerate} disabled={!selected || loading}>
+        <button
+          className="btn primary"
+          onClick={onGenerate}
+          disabled={!selected || loading}
+        >
           {loading ? <><span className="spinner" />Generating artifacts…</> : "Generate artifacts →"}
         </button>
       </div>

@@ -24,6 +24,7 @@ class Session:
     scope: str = "data"                 # data | gui | both
     domain_model: Any = None            # besser DomainModel
     gui_model: Any = None               # besser GUIModel
+    apex_export_dir: Optional[Path] = None  # uploaded split APEX export
     # Files generated for a chosen target: filename -> {path, description}.
     artifacts: dict[str, dict] = field(default_factory=dict)
     target_lcp: Optional[str] = None
