@@ -1,0 +1,37 @@
+{# Map BUML types to ServiceNow column types #}
+{%- macro get_servicenow_type(type_name) -%}
+    {%- if type_name == 'int' -%}IntegerColumn
+    {%- elif type_name == 'str' -%}StringColumn
+    {%- elif type_name == 'float' -%}DecimalColumn
+    {%- elif type_name == 'bool' -%}BooleanColumn
+    {%- elif type_name == 'date' -%}DateColumn
+    {%- elif type_name == 'datetime' -%}DateTimeColumn
+    {%- elif type_name == 'time' -%}StringColumn
+    {%- elif type_name == 'timedelta' -%}StringColumn
+    {%- elif type_name == 'any' -%}StringColumn
+    {%- else -%}StringColumn
+    {%- endif -%}
+{%- endmacro %}
+
+{# Render a simple column definition #}
+{%- macro render_simple_column(attribute) %}
+        {{ attribute.name }}: {{ get_servicenow_type(attribute.type.name) }}({
+            {%- if attribute.is_optional == False %} mandatory: true,{%- endif %}
+            label: '{{ attribute.name | replace('_', ' ') | title }}',
+            {%- if attribute.default_value is not none %} default: {% if attribute.type.name == 'str' %}'{{ attribute.default_value }}'{% elif attribute.type.name == 'bool' %}{{ attribute.default_value | lower }}{% else %}{{ attribute.default_value }}{% endif %},{%- endif %}
+        })
+{%- endmacro %}
+
+{# Render a choice column for enumerations #}
+{%- macro render_choice_column(attribute) %}
+        {{ attribute.name }}: ChoiceColumn({
+            {%- if attribute.is_optional == False %} mandatory: true,{%- endif %}
+            label: '{{ attribute.name | replace('_', ' ') | title }}',
+            choices: {
+                {%- for literal in attribute.type.literals %}
+                {{ literal.name }}: '{{ literal.name | replace('_', ' ') | title }}',
+                {%- endfor %}
+            },
+            {%- if attribute.default_value %} default: '{{ attribute.default_value }}',{%- endif %}
+        })
+{%- endmacro %}

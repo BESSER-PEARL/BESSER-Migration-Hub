@@ -1,0 +1,135 @@
+{% import "helpers.ts.j2" as helper -%}
+import "@servicenow/sdk/global";
+import {
+    {%- if 'Table' in used_column_types %}
+    Table,
+    {%- endif %}
+    {%- if 'StringColumn' in used_column_types %}
+    StringColumn,
+    {%- endif %}
+    {%- if 'IntegerColumn' in used_column_types %}
+    IntegerColumn,
+    {%- endif %}
+    {%- if 'ChoiceColumn' in used_column_types %}
+    ChoiceColumn,
+    {%- endif %}
+    {%- if 'ReferenceColumn' in used_column_types %}
+    ReferenceColumn,
+    {%- endif %}
+    {%- if 'DateColumn' in used_column_types %}
+    DateColumn,
+    {%- endif %}
+    {%- if 'DateTimeColumn' in used_column_types %}
+    DateTimeColumn,
+    {%- endif %}
+    {%- if 'EmailColumn' in used_column_types %}
+    EmailColumn,
+    {%- endif %}
+    {%- if 'BooleanColumn' in used_column_types %}
+    BooleanColumn,
+    {%- endif %}
+    {%- if 'DecimalColumn' in used_column_types %}
+    DecimalColumn,
+    {%- endif %}
+    {%- if 'UrlColumn' in used_column_types %}
+    UrlColumn,
+    {%- endif %}
+    {%- if 'HtmlColumn' in used_column_types %}
+    HtmlColumn,
+    {%- endif %}
+    {%- if 'Record' in used_column_types %}
+    Record,
+    {%- endif %}
+} from '@servicenow/sdk/core';
+
+{# Generate Enum definitions if any exist #}
+{%- if enumerations %}
+
+// --- ENUMERATIONS ---
+{%- for enum in enumerations %}
+
+/**
+ * {{ enum.name }} Enumeration
+ */
+export const {{ enum.name | lower }}_choices = {
+    {%- for literal in enum.literals %}
+    {{ literal.name }}: '{{ literal.name }}',
+    {%- endfor %}
+} as const;
+{%- endfor %}
+{%- endif %}
+
+{# Generate Table Definitions #}
+
+// --- TABLES ---
+{%- for class in classes %}
+
+/**
+ * {{ get_display_name(class.name) }}
+ */
+export const {{ get_table_name(class.name) }} = Table({
+    name: '{{ get_table_name(class.name) }}',
+    label: '{{ get_display_name(class.name) }}',
+    display: 'name',
+    extensible: true,
+    allowWebServiceAccess: true,
+    {%- if class.parents() %}
+    extends: '{{ get_table_name(class.parents()[0].name) }}',
+    {%- endif %}
+    schema: {
+        {%- for attribute in class.attributes %}
+        {%- if attribute.type.__class__.__name__ == 'Enumeration' %}
+{{ helper.render_choice_column(attribute) }},
+        {%- else %}
+{{ helper.render_simple_column(attribute) }},
+        {%- endif %}
+        {%- endfor %}
+        {%- for ref in references.get(class.name, []) %}
+        {%- if ref.multiplicity_max == 1 %}
+        {{ ref.property_name }}: ReferenceColumn({
+            referenceTable: '{{ ref.reference_table }}',
+            label: '{{ ref.property_name | replace('_', ' ') | title }}',
+        }),
+        {%- endif %}
+        {%- endfor %}
+    },
+});
+{%- endfor %}
+
+{# Generate Related Lists for associations #}
+{%- if associations %}
+
+// --- RELATED LISTS ---
+{%- for association in associations if association.ends | length == 2 %}
+{%- set ends = association.ends | list %}
+{%- set end1 = ends[0] %}
+{%- set end2 = ends[1] %}
+{%- set class1_name = get_table_name(end1.type.name) %}
+{%- set class2_name = get_table_name(end2.type.name) %}
+
+{%- if end1.multiplicity.max > 1 %}
+
+/**
+ * Related Lists for {{ class1_name }}: {{ end2.name }}
+ */
+const {{ class1_name }}_related_list = Record({
+    $id: Now.ID['{{ class1_name }}_related_list'],
+    table: 'sys_ui_related_list',
+    data: {
+        name: '{{ class1_name }}',
+        view: 'Default view',
+    },
+});
+
+Record({
+    $id: Now.ID['{{ class1_name }}_rl_entry_{{ end2.name }}'],
+    table: 'sys_ui_related_list_entry',
+    data: {
+        list_id: {{ class1_name }}_related_list,
+        position: 0,
+        related_list: '{{ class2_name }}.{{ end2.name }}',
+    },
+});
+{%- endif %}
+{%- endfor %}
+{%- endif %}
