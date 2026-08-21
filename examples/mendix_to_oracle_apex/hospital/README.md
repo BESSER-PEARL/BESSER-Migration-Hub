@@ -30,7 +30,7 @@ The diagram below shows the original data model as defined in Mendix:
 
 ## Output
 
-The `output/` folder contains the generated Oracle APEX artifacts:
+The `output/` folder contains the generated Oracle APEX artifacts (List UI pages):
 
 | File | Description |
 |---|---|
@@ -46,4 +46,4 @@ The `output/` folder contains the generated Oracle APEX artifacts:
 
 1. Run `generated_script_oracle_apex.sql` against your Oracle schema to create the tables.
 2. Create a new blank APEX application.
-3. Import each `*_page_generated.sql` file via **SQL Workshop → SQL Scripts → Run**.
+3. Import each `*_page_generated.sql` file.

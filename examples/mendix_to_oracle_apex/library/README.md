@@ -43,19 +43,9 @@ The `output/` folder contains the generated Oracle APEX artifacts:
 | `Catalog_page_generated.sql` | APEX interactive report page for the Catalog entity |
 | `Librarian_page_generated.sql` | APEX interactive report page for the Librarian entity |
 
-## How to Run
-
-From the repository root:
-
-```bash
-python migrator/converters/mendix_to_apex.py \
-  --model examples/mendix_to_oracle_apex/library/model.json \
-  --module MyFirstModule \
-  --output examples/mendix_to_oracle_apex/library/output
-```
 
 ## How to Import into Oracle APEX
 
 1. Run `generated_script_oracle_apex.sql` against your Oracle schema to create the tables.
 2. Create a new blank APEX application.
-3. Import each `*_page_generated.sql` file via **SQL Workshop → SQL Scripts → Run**.
+3. Import each `*_page_generated.sql` file.
