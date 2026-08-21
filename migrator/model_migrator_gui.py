@@ -1,5 +1,5 @@
 from besser.BUML.metamodel.gui.graphical_ui import GUIModel
-from migrator.parsers.mendix_gui import mendix_to_gui
+from migrator.parsers.mendix.mendix_gui import mendix_to_gui
 
 
 class GUIModelMigrator:

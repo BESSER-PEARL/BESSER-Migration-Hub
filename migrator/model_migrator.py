@@ -1,5 +1,5 @@
 from besser.BUML.metamodel.structural import DomainModel
-from migrator.parsers.mendix import mendix_to_buml
+from migrator.parsers.mendix.mendix import mendix_to_buml
 from migrator.parsers.powerapps import powerapps_to_buml
 
 class ModelMigrator:
@@ -8,7 +8,7 @@ class ModelMigrator:
     Args:
         lcp (str): The name of the low-code platform from which the model will be migrated.
         model_path (str): The path to the model file that will be migrated.
-        module_name (str): The name of the module within the LCP from which the model will 
+        module_name (str): The name of the module within the LCP from which the model will
             be extracted.
 
     Attributes:
