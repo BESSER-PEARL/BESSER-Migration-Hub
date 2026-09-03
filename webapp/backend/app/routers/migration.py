@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import io
+import logging
 import re
 import tempfile
+import traceback
 import zipfile
 from pathlib import Path
 from typing import Optional
+
+log = logging.getLogger(__name__)
 
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, StreamingResponse
@@ -102,6 +106,7 @@ async def create_pivot(
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     except ModuleNotFoundError as exc:
         store.delete(session.id)
+        log.error("ModuleNotFoundError during pivot:\n%s", traceback.format_exc())
         raise HTTPException(
             status_code=503,
             detail=(

@@ -146,6 +146,46 @@ SOURCES: dict[str, SourcePlatform] = {
             "The screenshot pipeline creates a GUI pivot model; data extraction is not available yet."
         ),
     ),
+    "retool": SourcePlatform(
+        id="retool",
+        label="Retool",
+        transformation="deterministic",
+        implemented=True,
+        supports_data=True,
+        supports_gui=True,
+        accepted_extensions=[".csv", ".zip"],
+        input_hint=(
+            "For the data model, upload one or more CSV files exported from Retool DB (one file per table). "
+            "For the GUI model, upload the RSX Toolscript ZIP package exported from Retool."
+        ),
+        allow_multiple=True,
+        needs_module=False,
+        needs_openai=False,
+        banner=(
+            "Retool is supported through a **deterministic transformation**. "
+            "Upload CSV exports for the data model and/or the RSX Toolscript ZIP for the GUI model."
+        ),
+    ),
+    "oracle_apex": SourcePlatform(
+        id="oracle_apex",
+        label="Oracle APEX",
+        transformation="deterministic",
+        implemented=True,
+        supports_data=True,
+        supports_gui=True,
+        accepted_extensions=[".sql"],
+        input_hint=(
+            "Upload the Oracle APEX DDL SQL script (tables) for the data model, "
+            "and/or the page SQL files (page_00001.sql, …) for the GUI model."
+        ),
+        allow_multiple=True,
+        needs_module=False,
+        needs_openai=False,
+        banner=(
+            "Oracle APEX is supported through a **deterministic transformation**. "
+            "Upload the DDL SQL script for the data model and/or the exported page SQL files for the GUI model."
+        ),
+    ),
 }
 
 
@@ -206,6 +246,24 @@ _SQL_DB_TUTORIAL = """\
 2. Run the generated `tables.sql` against a fresh schema.
 3. Verify tables, foreign keys and constraints were created.
 4. Point your low-code platform's "connect to existing database" wizard at the schema.
+"""
+
+_RETOOL_TUTORIAL = """\
+### Importing into Retool
+
+1. In your Retool workspace, open the **Resources** tab and create a new **Database** resource (Retool DB).
+2. Import each generated CSV file (`csv/<table>.csv`) into its corresponding table via **Import CSV**.
+3. To import the app, go to the **Apps** tab, click **Create new → Import app**, and upload the generated `json/<app_name>_retool_app.json`.
+4. Open the imported app and reconnect each query to your Retool DB resource.
+"""
+
+_SERVICE_NOW_TUTORIAL = """\
+### Importing into ServiceNow
+
+1. In your ServiceNow developer instance, open **Studio** and create a new scoped application or open an existing one.
+2. In the application navigator, go to **Scripts – Background** and paste the contents of the generated TypeScript helper file (`helpers.ts`) to register your table definitions.
+3. Copy the generated `<app_name>.ts` file content into a new **Script Include** in Studio.
+4. Activate the table definitions and verify the columns in the **Table** list view.
 """
 
 TARGETS: dict[str, TargetPlatform] = {
@@ -269,6 +327,26 @@ TARGETS: dict[str, TargetPlatform] = {
         supports_gui=False,
         output_desc="Coming soon.",
         note="No target generator wired yet.",
+    ),
+    "retool": TargetPlatform(
+        id="retool",
+        label="Retool",
+        implemented=True,
+        supports_data=True,
+        supports_gui=False,
+        generator="retool",
+        output_desc="CSV files (one per entity) and a Retool app JSON importable via the Retool UI.",
+        tutorial=_RETOOL_TUTORIAL,
+    ),
+    "service_now": TargetPlatform(
+        id="service_now",
+        label="ServiceNow",
+        implemented=True,
+        supports_data=True,
+        supports_gui=False,
+        generator="service_now",
+        output_desc="ServiceNow SDK TypeScript table definitions.",
+        tutorial=_SERVICE_NOW_TUTORIAL,
     ),
 }
 

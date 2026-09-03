@@ -42,6 +42,14 @@ def _run_generator(target_generator: str, sql_dialect: str | None,
         from besser.generators.sql.sql_generator import SQLGenerator
         SQLGenerator(model=model, output_dir=out, sql_dialect=sql_dialect).generate()
 
+    elif target_generator == "retool":
+        from migrator.generators.retool.retool_generator import RetoolGenerator
+        RetoolGenerator(model=model, output_dir=out).generate()
+
+    elif target_generator == "service_now":
+        from migrator.generators.service_now.service_now_generator import ServiceNowGenerator
+        ServiceNowGenerator(model=model, output_dir=out).generate()
+
     else:
         raise GenerateError(f"No generator wired for '{target_generator}'.")
 

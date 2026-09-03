@@ -160,7 +160,7 @@ def _serialize_gui(model: Any, pivot_dir: Path) -> tuple[str, str | None]:
 
 def _classify_uploads(session: Session) -> dict:
     """Split uploaded files by kind."""
-    images, csvs, jsons, others = [], [], [], []
+    images, csvs, jsons, sqls, zips, others = [], [], [], [], [], []
     for p in sorted(session.uploads_dir.iterdir()):
         suffix = p.suffix.lower()
         if suffix in (".png", ".jpg", ".jpeg"):
@@ -169,9 +169,13 @@ def _classify_uploads(session: Session) -> dict:
             csvs.append(p)
         elif suffix == ".json":
             jsons.append(p)
+        elif suffix == ".sql":
+            sqls.append(p)
+        elif suffix == ".zip":
+            zips.append(p)
         else:
             others.append(p)
-    return {"images": images, "csvs": csvs, "jsons": jsons, "others": others}
+    return {"images": images, "csvs": csvs, "jsons": jsons, "sqls": sqls, "zips": zips, "others": others}
 
 
 def build_pivot(
@@ -199,19 +203,40 @@ def build_pivot(
     want_data = scope in ("data", "both")
     want_gui = scope in ("gui", "both")
 
-    # Resolve the primary model path per source type.
+    # Resolve data_model_path / gui_model_path per source.
+    # These may differ (e.g. Retool uses a CSV dir for data but a ZIP for GUI).
+    data_model_path: str = ""
+    gui_model_path: str = ""
+    mig_module: Any = module_name
+
     if source_lcp == "mendix":
         if not files["jsons"]:
             raise PivotError("No Mendix JSON file was uploaded.")
-        model_path = str(files["jsons"][0])
+        data_model_path = gui_model_path = str(files["jsons"][0])
         if not module_name:
             raise PivotError("A Mendix module name is required.")
-        mig_module: Any = module_name
-    else:  # LLM path
+
+    elif source_lcp == "retool":
+        # Data: directory of CSV files; GUI: RSX Toolscript ZIP
+        data_model_path = str(session.uploads_dir)
+        if want_data and not files["csvs"]:
+            raise PivotError("No CSV files found. Upload Retool DB CSV exports for the data model.")
+        if want_gui and not files["zips"]:
+            raise PivotError("No ZIP file found. Upload the Retool RSX Toolscript ZIP for the GUI model.")
+        gui_model_path = str(files["zips"][0]) if files["zips"] else ""
+
+    elif source_lcp == "oracle_apex":
+        # Data: first SQL file (DDL); GUI: uploads directory (all page SQL files)
+        if want_data and not files["sqls"]:
+            raise PivotError("No SQL file found. Upload the Oracle APEX DDL SQL script for the data model.")
+        data_model_path = str(files["sqls"][0]) if files["sqls"] else ""
+        gui_model_path = str(session.uploads_dir)
+
+    else:  # LLM path (powerapps, outsystems, appian, salesforce, …)
         if not files["images"]:
             raise PivotError("An image/screenshot is required for LLM-based extraction.")
-        model_path = str(files["images"][0])
-        # The PowerApps parser reuses `module_name` to carry the CSV paths.
+        data_model_path = gui_model_path = str(files["images"][0])
+        # PowerApps parser reuses module_name to carry CSV paths.
         mig_module = [str(p) for p in files["csvs"]]
         if source.needs_openai and not openai_token:
             raise PivotError("An OpenAI token is required for this LLM-based transformation.")
@@ -227,7 +252,7 @@ def build_pivot(
             try:
                 dm = ModelMigrator(
                     lcp=source_lcp,
-                    model_path=model_path,
+                    model_path=data_model_path,
                     module_name=mig_module,
                     openai_token=openai_token or "",
                 ).domain_model()
@@ -269,7 +294,7 @@ def build_pivot(
             try:
                 gm = GUIModelMigrator(
                     lcp=source_lcp,
-                    model_path=model_path,
+                    model_path=gui_model_path,
                     module_name=mig_module,
                     openai_token=openai_token or "",
                 ).gui_model()
