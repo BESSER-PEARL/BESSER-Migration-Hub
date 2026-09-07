@@ -158,10 +158,14 @@ def _serialize_gui(model: Any, pivot_dir: Path) -> tuple[str, str | None]:
 # Orchestration
 # --------------------------------------------------------------------------- #
 
-def _classify_uploads(session: Session) -> dict:
-    """Split uploaded files by kind."""
+def _classify_uploads(directory: Path) -> dict:
+    """Split uploaded files in a directory by extension."""
     images, csvs, jsons, sqls, zips, others = [], [], [], [], [], []
-    for p in sorted(session.uploads_dir.iterdir()):
+    if not directory.is_dir():
+        return {"images": images, "csvs": csvs, "jsons": jsons, "sqls": sqls, "zips": zips, "others": others}
+    for p in sorted(directory.iterdir()):
+        if p.is_dir():
+            continue
         suffix = p.suffix.lower()
         if suffix in (".png", ".jpg", ".jpeg"):
             images.append(p)
@@ -198,46 +202,59 @@ def build_pivot(
     if not source.implemented:
         raise PivotError(f"Source platform '{source.label}' is not implemented yet.")
 
-    files = _classify_uploads(session)
+    # Detect whether split upload was used (data_files / gui_files sent separately).
+    data_dir = session.uploads_dir / "data"
+    gui_dir = session.uploads_dir / "gui"
+    is_split = data_dir.is_dir() or gui_dir.is_dir()
+
+    if is_split:
+        data_classified = _classify_uploads(data_dir)
+        gui_classified = _classify_uploads(gui_dir)
+    else:
+        flat = _classify_uploads(session.uploads_dir)
+        data_classified = gui_classified = flat
+
     warnings: list[str] = []
     want_data = scope in ("data", "both")
     want_gui = scope in ("gui", "both")
 
     # Resolve data_model_path / gui_model_path per source.
-    # These may differ (e.g. Retool uses a CSV dir for data but a ZIP for GUI).
     data_model_path: str = ""
     gui_model_path: str = ""
     mig_module: Any = module_name
 
     if source_lcp == "mendix":
-        if not files["jsons"]:
+        if not data_classified["jsons"]:
             raise PivotError("No Mendix JSON file was uploaded.")
-        data_model_path = gui_model_path = str(files["jsons"][0])
+        data_model_path = gui_model_path = str(data_classified["jsons"][0])
         if not module_name:
             raise PivotError("A Mendix module name is required.")
 
     elif source_lcp == "retool":
-        # Data: directory of CSV files; GUI: RSX Toolscript ZIP
-        data_model_path = str(session.uploads_dir)
-        if want_data and not files["csvs"]:
+        # Data: directory of CSV files; GUI: RSX Toolscript ZIP.
+        data_root = data_dir if is_split else session.uploads_dir
+        data_model_path = str(data_root)
+        if want_data and not data_classified["csvs"]:
             raise PivotError("No CSV files found. Upload Retool DB CSV exports for the data model.")
-        if want_gui and not files["zips"]:
+        if want_gui and not gui_classified["zips"]:
             raise PivotError("No ZIP file found. Upload the Retool RSX Toolscript ZIP for the GUI model.")
-        gui_model_path = str(files["zips"][0]) if files["zips"] else ""
+        gui_model_path = str(gui_classified["zips"][0]) if gui_classified["zips"] else ""
 
     elif source_lcp == "oracle_apex":
-        # Data: first SQL file (DDL); GUI: uploads directory (all page SQL files)
-        if want_data and not files["sqls"]:
+        # Data: DDL SQL file; GUI: directory of page SQL files.
+        if want_data and not data_classified["sqls"]:
             raise PivotError("No SQL file found. Upload the Oracle APEX DDL SQL script for the data model.")
-        data_model_path = str(files["sqls"][0]) if files["sqls"] else ""
-        gui_model_path = str(session.uploads_dir)
+        data_model_path = str(data_classified["sqls"][0]) if data_classified["sqls"] else ""
+        gui_root = gui_dir if is_split else session.uploads_dir
+        gui_model_path = str(gui_root)
 
     else:  # LLM path (powerapps, outsystems, appian, salesforce, …)
-        if not files["images"]:
+        flat = data_classified  # same dict for LLM sources (never split)
+        if not flat["images"]:
             raise PivotError("An image/screenshot is required for LLM-based extraction.")
-        data_model_path = gui_model_path = str(files["images"][0])
+        data_model_path = gui_model_path = str(flat["images"][0])
         # PowerApps parser reuses module_name to carry CSV paths.
-        mig_module = [str(p) for p in files["csvs"]]
+        mig_module = [str(p) for p in flat["csvs"]]
         if source.needs_openai and not openai_token:
             raise PivotError("An OpenAI token is required for this LLM-based transformation.")
 

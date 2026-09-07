@@ -102,7 +102,7 @@ def _classify_button(name: str, db_action: str, is_hot: bool, template_opts: str
 
 
 def _parse_page_file(sql_path: str):
-    """Parse one APEX page SQL file; return a Screen or None to skip."""
+    """Parse one APEX page SQL file; return (page_id, Screen) or None to skip."""
     with open(sql_path, "r", encoding="utf-8") as fh:
         sql = fh.read()
 
@@ -146,7 +146,9 @@ def _parse_page_file(sql_path: str):
             break
 
     if entity_name is None:
-        entity_name = page_name.strip()
+        entity_name = page_name.strip().replace(' ', '_').replace('-', '_')
+    else:
+        entity_name = entity_name.replace(' ', '_').replace('-', '_')
 
     # Build view elements
     view_elements: set = set()
@@ -175,8 +177,8 @@ def _parse_page_file(sql_path: str):
         btn_type, act_type = _classify_button(btn_name, db_action, is_hot, tmpl_opts)
 
         # Fixed: Button requires (name, description, label, buttonType, actionType)
-        # Names cannot contain spaces in this BESSER version
-        safe_name = btn_name.title().replace(' ', '_')
+        # Names cannot contain spaces or hyphens in this BESSER version
+        safe_name = btn_name.title().replace(' ', '_').replace('-', '_')
         view_elements.add(
             Button(
                 name=safe_name,
@@ -187,14 +189,17 @@ def _parse_page_file(sql_path: str):
             )
         )
 
-    # Screen name (no spaces allowed in BESSER names)
-    safe_entity = entity_name.replace(' ', '_') if entity_name else page_name.replace(' ', '_')
+    # Screen name (no spaces or hyphens allowed in BESSER names)
+    def _safe(s: str) -> str:
+        return s.replace(' ', '_').replace('-', '_')
+
+    safe_entity = _safe(entity_name) if entity_name else _safe(page_name)
     if is_list_page:
         screen_name = f"{safe_entity}_List"
     elif is_form_page or is_modal:
         screen_name = f"{safe_entity}_Form"
     else:
-        screen_name = page_name.replace(' ', '_')
+        screen_name = _safe(page_name)
 
     # Fixed: Screen requires (name, description, view_elements, ...)
     screen = Screen(
@@ -203,7 +208,7 @@ def _parse_page_file(sql_path: str):
         view_elements=view_elements,
         is_main_page=not is_modal,
     )
-    return screen
+    return page_id, screen
 
 
 def oracle_apex_to_gui(pages_dir: str, module_name: str = None) -> GUIModel:
@@ -234,11 +239,16 @@ def oracle_apex_to_gui(pages_dir: str, module_name: str = None) -> GUIModel:
         print(f"No page_*.sql files found in: {pages_dir}")
 
     screens: set = set()
+    seen_names: set = set()
     print(f"Parsing {len(page_files)} APEX page files in: {os.path.basename(pages_dir)}")
 
     for path in page_files:
-        screen = _parse_page_file(path)
-        if screen is not None:
+        result = _parse_page_file(path)
+        if result is not None:
+            page_id, screen = result
+            if screen.name in seen_names:
+                screen.name = f"{screen.name}_p{page_id}"
+            seen_names.add(screen.name)
             screens.add(screen)
             print(
                 f"  Screen '{screen.name}'"

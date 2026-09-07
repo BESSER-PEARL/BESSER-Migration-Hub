@@ -82,16 +82,33 @@ async def create_pivot(
     scope: str = Form("data"),
     module_name: Optional[str] = Form(None),
     openai_token: Optional[str] = Form(None),
-    files: list[UploadFile] = File(...),
+    files: list[UploadFile] = File(default=[]),
+    data_files: list[UploadFile] = File(default=[]),
+    gui_files: list[UploadFile] = File(default=[]),
 ) -> PivotResponse:
     if scope not in ("data", "gui", "both"):
         raise HTTPException(status_code=422, detail="scope must be 'data', 'gui' or 'both'.")
+    if not files and not data_files and not gui_files:
+        raise HTTPException(status_code=422, detail="At least one file must be uploaded.")
 
     session = store.create()
-    # Persist uploads.
+    # Persist uploads — flat list goes directly into uploads_dir;
+    # split data_files/gui_files go into uploads_dir/data/ and uploads_dir/gui/.
     for f in files:
         dest = session.uploads_dir / _safe_filename(f.filename or "upload")
         dest.write_bytes(await f.read())
+    if data_files:
+        data_dir = session.uploads_dir / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        for f in data_files:
+            dest = data_dir / _safe_filename(f.filename or "upload")
+            dest.write_bytes(await f.read())
+    if gui_files:
+        gui_dir = session.uploads_dir / "gui"
+        gui_dir.mkdir(parents=True, exist_ok=True)
+        for f in gui_files:
+            dest = gui_dir / _safe_filename(f.filename or "upload")
+            dest.write_bytes(await f.read())
 
     try:
         result = pivot_service.build_pivot(

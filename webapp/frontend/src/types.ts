@@ -12,6 +12,13 @@ export interface SourcePlatform {
   needs_openai: boolean;
   allow_csv: boolean;
   banner: string;
+  split_upload: boolean;
+  data_hint: string;
+  data_extensions: string[];
+  data_allow_multiple: boolean;
+  gui_hint: string;
+  gui_extensions: string[];
+  gui_allow_multiple: boolean;
 }
 
 export interface TargetPlatform {

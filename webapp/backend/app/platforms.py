@@ -29,6 +29,14 @@ class SourcePlatform:
     allow_csv: bool = False           # extra CSV files can complement the image
     # User-facing banner explaining what will happen once selected.
     banner: str = ""
+    # Split upload: separate dropzones for data model and GUI files.
+    split_upload: bool = False
+    data_hint: str = ""
+    data_extensions: list[str] = field(default_factory=list)
+    data_allow_multiple: bool = False
+    gui_hint: str = ""
+    gui_extensions: list[str] = field(default_factory=list)
+    gui_allow_multiple: bool = False
 
     def public(self) -> dict:
         return asdict(self)
@@ -155,8 +163,7 @@ SOURCES: dict[str, SourcePlatform] = {
         supports_gui=True,
         accepted_extensions=[".csv", ".zip"],
         input_hint=(
-            "For the data model, upload one or more CSV files exported from Retool DB (one file per table). "
-            "For the GUI model, upload the RSX Toolscript ZIP package exported from Retool."
+            "Upload CSV files (data model) and/or the RSX Toolscript ZIP (GUI model) exported from Retool."
         ),
         allow_multiple=True,
         needs_module=False,
@@ -165,6 +172,13 @@ SOURCES: dict[str, SourcePlatform] = {
             "Retool is supported through a **deterministic transformation**. "
             "Upload CSV exports for the data model and/or the RSX Toolscript ZIP for the GUI model."
         ),
+        split_upload=True,
+        data_hint="Upload one or more CSV files exported from Retool DB — one file per table.",
+        data_extensions=[".csv"],
+        data_allow_multiple=True,
+        gui_hint="Upload the RSX Toolscript ZIP package exported from Retool.",
+        gui_extensions=[".zip"],
+        gui_allow_multiple=False,
     ),
     "oracle_apex": SourcePlatform(
         id="oracle_apex",
@@ -175,8 +189,7 @@ SOURCES: dict[str, SourcePlatform] = {
         supports_gui=True,
         accepted_extensions=[".sql"],
         input_hint=(
-            "Upload the Oracle APEX DDL SQL script (tables) for the data model, "
-            "and/or the page SQL files (page_00001.sql, …) for the GUI model."
+            "Upload the DDL SQL script (data model) and/or the page SQL files (GUI model) exported from Oracle APEX."
         ),
         allow_multiple=True,
         needs_module=False,
@@ -185,6 +198,13 @@ SOURCES: dict[str, SourcePlatform] = {
             "Oracle APEX is supported through a **deterministic transformation**. "
             "Upload the DDL SQL script for the data model and/or the exported page SQL files for the GUI model."
         ),
+        split_upload=True,
+        data_hint="Upload the DDL SQL script containing your CREATE TABLE statements.",
+        data_extensions=[".sql"],
+        data_allow_multiple=False,
+        gui_hint="Upload all page SQL files exported from your APEX application (page_00001.sql, page_00002.sql, …).",
+        gui_extensions=[".sql"],
+        gui_allow_multiple=True,
     ),
 }
 

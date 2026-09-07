@@ -36,7 +36,12 @@ export interface PivotArgs {
   scope: Scope;
   moduleName?: string | null;
   openaiToken?: string | null;
-  files: File[];
+  /** Flat file list (non-split-upload sources). */
+  files?: File[];
+  /** Data-model files only (split-upload sources). */
+  dataFiles?: File[];
+  /** GUI-model files only (split-upload sources). */
+  guiFiles?: File[];
 }
 
 export async function createPivot(args: PivotArgs): Promise<PivotResponse> {
@@ -45,7 +50,9 @@ export async function createPivot(args: PivotArgs): Promise<PivotResponse> {
   form.append("scope", args.scope);
   if (args.moduleName) form.append("module_name", args.moduleName);
   if (args.openaiToken) form.append("openai_token", args.openaiToken);
-  args.files.forEach((f) => form.append("files", f));
+  (args.files ?? []).forEach((f) => form.append("files", f));
+  (args.dataFiles ?? []).forEach((f) => form.append("data_files", f));
+  (args.guiFiles ?? []).forEach((f) => form.append("gui_files", f));
   return handle<PivotResponse>(
     await fetch("/api/pivot", { method: "POST", body: form })
   );

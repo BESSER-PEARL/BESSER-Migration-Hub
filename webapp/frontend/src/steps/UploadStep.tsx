@@ -6,8 +6,15 @@ import type { Scope, SourcePlatform } from "../types";
 
 interface Props {
   source: SourcePlatform;
+  /** Flat file list — used for non-split-upload sources. */
   files: File[];
   setFiles: (f: File[]) => void;
+  /** Split upload — data model files only. */
+  dataFiles: File[];
+  setDataFiles: (f: File[]) => void;
+  /** Split upload — GUI model files only. */
+  guiFiles: File[];
+  setGuiFiles: (f: File[]) => void;
   scope: Scope;
   setScope: (s: Scope) => void;
   moduleName: string | null;
@@ -22,8 +29,14 @@ interface Props {
 
 export default function UploadStep(props: Props) {
   const {
-    source, files, setFiles, scope, setScope, moduleName, setModuleName,
-    openaiToken, setOpenaiToken, loading, error, onBack, onSubmit,
+    source,
+    files, setFiles,
+    dataFiles, setDataFiles,
+    guiFiles, setGuiFiles,
+    scope, setScope,
+    moduleName, setModuleName,
+    openaiToken, setOpenaiToken,
+    loading, error, onBack, onSubmit,
   } = props;
 
   const [modules, setModules] = useState<string[]>([]);
@@ -50,23 +63,66 @@ export default function UploadStep(props: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [files, source.needs_module]);
 
-  const canSubmit =
-    files.length > 0 &&
-    (!source.needs_module || !!moduleName) &&
-    (!source.needs_openai || openaiToken.trim().length > 0) &&
-    !loading;
+  const wantData = scope === "data" || scope === "both";
+  const wantGui  = scope === "gui"  || scope === "both";
+
+  let canSubmit: boolean;
+  if (source.split_upload) {
+    canSubmit =
+      (!wantData || dataFiles.length > 0) &&
+      (!wantGui  || guiFiles.length > 0) &&
+      (!source.needs_openai || openaiToken.trim().length > 0) &&
+      !loading;
+  } else {
+    canSubmit =
+      files.length > 0 &&
+      (!source.needs_module || !!moduleName) &&
+      (!source.needs_openai || openaiToken.trim().length > 0) &&
+      !loading;
+  }
 
   return (
     <div className="panel">
       <h2>Upload your model &amp; choose the scope</h2>
       <p className="subtitle">{source.input_hint}</p>
 
-      <FileDropzone
-        accept={source.accepted_extensions.concat(source.allow_csv ? [".csv"] : [])}
-        multiple={source.allow_multiple}
-        files={files}
-        onChange={setFiles}
-      />
+      {/* ── Split upload: separate zones for data model and GUI ── */}
+      {source.split_upload ? (
+        <>
+          {wantData && (
+            <div className="field">
+              <label>Data model files</label>
+              <div className="hint">{source.data_hint}</div>
+              <FileDropzone
+                accept={source.data_extensions}
+                multiple={source.data_allow_multiple}
+                files={dataFiles}
+                onChange={setDataFiles}
+              />
+            </div>
+          )}
+          {wantGui && (
+            <div className="field" style={{ marginTop: wantData ? 16 : 0 }}>
+              <label>GUI model files</label>
+              <div className="hint">{source.gui_hint}</div>
+              <FileDropzone
+                accept={source.gui_extensions}
+                multiple={source.gui_allow_multiple}
+                files={guiFiles}
+                onChange={setGuiFiles}
+              />
+            </div>
+          )}
+        </>
+      ) : (
+        /* ── Standard single dropzone ── */
+        <FileDropzone
+          accept={source.accepted_extensions.concat(source.allow_csv ? [".csv"] : [])}
+          multiple={source.allow_multiple}
+          files={files}
+          onChange={setFiles}
+        />
+      )}
 
       {source.needs_module && (
         <div className="field">

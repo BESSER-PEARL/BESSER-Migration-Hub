@@ -55,11 +55,13 @@ wwv_flow_imp_page.create_page(
         {%- if component is is_List%}
             {%- for source in component.list_sources%}
                 {%- if source is is_ModelElement%}
-                {# dataSourceClass may be an object OR a string #}
+                {# dataSourceClass may be an object, a string, or None (fall back to source.name) #}
                   {% if source.dataSourceClass is string %}
                      {% set ds_name = source.dataSourceClass %}
-                  {% else %}
+                  {% elif source.dataSourceClass is not none %}
                      {% set ds_name = source.dataSourceClass.name %}
+                  {% else %}
+                     {% set ds_name = source.name %}
                   {% endif %}
                      {% set data_source_name_lower = ds_name[0].lower() + ds_name[1:] %}
                      {% set data_source_name_upper = ds_name[0].upper() + ds_name[1:] %}

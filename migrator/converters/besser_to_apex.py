@@ -112,13 +112,18 @@ def _screen_is_list_page(screen_name: str) -> bool:
     """
     Return True for list/report screens; False for form/add/edit screens.
 
-    Handles two naming conventions:
-      • Mendix path  : names end with ``_page`` (but not ``_form_page``)
-      • Mockup path  : names end with ``Screen`` or ``ListScreen``
-                       (but not ``FormScreen``, ``AddScreen``, ``EditScreen``)
+    Handles three naming conventions:
+      • Oracle APEX path: names end with ``_List``
+      • Mendix path     : names end with ``_page`` (but not ``_form_page``)
+      • Mockup path     : names end with ``Screen`` or ``ListScreen``
+                          (but not ``FormScreen``, ``AddScreen``, ``EditScreen``)
     """
     name = screen_name.lower()
     _FORM_KEYWORDS = ("form", "add", "edit", "new", "create", "detail")
+
+    # Oracle APEX convention (*_List but not *_Form)
+    if name.endswith("_list"):
+        return True
 
     # Mendix convention
     if name.endswith("_page"):
@@ -155,151 +160,82 @@ def _build_page_generator(library_model, gui_model, app_id, screen, screen_numbe
 
 def generate_pages_for_gui_model(apex_export_dir, gui_model, library_model, workspace_name, user_name,
                                  output_dir=None):
-    """
-    Walk through pages folder in exported APEX app, match screens in GUI model,
-    generate SQL ONCE per screen, then remove it from further matching.
-    """
+    """Generate APEX page SQL for every list screen in the GUI model.
 
-
+    The app_id and version metadata are read from the uploaded APEX export;
+    page IDs are assigned sequentially starting above the highest existing page
+    so the generated SQL can be imported into the app without ID conflicts.
+    """
     pages_dir = get_apex_pages_dir(apex_export_dir)
     print(f"  APEX pages directory detected: {pages_dir}")
-    # Build mutable screen lists per module
-    module_screens = {
-        module: list(module.screens)
-        #for module in gui_model.modules
-        for module in gui_model.modules.values()
 
-    }
-
+    # Read all parseable pages from the export
     apex_pages = []
     for file_name in os.listdir(pages_dir):
         if not file_name.lower().endswith('.sql'):
             continue
-
         sql_file_path = os.path.join(pages_dir, file_name)
         apex_info = extract_apex_info_from_file(sql_file_path)
-        if apex_info.get('p_name') and apex_info.get('p_id') is not None:
+        if apex_info.get('p_id') is not None:
             apex_pages.append(apex_info)
 
     if not apex_pages:
         raise RuntimeError("No APEX pages found in export")
 
-    list_apex_pages = [p for p in apex_pages if p.get('page_type') == 'list']
-    if not list_apex_pages:
-        raise RuntimeError("No APEX list pages found in export")
+    # Pull app_id from the first page that has one
+    app_id = None
+    for info in apex_pages:
+        if info.get('p_default_application_id'):
+            app_id = str(info['p_default_application_id'])
+            break
+    if app_id is None:
+        raise RuntimeError("Could not determine app_id from APEX export")
 
-    app_id = str(list_apex_pages[0]['p_default_application_id'])
-
-    # Extract APEX version from the first page that carries it; fall back to
-    # the template defaults when the export does not include those fields.
+    # Pull APEX version metadata; fall back to safe defaults
     apex_version = '2024.11.30'
     apex_release = '24.2.6'
-    for page_info in apex_pages:
-        if page_info.get('p_version_yyyy_mm_dd'):
-            apex_version = page_info['p_version_yyyy_mm_dd']
-        if page_info.get('p_release'):
-            apex_release = page_info['p_release']
-        if page_info.get('p_version_yyyy_mm_dd') and page_info.get('p_release'):
+    for info in apex_pages:
+        if info.get('p_version_yyyy_mm_dd'):
+            apex_version = info['p_version_yyyy_mm_dd']
+        if info.get('p_release'):
+            apex_release = info['p_release']
+        if info.get('p_version_yyyy_mm_dd') and info.get('p_release'):
             break
 
     print(f"  APEX version detected: {apex_version}  release: {apex_release}")
 
-    generated_screens = set()
-    matched_apex_ids = set()
+    # Assign fresh page IDs above the highest existing one (steps of 2 so that
+    # the template's screen_number+1 form-page slot stays free between list pages)
+    max_existing_id = max((p['p_id'] for p in apex_pages), default=0)
+    # Round up to the next even number >= max+10 so IDs look tidy
+    next_id = max_existing_id + 10
+    if next_id % 2 != 0:
+        next_id += 1
 
-    for apex_info in list_apex_pages:
-
-        if not apex_info.get('p_name'):
-            continue
-
-        apex_page_name = _normalize_page_name(apex_info['p_name'])
-
-        for module, remaining_screens in module_screens.items():
-
-            for screen in remaining_screens[:]:
-                if not _screen_is_list_page(screen.name):
-                    continue
-
-                screen_page_name = _normalize_page_name(screen.name)
-
-                if (
-                    screen_page_name == apex_page_name
-                    or screen_page_name.startswith(apex_page_name)
-                    or apex_page_name.startswith(screen_page_name)
-                ):
-
-                    sql_list_page_file = _build_page_generator(
-                        library_model=library_model,
-                        gui_model=gui_model,
-                        app_id=app_id,
-                        screen=screen,
-                        screen_number=apex_info['p_id'],
-                        workspace_name=workspace_name,
-                        user_name=user_name,
-                        apex_version=apex_version,
-                        apex_release=apex_release,
-                        output_dir=output_dir,
-                    )
-                    sql_list_page_file.generate()
-                    generated_screens.add(screen.name)
-                    matched_apex_ids.add(apex_info['p_id'])
-
-                    # ✅ Remove screen after first successful match
-                    remaining_screens.remove(screen)
-
-                    # ✅ Stop searching for this APEX file
-                    break
-
-    # Second pass: resolve minor naming differences (e.g., Operational vs Operations).
-    unmatched_screens = []
-    for module, remaining_screens in module_screens.items():
-        for screen in remaining_screens:
-            if _screen_is_list_page(screen.name):
-                unmatched_screens.append(screen)
-
-    remaining_apex_pages = [
-        p for p in list_apex_pages
-        if p.get('p_id') not in matched_apex_ids
-    ]
-
-    for screen in unmatched_screens:
-        screen_page_name = _normalize_page_name(screen.name)
-        best = None
-        best_score = 0.0
-        for apex_info in remaining_apex_pages:
-            apex_page_name = _normalize_page_name(apex_info['p_name'])
-            score = _similarity(screen_page_name, apex_page_name)
-            if score > best_score:
-                best_score = score
-                best = apex_info
-
-        if best and best_score >= 0.85:
-            sql_list_page_file = _build_page_generator(
+    generated_screens = []
+    for module in gui_model.modules.values():
+        for screen in sorted(module.screens, key=lambda s: s.name):
+            if not _screen_is_list_page(screen.name):
+                continue
+            gen = _build_page_generator(
                 library_model=library_model,
                 gui_model=gui_model,
                 app_id=app_id,
                 screen=screen,
-                screen_number=best['p_id'],
+                screen_number=next_id,
                 workspace_name=workspace_name,
                 user_name=user_name,
                 apex_version=apex_version,
                 apex_release=apex_release,
                 output_dir=output_dir,
             )
-            sql_list_page_file.generate()
-            generated_screens.add(screen.name)
-            matched_apex_ids.add(best['p_id'])
-            remaining_apex_pages = [p for p in remaining_apex_pages if p['p_id'] != best['p_id']]
+            gen.generate()
+            print(f"  Generated page {next_id}: {screen.name}")
+            generated_screens.append(screen.name)
+            next_id += 2
 
-    # Keep the output list-page-only: do not synthesize new IDs for unmatched pages.
-    unmatched_list_pages = []
-    for module in module_screens.values():
-        for screen in module:
-            if _screen_is_list_page(screen.name) and screen.name not in generated_screens:
-                unmatched_list_pages.append(screen.name)
-
-    if unmatched_list_pages:
-        print("Warning: unmatched list screens were skipped:", ", ".join(sorted(unmatched_list_pages)))
+    if not generated_screens:
+        print("Warning: no list screens found in GUI model to generate.")
 
 
 

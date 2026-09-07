@@ -24,6 +24,8 @@ export default function App() {
   // Wizard state
   const [sourceId, setSourceId] = useState<string | null>(null);
   const [files, setFiles] = useState<File[]>([]);
+  const [dataFiles, setDataFiles] = useState<File[]>([]);
+  const [guiFiles, setGuiFiles] = useState<File[]>([]);
   const [scope, setScope] = useState<Scope>("data");
   const [moduleName, setModuleName] = useState<string | null>(null);
   const [openaiToken, setOpenaiToken] = useState("");
@@ -50,6 +52,8 @@ export default function App() {
     const s = platforms?.sources.find((x) => x.id === id);
     setScope(s && !s.supports_gui ? "data" : "both");
     setFiles([]);
+    setDataFiles([]);
+    setGuiFiles([]);
     setModuleName(null);
     setPivot(null);
     setStepError(null);
@@ -60,13 +64,11 @@ export default function App() {
     setBusy(true);
     setStepError(null);
     try {
-      const result = await createPivot({
-        sourceLcp: source.id,
-        scope,
-        moduleName,
-        openaiToken,
-        files,
-      });
+      const result = await createPivot(
+        source.split_upload
+          ? { sourceLcp: source.id, scope, moduleName, openaiToken, dataFiles, guiFiles }
+          : { sourceLcp: source.id, scope, moduleName, openaiToken, files }
+      );
       setPivot(result);
       setStep(2);
     } catch (e) {
@@ -115,6 +117,8 @@ export default function App() {
     setStep(0);
     setSourceId(null);
     setFiles([]);
+    setDataFiles([]);
+    setGuiFiles([]);
     setScope("data");
     setModuleName(null);
     setOpenaiToken("");
@@ -152,6 +156,10 @@ export default function App() {
           source={source}
           files={files}
           setFiles={setFiles}
+          dataFiles={dataFiles}
+          setDataFiles={setDataFiles}
+          guiFiles={guiFiles}
+          setGuiFiles={setGuiFiles}
           scope={scope}
           setScope={setScope}
           moduleName={moduleName}
