@@ -1,2 +1,2 @@
 from .mendix import *
-from .mendix_gui import *
+from .mendix.mendix_gui import *

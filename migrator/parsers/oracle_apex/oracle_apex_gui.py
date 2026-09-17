@@ -255,3 +255,83 @@ def oracle_apex_to_gui(pages_dir: str, module_name: str = None) -> GUIModel:
 
     print(f"  Total: {len(screens)} screens extracted")
     return gui_model
+
+
+# ---------------------------------------------------------------------------
+# Monolithic SQL export parser
+# ---------------------------------------------------------------------------
+
+import re as _re
+import tempfile as _tempfile
+
+_PAGE_MARKER_RE = _re.compile(
+    r'^prompt\s+--application/pages/(page_\d+)\s*$',
+    _re.IGNORECASE | _re.MULTILINE,
+)
+_PNAME_RE = _re.compile(r"(,\s*p_name\s*=>\s*N?')(.*?)(')", _re.IGNORECASE | _re.DOTALL)
+
+
+def _sanitize_section(text: str) -> str:
+    """Replace spaces/hyphens inside p_name values to avoid BESSER parse errors."""
+    def _fix(m):
+        safe = _re.sub(r"[\s\-]+", "_", m.group(2))
+        return m.group(1) + safe + m.group(3)
+    return _PNAME_RE.sub(_fix, text)
+
+
+def oracle_apex_gui_from_sql(sql_path: str, module_name: str = None) -> GUIModel:
+    """Parse a monolithic Oracle APEX SQL export and return a GUIModel.
+
+    Oracle APEX can export an application as a single SQL file.  Each page
+    section is delimited by a ``prompt --application/pages/page_NNNNN`` line.
+    This function splits the file on those markers, writes each section to a
+    temporary file, and delegates to the existing :func:`_parse_page_file`
+    helper.
+
+    Args:
+        sql_path   : path to the monolithic ``.sql`` export file.
+        module_name: optional name for the GUIModel and its Module.
+
+    Returns:
+        A populated ``GUIModel``, or ``None`` if the file is missing or contains
+        no page markers.
+    """
+    if not os.path.isfile(sql_path):
+        print(f"  SQL file not found: {sql_path}")
+        return None
+
+    with open(sql_path, "r", encoding="utf-8", errors="replace") as fh:
+        content = fh.read()
+
+    markers = list(_PAGE_MARKER_RE.finditer(content))
+    if not markers:
+        print(f"  No page markers found in: {os.path.basename(sql_path)}")
+        return None
+
+    name = module_name or os.path.splitext(os.path.basename(sql_path))[0]
+    print(f"  Found {len(markers)} page sections in {os.path.basename(sql_path)}")
+
+    screens: set = set()
+    with _tempfile.TemporaryDirectory() as tmp_dir:
+        for i, m in enumerate(markers):
+            page_id = m.group(1)
+            start   = m.start()
+            end     = markers[i + 1].start() if i + 1 < len(markers) else len(content)
+            section = _sanitize_section(content[start:end])
+
+            tmp_file = os.path.join(tmp_dir, f"{page_id}.sql")
+            with open(tmp_file, "w", encoding="utf-8") as fh:
+                fh.write(section)
+
+            screen = _parse_page_file(tmp_file)
+            if screen is not None:
+                existing_names = {s.name for s in screens}
+                if screen.name in existing_names:
+                    screen.name = f"{screen.name}_{page_id}"
+                screens.add(screen)
+
+    gui_model = GUIModel(name=name, package="", versionCode="",
+                         versionName="", modules={}, description="")
+    gui_model.modules[name] = Module(name=name, screens=screens)
+    print(f"  Total: {len(screens)} screens extracted from monolithic SQL")
+    return gui_model
