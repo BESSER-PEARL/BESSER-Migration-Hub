@@ -1,8 +1,14 @@
 """Retool RSX zip -> BESSER B-UML GUIModel parser.
 
 Parses a Retool RSX Toolscript zip package.  The zip must contain
-src/*.rsx files (one per screen).  Each file is XML; the parser extracts:
+src/*.rsx files (one per screen), either at the root level (src/*.rsx)
+or under an app-name prefix (<app_name>/src/*.rsx).
 
+RSX files use a JSX-like attribute syntax that is NOT valid XML
+(e.g. ``attr={[]}`` or ``{{ expr }}``).  All element detection is
+therefore done with regular expressions rather than an XML parser.
+
+The parser extracts:
   - Table elements  -> DataList view elements
   - Button elements -> Button view elements
 
@@ -13,7 +19,6 @@ or contains no src/*.rsx files.
 import os
 import re
 import zipfile
-from xml.etree import ElementTree as ET
 
 from besser.BUML.metamodel.gui.graphical_ui import (
     Button,
@@ -54,54 +59,60 @@ def _safe_name(text: str) -> str:
     return re.sub(r'[^A-Za-z0-9_]', '_', text).strip('_') or 'Element'
 
 
-def _parse_rsx_screen(entry_name: str, xml_content: str):
-    """Parse one src/*.rsx file into a B-UML Screen, or return None."""
+# Regex patterns for RSX element detection (no XML parser — RSX uses JSX syntax)
+_TABLE_NAME_RE  = re.compile(r'<Table\b[^>]*\bname="([^"]+)"',  re.DOTALL)
+_TABLE_ID_RE    = re.compile(r'<Table\b[^>]*\bid="([^"]+)"',    re.DOTALL)
+_TABLE_RE       = re.compile(r'<Table\b')
+_BTN_TEXT_RE    = re.compile(r'<Button\b[^>]*\btext="([^"]+)"', re.DOTALL)
+_BTN_NAME_RE    = re.compile(r'<Button\b[^>]*\bname="([^"]+)"', re.DOTALL)
+
+
+def _parse_rsx_screen(entry_name: str, rsx_content: str):
+    """Parse one src/*.rsx file into a B-UML Screen using regex.
+
+    RSX uses JSX-like attribute syntax (e.g. ``attr={[]}`` or
+    ``{{ expr }}``) that is not valid XML, so ElementTree is not used.
+    """
     stem        = os.path.splitext(os.path.basename(entry_name))[0]
     screen_name = _safe_name(stem)
-
-    try:
-        root = ET.fromstring(xml_content)
-    except ET.ParseError as exc:
-        print(f"  XML parse error in {entry_name}: {exc}")
-        return None
 
     view_elements: set = set()
     entity_name = screen_name
 
-    # Extract entity name and DataList from Table elements
-    for table_elem in root.iter('Table'):
-        raw = (table_elem.get('name') or table_elem.get('id') or '').strip()
-        raw = re.sub(r'[Tt]able', '', raw).strip()
-        if raw:
-            entity_name = _safe_name(raw)
-        data_source = DataSourceElement(
-            name=entity_name,
-            dataSourceClass=entity_name,
-        )
+    # ── Table → DataList ──────────────────────────────────────────────────────
+    m = _TABLE_NAME_RE.search(rsx_content) or _TABLE_ID_RE.search(rsx_content)
+    if _TABLE_RE.search(rsx_content):
+        if m:
+            raw = re.sub(r'[Tt]able', '', m.group(1)).strip()
+            if raw:
+                entity_name = _safe_name(raw)
+        data_source = DataSourceElement(name=entity_name)
         view_elements.add(DataList(
             name=_safe_name(f"{entity_name}_List"),
             description="",
             list_sources={data_source},
         ))
-        break  # one table per screen
 
-    # Extract Button elements
-    for btn_elem in root.iter('Button'):
-        label = (btn_elem.get('name') or btn_elem.get('label') or '').strip()
-        if not label:
-            continue
-        safe = _safe_name(label)
-        btn_type, act_type = _classify_button(label)
-        try:
-            view_elements.add(Button(
-                name=safe,
-                description="",
-                label=label,
-                buttonType=btn_type,
-                actionType=act_type,
-            ))
-        except ValueError:
-            pass
+    # ── Button elements ───────────────────────────────────────────────────────
+    labels_seen: set = set()
+    for pat in (_BTN_TEXT_RE, _BTN_NAME_RE):
+        for label in pat.findall(rsx_content):
+            label = label.strip()
+            if not label or label in labels_seen:
+                continue
+            labels_seen.add(label)
+            safe = _safe_name(label)
+            btn_type, act_type = _classify_button(label)
+            try:
+                view_elements.add(Button(
+                    name=safe,
+                    description="",
+                    label=label,
+                    buttonType=btn_type,
+                    actionType=act_type,
+                ))
+            except ValueError:
+                pass
 
     is_modal = bool(re.search(r'(form|modal|detail)', screen_name.lower()))
     return Screen(
@@ -132,9 +143,11 @@ def retool_rsx_to_gui(zip_path: str, module_name: str = None) -> GUIModel:
 
     try:
         with zipfile.ZipFile(zip_path, 'r') as zf:
+            # Accept both  src/*.rsx  and  <app_name>/src/*.rsx  layouts
+            _RSX_ENTRY_RE = re.compile(r'(?:^|/)src/[^/]+\.rsx$')
             rsx_entries = sorted(
                 n for n in zf.namelist()
-                if n.startswith('src/') and n.endswith('.rsx')
+                if _RSX_ENTRY_RE.search(n)
             )
             if not rsx_entries:
                 print("  No src/*.rsx files found in zip — skipping GUI extraction")
