@@ -199,9 +199,9 @@ SOURCES: dict[str, SourcePlatform] = {
             "Upload the DDL SQL script for the data model and/or the exported page SQL files for the GUI model."
         ),
         split_upload=True,
-        data_hint="Upload the DDL SQL script containing your CREATE TABLE statements.",
+        data_hint="Upload one or more DDL SQL scripts containing your CREATE TABLE statements. You can upload a single file or multiple files — all will be merged and parsed together.",
         data_extensions=[".sql"],
-        data_allow_multiple=False,
+        data_allow_multiple=True,
         gui_hint="Upload all page SQL files exported from your APEX application (page_00001.sql, page_00002.sql, …).",
         gui_extensions=[".sql"],
         gui_allow_multiple=True,

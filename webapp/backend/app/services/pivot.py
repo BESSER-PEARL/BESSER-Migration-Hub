@@ -241,10 +241,16 @@ def build_pivot(
         gui_model_path = str(gui_classified["zips"][0]) if gui_classified["zips"] else ""
 
     elif source_lcp == "oracle_apex":
-        # Data: DDL SQL file; GUI: directory of page SQL files.
+        # Data: one or more DDL SQL files; GUI: directory of page SQL files.
         if want_data and not data_classified["sqls"]:
             raise PivotError("No SQL file found. Upload the Oracle APEX DDL SQL script for the data model.")
-        data_model_path = str(data_classified["sqls"][0]) if data_classified["sqls"] else ""
+        # Pass the directory when multiple files are uploaded so oracle_apex_to_buml
+        # auto-discovers and merges them all; otherwise pass the single file directly.
+        data_root = data_dir if is_split else session.uploads_dir
+        if len(data_classified["sqls"]) > 1:
+            data_model_path = str(data_root)
+        else:
+            data_model_path = str(data_classified["sqls"][0]) if data_classified["sqls"] else ""
         gui_root = gui_dir if is_split else session.uploads_dir
         gui_model_path = str(gui_root)
 
