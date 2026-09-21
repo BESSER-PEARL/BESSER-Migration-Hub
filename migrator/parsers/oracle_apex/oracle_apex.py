@@ -14,21 +14,26 @@ All auto-generated surrogate primary key columns (IDENTITY) are skipped.
 Foreign key columns are converted to B-UML BinaryAssociations instead of
 plain attributes.
 
-Multi-file support:
+oracle_apex_to_buml(ddl_path, module_name) is the single entry point and
+accepts either:
+  - a path to one ``.sql`` DDL file, or
+  - a path to a folder containing ``.sql`` DDL files, which are
+    auto-discovered, skipping non-DDL scripts (deinstall, data-load,
+    PL/SQL packages, APEX app exports, etc.) and deduplicating tables that
+    appear in more than one file.
+
+Multi-file support (used internally, also available directly):
     oracle_apex_multi_to_buml(paths, module_name)
         Accepts a list of .sql file paths, merges them, and parses as one.
 
     oracle_apex_dir_to_buml(folder, module_name)
-        Auto-discovers DDL .sql files in a folder, skipping non-DDL scripts
-        (deinstall, data-load, PL/SQL packages, APEX app exports, etc.) and
-        deduplicating tables that appear in more than one file.
+        Auto-discovers DDL .sql files in a folder and merges them.
 
 Usage:
     from migrator.parsers.oracle_apex.oracle_apex import oracle_apex_to_buml
-    domain_model = oracle_apex_to_buml("script.sql", module_name="LibraryApp")
 
-    from migrator.parsers.oracle_apex.oracle_apex import oracle_apex_dir_to_buml
-    domain_model = oracle_apex_dir_to_buml("path/to/sql/folder", module_name="MyApp")
+    domain_model = oracle_apex_to_buml("script.sql", module_name="LibraryApp")
+    domain_model = oracle_apex_to_buml("path/to/sql/folder", module_name="MyApp")
 """
 
 import glob
@@ -180,8 +185,31 @@ def _parse_columns(table_body: str, fk_columns: set) -> set:
 # Public entry point
 # ---------------------------------------------------------------------------
 
-def oracle_apex_to_buml(ddl_path: str, module_name: str = None) -> DomainModel:
-    """Parse an Oracle APEX DDL SQL file and return a BESSER B-UML DomainModel.
+def oracle_apex_to_buml(ddl_path: str, module_name: str = None,
+                         pattern: str = "*.sql") -> DomainModel:
+    """Parse Oracle APEX DDL SQL and return a BESSER B-UML DomainModel.
+
+    Accepts either a single ``.sql`` file or a folder containing DDL ``.sql``
+    files. Folders are handled via :func:`oracle_apex_dir_to_buml`, which
+    discovers and merges the relevant DDL files automatically.
+
+    Args:
+        ddl_path:    Path to a DDL ``.sql`` file, or a folder containing them.
+        module_name: Optional name for the resulting DomainModel.
+        pattern:     Glob pattern used when ``ddl_path`` is a folder
+                     (default ``"*.sql"``).
+
+    Returns:
+        A populated ``DomainModel``, or ``None`` on a fatal error.
+    """
+    if os.path.isdir(ddl_path):
+        return oracle_apex_dir_to_buml(ddl_path, module_name=module_name,
+                                        pattern=pattern)
+    return _oracle_apex_file_to_buml(ddl_path, module_name=module_name)
+
+
+def _oracle_apex_file_to_buml(ddl_path: str, module_name: str = None) -> DomainModel:
+    """Parse a single Oracle APEX DDL SQL file and return a DomainModel.
 
     Args:
         ddl_path:    Path to the DDL ``.sql`` file.
@@ -361,7 +389,7 @@ def oracle_apex_multi_to_buml(paths: list, module_name: str = None):
         tmp_path = tmp.name
 
     try:
-        model = oracle_apex_to_buml(ddl_path=tmp_path, module_name=name)
+        model = _oracle_apex_file_to_buml(ddl_path=tmp_path, module_name=name)
     finally:
         os.unlink(tmp_path)
 
