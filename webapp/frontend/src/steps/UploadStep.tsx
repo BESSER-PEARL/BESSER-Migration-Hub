@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import FileDropzone from "../components/FileDropzone";
+import Markdown from "../components/Markdown";
 import ScopeSelector from "../components/ScopeSelector";
 import { fetchMendixModules } from "../api";
 import type { Scope, SourcePlatform } from "../types";
@@ -92,7 +93,7 @@ export default function UploadStep(props: Props) {
           {wantData && (
             <div className="field">
               <label>Data model files</label>
-              <div className="hint">{source.data_hint}</div>
+              <div className="hint"><Markdown text={source.data_hint} /></div>
               <FileDropzone
                 accept={source.data_extensions}
                 multiple={source.data_allow_multiple}
@@ -104,7 +105,7 @@ export default function UploadStep(props: Props) {
           {wantGui && (
             <div className="field" style={{ marginTop: wantData ? 16 : 0 }}>
               <label>GUI model files</label>
-              <div className="hint">{source.gui_hint}</div>
+              <div className="hint"><Markdown text={source.gui_hint} /></div>
               <FileDropzone
                 accept={source.gui_extensions}
                 multiple={source.gui_allow_multiple}

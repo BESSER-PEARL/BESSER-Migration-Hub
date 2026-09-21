@@ -228,7 +228,8 @@ def _oracle_apex_file_to_buml(ddl_path: str, module_name: str = None) -> DomainM
     with open(ddl_path, "r", encoding="utf-8", errors="replace") as fh:
         content = fh.read()
 
-    name         = module_name or os.path.splitext(os.path.basename(ddl_path))[0]
+    raw_name     = module_name or os.path.splitext(os.path.basename(ddl_path))[0]
+    name         = re.sub(r"[^A-Za-z0-9_]", "_", raw_name)
     domain_model = DomainModel(name=name)
     classes:      dict = {}
     pending_fks:  list = []

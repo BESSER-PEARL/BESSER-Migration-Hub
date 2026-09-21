@@ -224,13 +224,12 @@ def oracle_apex_to_gui(pages_dir: str, module_name: str = None) -> GUIModel:
 
     name = module_name or "OracleApexGUI"
 
-    # Fixed: GUIModel requires all positional args
     gui_model = GUIModel(
         name=name,
         package="",
         versionCode="",
         versionName="",
-        modules={},
+        modules=set(),
         description="",
     )
 
@@ -258,10 +257,8 @@ def oracle_apex_to_gui(pages_dir: str, module_name: str = None) -> GUIModel:
         else:
             print(f"  Skipped: {os.path.basename(path)}")
 
-    # Fixed: Module(name, screens) - no gui_model kwarg in this BESSER version
     module = Module(name=name, screens=screens)
-    # Fixed: modules is a dict, use update()
-    gui_model.modules.update({module.name: module})
+    gui_model.modules.add(module)
 
     print(f"  Total: {len(screens)} screens extracted")
     return gui_model

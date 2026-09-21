@@ -199,7 +199,17 @@ SOURCES: dict[str, SourcePlatform] = {
             "Upload the DDL SQL script for the data model and/or the exported page SQL files for the GUI model."
         ),
         split_upload=True,
-        data_hint="Upload one or more DDL SQL scripts containing your CREATE TABLE statements. You can upload a single file or multiple files — all will be merged and parsed together.",
+        data_hint=(
+            "Upload one or more plain DDL SQL scripts containing your `CREATE TABLE` statements."
+            " Multiple files are merged before parsing.\n\n"
+            "**How to export the DDL from Oracle APEX:**\n"
+            "1. In your workspace open **SQL Workshop → Utilities → Generate DDL**.\n"
+            "2. Select your schema, tick the tables you want to migrate, and click **Generate DDL**.\n"
+            "3. Download the resulting `.sql` file and upload it here.\n\n"
+            "**Do not** upload the application export files (e.g. `install_create_tables.sql`"
+            " from a custom split export) — those embed the DDL inside Oracle's internal"
+            " `wwv_flow_imp` wrapper and cannot be parsed directly."
+        ),
         data_extensions=[".sql"],
         data_allow_multiple=True,
         gui_hint="Upload all page SQL files exported from your APEX application (page_00001.sql, page_00002.sql, …).",

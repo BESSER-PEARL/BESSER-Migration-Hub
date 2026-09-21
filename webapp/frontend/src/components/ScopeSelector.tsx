@@ -6,18 +6,16 @@ interface Props {
   onChange: (scope: Scope) => void;
 }
 
-const OPTIONS: { value: Scope; label: string }[] = [
-  { value: "data", label: "Data model" },
-  { value: "gui", label: "GUI model" },
-  { value: "both", label: "Both" },
+const OPTIONS: { value: Scope; label: string; description: string }[] = [
+  { value: "data",  label: "Data model", description: "Extract the data model only." },
+  { value: "both",  label: "Both",       description: "Extract the data model and the GUI model." },
 ];
 
 export default function ScopeSelector({ value, guiSupported, onChange }: Props) {
   return (
     <div className="scope-options">
       {OPTIONS.map((opt) => {
-        const needsGui = opt.value === "gui" || opt.value === "both";
-        const disabled = needsGui && !guiSupported;
+        const disabled = opt.value === "both" && !guiSupported;
         return (
           <label
             key={opt.value}
@@ -31,7 +29,10 @@ export default function ScopeSelector({ value, guiSupported, onChange }: Props) 
               disabled={disabled}
               onChange={() => onChange(opt.value)}
             />
-            {opt.label}
+            <span className="scope-text">
+              <span className="scope-label">{opt.label}</span>
+              <span className="scope-desc">{opt.description}</span>
+            </span>
           </label>
         );
       })}
