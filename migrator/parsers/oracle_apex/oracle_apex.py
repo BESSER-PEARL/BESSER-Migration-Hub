@@ -89,7 +89,7 @@ _CREATE_TABLE_RE = re.compile(
 
 # ALTER TABLE ... ADD [CONSTRAINT name] FOREIGN KEY (col) REFERENCES other(col)
 _ALTER_FK_RE = re.compile(
-    r'ALTER\s+TABLE\s+"?(\w+)"?\s+ADD\s+(?:CONSTRAINT\s+\w+\s+)?'
+    r'ALTER\s+TABLE\s+"?(\w+)"?\s+ADD\s+(?:CONSTRAINT\s+"?\w+"?\s+)?'
     r'FOREIGN\s+KEY\s*\(\s*"?(\w+)"?\s*\)\s+REFERENCES\s+"?(\w+)"?',
     re.IGNORECASE,
 )
