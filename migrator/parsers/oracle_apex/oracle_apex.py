@@ -14,13 +14,32 @@ All auto-generated surrogate primary key columns (IDENTITY) are skipped.
 Foreign key columns are converted to B-UML BinaryAssociations instead of
 plain attributes.
 
+oracle_apex_to_buml(ddl_path, module_name) is the single entry point and
+accepts either:
+  - a path to one ``.sql`` DDL file, or
+  - a path to a folder containing ``.sql`` DDL files, which are
+    auto-discovered, skipping non-DDL scripts (deinstall, data-load,
+    PL/SQL packages, APEX app exports, etc.) and deduplicating tables that
+    appear in more than one file.
+
+Multi-file support (used internally, also available directly):
+    oracle_apex_multi_to_buml(paths, module_name)
+        Accepts a list of .sql file paths, merges them, and parses as one.
+
+    oracle_apex_dir_to_buml(folder, module_name)
+        Auto-discovers DDL .sql files in a folder and merges them.
+
 Usage:
-    from migrator.parsers.oracle_apex import oracle_apex_to_buml
+    from migrator.parsers.oracle_apex.oracle_apex import oracle_apex_to_buml
+
     domain_model = oracle_apex_to_buml("script.sql", module_name="LibraryApp")
+    domain_model = oracle_apex_to_buml("path/to/sql/folder", module_name="MyApp")
 """
 
+import glob
 import os
 import re
+import tempfile
 
 from besser.BUML.metamodel.structural import (
     BinaryAssociation,
@@ -75,7 +94,7 @@ _CREATE_TABLE_RE = re.compile(
 
 # ALTER TABLE ... ADD [CONSTRAINT name] FOREIGN KEY (col) REFERENCES other(col)
 _ALTER_FK_RE = re.compile(
-    r'ALTER\s+TABLE\s+"?(\w+)"?\s+ADD\s+(?:CONSTRAINT\s+\w+\s+)?'
+    r'ALTER\s+TABLE\s+"?(\w+)"?\s+ADD\s+(?:CONSTRAINT\s+"?\w+"?\s+)?'
     r'FOREIGN\s+KEY\s*\(\s*"?(\w+)"?\s*\)\s+REFERENCES\s+"?(\w+)"?',
     re.IGNORECASE,
 )
@@ -166,8 +185,31 @@ def _parse_columns(table_body: str, fk_columns: set) -> set:
 # Public entry point
 # ---------------------------------------------------------------------------
 
-def oracle_apex_to_buml(ddl_path: str, module_name: str = None) -> DomainModel:
-    """Parse an Oracle APEX DDL SQL file and return a BESSER B-UML DomainModel.
+def oracle_apex_to_buml(ddl_path: str, module_name: str = None,
+                         pattern: str = "*.sql") -> DomainModel:
+    """Parse Oracle APEX DDL SQL and return a BESSER B-UML DomainModel.
+
+    Accepts either a single ``.sql`` file or a folder containing DDL ``.sql``
+    files. Folders are handled via :func:`oracle_apex_dir_to_buml`, which
+    discovers and merges the relevant DDL files automatically.
+
+    Args:
+        ddl_path:    Path to a DDL ``.sql`` file, or a folder containing them.
+        module_name: Optional name for the resulting DomainModel.
+        pattern:     Glob pattern used when ``ddl_path`` is a folder
+                     (default ``"*.sql"``).
+
+    Returns:
+        A populated ``DomainModel``, or ``None`` on a fatal error.
+    """
+    if os.path.isdir(ddl_path):
+        return oracle_apex_dir_to_buml(ddl_path, module_name=module_name,
+                                        pattern=pattern)
+    return _oracle_apex_file_to_buml(ddl_path, module_name=module_name)
+
+
+def _oracle_apex_file_to_buml(ddl_path: str, module_name: str = None) -> DomainModel:
+    """Parse a single Oracle APEX DDL SQL file and return a DomainModel.
 
     Args:
         ddl_path:    Path to the DDL ``.sql`` file.
@@ -247,3 +289,138 @@ def oracle_apex_to_buml(ddl_path: str, module_name: str = None) -> DomainModel:
 
     print(f"  Total: {len(classes)} classes, {len(domain_model.associations)} associations")
     return domain_model
+
+
+# ---------------------------------------------------------------------------
+# Multi-file helpers
+# ---------------------------------------------------------------------------
+
+# Patterns that identify NON-DDL / non-schema SQL files to skip automatically
+_SKIP_NAME_RE = re.compile(
+    r"(deinstall|load[_-]?data|insert[_-]?data|seed|"
+    r"[_-]pkg[_-]|pkg[_-]body|pkg[_-]spec|"
+    r"trigger|timing|process[_-]table|"
+    r"set[_-]?plscope|load[_-]?sample|"
+    r"summary|^scope\.|^start\.|"
+    r"refresh[_-]?data|update[_-]?data|drop[_-]?old|"
+    r"pipelined|event[_-]?log|event[_-]?pkg|"
+    r"sequence\.sql)",
+    re.IGNORECASE,
+)
+
+# APEX monolithic app exports always contain this token
+_APEX_EXPORT_TOKEN = re.compile(r"wwv_flow_imp\.import_begin", re.IGNORECASE)
+
+# Used to detect duplicate CREATE TABLE definitions across files
+_TABLE_NAME_RE = re.compile(r'CREATE\s+TABLE\s+"?(\w+)"?\s*\(', re.IGNORECASE)
+
+
+def _is_ddl_file(path: str) -> bool:
+    """Return True if the file looks like a DDL schema file worth parsing."""
+    name = os.path.basename(path)
+    if _SKIP_NAME_RE.search(name):
+        return False
+    try:
+        with open(path, "r", encoding="utf-8", errors="replace") as fh:
+            head = fh.read(2048)
+        if _APEX_EXPORT_TOKEN.search(head):
+            return False
+    except OSError:
+        return False
+    return True
+
+
+def _merge_ddl_files(paths: list) -> str:
+    """Concatenate multiple DDL files, skipping duplicate CREATE TABLE blocks."""
+    seen_tables: set = set()
+    parts = []
+    for p in paths:
+        with open(p, "r", encoding="utf-8", errors="replace") as fh:
+            content = fh.read()
+        tables_in_file = {m.group(1).upper() for m in _TABLE_NAME_RE.finditer(content)}
+        duplicates = tables_in_file & seen_tables
+        if duplicates:
+            print(f"  Skipping {os.path.basename(p)} (duplicate tables: {sorted(duplicates)})")
+            continue
+        seen_tables.update(tables_in_file)
+        parts.append(content)
+        parts.append("\n")
+    return "\n".join(parts)
+
+
+# ---------------------------------------------------------------------------
+# Multi-file entry points
+# ---------------------------------------------------------------------------
+
+def oracle_apex_multi_to_buml(paths: list, module_name: str = None):
+    """Parse multiple Oracle APEX DDL SQL files and return a DomainModel.
+
+    All files are merged (with duplicate-table deduplication) and parsed as
+    a single DDL document.
+
+    Args:
+        paths      : list of paths to .sql DDL files (merged in given order).
+        module_name: optional name for the resulting DomainModel.
+
+    Returns:
+        A populated DomainModel, or None on a fatal error.
+    """
+    if not paths:
+        print("oracle_apex_multi_to_buml: no files provided.")
+        return None
+
+    missing = [p for p in paths if not os.path.isfile(p)]
+    if missing:
+        for p in missing:
+            print(f"  File not found: {p}")
+        return None
+
+    print(f"Merging {len(paths)} DDL file(s):")
+    for p in paths:
+        print(f"  + {os.path.basename(p)}")
+
+    combined = _merge_ddl_files(paths)
+    name = module_name or "OracleApexModel"
+
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".sql", encoding="utf-8", delete=False
+    ) as tmp:
+        tmp.write(combined)
+        tmp_path = tmp.name
+
+    try:
+        model = _oracle_apex_file_to_buml(ddl_path=tmp_path, module_name=name)
+    finally:
+        os.unlink(tmp_path)
+
+    return model
+
+
+def oracle_apex_dir_to_buml(folder: str, module_name: str = None,
+                             pattern: str = "*.sql"):
+    """Discover DDL .sql files in a folder, merge them, and return a DomainModel.
+
+    Non-DDL files (deinstall scripts, data-load scripts, APEX app exports,
+    PL/SQL packages, triggers, etc.) are skipped automatically.  Duplicate
+    CREATE TABLE definitions across files are also deduplicated.
+
+    Args:
+        folder     : directory to search for .sql files (searched recursively).
+        module_name: optional name for the resulting DomainModel.
+        pattern    : glob pattern for SQL files (default "*.sql").
+
+    Returns:
+        A populated DomainModel, or None on a fatal error.
+    """
+    if not os.path.isdir(folder):
+        print(f"oracle_apex_dir_to_buml: folder not found: {folder}")
+        return None
+
+    all_sql = sorted(glob.glob(os.path.join(folder, "**", pattern), recursive=True))
+    ddl_files = [p for p in all_sql if _is_ddl_file(p)]
+
+    if not ddl_files:
+        print(f"oracle_apex_dir_to_buml: no DDL files found in: {folder}")
+        return None
+
+    return oracle_apex_multi_to_buml(ddl_files, module_name=module_name)
