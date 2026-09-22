@@ -1,4 +1,4 @@
-import { pivotDownloadUrl } from "../api";
+import { pivotDownloadUrl, bumlProjectDownloadUrl } from "../api";
 import type { PivotResponse } from "../types";
 
 interface Props {
@@ -72,6 +72,9 @@ export default function PivotStep({ pivot, onBack, onNext }: Props) {
           ))}
           <a className="download-link" href={pivotDownloadUrl(pivot.session_id, "all")}>
             ⬇ All (.zip)
+          </a>
+          <a className="download-link" href={bumlProjectDownloadUrl(pivot.session_id)}>
+            ⬇ Download as BUML project (.py)
           </a>
         </div>
         {pivot.downloads.filter((d) => d.note).map((d) => (

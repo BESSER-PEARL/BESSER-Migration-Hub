@@ -89,3 +89,7 @@ export function pivotDownloadUrl(sessionId: string, artifact: string): string {
 export function artifactDownloadUrl(sessionId: string, name: string): string {
   return `/api/sessions/${sessionId}/download/artifacts?name=${encodeURIComponent(name)}`;
 }
+
+export function bumlProjectDownloadUrl(sessionId: string): string {
+  return `/api/sessions/${sessionId}/download/buml-project`;
+}

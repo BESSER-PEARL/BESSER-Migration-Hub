@@ -9,5 +9,8 @@ __pycache__/
 *.pyc
 
 # node / frontend
-node_modules/
-webapp/frontend/dist/
+**/node_modules/
+**/dist/
+
+# vite cache
+**/.vite/
