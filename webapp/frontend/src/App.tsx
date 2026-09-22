@@ -5,7 +5,7 @@ import UploadStep from "./steps/UploadStep";
 import PivotStep from "./steps/PivotStep";
 import TargetStep from "./steps/TargetStep";
 import ArtifactsStep from "./steps/ArtifactsStep";
-import { createPivot, fetchPlatforms, generateArtifacts, uploadApexExport } from "./api";
+import { createPivot, fetchPlatforms, generateArtifacts } from "./api";
 import type {
   GenerateResponse,
   Platforms,
@@ -32,12 +32,10 @@ export default function App() {
 
   const [pivot, setPivot] = useState<PivotResponse | null>(null);
   const [targetId, setTargetId] = useState<string | null>(null);
-  const [apexExport, setApexExport] = useState<File | null>(null);
   const [generateResult, setGenerateResult] = useState<GenerateResponse | null>(null);
 
   const [busy, setBusy] = useState(false);
   const [stepError, setStepError] = useState<string | null>(null);
-  const [guiError, setGuiError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPlatforms().then(setPlatforms).catch((e) => setLoadError(e.message));
@@ -93,24 +91,8 @@ export default function App() {
     }
   };
 
-  const runApexGuiGenerate = async () => {
-    if (!pivot || !apexExport) return;
-    setBusy(true);
-    setGuiError(null);
-    try {
-      await uploadApexExport(pivot.session_id, apexExport);
-      const result = await generateArtifacts(pivot.session_id, "oracle_apex");
-      setGenerateResult(result);
-    } catch (e) {
-      setGuiError((e as Error).message);
-    } finally {
-      setBusy(false);
-    }
-  };
-
   const selectTarget = (id: string) => {
     setTargetId(id);
-    setApexExport(null);
   };
 
   const restart = () => {
@@ -124,10 +106,8 @@ export default function App() {
     setOpenaiToken("");
     setPivot(null);
     setTargetId(null);
-    setApexExport(null);
     setGenerateResult(null);
     setStepError(null);
-    setGuiError(null);
   };
 
   return (
@@ -198,12 +178,6 @@ export default function App() {
         <ArtifactsStep
           result={generateResult}
           target={target}
-          hasGuiModel={pivot?.summary.screens !== null && pivot?.summary.screens !== undefined}
-          apexExport={apexExport}
-          setApexExport={setApexExport}
-          guiLoading={busy}
-          guiError={guiError}
-          onGenerateGui={runApexGuiGenerate}
           onBack={() => { setStepError(null); setStep(3); }}
           onRestart={restart}
         />

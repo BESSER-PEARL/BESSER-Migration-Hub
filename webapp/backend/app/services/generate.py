@@ -27,11 +27,13 @@ def _run_generator(target_generator: str, sql_dialect: str | None,
     out = str(output_dir)
 
     if target_generator == "oracle_apex":
-        from migrator.generators.sql.oracle_apex_sql_generator import OracleApexSQLGenerator
-        OracleApexSQLGenerator(
+        from migrator.generators.sql.oracle_apex_app_generator import OracleApexFullAppGenerator
+        app_name = getattr(model, "name", None) or "Generated_App"
+        OracleApexFullAppGenerator(
             model=model,
             output_dir=out,
-            output_filename="tables_oracle_apex.sql",
+            output_filename="oracle_apex_app.sql",
+            app_name=app_name,
         ).generate()
 
     elif target_generator == "spreadsheet":
@@ -110,12 +112,9 @@ def generate_artifacts(session: Session, target_lcp: str) -> dict:
 
     apex_pages: list[Path] = []
     if target_lcp == "oracle_apex" and session.gui_model is not None:
-        if session.apex_export_dir is None:
-            warnings.append(
-                "The table script is ready. After importing it into APEX and exporting "
-                "the app as a split ZIP, upload that ZIP to generate GUI page SQL."
-            )
-        else:
+        if session.apex_export_dir is not None:
+            # Legacy path: user uploaded a split APEX export — still generate
+            # per-page SQL from the GUI model for incremental page updates.
             try:
                 apex_pages = _run_apex_gui_generator(session)
             except Exception as exc:

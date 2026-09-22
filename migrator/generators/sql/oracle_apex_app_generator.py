@@ -1,0 +1,867 @@
+"""Oracle APEX Full Application Generator for BESSER B-UML domain models.
+
+Produces a single self-contained SQL file that:
+
+1. Creates all tables (plain DDL, identical to OracleApexSQLGenerator output).
+2. Creates a complete Oracle APEX application with:
+   - APEX Accounts authentication
+   - Side-navigation menu with one entry per entity
+   - Global page (0) and home page (1)
+   - Interactive-report list page per class (even page numbers: 2, 4, 6, …)
+   - Modal form page per class (odd page numbers: 3, 5, 7, …) with
+     Create / Apply Changes / Delete buttons and NATIVE_FORM_DML auto-DML.
+
+Usage
+-----
+Run the generated ``oracle_apex_app.sql`` file in Oracle APEX SQL Workshop →
+SQL Scripts (or import it via App Builder → Import → Application).  No prior
+APEX application export is required.
+"""
+from __future__ import annotations
+
+import os
+import random
+import re
+from typing import Optional
+
+from besser.BUML.metamodel.structural import DomainModel, Class
+
+from .oracle_apex_sql_generator import OracleApexSQLGenerator
+
+
+class OracleApexFullAppGenerator:
+    """Generate a self-contained APEX application SQL from a B-UML DomainModel."""
+
+    APEX_VERSION = "2024.11.30"
+    APEX_RELEASE = "24.2.6"
+
+    # Universal Theme 42 template IDs — applied on import by App Builder.
+    _BTN_TMPL   = 4073839297780169708
+    _FIELD_TMPL = 1610598484065263269   # Optional / Required label above
+
+    def __init__(
+        self,
+        model: DomainModel,
+        output_dir: str = None,
+        output_filename: str = "oracle_apex_app.sql",
+        app_id: Optional[int] = None,
+        app_name: Optional[str] = None,
+    ):
+        self.model = model
+        self.output_dir = output_dir or os.getcwd()
+        self.output_filename = output_filename
+        # Pick a random ID in the 1000–9000 range when none is supplied so
+        # successive imports don't collide with each other or with samples.
+        self.app_id = app_id if app_id is not None else random.randint(1000, 9000)
+        self.app_name = app_name or (model.name or "Generated_App")
+        # Large random ID offset — mirrors real APEX exports (e.g. 43061406402105851).
+        # Added to every wwv_flow_imp.id(N) call so component IDs are globally
+        # unique and don't collide with leftover metadata from previous imports.
+        self._id_offset = random.randint(10**14, 10**17)
+
+        self._ddl = OracleApexSQLGenerator(model, output_dir, "_tmp_ddl.sql")
+
+        # ID counter — each call to _uid() returns a unique large integer.
+        self._ctr = 1_000_000
+        self._auth_id = self._uid()
+        self._nav_list_id = self._uid()
+        self._nav_bar_list_id = self._uid()
+
+    # ── ID helpers ────────────────────────────────────────────────────────────
+
+    def _uid(self) -> int:
+        self._ctr += 1000
+        return self._ctr
+
+    def _wid(self, n: int) -> str:
+        return f"wwv_flow_imp.id({n})"
+
+    # ── Block wrappers ────────────────────────────────────────────────────────
+
+    def _comp_begin(self) -> str:
+        return (
+            "begin\n"
+            "wwv_flow_imp.component_begin (\n"
+            f" p_version_yyyy_mm_dd=>'{self.APEX_VERSION}'\n"
+            f",p_release=>'{self.APEX_RELEASE}'\n"
+            ",p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)\n"
+            f",p_default_application_id=>{self.app_id}\n"
+            f",p_default_id_offset=>{self._id_offset}\n"
+            ",p_default_owner=>USER\n"
+            ");\n"
+        )
+
+    @staticmethod
+    def _comp_end() -> str:
+        return "wwv_flow_imp.component_end;\nend;\n/\n\n"
+
+    # ── Model helpers ─────────────────────────────────────────────────────────
+
+    def _classes(self) -> list[Class]:
+        try:
+            classes = list(self.model.classes_sorted_by_inheritance())
+        except Exception:
+            from besser.BUML.metamodel.structural import Class as _Class
+            classes = [t for t in self.model.types if isinstance(t, _Class)]
+        return classes
+
+    def _tbl(self, name: str) -> str:
+        return self._ddl._table_name(name).upper()
+
+    def _col(self, name: str) -> str:
+        return self._ddl._col_name(name).upper()
+
+    # ── DDL section ───────────────────────────────────────────────────────────
+
+    def _ddl_section(self) -> str:
+        lines: list[str] = [
+            "--",
+            "-- SECTION 1: TABLE DDL",
+            "--",
+            "",
+        ]
+
+        enum_map = self._ddl._get_enum_map()
+        classes = list(self.model.classes_sorted_by_inheritance())
+        class_names = {c.name for c in classes}
+        fk_map, nm_tables = self._ddl._compute_fk_columns(class_names)
+        sorted_cls = self._ddl._topo_sort(classes, fk_map)
+
+        lines.extend(self._ddl._drop_section(sorted_cls, nm_tables))
+        lines += ["--------------------------------------------------",
+                  "-- TABLES",
+                  "--------------------------------------------------", ""]
+
+        for cls in sorted_cls:
+            tname = self._tbl(cls.name)
+            parent = self._ddl._find_parent(cls)
+            parent_tname = self._tbl(parent.name) if parent else None
+
+            col_defs = ["    id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY"]
+            fk_cols: list[str] = []
+            constraints: list[str] = []
+
+            if parent is not None:
+                pfk = f"{parent_tname.lower()}_id"
+                fk_cols.append(f"    {pfk} NUMBER NOT NULL")
+                constraints.append(f"    FOREIGN KEY ({pfk}) REFERENCES {parent_tname}(id)")
+
+            for attr in sorted(cls.attributes, key=lambda a: a.name):
+                cname = self._col(attr.name)
+                tname_lower = tname.lower()
+                ttype = attr.type.name
+                nn = "" if attr.is_optional else " NOT NULL"
+
+                if ttype == "bool":
+                    col_defs.append(f"    {cname} NUMBER(1) DEFAULT 0{nn}")
+                    constraints.append(
+                        f"    CONSTRAINT chk_{tname_lower}_{cname} CHECK ({cname} IN (0, 1))"
+                    )
+                elif ttype in enum_map:
+                    vals = enum_map[ttype]
+                    mlen = max((len(v) for v in vals), default=20)
+                    col_defs.append(f"    {cname} VARCHAR2({max(mlen + 4, 20)}){nn}")
+                    vs = ", ".join(f"'{v}'" for v in vals)
+                    constraints.append(
+                        f"    CONSTRAINT chk_{tname_lower}_{cname} CHECK ({cname} IN ({vs}))"
+                    )
+                else:
+                    col_defs.append(f"    {cname} {self._ddl._col_type(ttype, enum_map)}{nn}")
+
+            seen: set = set()
+            for fk_col, ref_tbl, is_uniq in fk_map.get(cls.name, []):
+                key = (fk_col, ref_tbl)
+                if key in seen:
+                    continue
+                seen.add(key)
+                fk_cols.append(f"    {fk_col} NUMBER NOT NULL")
+                constraints.append(f"    FOREIGN KEY ({fk_col}) REFERENCES {ref_tbl}(id)")
+                if is_uniq:
+                    constraints.append(
+                        f"    CONSTRAINT uq_{tname.lower()}_{fk_col} UNIQUE ({fk_col})"
+                    )
+
+            all_cols = col_defs + fk_cols + constraints
+            lines += [f"-- {cls.name}", f"CREATE TABLE {tname} (", ",\n".join(all_cols), ");", ""]
+
+        seen_jct: set = set()
+        for t1, t2, c1, c2 in nm_tables:
+            jn = f"{t1}_{t2}"
+            if jn in seen_jct:
+                continue
+            seen_jct.add(jn)
+            lines += [
+                f"CREATE TABLE {jn} (",
+                f"    {c1} NUMBER NOT NULL,",
+                f"    {c2} NUMBER NOT NULL,",
+                f"    PRIMARY KEY ({c1}, {c2}),",
+                f"    FOREIGN KEY ({c1}) REFERENCES {t1}(id),",
+                f"    FOREIGN KEY ({c2}) REFERENCES {t2}(id)",
+                ");", "",
+            ]
+
+        return "\n".join(lines) + "\n"
+
+    # ── APEX envelope ─────────────────────────────────────────────────────────
+
+    def _set_environment(self) -> str:
+        return (
+            "--\n"
+            "-- APEX APPLICATION\n"
+            "-- Import via App Builder → Import → Application.\n"
+            "-- Tables are created by the Supporting Objects install script\n"
+            "-- embedded at the end of this file.\n"
+            "--\n\n"
+            "prompt --application/set_environment\n"
+            "set define off verify off feedback off\n"
+            "whenever sqlerror exit sql.sqlcode rollback\n"
+            "begin\n"
+            "wwv_flow_imp.import_begin (\n"
+            f" p_version_yyyy_mm_dd=>'{self.APEX_VERSION}'\n"
+            f",p_release=>'{self.APEX_RELEASE}'\n"
+            ",p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)\n"
+            f",p_default_application_id=>nvl(wwv_flow_application_install.get_application_id,{self.app_id})\n"
+            f",p_default_id_offset=>{self._id_offset}\n"
+            ",p_default_owner=>USER\n"
+            ");\n"
+            "wwv_flow.g_import_in_progress := true;\n"
+            f"wwv_flow.g_flow_id := nvl(wwv_flow_application_install.get_application_id,{self.app_id});\n"
+            "end;\n"
+            "/\n\n"
+        )
+
+    def _end_environment(self) -> str:
+        return (
+            "prompt --application/end_environment\n"
+            "begin\n"
+            "wwv_flow_imp.import_end(\n"
+            "  p_auto_install_sup_obj => nvl(\n"
+            "    wwv_flow_application_install.get_auto_install_sup_obj, false));\n"
+            "commit;\n"
+            "end;\n"
+            "/\n"
+            "set verify on feedback on define on\n"
+            "prompt  ...done\n"
+        )
+
+    # ── Authentication ─────────────────────────────────────────────────────────
+
+    def _authentication(self) -> str:
+        lines = [
+            "prompt --application/shared_components/security/authentications/apex_accounts",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_authentication(",
+            f" p_id=>{self._wid(self._auth_id)}",
+            ",p_name=>'Application Express Accounts'",
+            ",p_scheme_type=>'NATIVE_APEX_ACCOUNTS'",
+            ",p_invalid_session_type=>'LOGIN'",
+            ",p_logout_url=>'f?p=&APP_ID.:1'",
+            ",p_use_secure_cookie_yn=>'N'",
+            ",p_ras_mode=>0",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    # ── Application ────────────────────────────────────────────────────────────
+
+    def _application(self) -> str:
+        alias = re.sub(r"[^A-Z0-9]", "", self.app_name.upper()) or "APP"
+        safe_name = self.app_name.replace("'", "''")
+        lines = [
+            "prompt --application/create_application",
+            self._comp_begin(),
+            "wwv_imp_workspace.create_flow(",
+            " p_id=>wwv_flow.g_flow_id",
+            ",p_owner=>USER",
+            f",p_name=>nvl(wwv_flow_application_install.get_application_name,'{safe_name}')",
+            f",p_alias=>'{alias}'",
+            ",p_application_tab_set=>0",
+            ",p_logo_type=>'T'",
+            f",p_logo_text=>'{safe_name}'",
+            ",p_public_user=>'APEX_PUBLIC_USER'",
+            f",p_authentication_id=>{self._wid(self._auth_id)}",
+            ",p_flow_status=>'AVAILABLE_W_EDIT_LINK'",
+            ",p_compatibility_mode=>'19.2'",
+            ",p_theme_id=>42",
+            ",p_home_url=>'f?p=&APP_ID.:1:&SESSION.'",
+            ",p_theme_style_by_user_pref=>false",
+            f",p_navigation_list_id=>{self._wid(self._nav_list_id)}",
+            ",p_navigation_list_position=>'SIDE'",
+            ",p_nav_bar_type=>'LIST'",
+            f",p_nav_bar_list_id=>{self._wid(self._nav_bar_list_id)}",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    # ── Navigation ─────────────────────────────────────────────────────────────
+
+    def _navigation(self, classes: list[Class]) -> str:
+        lines = [
+            "prompt --application/shared_components/navigation/lists/navigation_menu",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_list(",
+            f" p_id=>{self._wid(self._nav_list_id)}",
+            ",p_name=>'Navigation Menu'",
+            ",p_static_id=>'navigation-menu'",
+            ");",
+        ]
+
+        home_id = self._uid()
+        lines += [
+            "wwv_flow_imp_shared.create_list_item(",
+            f" p_id=>{self._wid(home_id)}",
+            ",p_list_item_display_sequence=>10",
+            ",p_list_item_link_text=>'Home'",
+            ",p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'",
+            ",p_list_item_icon=>'fa-home'",
+            ",p_list_item_current_type=>'TARGET_PAGE'",
+            ");",
+        ]
+
+        for i, cls in enumerate(classes):
+            page_num = 2 + i * 2
+            item_id = self._uid()
+            safe_label = cls.name.replace("'", "''")
+            lines += [
+                "wwv_flow_imp_shared.create_list_item(",
+                f" p_id=>{self._wid(item_id)}",
+                f",p_list_item_display_sequence=>{(i + 2) * 10}",
+                f",p_list_item_link_text=>'{safe_label}'",
+                f",p_list_item_link_target=>'f?p=&APP_ID.:{page_num}:&SESSION.::&DEBUG.::::'",
+                ",p_list_item_icon=>'fa-table'",
+                ",p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'",
+                f",p_list_item_current_for_pages=>'{page_num},{page_num + 1}'",
+                ");",
+            ]
+
+        lines.append(self._comp_end())
+
+        # Nav bar list (logout)
+        logout_id = self._uid()
+        lines += [
+            "prompt --application/shared_components/navigation/lists/navigation_bar",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_list(",
+            f" p_id=>{self._wid(self._nav_bar_list_id)}",
+            ",p_name=>'Navigation Bar'",
+            ",p_static_id=>'navigation-bar'",
+            ");",
+            "wwv_flow_imp_shared.create_list_item(",
+            f" p_id=>{self._wid(logout_id)}",
+            ",p_list_item_display_sequence=>10",
+            ",p_list_item_link_text=>'Log Out'",
+            ",p_list_item_link_target=>'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::::'",
+            ",p_list_item_icon=>'fa-sign-out'",
+            ",p_list_item_current_type=>'NEVER'",
+            ");",
+            self._comp_end(),
+        ]
+
+        return "\n".join(lines)
+
+    # ── Pages ──────────────────────────────────────────────────────────────────
+
+    def _global_page(self) -> str:
+        lines = [
+            "prompt --application/pages/page_00000",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            " p_id=>0",
+            ",p_name=>'Global Page'",
+            ",p_step_title=>'Global Page'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_protection_level=>'D'",
+            ",p_page_component_map=>'08'",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    def _home_page(self, classes: list[Class]) -> str:
+        lines_html = "\n".join(
+            f'<li><a href="f?p=&APP_ID.:{2 + i * 2}:&SESSION.">'
+            f"{cls.name}</a></li>"
+            for i, cls in enumerate(classes)
+        )
+        html = f"<ul>\n{lines_html}\n</ul>"
+        safe_html = html.replace("'", "''")
+        safe_name = self.app_name.replace("'", "''")
+
+        region_id = self._uid()
+        lines = [
+            "prompt --application/pages/page_00001",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            " p_id=>1",
+            f",p_name=>'{safe_name}'",
+            f",p_step_title=>'{safe_name}'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_protection_level=>'C'",
+            ",p_page_component_map=>'08'",
+            ");",
+            "wwv_flow_imp_page.create_page_plug(",
+            f" p_id=>{self._wid(region_id)}",
+            ",p_plug_name=>'Entities'",
+            ",p_region_template_options=>'#DEFAULT#'",
+            ",p_plug_display_sequence=>10",
+            ",p_plug_source_type=>'NATIVE_STATIC_CONTENT'",
+            f",p_plug_source=>'{safe_html}'",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    def _list_page(self, cls: Class, page_num: int) -> str:
+        table = self._tbl(cls.name)
+        form_page = page_num + 1
+        safe_name = cls.name.replace("'", "''")
+
+        region_id = self._uid()
+        ws_uid = self._uid()
+        btn_id = self._uid()
+        da_ev_id = self._uid()
+        da_ac_id = self._uid()
+
+        # Exclude the 'id' column — it's the auto-generated PK already added
+        # as the hidden P{n}_ID item and the worksheet's primary-key column.
+        attrs = [a for a in sorted(cls.attributes, key=lambda a: a.name)
+                 if self._col(a.name) != 'ID']
+
+        lines = [
+            f"prompt --application/pages/page_{page_num:05d}",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            f" p_id=>{page_num}",
+            f",p_name=>'{safe_name}s'",
+            f",p_step_title=>'{safe_name}s'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_protection_level=>'C'",
+            ",p_page_component_map=>'18'",
+            ");",
+            "wwv_flow_imp_page.create_page_plug(",
+            f" p_id=>{self._wid(region_id)}",
+            f",p_plug_name=>'{safe_name}s'",
+            ",p_region_template_options=>'#DEFAULT#'",
+            ",p_plug_display_sequence=>10",
+            ",p_query_type=>'TABLE'",
+            f",p_query_table=>'{table}'",
+            ",p_include_rowid_column=>false",
+            ",p_plug_source_type=>'NATIVE_IR'",
+            f",p_prn_page_header=>'{safe_name}s'",
+            ");",
+            "wwv_flow_imp_page.create_worksheet(",
+            f" p_name=>'{safe_name}s'",
+            ",p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.'",
+            ",p_no_data_found_message=>'No data found.'",
+            ",p_base_pk1=>'ID'",
+            ",p_pagination_type=>'ROWS_X_TO_Y'",
+            ",p_pagination_display_pos=>'BOTTOM_RIGHT'",
+            ",p_report_list_mode=>'TABS'",
+            ",p_lazy_loading=>false",
+            ",p_show_detail_link=>'C'",
+            ",p_show_notify=>'Y'",
+            ",p_download_formats=>'CSV:HTML:XLSX:PDF'",
+            ",p_enable_mail_download=>'Y'",
+            f",p_detail_link=>'f?p=&APP_ID.:{form_page}:&APP_SESSION.::&DEBUG.:RP:"
+            f"P{form_page}_ID:#ID#'",
+            ",p_detail_link_text=>'<span aria-label=\"Edit\">"
+            "<span class=\"fa fa-edit\" aria-hidden=\"true\"></span></span>'",
+            ",p_owner=>USER",
+            f",p_internal_uid=>{ws_uid}",
+            ");",
+            # ID column (hidden)
+            "wwv_flow_imp_page.create_worksheet_column(",
+            " p_db_column_name=>'ID'",
+            ",p_display_order=>1",
+            ",p_is_primary_key=>'Y'",
+            ",p_column_identifier=>'A'",
+            ",p_column_label=>'Id'",
+            ",p_column_type=>'NUMBER'",
+            ",p_display_text_as=>'HIDDEN_ESCAPE_SC'",
+            ",p_heading_alignment=>'LEFT'",
+            ",p_tz_dependent=>'N'",
+            ",p_use_as_row_header=>'N'",
+            ");",
+        ]
+
+        col_ids: list[str] = []
+        for j, attr in enumerate(attrs):
+            col = self._col(attr.name)
+            label = attr.name.replace("_", " ").title().replace("'", "''")
+            col_id_char = chr(ord("B") + j)
+            col_type = (
+                "NUMBER" if attr.type.name in ("int", "float", "bool")
+                else "DATE" if attr.type.name in ("date", "datetime", "time")
+                else "STRING"
+            )
+            lines += [
+                "wwv_flow_imp_page.create_worksheet_column(",
+                f" p_db_column_name=>'{col}'",
+                f",p_display_order=>{j + 2}",
+                f",p_column_identifier=>'{col_id_char}'",
+                f",p_column_label=>'{label}'",
+                f",p_column_type=>'{col_type}'",
+                ",p_heading_alignment=>'LEFT'",
+                ",p_tz_dependent=>'N'",
+                ",p_use_as_row_header=>'N'",
+                ");",
+            ]
+            col_ids.append(col)
+
+        report_cols = ":".join(col_ids) or "ID"
+        lines += [
+            "wwv_flow_imp_page.create_worksheet_rpt(",
+            " p_application_user=>'APXWS_DEFAULT'",
+            ",p_report_seq=>10",
+            ",p_report_alias=>'DEFAULT'",
+            ",p_status=>'PUBLIC'",
+            ",p_is_default=>'Y'",
+            f",p_report_columns=>'{report_cols}'",
+            ");",
+            # Create button
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(btn_id)}",
+            ",p_button_sequence=>10",
+            f",p_button_plug_id=>{self._wid(region_id)}",
+            ",p_button_name=>'CREATE'",
+            ",p_button_action=>'REDIRECT_PAGE'",
+            ",p_button_template_options=>'#DEFAULT#'",
+            f",p_button_template_id=>{self._BTN_TMPL}",
+            ",p_button_is_hot=>'Y'",
+            ",p_button_image_alt=>'Create'",
+            ",p_button_position=>'RIGHT_OF_IR_SEARCH_BAR'",
+            f",p_button_redirect_url=>'f?p=&APP_ID.:{form_page}:&APP_SESSION.::&DEBUG.:{form_page}::'",
+            ");",
+            # DA: refresh IR after modal closes
+            "wwv_flow_imp_page.create_page_da_event(",
+            f" p_id=>{self._wid(da_ev_id)}",
+            ",p_name=>'Refresh Report After Dialog'",
+            ",p_event_sequence=>10",
+            ",p_triggering_element_type=>'REGION'",
+            f",p_triggering_region_id=>{self._wid(region_id)}",
+            ",p_bind_type=>'bind'",
+            ",p_execution_type=>'IMMEDIATE'",
+            ",p_bind_event_type=>'apexafterclosedialog'",
+            ");",
+            "wwv_flow_imp_page.create_page_da_action(",
+            f" p_id=>{self._wid(da_ac_id)}",
+            f",p_event_id=>{self._wid(da_ev_id)}",
+            ",p_event_result=>'TRUE'",
+            ",p_action_sequence=>10",
+            ",p_execute_on_page_init=>'N'",
+            ",p_action=>'NATIVE_REFRESH'",
+            ",p_affected_elements_type=>'REGION'",
+            f",p_affected_region_id=>{self._wid(region_id)}",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    def _form_page(self, cls: Class, page_num: int) -> str:
+        table = self._tbl(cls.name)
+        pk_item = f"P{page_num}_ID"
+        safe_name = cls.name.replace("'", "''")
+
+        region_id     = self._uid()
+        btn_cancel_id = self._uid()
+        btn_delete_id = self._uid()
+        btn_save_id   = self._uid()
+        btn_create_id = self._uid()
+        pk_item_id    = self._uid()
+        fetch_proc_id   = self._uid()
+        process_proc_id = self._uid()
+        da_ev_id      = self._uid()
+        da_ac_id      = self._uid()
+
+        # Skip 'id' — already handled as the auto-generated PK hidden item.
+        attrs = [a for a in sorted(cls.attributes, key=lambda a: a.name)
+                 if self._col(a.name) != 'ID']
+
+        lines = [
+            f"prompt --application/pages/page_{page_num:05d}",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            f" p_id=>{page_num}",
+            f",p_name=>'Manage {safe_name}'",
+            f",p_step_title=>'Manage {safe_name}'",
+            ",p_page_mode=>'MODAL'",
+            ",p_reload_on_submit=>'A'",
+            ",p_warn_on_unsaved_changes=>'N'",
+            ",p_first_item=>'AUTO_FIRST_ITEM'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_javascript_code=>'var htmldb_delete_message = ''"
+            + '"DELETE_CONFIRM_MSG"'
+            + "'';'",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_protection_level=>'C'",
+            ",p_page_component_map=>'02'",
+            ");",
+            # NATIVE_FORM region
+            "wwv_flow_imp_page.create_page_plug(",
+            f" p_id=>{self._wid(region_id)}",
+            f",p_plug_name=>'{safe_name}'",
+            ",p_region_template_options=>'#DEFAULT#'",
+            ",p_plug_display_sequence=>10",
+            ",p_query_type=>'TABLE'",
+            f",p_query_table=>'{table}'",
+            ",p_include_rowid_column=>false",
+            ",p_plug_source_type=>'NATIVE_FORM'",
+            ");",
+            # Cancel button
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(btn_cancel_id)}",
+            ",p_button_sequence=>10",
+            f",p_button_plug_id=>{self._wid(region_id)}",
+            ",p_button_name=>'CANCEL'",
+            ",p_button_action=>'DEFINED_BY_DA'",
+            ",p_button_template_options=>'#DEFAULT#'",
+            f",p_button_template_id=>{self._BTN_TMPL}",
+            ",p_button_image_alt=>'Cancel'",
+            ",p_button_position=>'CLOSE'",
+            ");",
+            # Delete button
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(btn_delete_id)}",
+            ",p_button_sequence=>20",
+            f",p_button_plug_id=>{self._wid(region_id)}",
+            ",p_button_name=>'DELETE'",
+            ",p_button_action=>'SUBMIT'",
+            ",p_button_template_options=>'#DEFAULT#'",
+            f",p_button_template_id=>{self._BTN_TMPL}",
+            ",p_button_image_alt=>'Delete'",
+            ",p_button_position=>'DELETE'",
+            f",p_button_condition=>'{pk_item}'",
+            ",p_button_condition_type=>'ITEM_IS_NOT_NULL'",
+            ",p_database_action=>'DELETE'",
+            ");",
+            # Save button
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(btn_save_id)}",
+            ",p_button_sequence=>30",
+            f",p_button_plug_id=>{self._wid(region_id)}",
+            ",p_button_name=>'SAVE'",
+            ",p_button_action=>'SUBMIT'",
+            ",p_button_template_options=>'#DEFAULT#:t-Button--hot'",
+            f",p_button_template_id=>{self._BTN_TMPL}",
+            ",p_button_image_alt=>'Apply Changes'",
+            ",p_button_position=>'CHANGE'",
+            f",p_button_condition=>'{pk_item}'",
+            ",p_button_condition_type=>'ITEM_IS_NOT_NULL'",
+            ",p_database_action=>'UPDATE'",
+            ");",
+            # Create button
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(btn_create_id)}",
+            ",p_button_sequence=>40",
+            f",p_button_plug_id=>{self._wid(region_id)}",
+            ",p_button_name=>'CREATE'",
+            ",p_button_action=>'SUBMIT'",
+            ",p_button_template_options=>'#DEFAULT#:t-Button--hot'",
+            f",p_button_template_id=>{self._BTN_TMPL}",
+            ",p_button_image_alt=>'Create'",
+            ",p_button_position=>'CREATE'",
+            f",p_button_condition=>'{pk_item}'",
+            ",p_button_condition_type=>'ITEM_IS_NULL'",
+            ",p_database_action=>'INSERT'",
+            ");",
+            # Hidden PK item
+            "wwv_flow_imp_page.create_page_item(",
+            f" p_id=>{self._wid(pk_item_id)}",
+            f",p_name=>'{pk_item}'",
+            ",p_item_sequence=>10",
+            f",p_item_plug_id=>{self._wid(region_id)}",
+            ",p_use_cache_before_default=>'NO'",
+            ",p_source=>'ID'",
+            ",p_source_type=>'DB_COLUMN'",
+            ",p_display_as=>'NATIVE_HIDDEN'",
+            ",p_protection_level=>'S'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes("
+            "wwv_flow_t_varchar2('value_protected','Y')).to_clob",
+            ");",
+        ]
+
+        # One text item per attribute
+        for j, attr in enumerate(attrs):
+            item_id = self._uid()
+            item_name = f"P{page_num}_{self._col(attr.name)}"
+            col = self._col(attr.name)
+            prompt = attr.name.replace("_", " ").title().replace("'", "''")
+            lines += [
+                "wwv_flow_imp_page.create_page_item(",
+                f" p_id=>{self._wid(item_id)}",
+                f",p_name=>'{item_name}'",
+                f",p_item_sequence=>{(j + 2) * 10}",
+                f",p_item_plug_id=>{self._wid(region_id)}",
+                ",p_use_cache_before_default=>'NO'",
+                f",p_prompt=>'{prompt}'",
+                f",p_source=>'{col}'",
+                ",p_source_type=>'DB_COLUMN'",
+                ",p_display_as=>'NATIVE_TEXT_FIELD'",
+                ",p_cSize=>64",
+                ",p_cMaxlength=>255",
+                f",p_field_template=>{self._FIELD_TMPL}",
+                ",p_item_template_options=>'#DEFAULT#'",
+                ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+                "  'disabled','N',",
+                "  'submit_when_enter_pressed','N',",
+                "  'subtype','TEXT',",
+                "  'trim_spaces','NONE')).to_clob",
+                ");",
+            ]
+
+        # Fetch process: loads the row after page load (AFTER_HEADER)
+        lines += [
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(fetch_proc_id)}",
+            ",p_process_sequence=>10",
+            ",p_process_point=>'AFTER_HEADER'",
+            ",p_process_type=>'NATIVE_FORM_FETCH'",
+            f",p_process_name=>'Fetch Row from {safe_name}'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            f"  'primary_key_column', 'ID',",
+            f"  'primary_key_item', '{pk_item}',",
+            f"  'table_name', '{table}')).to_clob",
+            ");",
+            # DML process: insert / update / delete based on button pressed
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(process_proc_id)}",
+            ",p_process_sequence=>20",
+            ",p_process_point=>'AFTER_SUBMIT'",
+            ",p_process_type=>'NATIVE_FORM_PROCESS'",
+            f",p_process_name=>'Process Row of {safe_name}'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'lock_row', 'Y',",
+            "  'primary_key_column', 'ID',",
+            f"  'primary_key_item', '{pk_item}',",
+            f"  'return_key_into_item', '{pk_item}',",
+            "  'supported_operations', 'I:U:D',",
+            f"  'table_name', '{table}')).to_clob",
+            ",p_process_error_message=>'#SQLERRM#'",
+            ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
+            ",p_process_when=>'CREATE,SAVE,DELETE'",
+            ",p_process_when_type=>'REQUEST_IN_CONDITION'",
+            ",p_process_success_message=>'Action Processed.'",
+            ");",
+            # DA: Cancel button → close dialog without saving
+            "wwv_flow_imp_page.create_page_da_event(",
+            f" p_id=>{self._wid(da_ev_id)}",
+            ",p_name=>'Cancel Dialog'",
+            ",p_event_sequence=>10",
+            ",p_triggering_element_type=>'BUTTON'",
+            f",p_triggering_button_id=>{self._wid(btn_cancel_id)}",
+            ",p_bind_type=>'bind'",
+            ",p_execution_type=>'IMMEDIATE'",
+            ",p_bind_event_type=>'click'",
+            ");",
+            "wwv_flow_imp_page.create_page_da_action(",
+            f" p_id=>{self._wid(da_ac_id)}",
+            f",p_event_id=>{self._wid(da_ev_id)}",
+            ",p_event_result=>'TRUE'",
+            ",p_action_sequence=>10",
+            ",p_execute_on_page_init=>'N'",
+            ",p_action=>'NATIVE_DIALOG_CANCEL'",
+            ");",
+            self._comp_end(),
+        ]
+
+        return "\n".join(lines)
+
+    # ── Supporting Objects (DDL embedded inside the APEX import envelope) ────────
+
+    def _chunk_varchar2(self, sql: str, chunk_size: int = 4000) -> list[str]:
+        """Escape and chunk SQL for wwv_flow_imp.g_varchar2_table.
+
+        Single quotes are doubled for embedding in PL/SQL string literals.
+        Chunks never split a '' pair at a boundary.
+        """
+        escaped = sql.replace("'", "''")
+        chunks: list[str] = []
+        i = 0
+        n = len(escaped)
+        while i < n:
+            end = min(i + chunk_size, n)
+            # Back up one character if we would split a '' (escaped-quote) pair.
+            if end < n and escaped[end - 1] == "'" and escaped[end] == "'":
+                end -= 1
+            chunks.append(escaped[i:end])
+            i = end
+        return chunks
+
+    def _supporting_objects(self) -> str:
+        """Embed the table DDL as an APEX Supporting Objects install script.
+
+        The install script runs automatically when the user checks
+        "Run Supporting Objects" in the App Builder import wizard, or
+        manually via Supporting Objects → Install.
+        """
+        # Reuse the existing DDL generation logic to get the SQL text.
+        ddl_sql = self._ddl_section()
+        chunks = self._chunk_varchar2(ddl_sql)
+
+        install_id = self._uid()
+
+        lines = [
+            "prompt --application/deployment/installscripts/create_tables",
+            self._comp_begin(),
+            "wwv_flow_imp.g_varchar2_table := wwv_flow_imp_shared.empty_varchar2_table;",
+        ]
+
+        for idx, chunk in enumerate(chunks, start=1):
+            lines.append(f"wwv_flow_imp.g_varchar2_table({idx}) := '{chunk}';")
+
+        lines += [
+            "wwv_flow_imp_shared.create_install_script(",
+            f" p_id=>{self._wid(install_id)}",
+            ",p_flow_id=>wwv_flow.g_flow_id",
+            ",p_flow_step_id=>0",
+            ",p_prompt=>'Create Tables'",
+            ",p_notes=>'Creates the database tables required by this application.'",
+            ",p_script_type=>'INSTALL'",
+            ",p_script_clob=>wwv_flow_imp.varchar2_to_clob(wwv_flow_imp.g_varchar2_table)",
+            ");",
+            self._comp_end(),
+        ]
+
+        return "\n".join(lines)
+
+    # ── Entry point ────────────────────────────────────────────────────────────
+
+    def generate(self) -> str:
+        """Write the full APEX app SQL to <output_dir>/<output_filename>.
+
+        Returns the absolute path to the generated file.
+        """
+        os.makedirs(self.output_dir, exist_ok=True)
+        file_path = os.path.join(self.output_dir, self.output_filename)
+
+        classes = self._classes()
+
+        parts: list[str] = []
+        # File starts with the APEX import header — no plain DDL preamble.
+        # DDL is embedded as a Supporting Objects install script at the end.
+        parts.append(self._set_environment())
+        parts.append(self._application())
+        parts.append(self._authentication())
+        parts.append(self._navigation(classes))
+        parts.append(self._global_page())
+        parts.append(self._home_page(classes))
+
+        for i, cls in enumerate(classes):
+            list_page = 2 + i * 2
+            form_page = 3 + i * 2
+            parts.append(self._list_page(cls, list_page))
+            parts.append(self._form_page(cls, form_page))
+
+        parts.append(self._supporting_objects())
+        parts.append(self._end_environment())
+
+        with open(file_path, "w", encoding="utf-8") as fh:
+            fh.write("\n".join(parts))
+
+        print(f"Oracle APEX full app SQL generated: {file_path}")
+        return file_path

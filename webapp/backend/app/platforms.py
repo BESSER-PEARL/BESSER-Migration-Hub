@@ -226,36 +226,31 @@ SOURCES: dict[str, SourcePlatform] = {
 _ORACLE_APEX_TUTORIAL = """\
 ### Importing into Oracle APEX
 
-#### Stage 1: create the template APEX application
+#### Import the generated application
 
-1. This hub has already performed the `mendix_to_structure.py` step for you:
-   the downloaded pivot/domain model is the input used to create
-   `tables_oracle_apex.sql`.
-2. In your APEX workspace, open **SQL Workshop**, go to **SQL Scripts**, and
-   import `tables_oracle_apex.sql`.
-3. Select **Run Script**. When APEX asks whether it should create the
-   application and its pages, select **Yes**.
-4. Open the application that APEX created and export it using **Custom Export**
-   with **Split into multiple files** enabled. Zip the exported folder.
+1. Download `oracle_apex_app.sql` from this hub.
+2. In your APEX workspace, go to **App Builder → Import → Application**.
+3. Choose the downloaded `.sql` file and click **Next**.
+4. Adjust the application ID if 100 is already taken, then click **Install
+   Application**.
+5. On the next screen, leave **Run Supporting Objects** checked and click
+   **Install**. This runs the embedded DDL and creates all database tables
+   automatically.
 
-#### Stage 2: generate and apply the GUI model
+If you skipped step 5, or want to re-run the table creation later, open the
+application and go to **Supporting Objects → Install**.
 
-1. Return to this hub's artifacts step and upload the exported APEX ZIP. The
-   hub accepts the `<export-name>/application/pages/...` layout and extracts
-   the workspace/user metadata automatically.
-2. Click **Generate GUI page SQL**. The hub runs the same page-generation logic
-   as `migrator/converters/mendix_to_apex.py` using the stored domain and GUI
-   pivot models.
-3. Download the generated page SQL ZIP, return to **SQL Workshop > SQL
-   Scripts**, import the generated SQL, and select **Run Script**.
-4. When APEX prompts you to create the application and its pages, select
-   **Yes**. This creates the final APEX application containing the migrated
-   GUI. Verify the pages, regions, buttons, and navigation.
+#### What is included
 
-For screenshot-based sources, the interface first creates the GUI pivot model
-with BESSER's `mockup_to_buml` pipeline. The same two-stage APEX workflow then
-applies: create/export a template app, upload its split ZIP here, generate the
-GUI page SQL, and run that SQL to create the final app.
+* All database tables derived from your data model (created via Supporting Objects).
+* A side-navigation menu with one entry per entity.
+* An **Interactive Report** (list + search) page for each entity.
+* A **modal form** page for each entity supporting Create, Edit, and Delete.
+
+#### Customising
+
+After import the application is fully editable in App Builder — add formatting,
+validation rules, charts, or additional pages as needed.
 """
 
 _POWERAPPS_TUTORIAL = """\
@@ -302,11 +297,14 @@ TARGETS: dict[str, TargetPlatform] = {
         label="Oracle APEX",
         implemented=True,
         supports_data=True,
-        supports_gui=False,
+        supports_gui=True,
         generator="oracle_apex",
-        output_desc="Oracle-compatible DDL (tables, identity PKs, FKs, enum CHECKs).",
+        output_desc=(
+            "A self-contained Oracle APEX application SQL file (`oracle_apex_app.sql`) containing "
+            "table DDL, an Interactive Report page per entity, a modal form page per entity, "
+            "and a navigation menu. Import directly via App Builder → Import → Application."
+        ),
         tutorial=_ORACLE_APEX_TUTORIAL,
-        note="GUI page SQL requires a split APEX export. Follow the GUI-model instructions in the import guide.",
     ),
     "powerapps": TargetPlatform(
         id="powerapps",
