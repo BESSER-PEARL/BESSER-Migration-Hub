@@ -42,12 +42,14 @@ class OracleApexFullAppGenerator:
     def __init__(
         self,
         model: DomainModel,
+        gui_model=None,
         output_dir: str = None,
         output_filename: str = "oracle_apex_app.sql",
         app_id: Optional[int] = None,
         app_name: Optional[str] = None,
     ):
         self.model = model
+        self.gui_model = gui_model
         self.output_dir = output_dir or os.getcwd()
         self.output_filename = output_filename
         # Pick a random ID in the 1000–9000 range when none is supplied so
@@ -267,7 +269,13 @@ class OracleApexFullAppGenerator:
         return "\n".join(lines)
 
     def _login_page(self) -> str:
-        """Generate page 101 (alias LOGIN) — required by NATIVE_APEX_ACCOUNTS auth."""
+        """Page 101 (alias LOGIN) — required by NATIVE_APEX_ACCOUNTS.
+
+        Template IDs are intentionally omitted (p_step_template, p_plug_template)
+        so APEX uses its workspace defaults instead of hardcoded IDs from a
+        different workspace that would cause ORA-01403 at render time.
+        Button and field templates reuse the same constants as the rest of the app.
+        """
         region_uid = self._uid()
         button_uid = self._uid()
         usr_item_uid = self._uid()
@@ -296,7 +304,7 @@ class OracleApexFullAppGenerator:
             ");",
             "wwv_flow_imp_page.create_page_plug(",
             f" p_id=>{self._wid(region_uid)}",
-            ",p_plug_name=>'Login'",
+            f",p_plug_name=>'{self.app_name.replace(chr(39), chr(39)+chr(39))}'",
             ",p_region_template_options=>'#DEFAULT#'",
             ",p_plug_template=>2675634334296186762",
             ",p_plug_display_sequence=>10",
@@ -313,7 +321,7 @@ class OracleApexFullAppGenerator:
             ",p_button_name=>'LOGIN'",
             ",p_button_action=>'SUBMIT'",
             ",p_button_template_options=>'#DEFAULT#'",
-            ",p_button_template_id=>4073839297780169708",
+            f",p_button_template_id=>{self._BTN_TMPL}",
             ",p_button_is_hot=>'Y'",
             ",p_button_image_alt=>'Sign In'",
             ",p_button_position=>'NEXT'",
@@ -375,8 +383,8 @@ class OracleApexFullAppGenerator:
             ",p_process_type=>'NATIVE_PLSQL'",
             ",p_process_name=>'Set Username Cookie'",
             ",p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(",
-            "'apex_authentication.send_login_username_cookie (',",
-            "'    p_username => lower(:P101_USERNAME) );'))",
+            "  'apex_authentication.send_login_username_cookie (',",
+            "  '    p_username => lower(:P101_USERNAME) );'))",
             ",p_process_clob_language=>'PLSQL'",
             ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
             ");",
@@ -387,9 +395,9 @@ class OracleApexFullAppGenerator:
             ",p_process_type=>'NATIVE_PLSQL'",
             ",p_process_name=>'Login'",
             ",p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(",
-            "'apex_authentication.login(',",
-            "'    p_username => :P101_USERNAME,',",
-            "'    p_password => :P101_PASSWORD );'))",
+            "  'apex_authentication.login(',",
+            "  '    p_username => :P101_USERNAME,',",
+            "  '    p_password => :P101_PASSWORD );'))",
             ",p_process_clob_language=>'PLSQL'",
             ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
             ");",
@@ -402,6 +410,85 @@ class OracleApexFullAppGenerator:
             ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
             "  'type', 'CLEAR_CACHE_CURRENT_PAGE')).to_clob",
             ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    # ── Theme ──────────────────────────────────────────────────────────────────
+
+    def _theme(self) -> str:
+        """Subscribe the app to Universal Theme 42.
+
+        Without this block APEX has no template mappings for the app, causing
+        ORA-01403 at WWV_FLOW_THEME line 702 the moment any page renders.
+        Template IDs here are Universal Theme blueprint IDs; the
+        wwv_imp_util.get_subscription_id() call in p_reference_id translates
+        them to workspace-local IDs at import time.
+        """
+        style_id = self._uid()
+        theme_id = self._uid()
+        lines = [
+            "prompt --application/shared_components/user_interface/theme_style",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_theme_style(",
+            f" p_id=>{self._wid(style_id)}",
+            ",p_theme_id=>42",
+            ",p_name=>'Vita'",
+            ",p_static_id=>'VITA'",
+            ",p_css_file_urls=>'#THEME_FILES#css/Vita#MIN#.css?v=#APEX_VERSION#'",
+            ",p_is_current=>true",
+            ",p_is_public=>true",
+            ",p_is_accessible=>false",
+            ");",
+            self._comp_end(),
+            "prompt --application/shared_components/user_interface/theme",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_theme(",
+            f" p_id=>{self._wid(theme_id)}",
+            ",p_theme_id=>42",
+            ",p_static_id=>'universal-theme'",
+            ",p_theme_name=>'Universal Theme'",
+            ",p_theme_internal_name=>'UNIVERSAL_THEME'",
+            ",p_version_identifier=>'26.1'",
+            ",p_navigation_type=>'L'",
+            ",p_nav_bar_type=>'LIST'",
+            ",p_is_locked=>false",
+            f",p_current_theme_style_id=>{self._wid(style_id)}",
+            ",p_default_page_template=>4073832297226169690",
+            ",p_default_dialog_template=>2101883943284197310",
+            ",p_error_template=>2102634289808461002",
+            ",p_printer_friendly_template=>4073832297226169690",
+            ",p_login_template=>2102634289808461002",
+            f",p_default_button_template=>{self._BTN_TMPL}",
+            ",p_default_region_template=>4073835273271169698",
+            ",p_default_chart_template=>4073835273271169698",
+            ",p_default_form_template=>4073835273271169698",
+            ",p_default_reportr_template=>4073835273271169698",
+            ",p_default_wizard_template=>4073835273271169698",
+            ",p_default_menur_template=>2532939663579242476",
+            ",p_default_listr_template=>4073835273271169698",
+            ",p_default_irr_template=>2102002977963900996",
+            ",p_default_report_template=>2540130677583398057",
+            ",p_default_label_template=>1610598304472262251",
+            ",p_default_menu_template=>4073839682315169711",
+            ",p_default_list_template=>4073837480889169704",
+            ",p_default_top_nav_list_temp=>2528231041045349458",
+            ",p_default_side_nav_list_temp=>2469215554099805162",
+            ",p_default_nav_list_position=>'SIDE'",
+            ",p_default_dialogbtnr_template=>2127905476394690047",
+            ",p_default_dialogr_template=>4502917002193490937",
+            ",p_default_option_label=>1610598304472262251",
+            f",p_default_required_label=>{self._FIELD_TMPL}",
+            ",p_default_navbar_list_template=>2849019392706229583",
+            ",p_file_prefix=>nvl(wwv_flow_application_install.get_static_theme_file_prefix(42),'#APEX_FILES#themes/theme_42/26.1/')",
+            ",p_files_version=>64",
+            ",p_icon_library=>'FONTAPEX'",
+            ",p_javascript_file_urls=>wwv_flow_string.join(wwv_flow_t_varchar2(",
+            "'#APEX_FILES#libraries/apex/#MIN_DIRECTORY#widget.stickyWidget#MIN#.js?v=#APEX_VERSION#',",
+            "'#THEME_FILES#js/theme42#MIN#.js?v=#APEX_VERSION#'))",
+            ",p_css_file_urls=>'#THEME_FILES#css/Core#MIN#.css?v=#APEX_VERSION#'",
+            ",p_reference_id=>wwv_imp_util.get_subscription_id(4073840274158169736,2000,'universal-theme',8842.261)",
             ");",
             self._comp_end(),
         ]
@@ -552,8 +639,11 @@ class OracleApexFullAppGenerator:
             ",p_plug_name=>'Entities'",
             ",p_region_template_options=>'#DEFAULT#'",
             ",p_plug_display_sequence=>10",
-            ",p_plug_source_type=>'NATIVE_STATIC_CONTENT'",
+            ",p_location=>null",
             f",p_plug_source=>'{safe_html}'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'expand_shortcuts', 'N',",
+            "  'output_as', 'HTML')).to_clob",
             ");",
             self._comp_end(),
         ]
@@ -915,6 +1005,261 @@ class OracleApexFullAppGenerator:
 
         return "\n".join(lines)
 
+    # ── GUI-model page generation ─────────────────────────────────────────────
+
+    def _assign_gui_page_numbers(self) -> list:
+        """Pair list/form GUI screens and assign consecutive page numbers.
+
+        List screens get even numbers (2, 4, 6, …); the corresponding form
+        screen gets the immediately following odd number (3, 5, 7, …).  This
+        matches the template's hard-coded detail-link assumption
+        (screen_number + 1 = form page).
+
+        Returns [(screen, page_num, entity_name_or_None)] where entity_name
+        is set only for form screens (to look up the domain model class).
+        """
+        all_screens: list = []
+        modules_iter = (self.gui_model.modules.values()
+                        if isinstance(self.gui_model.modules, dict)
+                        else self.gui_model.modules)
+        for module in modules_iter:
+            all_screens.extend(module.screens)
+
+        # Group by entity name derived from screen name convention
+        entity_groups: dict = {}  # entity -> {'list': screen, 'form': screen}
+        others: list = []
+
+        for screen in all_screens:
+            name = screen.name
+            if name.endswith('_List'):
+                entity = name[:-5]
+                entity_groups.setdefault(entity, {})['list'] = screen
+            elif name.endswith('_Form'):
+                entity = name[:-5]
+                entity_groups.setdefault(entity, {})['form'] = screen
+            else:
+                others.append(screen)
+
+        result: list = []
+        page_num = 2
+
+        for entity in sorted(entity_groups.keys()):
+            group = entity_groups[entity]
+            if 'list' in group:
+                result.append((group['list'], page_num, None))
+            page_num += 1          # list page always occupies this slot
+            if 'form' in group:
+                result.append((group['form'], page_num, entity))
+            page_num += 1          # form page always occupies this slot
+
+        for screen in sorted(others, key=lambda s: s.name):
+            result.append((screen, page_num, None))
+            page_num += 1
+
+        return result
+
+    def _find_class_for_entity(self, entity_name: str):
+        """Return the domain model Class whose name matches entity_name."""
+        for cls in self._classes():
+            if cls.name == entity_name:
+                return cls
+        # case-insensitive
+        el = entity_name.lower()
+        for cls in self._classes():
+            if cls.name.lower() == el:
+                return cls
+        # strip underscores
+        clean = el.replace('_', '')
+        for cls in self._classes():
+            if cls.name.lower().replace('_', '') == clean:
+                return cls
+        return None
+
+    @staticmethod
+    def _extract_page_content(sql: str) -> str:
+        """Strip the standalone import_begin/end wrapper; keep create_page SQL.
+
+        The UIPagesSQLGenerator template produces a standalone file with its own
+        import_begin at the top and import_end at the bottom.  We only want the
+        page creation block (prompt + begin/end block) so it can be embedded
+        inside the combined app SQL whose import_begin is already at the top.
+        """
+        # Match the 'prompt --application/pages/page_NNN' line (create, not delete)
+        m = re.search(r'^prompt --application/pages/page_\d+\s*$', sql, re.MULTILINE)
+        if not m:
+            return ""
+        end_m = re.search(
+            r'^begin\s*\nwwv_flow_imp\.import_end',
+            sql[m.start():],
+            re.MULTILINE | re.IGNORECASE,
+        )
+        if end_m:
+            content = sql[m.start(): m.start() + end_m.start()].rstrip()
+        else:
+            content = sql[m.start():].rstrip()
+        return content
+
+    def _generate_ir_page_from_gui(self, screen, page_num: int) -> str:
+        """Generate an Interactive Report page SQL from a GUI model list screen.
+
+        Calls UIPagesSQLGenerator (Jinja2 template), reads the output file,
+        strips the standalone wrapper, and returns the embeddable page SQL.
+        Returns "" if the screen produces no page content (e.g. no DataList).
+        """
+        import tempfile
+        try:
+            from migrator.generators.sql.sql_generator_ui import UIPagesSQLGenerator
+        except ImportError:
+            return ""
+
+        fname = f"page_{page_num:05d}.sql"
+        with tempfile.TemporaryDirectory() as tmpdir:
+            try:
+                UIPagesSQLGenerator(
+                    model=self.model,
+                    gui_model=self.gui_model,
+                    app_id=str(self.app_id),
+                    screen=screen,
+                    screen_number=page_num,
+                    workspace_name="GENERATED",
+                    user_name="USER",
+                    output_file_name=fname,
+                    output_dir=tmpdir,
+                ).generate()
+            except Exception:
+                return ""
+
+            out_file = os.path.join(tmpdir, fname)
+            if not os.path.exists(out_file):
+                return ""
+            with open(out_file, 'r', encoding='utf-8') as fh:
+                content = fh.read()
+
+        return self._extract_page_content(content)
+
+    def _navigation_gui(self, assignments: list) -> str:
+        """Navigation menu built from GUI model screens (one entry per entity)."""
+        # Build page-map: entity -> [list_page_num, form_page_num]
+        page_map: dict = {}
+        for screen, page_num, _ in assignments:
+            name = screen.name
+            if name.endswith('_List'):
+                entity = name[:-5]
+                page_map.setdefault(entity, [None, None])[0] = page_num
+            elif name.endswith('_Form'):
+                entity = name[:-5]
+                page_map.setdefault(entity, [None, None])[1] = page_num
+
+        lines = [
+            "prompt --application/shared_components/navigation/lists/navigation_menu",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_list(",
+            f" p_id=>{self._wid(self._nav_list_id)}",
+            ",p_name=>'Navigation Menu'",
+            ",p_static_id=>'navigation-menu'",
+            ");",
+        ]
+        home_id = self._uid()
+        lines += [
+            "wwv_flow_imp_shared.create_list_item(",
+            f" p_id=>{self._wid(home_id)}",
+            ",p_list_item_display_sequence=>10",
+            ",p_list_item_link_text=>'Home'",
+            ",p_list_item_link_target=>'f?p=&APP_ID.:1:&SESSION.::&DEBUG.::::'",
+            ",p_list_item_icon=>'fa-home'",
+            ",p_list_item_current_type=>'TARGET_PAGE'",
+            ");",
+        ]
+
+        for i, entity in enumerate(sorted(page_map.keys())):
+            list_pn, form_pn = page_map[entity]
+            if list_pn is None:
+                continue  # no list page → skip from nav
+            item_id = self._uid()
+            safe_label = entity.replace("'", "''").replace('_', ' ')
+            active_pages = str(list_pn)
+            if form_pn is not None:
+                active_pages += f",{form_pn}"
+            lines += [
+                "wwv_flow_imp_shared.create_list_item(",
+                f" p_id=>{self._wid(item_id)}",
+                f",p_list_item_display_sequence=>{(i + 2) * 10}",
+                f",p_list_item_link_text=>'{safe_label}'",
+                f",p_list_item_link_target=>'f?p=&APP_ID.:{list_pn}:&SESSION.::&DEBUG.::::'",
+                ",p_list_item_icon=>'fa-table'",
+                ",p_list_item_current_type=>'COLON_DELIMITED_PAGE_LIST'",
+                f",p_list_item_current_for_pages=>'{active_pages}'",
+                ");",
+            ]
+
+        lines.append(self._comp_end())
+
+        # Nav bar (logout)
+        logout_id = self._uid()
+        lines += [
+            "prompt --application/shared_components/navigation/lists/navigation_bar",
+            self._comp_begin(),
+            "wwv_flow_imp_shared.create_list(",
+            f" p_id=>{self._wid(self._nav_bar_list_id)}",
+            ",p_name=>'Navigation Bar'",
+            ",p_static_id=>'navigation-bar'",
+            ");",
+            "wwv_flow_imp_shared.create_list_item(",
+            f" p_id=>{self._wid(logout_id)}",
+            ",p_list_item_display_sequence=>10",
+            ",p_list_item_link_text=>'Log Out'",
+            ",p_list_item_link_target=>'f?p=&APP_ID.:9999:&SESSION.::&DEBUG.::::'",
+            ",p_list_item_icon=>'fa-sign-out'",
+            ",p_list_item_current_type=>'NEVER'",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    def _home_page_gui(self, assignments: list) -> str:
+        """Home page with links to each entity list page (from GUI model)."""
+        list_links = []
+        for screen, page_num, _ in assignments:
+            if screen.name.endswith('_List'):
+                entity = screen.name[:-5].replace('_', ' ')
+                safe_entity = entity.replace("'", "''")
+                list_links.append(
+                    f'<li><a href="f?p=&APP_ID.:{page_num}:&SESSION.">'
+                    f'{safe_entity}</a></li>'
+                )
+
+        html = '<ul>\n' + '\n'.join(list_links) + '\n</ul>'
+        safe_html = html.replace("'", "''")
+        safe_name = self.app_name.replace("'", "''")
+        region_id = self._uid()
+
+        lines = [
+            "prompt --application/pages/page_00001",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            " p_id=>1",
+            f",p_name=>'{safe_name}'",
+            f",p_step_title=>'{safe_name}'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_protection_level=>'C'",
+            ",p_page_component_map=>'08'",
+            ");",
+            "wwv_flow_imp_page.create_page_plug(",
+            f" p_id=>{self._wid(region_id)}",
+            ",p_plug_name=>'Entities'",
+            ",p_region_template_options=>'#DEFAULT#'",
+            ",p_plug_display_sequence=>10",
+            ",p_location=>null",
+            f",p_plug_source=>'{safe_html}'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'expand_shortcuts', 'N',",
+            "  'output_as', 'HTML')).to_clob",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
     # ── Supporting Objects (DDL embedded inside the APEX import envelope) ────────
 
     def _format_varchar2_table(self, sql: str) -> list[str]:
@@ -1146,16 +1491,35 @@ class OracleApexFullAppGenerator:
         # DDL is embedded as a Supporting Objects install script at the end.
         parts.append(self._set_environment())
         parts.append(self._application())
+        parts.append(self._theme())
         parts.append(self._authentication())
-        parts.append(self._navigation(classes))
-        parts.append(self._global_page())
-        parts.append(self._home_page(classes))
+        parts.append(self._login_page())
 
-        for i, cls in enumerate(classes):
-            list_page = 2 + i * 2
-            form_page = 3 + i * 2
-            parts.append(self._list_page(cls, list_page))
-            parts.append(self._form_page(cls, form_page))
+        if self.gui_model is not None:
+            assignments = self._assign_gui_page_numbers()
+            parts.append(self._navigation_gui(assignments))
+            parts.append(self._global_page())
+            parts.append(self._home_page_gui(assignments))
+            for screen, page_num, entity_name in assignments:
+                name = screen.name
+                if name.endswith('_List'):
+                    sql = self._generate_ir_page_from_gui(screen, page_num)
+                    if sql:
+                        parts.append(sql)
+                elif name.endswith('_Form') and entity_name is not None:
+                    cls = self._find_class_for_entity(entity_name)
+                    if cls is not None:
+                        parts.append(self._form_page(cls, page_num))
+                # other screen types are skipped for now
+        else:
+            parts.append(self._navigation(classes))
+            parts.append(self._global_page())
+            parts.append(self._home_page(classes))
+            for i, cls in enumerate(classes):
+                list_page = 2 + i * 2
+                form_page = 3 + i * 2
+                parts.append(self._list_page(cls, list_page))
+                parts.append(self._form_page(cls, form_page))
 
         parts.append(self._supporting_objects())
         parts.append(self._end_environment())

@@ -23,7 +23,7 @@ def _snapshot(output_dir: Path) -> set[Path]:
 
 
 def _run_generator(target_generator: str, sql_dialect: str | None,
-                   model: Any, output_dir: Path) -> None:
+                   model: Any, output_dir: Path, gui_model=None) -> None:
     out = str(output_dir)
 
     if target_generator == "oracle_apex":
@@ -31,6 +31,7 @@ def _run_generator(target_generator: str, sql_dialect: str | None,
         app_name = getattr(model, "name", None) or "Generated_App"
         OracleApexFullAppGenerator(
             model=model,
+            gui_model=gui_model,
             output_dir=out,
             output_filename="oracle_apex_app.sql",
             app_name=app_name,
@@ -105,8 +106,10 @@ def generate_artifacts(session: Session, target_lcp: str) -> dict:
     output_dir = session.output_dir
     before = _snapshot(output_dir)
 
+    gui_model_for_gen = session.gui_model if target_lcp == "oracle_apex" else None
     try:
-        _run_generator(target.generator, target.sql_dialect, session.domain_model, output_dir)
+        _run_generator(target.generator, target.sql_dialect, session.domain_model,
+                       output_dir, gui_model=gui_model_for_gen)
     except Exception as exc:
         raise GenerateError(f"Generation failed: {exc}") from exc
 
