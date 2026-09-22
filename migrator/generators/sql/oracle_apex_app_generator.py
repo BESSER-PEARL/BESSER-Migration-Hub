@@ -148,6 +148,8 @@ class OracleApexFullAppGenerator:
 
             for attr in sorted(cls.attributes, key=lambda a: a.name):
                 cname = self._col(attr.name)
+                if cname == 'ID':
+                    continue  # already the identity PK
                 tname_lower = tname.lower()
                 ttype = attr.type.name
                 nn = "" if attr.is_optional else " NOT NULL"
@@ -253,11 +255,153 @@ class OracleApexFullAppGenerator:
             "wwv_flow_imp_shared.create_authentication(",
             f" p_id=>{self._wid(self._auth_id)}",
             ",p_name=>'Application Express Accounts'",
+            ",p_static_id=>'apex-accounts'",
             ",p_scheme_type=>'NATIVE_APEX_ACCOUNTS'",
             ",p_invalid_session_type=>'LOGIN'",
-            ",p_logout_url=>'f?p=&APP_ID.:1'",
+            ",p_logout_url=>'f?p=&APP_ID.:1:&SESSION.'",
             ",p_use_secure_cookie_yn=>'N'",
             ",p_ras_mode=>0",
+            ");",
+            self._comp_end(),
+        ]
+        return "\n".join(lines)
+
+    def _login_page(self) -> str:
+        """Generate page 101 (alias LOGIN) — required by NATIVE_APEX_ACCOUNTS auth."""
+        region_uid = self._uid()
+        button_uid = self._uid()
+        usr_item_uid = self._uid()
+        pwd_item_uid = self._uid()
+        proc_get_cookie_uid = self._uid()
+        proc_set_cookie_uid = self._uid()
+        proc_login_uid = self._uid()
+        proc_clear_uid = self._uid()
+
+        lines = [
+            "prompt --application/pages/page_00101",
+            self._comp_begin(),
+            "wwv_flow_imp_page.create_page(",
+            " p_id=>101",
+            ",p_name=>'Login'",
+            ",p_alias=>'LOGIN'",
+            ",p_step_title=>'Sign In'",
+            ",p_reload_on_submit=>'A'",
+            ",p_warn_on_unsaved_changes=>'N'",
+            ",p_autocomplete_on_off=>'OFF'",
+            ",p_step_template=>2102634289808461002",
+            ",p_page_template_options=>'#DEFAULT#'",
+            ",p_page_is_public_y_n=>'Y'",
+            ",p_protection_level=>'C'",
+            ",p_page_component_map=>'16'",
+            ");",
+            "wwv_flow_imp_page.create_page_plug(",
+            f" p_id=>{self._wid(region_uid)}",
+            ",p_plug_name=>'Login'",
+            ",p_region_template_options=>'#DEFAULT#'",
+            ",p_plug_template=>2675634334296186762",
+            ",p_plug_display_sequence=>10",
+            ",p_plug_item_display_point=>'ABOVE'",
+            ",p_location=>null",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'expand_shortcuts', 'N',",
+            "  'output_as', 'HTML')).to_clob",
+            ");",
+            "wwv_flow_imp_page.create_page_button(",
+            f" p_id=>{self._wid(button_uid)}",
+            ",p_button_sequence=>10",
+            f",p_button_plug_id=>{self._wid(region_uid)}",
+            ",p_button_name=>'LOGIN'",
+            ",p_button_action=>'SUBMIT'",
+            ",p_button_template_options=>'#DEFAULT#'",
+            ",p_button_template_id=>4073839297780169708",
+            ",p_button_is_hot=>'Y'",
+            ",p_button_image_alt=>'Sign In'",
+            ",p_button_position=>'NEXT'",
+            ");",
+            "wwv_flow_imp_page.create_page_item(",
+            f" p_id=>{self._wid(usr_item_uid)}",
+            ",p_name=>'P101_USERNAME'",
+            ",p_is_required=>true",
+            ",p_item_sequence=>10",
+            f",p_item_plug_id=>{self._wid(region_uid)}",
+            ",p_prompt=>'Username'",
+            ",p_placeholder=>'username'",
+            ",p_source_type=>'ALWAYS_NULL'",
+            ",p_display_as=>'NATIVE_TEXT_FIELD'",
+            ",p_cSize=>64",
+            ",p_cMaxlength=>100",
+            ",p_field_template=>2042262243893469891",
+            ",p_item_template_options=>'#DEFAULT#'",
+            ",p_restricted_characters=>'WEB_SAFE'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'disabled', 'N',",
+            "  'submit_when_enter_pressed', 'N',",
+            "  'subtype', 'TEXT',",
+            "  'trim_spaces', 'NONE')).to_clob",
+            ");",
+            "wwv_flow_imp_page.create_page_item(",
+            f" p_id=>{self._wid(pwd_item_uid)}",
+            ",p_name=>'P101_PASSWORD'",
+            ",p_is_required=>true",
+            ",p_item_sequence=>20",
+            f",p_item_plug_id=>{self._wid(region_uid)}",
+            ",p_prompt=>'Password'",
+            ",p_placeholder=>'password'",
+            ",p_source_type=>'ALWAYS_NULL'",
+            ",p_display_as=>'NATIVE_PASSWORD'",
+            ",p_cSize=>64",
+            ",p_cMaxlength=>100",
+            ",p_field_template=>2042262243893469891",
+            ",p_item_template_options=>'#DEFAULT#'",
+            ",p_is_persistent=>'N'",
+            ",p_restricted_characters=>'WEB_SAFE'",
+            ",p_encrypt_session_state_yn=>'N'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'submit_when_enter_pressed', 'Y')).to_clob",
+            ");",
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(proc_get_cookie_uid)}",
+            ",p_process_sequence=>10",
+            ",p_process_point=>'BEFORE_HEADER'",
+            ",p_process_type=>'NATIVE_PLSQL'",
+            ",p_process_name=>'Get Username Cookie'",
+            ",p_process_sql_clob=>':P101_USERNAME := apex_authentication.get_login_username_cookie;'",
+            ",p_process_clob_language=>'PLSQL'",
+            ");",
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(proc_set_cookie_uid)}",
+            ",p_process_sequence=>10",
+            ",p_process_point=>'AFTER_SUBMIT'",
+            ",p_process_type=>'NATIVE_PLSQL'",
+            ",p_process_name=>'Set Username Cookie'",
+            ",p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(",
+            "'apex_authentication.send_login_username_cookie (',",
+            "'    p_username => lower(:P101_USERNAME) );'))",
+            ",p_process_clob_language=>'PLSQL'",
+            ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
+            ");",
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(proc_login_uid)}",
+            ",p_process_sequence=>20",
+            ",p_process_point=>'AFTER_SUBMIT'",
+            ",p_process_type=>'NATIVE_PLSQL'",
+            ",p_process_name=>'Login'",
+            ",p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(",
+            "'apex_authentication.login(',",
+            "'    p_username => :P101_USERNAME,',",
+            "'    p_password => :P101_PASSWORD );'))",
+            ",p_process_clob_language=>'PLSQL'",
+            ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
+            ");",
+            "wwv_flow_imp_page.create_page_process(",
+            f" p_id=>{self._wid(proc_clear_uid)}",
+            ",p_process_sequence=>30",
+            ",p_process_point=>'AFTER_SUBMIT'",
+            ",p_process_type=>'NATIVE_SESSION_STATE'",
+            ",p_process_name=>'Clear Page(s) Cache'",
+            ",p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2(",
+            "  'type', 'CLEAR_CACHE_CURRENT_PAGE')).to_clob",
+            ",p_error_display_location=>'INLINE_IN_NOTIFICATION'",
             ");",
             self._comp_end(),
         ]
@@ -773,61 +917,217 @@ class OracleApexFullAppGenerator:
 
     # ── Supporting Objects (DDL embedded inside the APEX import envelope) ────────
 
-    def _chunk_varchar2(self, sql: str, chunk_size: int = 4000) -> list[str]:
-        """Escape and chunk SQL for wwv_flow_imp.g_varchar2_table.
+    def _format_varchar2_table(self, sql: str) -> list[str]:
+        """Format SQL text as g_varchar2_table assignments using ||wwv_flow.LF||.
 
-        Single quotes are doubled for embedding in PL/SQL string literals.
-        Chunks never split a '' pair at a boundary.
+        Each element holds complete SQL lines. Value length is capped at 4000
+        chars per element (content + one byte per newline).
         """
-        escaped = sql.replace("'", "''")
-        chunks: list[str] = []
-        i = 0
-        n = len(escaped)
-        while i < n:
-            end = min(i + chunk_size, n)
-            # Back up one character if we would split a '' (escaped-quote) pair.
-            if end < n and escaped[end - 1] == "'" and escaped[end] == "'":
-                end -= 1
-            chunks.append(escaped[i:end])
-            i = end
-        return chunks
+        sql_lines = sql.split('\n')
+        result: list[str] = []
+        idx = 1
+        bucket: list[str] = []
+        bucket_len = 0
+
+        def flush() -> None:
+            nonlocal idx
+            parts = [f"'{ln}'" for ln in bucket]
+            body = "||wwv_flow.LF||\n".join(parts) + "||wwv_flow.LF||\n''"
+            result.append(f"wwv_flow_imp.g_varchar2_table({idx}) := {body};")
+            idx += 1
+
+        for line in sql_lines:
+            escaped = line.replace("'", "''")
+            contrib = len(line) + 1  # content + the LF we represent
+            if bucket_len + contrib > 4000 and bucket:
+                flush()
+                bucket = []
+                bucket_len = 0
+            bucket.append(escaped)
+            bucket_len += contrib
+
+        if bucket:
+            flush()
+
+        return result
+
+    def _drop_sql(self) -> str:
+        """Simple PL/SQL DROP blocks for the Supporting Objects deinstall script."""
+        classes = list(self.model.classes_sorted_by_inheritance())
+        class_names = {c.name for c in classes}
+        fk_map, nm_tables = self._ddl._compute_fk_columns(class_names)
+        sorted_cls = self._ddl._topo_sort(classes, fk_map)
+
+        lines: list[str] = []
+        seen_jct: set = set()
+        for t1, t2, _, _ in nm_tables:
+            jn = f"{t1}_{t2}"
+            if jn in seen_jct:
+                continue
+            seen_jct.add(jn)
+            lines.append(
+                f"BEGIN EXECUTE IMMEDIATE 'DROP TABLE {jn} CASCADE CONSTRAINTS';"
+                f" EXCEPTION WHEN OTHERS THEN NULL; END;"
+            )
+            lines.append("/")
+        for cls in reversed(sorted_cls):
+            tname = self._tbl(cls.name)
+            lines.append(
+                f"BEGIN EXECUTE IMMEDIATE 'DROP TABLE {tname} CASCADE CONSTRAINTS';"
+                f" EXCEPTION WHEN OTHERS THEN NULL; END;"
+            )
+            lines.append("/")
+        return "\n".join(lines) + "\n"
+
+    def _create_tables_sql(self) -> str:
+        """CREATE TABLE DDL for the Supporting Objects install script.
+
+        Drops any existing tables first so the script is idempotent — a
+        second import (or re-install) won't fail with ORA-00955.
+        """
+        enum_map = self._ddl._get_enum_map()
+        classes = list(self.model.classes_sorted_by_inheritance())
+        class_names = {c.name for c in classes}
+        fk_map, nm_tables = self._ddl._compute_fk_columns(class_names)
+        sorted_cls = self._ddl._topo_sort(classes, fk_map)
+
+        lines: list[str] = []
+
+        # Drop in reverse order (junction tables first, then entity tables).
+        # EXCEPTION WHEN OTHERS silently ignores ORA-00942 (table doesn't exist).
+        seen_jct_d: set = set()
+        for t1, t2, _, _ in nm_tables:
+            jn = f"{t1}_{t2}"
+            if jn in seen_jct_d:
+                continue
+            seen_jct_d.add(jn)
+            lines.append(
+                f"BEGIN EXECUTE IMMEDIATE 'DROP TABLE {jn} CASCADE CONSTRAINTS';"
+                f" EXCEPTION WHEN OTHERS THEN NULL; END;"
+            )
+            lines.append("/")
+        for cls in reversed(sorted_cls):
+            tname = self._tbl(cls.name)
+            lines.append(
+                f"BEGIN EXECUTE IMMEDIATE 'DROP TABLE {tname} CASCADE CONSTRAINTS';"
+                f" EXCEPTION WHEN OTHERS THEN NULL; END;"
+            )
+            lines.append("/")
+        lines.append("")
+
+        for cls in sorted_cls:
+            tname = self._tbl(cls.name)
+            tname_lower = tname.lower()
+            parent = self._ddl._find_parent(cls)
+            parent_tname = self._tbl(parent.name) if parent else None
+
+            col_defs = ["    id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY"]
+            fk_cols: list[str] = []
+            constraints: list[str] = []
+
+            if parent is not None:
+                pfk = f"{parent_tname.lower()}_id"
+                fk_cols.append(f"    {pfk} NUMBER NOT NULL")
+                constraints.append(f"    FOREIGN KEY ({pfk}) REFERENCES {parent_tname}(id)")
+
+            for attr in sorted(cls.attributes, key=lambda a: a.name):
+                cname = self._col(attr.name)
+                if cname == 'ID':
+                    continue  # already the identity PK
+                ttype = attr.type.name
+                nn = "" if attr.is_optional else " NOT NULL"
+                if ttype == "bool":
+                    col_defs.append(f"    {cname} NUMBER(1) DEFAULT 0{nn}")
+                    constraints.append(
+                        f"    CONSTRAINT chk_{tname_lower}_{cname} CHECK ({cname} IN (0, 1))"
+                    )
+                elif ttype in enum_map:
+                    vals = enum_map[ttype]
+                    mlen = max((len(v) for v in vals), default=20)
+                    col_defs.append(f"    {cname} VARCHAR2({max(mlen + 4, 20)}){nn}")
+                    vs = ", ".join(f"'{v}'" for v in vals)
+                    constraints.append(
+                        f"    CONSTRAINT chk_{tname_lower}_{cname} CHECK ({cname} IN ({vs}))"
+                    )
+                else:
+                    col_defs.append(f"    {cname} {self._ddl._col_type(ttype, enum_map)}{nn}")
+
+            seen: set = set()
+            for fk_col, ref_tbl, is_uniq in fk_map.get(cls.name, []):
+                key = (fk_col, ref_tbl)
+                if key in seen:
+                    continue
+                seen.add(key)
+                fk_cols.append(f"    {fk_col} NUMBER NOT NULL")
+                constraints.append(f"    FOREIGN KEY ({fk_col}) REFERENCES {ref_tbl}(id)")
+                if is_uniq:
+                    constraints.append(
+                        f"    CONSTRAINT uq_{tname_lower}_{fk_col} UNIQUE ({fk_col})"
+                    )
+
+            all_cols = col_defs + fk_cols + constraints
+            lines += [f"CREATE TABLE {tname} (", ",\n".join(all_cols), ");", ""]
+
+        seen_jct: set = set()
+        for t1, t2, c1, c2 in nm_tables:
+            jn = f"{t1}_{t2}"
+            if jn in seen_jct:
+                continue
+            seen_jct.add(jn)
+            lines += [
+                f"CREATE TABLE {jn} (",
+                f"    {c1} NUMBER NOT NULL,",
+                f"    {c2} NUMBER NOT NULL,",
+                f"    PRIMARY KEY ({c1}, {c2}),",
+                f"    FOREIGN KEY ({c1}) REFERENCES {t1}(id),",
+                f"    FOREIGN KEY ({c2}) REFERENCES {t2}(id)",
+                ");", "",
+            ]
+
+        return "\n".join(lines) + "\n"
 
     def _supporting_objects(self) -> str:
-        """Embed the table DDL as an APEX Supporting Objects install script.
+        """Embed DDL as APEX Supporting Objects (deinstall + install scripts).
 
-        The install script runs automatically when the user checks
-        "Run Supporting Objects" in the App Builder import wizard, or
-        manually via Supporting Objects → Install.
+        Structure mirrors real APEX 24.x exports:
+        1. create_install  — registers the supporting objects + DROP deinstall script
+        2. create_install_script — the CREATE TABLE install script, linked via p_install_id
         """
-        # Reuse the existing DDL generation logic to get the SQL text.
-        ddl_sql = self._ddl_section()
-        chunks = self._chunk_varchar2(ddl_sql)
-
         install_id = self._uid()
+        script_id = self._uid()
 
-        lines = [
-            "prompt --application/deployment/installscripts/create_tables",
+        # Block 1: create_install (deinstall = DROP tables)
+        b1 = [
+            "prompt --application/deployment/definition",
             self._comp_begin(),
-            "wwv_flow_imp.g_varchar2_table := wwv_flow_imp_shared.empty_varchar2_table;",
+            "wwv_flow_imp.g_varchar2_table := wwv_flow_imp.empty_varchar2_table;",
+        ] + self._format_varchar2_table(self._drop_sql()) + [
+            "wwv_flow_imp_shared.create_install(",
+            f" p_id=>{self._wid(install_id)}",
+            ",p_deinstall_script_clob=>wwv_flow_imp.varchar2_to_clob(wwv_flow_imp.g_varchar2_table)",
+            ",p_required_free_kb=>100",
+            ");",
+            self._comp_end(),
         ]
 
-        for idx, chunk in enumerate(chunks, start=1):
-            lines.append(f"wwv_flow_imp.g_varchar2_table({idx}) := '{chunk}';")
-
-        lines += [
+        # Block 2: create_install_script (install = CREATE TABLE)
+        b2 = [
+            "prompt --application/deployment/installscripts/create_tables",
+            self._comp_begin(),
+            "wwv_flow_imp.g_varchar2_table := wwv_flow_imp.empty_varchar2_table;",
+        ] + self._format_varchar2_table(self._create_tables_sql()) + [
             "wwv_flow_imp_shared.create_install_script(",
-            f" p_id=>{self._wid(install_id)}",
-            ",p_flow_id=>wwv_flow.g_flow_id",
-            ",p_flow_step_id=>0",
-            ",p_prompt=>'Create Tables'",
-            ",p_notes=>'Creates the database tables required by this application.'",
+            f" p_id=>{self._wid(script_id)}",
+            f",p_install_id=>{self._wid(install_id)}",
+            ",p_name=>'create_tables'",
+            ",p_sequence=>10",
             ",p_script_type=>'INSTALL'",
             ",p_script_clob=>wwv_flow_imp.varchar2_to_clob(wwv_flow_imp.g_varchar2_table)",
             ");",
             self._comp_end(),
         ]
 
-        return "\n".join(lines)
+        return "\n".join(b1) + "\n" + "\n".join(b2)
 
     # ── Entry point ────────────────────────────────────────────────────────────
 
