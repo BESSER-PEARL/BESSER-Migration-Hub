@@ -1020,12 +1020,22 @@ class OracleApexFullAppGenerator:
         Returns ('list'|'form'|'other', entity_name_or_None).
         """
         lower = name.lower()
-        # Check form suffixes first — they often end with '_page' too
-        for suffix in ('_form_page', '_from_page', '_form'):
+        # Underscore-separated form suffixes (check most-specific first)
+        for suffix in ('_form_page', '_from_page', '_view_edit', '_viewedit',
+                       '_edit', '_form', '_create', '_new', '_add', '_detail',
+                       '_update', '_show'):
             if lower.endswith(suffix):
                 return 'form', name[:len(name) - len(suffix)]
-        for suffix in ('_list', '_page'):
+        # Underscore-separated list suffixes
+        for suffix in ('_list', '_page', '_overview', '_browse', '_index', '_all'):
             if lower.endswith(suffix):
+                return 'list', name[:len(name) - len(suffix)]
+        # CamelCase without underscore separator (e.g. TaskOverview, TaskEdit)
+        for suffix in ('viewedit', 'edit', 'form', 'create', 'detail', 'update'):
+            if lower.endswith(suffix) and len(name) > len(suffix):
+                return 'form', name[:len(name) - len(suffix)]
+        for suffix in ('overview', 'list', 'browse', 'index'):
+            if lower.endswith(suffix) and len(name) > len(suffix):
                 return 'list', name[:len(name) - len(suffix)]
         return 'other', None
 
@@ -1147,7 +1157,14 @@ class OracleApexFullAppGenerator:
         import tempfile
         try:
             from migrator.generators.sql.sql_generator_ui import UIPagesSQLGenerator
+            from besser.BUML.metamodel.gui import DataList
         except ImportError:
+            return ""
+
+        # UIPagesSQLGenerator only produces useful IR SQL when the screen has
+        # at least one DataList component. Without it the template emits a
+        # minimal empty-page stub — skip the round-trip and return "" early.
+        if not any(isinstance(v, DataList) for v in getattr(screen, 'view_elements', [])):
             return ""
 
         fname = f"page_{page_num:05d}.sql"
