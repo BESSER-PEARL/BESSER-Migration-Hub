@@ -1,3 +1,6 @@
-from .mendix_to_structure import *
-from .mendix_to_apex import *
-from .besser_to_apex import *
+"""Optional conversion scripts.
+
+Converter modules are intentionally not imported here: some legacy scripts
+are executable examples and perform work at import time. Import the specific
+converter you need instead.
+"""

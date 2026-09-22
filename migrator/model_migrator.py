@@ -70,6 +70,18 @@ class ModelMigrator:
                                             csv_paths=self.module_name,
                                             openai_token=self.openai_token
                                             )
+        elif self.lcp == "retool":
+            from migrator.parsers.retool.retool_csv_parser import retool_csv_to_buml
+            domain_model = retool_csv_to_buml(
+                csv_dir=self.model_path,
+                module_name=self.module_name or None,
+            )
+        elif self.lcp == "oracle_apex":
+            from migrator.parsers.oracle_apex.oracle_apex import oracle_apex_to_buml
+            domain_model = oracle_apex_to_buml(
+                ddl_path=self.model_path,
+                module_name=self.module_name or None,
+            )
         else:
             raise ValueError("Low code platform not supported")
 

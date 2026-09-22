@@ -67,13 +67,19 @@ class GUIModelMigrator:
                 module_name=self.module_name,
             )
         elif self.lcp == "powerapps":
-            # the powerapps parser isn't written yet, keep structure for future
-            # gui_model = powerapps_to_buml(
-            #     image_path=self.model_path,
-            #     csv_paths=self.module_name,
-            #     openai_token=self.openai_token,
-            # )
             print("PowerApps GUI model migration is not implemented yet.")
+        elif self.lcp == "retool":
+            from migrator.parsers.retool.retool_rsx_parser import retool_rsx_to_gui
+            gui_model = retool_rsx_to_gui(
+                zip_path=self.model_path,
+                module_name=self.module_name or None,
+            )
+        elif self.lcp == "oracle_apex":
+            from migrator.parsers.oracle_apex.oracle_apex_gui import oracle_apex_to_gui
+            gui_model = oracle_apex_to_gui(
+                pages_dir=self.model_path,
+                module_name=self.module_name or None,
+            )
         else:
             raise ValueError("Low code platform not supported")
 

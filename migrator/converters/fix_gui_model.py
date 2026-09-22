@@ -445,3 +445,4 @@ def fix_generated_gui_model(py_file: str) -> None:
             )
         except Exception:
             pass
+

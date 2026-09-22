@@ -1,5 +1,6 @@
 from migrator import ModelMigrator
 from besser.utilities.buml_code_builder import domain_model_to_code
+
 from migrator.generators.sql.oracle_apex_sql_generator import OracleApexSQLGenerator
 from besser.BUML.metamodel.structural import *
 from migrator.generators.sql import SQLGenerator
