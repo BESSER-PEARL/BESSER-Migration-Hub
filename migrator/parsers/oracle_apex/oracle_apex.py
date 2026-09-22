@@ -128,7 +128,10 @@ _COLUMN_RE = re.compile(
 
 def _to_pascal(name: str) -> str:
     """Convert snake_case or UPPER_CASE to PascalCase."""
-    return "".join(word.capitalize() for word in name.lower().split("_"))
+    result = "".join(word.capitalize() for word in name.lower().split("_"))
+    if result and result[0].isdigit():
+        result = "_" + result
+    return result
 
 
 def _collect_alter_fks(content: str) -> dict:
@@ -230,6 +233,8 @@ def _oracle_apex_file_to_buml(ddl_path: str, module_name: str = None) -> DomainM
 
     raw_name     = module_name or os.path.splitext(os.path.basename(ddl_path))[0]
     name         = re.sub(r"[^A-Za-z0-9_]", "_", raw_name)
+    if name and name[0].isdigit():
+        name = "_" + name
     domain_model = DomainModel(name=name)
     classes:      dict = {}
     pending_fks:  list = []

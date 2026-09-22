@@ -47,7 +47,10 @@ def _normalize_stem(stem: str) -> str:
 
 def _to_pascal(name: str) -> str:
     """Convert snake_case / lower-case identifier to PascalCase class name."""
-    return "".join(word.capitalize() for word in name.replace('-', '_').split('_'))
+    result = "".join(word.capitalize() for word in name.replace('-', '_').split('_'))
+    if result and result[0].isdigit():
+        result = "_" + result
+    return result
 
 
 def _infer_type(col_name: str):

@@ -8,11 +8,34 @@ import problem.
 from __future__ import annotations
 
 from pathlib import Path
+import re
 import shutil
 from typing import Any
 
 from ..platforms import get_source
 from ..sessions import Session
+
+
+def _fix_digit_leading_vars(file_path: Path) -> None:
+    """Rename Python identifiers that start with a digit in a generated BUML file.
+
+    BESSER's code builder emits names like ``100_transactions_generated = Screen(...)``
+    which are invalid Python identifiers.  This scans for every such LHS name and
+    prepends ``_`` to all standalone occurrences, leaving quoted string values untouched.
+    """
+    content = file_path.read_text(encoding="utf-8")
+    # Find identifiers starting with a digit used as assignment targets or attribute bases.
+    bad_names = set(re.findall(r'^(\d\w+)\s*[=.]', content, re.MULTILINE))
+    if not bad_names:
+        return
+    for name in bad_names:
+        # Replace only standalone occurrences (not inside strings or longer identifiers).
+        content = re.sub(
+            r'(?<![A-Za-z0-9_"\'])' + re.escape(name) + r'(?![A-Za-z0-9_"\'])',
+            '_' + name,
+            content,
+        )
+    file_path.write_text(content, encoding="utf-8")
 
 
 class PivotError(Exception):
@@ -108,7 +131,9 @@ def _serialize_domain(model: Any, pivot_dir: Path) -> str:
     from besser.utilities.buml_code_builder import domain_model_to_code
 
     filename = "buml_model.py"
-    domain_model_to_code(model=model, file_path=str(pivot_dir / filename))
+    out_path = pivot_dir / filename
+    domain_model_to_code(model=model, file_path=str(out_path))
+    _fix_digit_leading_vars(out_path)
     return filename
 
 
@@ -131,7 +156,9 @@ def _serialize_gui(model: Any, pivot_dir: Path) -> tuple[str, str | None]:
     if builder is not None:
         try:
             filename = "gui_model.py"
-            builder(model=model, file_path=str(pivot_dir / filename))
+            out_path = pivot_dir / filename
+            builder(model=model, file_path=str(out_path))
+            _fix_digit_leading_vars(out_path)
             return filename, None
         except Exception as exc:
             fallback_note = (

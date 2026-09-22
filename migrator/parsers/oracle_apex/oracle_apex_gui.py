@@ -191,7 +191,10 @@ def _parse_page_file(sql_path: str):
 
     # Screen name (no spaces or hyphens allowed in BESSER names)
     def _safe(s: str) -> str:
-        return s.replace(' ', '_').replace('-', '_')
+        result = re.sub(r'[^A-Za-z0-9_]', '_', s)
+        if result and result[0].isdigit():
+            result = "_" + result
+        return result or '_'
 
     safe_entity = _safe(entity_name) if entity_name else _safe(page_name)
     if is_list_page:

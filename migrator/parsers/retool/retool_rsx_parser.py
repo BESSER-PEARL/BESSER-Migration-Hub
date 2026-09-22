@@ -56,7 +56,10 @@ def _classify_button(label: str):
 
 def _safe_name(text: str) -> str:
     """Replace non-identifier characters with underscores."""
-    return re.sub(r'[^A-Za-z0-9_]', '_', text).strip('_') or 'Element'
+    result = re.sub(r'[^A-Za-z0-9_]', '_', text).strip('_') or 'Element'
+    if result[0].isdigit():
+        result = "_" + result
+    return result
 
 
 # Regex patterns for RSX element detection (no XML parser — RSX uses JSX syntax)

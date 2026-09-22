@@ -2,6 +2,13 @@ import json
 import os
 from besser.BUML.metamodel.structural import *
 
+def _safe_name(name: str | None) -> str | None:
+    """Prefix with '_' if name starts with a digit to keep it a valid Python identifier."""
+    if name and name[0].isdigit():
+        return "_" + name
+    return name
+
+
 def primitive_data_types() -> set[PrimitiveDataType]:
     return {PrimitiveDataType("int"), PrimitiveDataType("str"), PrimitiveDataType("datetime")}
 
@@ -26,7 +33,7 @@ def build_enums(enums: list[dict[str, Any]]) -> set[Enumeration]:
     enumerations = set()
     for enum in enums:
         literals = {EnumerationLiteral(name=_get_enum_literal_name(literal)) for literal in enum.get("values", [])}
-        enumerations.add(Enumeration(name=enum.get("name"), literals=literals))
+        enumerations.add(Enumeration(name=_safe_name(enum.get("name")), literals=literals))
     return enumerations
 
 def mendix_to_buml_datatype(mendix_datetype: str) -> str:
@@ -49,12 +56,12 @@ def build_classes(entities: list, buml_model: DomainModel) -> set[Class]:
             attr_type = attr["type"].get("$Type", "")
             if attr_type == "DomainModels$EnumerationAttributeType":
                 enum_name = attr["type"]["enumeration"].split('.')[1]
-                new_attr = Property(name=attr.get("name"), type=buml_model.get_type_by_name(enum_name))
+                new_attr = Property(name=_safe_name(attr.get("name")), type=buml_model.get_type_by_name(enum_name))
             else:
                 prim_data_type = mendix_to_buml_datatype(attr_type)
-                new_attr = Property(name=attr.get("name"), type=prim_data_type)
+                new_attr = Property(name=_safe_name(attr.get("name")), type=prim_data_type)
             attributes.add(new_attr)
-        classes.add(Class(name=entity.get("name"), attributes=attributes))
+        classes.add(Class(name=_safe_name(entity.get("name")), attributes=attributes))
     return classes
 
 def build_associations(associations: list[dict], entities: list[dict], buml_model: DomainModel) -> set[Association]:
@@ -75,16 +82,17 @@ def build_associations(associations: list[dict], entities: list[dict], buml_mode
 
         for entity in entities:
             class_name = entity.get("name")
+            safe_class = _safe_name(class_name)
             if entity.get("$ID") == association.get("parent"):
                 comp_1 = association.get("deleteBehavior", {}).get("parentDeleteBehavior") == "DeleteMeAndReferences"
-                parent_property = Property(name=class_name.lower(), type=buml_model.get_class_by_name(class_name), multiplicity=mul1, is_composite=comp_1)
+                parent_property = Property(name=safe_class.lower(), type=buml_model.get_class_by_name(safe_class), multiplicity=mul1, is_composite=comp_1)
             elif entity.get("$ID") == association.get("child"):
                 comp_2 = association.get("deleteBehavior", {}).get("childDeleteBehavior") == "DeleteMeAndReferences"
-                child_property = Property(name=class_name.lower(), type=buml_model.get_class_by_name(class_name), multiplicity=mul2, is_composite=comp_2)
+                child_property = Property(name=safe_class.lower(), type=buml_model.get_class_by_name(safe_class), multiplicity=mul2, is_composite=comp_2)
 
         # Check if both ends are defined before creating the association
         if parent_property and child_property:
-            new_association = BinaryAssociation(name=association.get("name"), ends={parent_property, child_property})
+            new_association = BinaryAssociation(name=_safe_name(association.get("name")), ends={parent_property, child_property})
             result_associations.add(new_association)
         else:
             print(f"Warning: Association '{association.get('name')}' is missing a valid end.")
