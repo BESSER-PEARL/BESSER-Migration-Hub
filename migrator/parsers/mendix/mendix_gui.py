@@ -46,8 +46,14 @@ def extract_main_pages(unit) -> set[str]:
 
 
 
-def mendix_to_buml_button_type(mendix_button_type: str) -> str:
-    """Converts Mendix button type to B-UML button type."""
+def mendix_to_buml_button_type(mendix_button_type: str) -> ButtonType:
+    """Converts Mendix button type to B-UML button type.
+
+    ``Button`` requires a non-null ``buttonType``, so any unmapped/unknown
+    Mendix action falls back to ``ButtonType.RaisedButton`` instead of ""
+    (an empty string previously left generated code with a missing
+    constructor argument).
+    """
     type_mapping = {
         "Pages$PageClientAction": ButtonType.RaisedButton,
         "Pages$DeleteClientAction": ButtonType.OutlinedButton,
@@ -58,19 +64,31 @@ def mendix_to_buml_button_type(mendix_button_type: str) -> str:
         "Pages$SaveChangesClientAction": ButtonType.RaisedButton
 
     }
-    return type_mapping.get(mendix_button_type, "")
+    return type_mapping.get(mendix_button_type, ButtonType.RaisedButton)
 
 
-def mendix_to_buml_action_type(mendix_action_type: str) -> str:
-    """Converts Mendix button type to B-UML action type for button."""
+def mendix_to_buml_action_type(mendix_action_type: str) -> ButtonActionType:
+    """Converts Mendix button type to B-UML action type for button.
+
+    ``Button`` requires a non-null ``actionType``, so any unmapped/unknown
+    Mendix action (e.g. ``NoClientAction``, ``MicroflowClientAction``) falls
+    back to ``ButtonActionType.RunMethod`` instead of "" (an empty string
+    previously left generated code with a missing constructor argument).
+    """
     type_mapping = {
         "Pages$DeleteClientAction": ButtonActionType.Delete,
         "Pages$CancelChangesClientAction": ButtonActionType.Cancel,
-        "Pages$PageClientAction": ButtonActionType.Edit,
+        "Pages$PageClientAction": ButtonActionType.Navigate,
         "Pages$CreateObjectClientAction": ButtonActionType.Add,
-        "Pages$SaveChangesClientAction": ButtonActionType.Save
+        "Pages$SaveChangesClientAction": ButtonActionType.Save,
+        "Pages$MicroflowClientAction": ButtonActionType.RunMethod,
+        "Pages$CallNanoflowClientAction": ButtonActionType.RunMethod,
+        "Pages$NoClientAction": ButtonActionType.RunMethod,
+        "Pages$ClosePageClientAction": ButtonActionType.Back,
+        "Pages$SignOutClientAction": ButtonActionType.Logout,
+        "Pages$OpenLinkClientAction": ButtonActionType.Navigate,
     }
-    return type_mapping.get(mendix_action_type, "")
+    return type_mapping.get(mendix_action_type, ButtonActionType.RunMethod)
 
 
 # for styling for buttons
@@ -191,18 +209,17 @@ def extract_action_buttons(unit):
                 action_type = mendix_to_buml_action_type(button_type_str)
 
                 target_screen = None
-                if action_type == ButtonActionType.Navigate:
-                    page_settings = action.get("pageSettings", {})
-                    if isinstance(page_settings, dict):
-                        screen_name = page_settings.get("page", "").split(".")[1]
-                        target_screen = Screen(
-                            name=screen_name,
-                            description="",
-                            x_dpi="",
-                            y_dpi="",
-                            screen_size="Small",
-                            view_elements={},
-                        )
+                page_settings = action.get("pageSettings", {})
+                if isinstance(page_settings, dict) and page_settings.get("page"):
+                    screen_name = page_settings.get("page", "").split(".")[1]
+                    target_screen = Screen(
+                        name=screen_name,
+                        description="",
+                        x_dpi="",
+                        y_dpi="",
+                        screen_size="Small",
+                        view_elements=set(),
+                    )
 
                 if button_type == ButtonType.TextButton and label in {"Back", "Return", "←"}:
                     action_type = ButtonActionType.Back
@@ -539,14 +556,13 @@ def mendix_to_gui(json_path: str, module_name: str,
         package="",
         versionCode="",
         versionName="",
-        modules={},
+        modules=set(),
         description="",
     )
     modules_set = build_modules(
         gui_screens=gui_screens, gui_model=gui_model, main_pages=main_pages
     )
-    modules_dict = {module.name: module for module in modules_set}
-    gui_model.modules.update(modules_dict)
+    gui_model.modules.update(modules_set)
 
     return gui_model
 

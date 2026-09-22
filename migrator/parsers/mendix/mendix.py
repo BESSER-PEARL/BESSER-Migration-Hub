@@ -1,12 +1,21 @@
 import json
 import os
+import re
 from besser.BUML.metamodel.structural import *
 
 def _safe_name(name: str | None) -> str | None:
-    """Prefix with '_' if name starts with a digit to keep it a valid Python identifier."""
-    if name and name[0].isdigit():
-        return "_" + name
-    return name
+    """Sanitize a name to be a valid B-UML/Python identifier.
+
+    Replaces any character that is not a letter, digit or underscore
+    (e.g. spaces, punctuation) with '_', and prefixes with '_' if the
+    result starts with a digit.
+    """
+    if not name:
+        return name
+    safe = re.sub(r"\W", "_", name)
+    if safe[0].isdigit():
+        safe = "_" + safe
+    return safe
 
 
 def primitive_data_types() -> set[PrimitiveDataType]:
@@ -32,7 +41,7 @@ def build_enums(enums: list[dict[str, Any]]) -> set[Enumeration]:
     """Builds enumerations from Mendix JSON data."""
     enumerations = set()
     for enum in enums:
-        literals = {EnumerationLiteral(name=_get_enum_literal_name(literal)) for literal in enum.get("values", [])}
+        literals = {EnumerationLiteral(name=_safe_name(_get_enum_literal_name(literal))) for literal in enum.get("values", [])}
         enumerations.add(Enumeration(name=_safe_name(enum.get("name")), literals=literals))
     return enumerations
 
@@ -104,11 +113,17 @@ def build_generalizations(entities: list[dict], buml_model: DomainModel) -> set[
     result_generalizations = set()
 
     for entity in entities:
-        if entity.get("generalization").get("generalization"):
-            general = buml_model.get_class_by_name(entity.get("generalization").get("generalization").split(".")[1])
-            specific = buml_model.get_class_by_name(entity.get("name"))
+        qualified_general = entity.get("generalization").get("generalization")
+        if qualified_general:
+            general_name = _safe_name(qualified_general.split(".")[1])
+            general = buml_model.get_class_by_name(general_name)
+            specific = buml_model.get_class_by_name(_safe_name(entity.get("name")))
+            if general is None:
+                print(f"Warning: Skipping generalization '{qualified_general}' -> "
+                      f"parent class '{general_name}' is not part of the migrated module "
+                      f"(likely a built-in Mendix module such as 'System').")
+                continue
             new_generalization: Generalization = Generalization(general, specific)
-            print(entity.get("generalization").get("generalization"))
             result_generalizations.add(new_generalization)
     return result_generalizations
 

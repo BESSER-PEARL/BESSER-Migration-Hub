@@ -38,6 +38,36 @@ def _fix_digit_leading_vars(file_path: Path) -> None:
     file_path.write_text(content, encoding="utf-8")
 
 
+_GLOBALS_DOMAIN_MODEL_REF = (
+    "domain_model_ref = globals().get('domain_model') or "
+    "next((v for k, v in globals().items() if k.startswith('domain_model') "
+    "and hasattr(v, 'get_class_by_name')), None)"
+)
+_SAFE_DOMAIN_MODEL_REF = (
+    "try:\n"
+    "    domain_model_ref = domain_model\n"
+    "except NameError:\n"
+    "    domain_model_ref = None"
+)
+
+
+def _fix_globals_domain_model_ref(file_path: Path) -> None:
+    """Replace BESSER's ``globals()``-based domain-model lookup with a direct reference.
+
+    ``besser.utilities.buml_code_builder`` emits ``domain_model_ref = globals().get(...)``
+    for DataList/data-binding resolution. Some BUML BESSER-editor consumers execute
+    generated content in a restricted namespace without ``globals``/``__builtins__``,
+    which makes the import fail with ``name 'globals' is not defined``. Since the
+    combined project always defines ``domain_model`` as a top-level name before the
+    GUI section, a plain (builtin-free) name lookup is equivalent and safe everywhere.
+    """
+    content = file_path.read_text(encoding="utf-8")
+    if _GLOBALS_DOMAIN_MODEL_REF not in content:
+        return
+    content = content.replace(_GLOBALS_DOMAIN_MODEL_REF, _SAFE_DOMAIN_MODEL_REF)
+    file_path.write_text(content, encoding="utf-8")
+
+
 class PivotError(Exception):
     """Raised when the pivot model cannot be produced."""
 
@@ -118,7 +148,9 @@ def _build_screenshot_gui(session: Session, openai_token: str) -> tuple[Any, str
         raise PivotError(f"Generated GUI model could not be loaded: {exc}") from exc
 
     filename = "gui_model.py"
-    shutil.copy2(gui_file, session.pivot_dir / filename)
+    out_path = session.pivot_dir / filename
+    shutil.copy2(gui_file, out_path)
+    _fix_globals_domain_model_ref(out_path)
     return gui_model, filename, None
 
 
@@ -154,13 +186,17 @@ def _serialize_gui(model: Any, pivot_dir: Path) -> tuple[str, str | None]:
 
     fallback_note: str | None = None
     if builder is not None:
+        out_path = pivot_dir / "gui_model.py"
         try:
-            filename = "gui_model.py"
-            out_path = pivot_dir / filename
             builder(model=model, file_path=str(out_path))
             _fix_digit_leading_vars(out_path)
-            return filename, None
+            _fix_globals_domain_model_ref(out_path)
+            return "gui_model.py", None
         except Exception as exc:
+            # The builder may have written a partial file before failing; remove it so
+            # the project-download endpoint doesn't silently bundle broken code instead
+            # of the fallback text dump produced below.
+            out_path.unlink(missing_ok=True)
             fallback_note = (
                 "The BESSER GUI code-builder could not serialize this model "
                 f"({exc}); exported a readable text dump instead."
