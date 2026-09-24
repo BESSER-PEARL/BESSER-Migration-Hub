@@ -1,4 +1,5 @@
 from besser.BUML.metamodel.gui.graphical_ui import GUIModel
+from besser.BUML.metamodel.structural import DomainModel
 from migrator.parsers.mendix.mendix_gui import mendix_to_gui
 
 
@@ -10,6 +11,11 @@ class GUIModelMigrator:
         model_path (str): The path to the model file that will be migrated.
         module_name (str): The name of the module within the LCP from which the model will
             be extracted.
+        domain_model (DomainModel, optional): The already-built ``DomainModel`` for this
+            same module, if available (i.e. data model and GUI model are being extracted
+            together). When supplied, Mendix Forms/DataLists resolve their bound entity as
+            a real ``Class`` reference instead of just a name string. Only used by the
+            ``mendix`` LCP today.
 
     Attributes:
         lcp (str): The name of the low-code platform.
@@ -17,11 +23,13 @@ class GUIModelMigrator:
         module_name (str): The name of the module.
     """
 
-    def __init__(self, lcp: str, model_path: str, module_name: str, openai_token: str):
+    def __init__(self, lcp: str, model_path: str, module_name: str, openai_token: str,
+                 domain_model: DomainModel = None):
         self.lcp: str = lcp
         self.model_path: str = model_path
         self.module_name: str = module_name
         self.openai_token: str = openai_token
+        self.domain_model: DomainModel = domain_model
 
     # Getter and Setter for lcp
     @property
@@ -65,6 +73,7 @@ class GUIModelMigrator:
             gui_model = mendix_to_gui(
                 json_path=self.model_path,
                 module_name=self.module_name,
+                domain_model=self.domain_model,
             )
         elif self.lcp == "powerapps":
             print("PowerApps GUI model migration is not implemented yet.")
