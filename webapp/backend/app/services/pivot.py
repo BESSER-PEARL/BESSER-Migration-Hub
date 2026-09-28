@@ -68,6 +68,118 @@ def _fix_globals_domain_model_ref(file_path: Path) -> None:
     file_path.write_text(content, encoding="utf-8")
 
 
+def _collect_constructor_variables(content: str, class_name: str) -> dict[str, list[str]]:
+    """Map ``target_name -> [variable names, in file order]`` for every
+    ``var = ClassName(..., name="target_name", ...)`` call in generated code,
+    whether written on one line or spread across several (``_write_constructor``
+    picks single- vs multi-line purely based on how many parameters it has).
+
+    Mendix widget names are only unique *within one page*, not across the
+    whole app (e.g. many pages independently have their own "listView1"), so
+    the same ``name=`` value can legitimately appear many times; BESSER's own
+    ``created_vars`` dedup then assigns each a distinct Python variable
+    (``listview1``, ``listview1_1``, ``listview1_2``, ...). Returning every
+    occurrence (not just the first) lets the caller pair them up positionally
+    instead of always grabbing the first match.
+    """
+    occurrences: dict[str, list[str]] = {}
+    lines = content.splitlines()
+    start_pattern = re.compile(rf'^(\w+) = {re.escape(class_name)}\(')
+    name_pattern = re.compile(r'name="((?:[^"\\]|\\.)*)"')
+    i = 0
+    while i < len(lines):
+        match = start_pattern.match(lines[i])
+        if match:
+            var_name = match.group(1)
+            block_lines = [lines[i]]
+            j = i
+            if not lines[i].rstrip().endswith(')'):
+                j += 1
+                while j < len(lines) and lines[j].strip() != ')':
+                    block_lines.append(lines[j])
+                    j += 1
+                if j < len(lines):
+                    block_lines.append(lines[j])
+            name_match = name_pattern.search("\n".join(block_lines))
+            if name_match:
+                occurrences.setdefault(name_match.group(1), []).append(var_name)
+            i = j
+        i += 1
+    return occurrences
+
+
+def _fix_gui_data_bindings(file_path: Path, gui_model: Any) -> None:
+    """Append ``<var>.data_binding = DataBinding(domain_concept=<ClassVar>)`` lines
+    for every ``Form``/``DataList`` whose ``data_binding`` the Mendix parser
+    resolved to a domain ``Class``.
+
+    Unlike charts/``MetricCard``, BESSER's own ``gui_model_to_code`` never
+    serializes ``data_binding`` for ``Form``/``DataList`` at all (verified
+    against the installed package), so it would otherwise be silently dropped
+    from the generated file even though the in-memory BUML object has it set.
+    This assumes the domain model was already emitted earlier in the same
+    file (true for the combined "download BUML project" file), so each class
+    is referenced by the exact variable name ``domain_model_to_code`` gave it.
+    """
+    from besser.BUML.metamodel.gui.graphical_ui import Form, DataList
+    from besser.utilities.buml_code_builder.common import safe_class_name
+
+    def walk(elems):
+        # Sort at every level the same way gui_model_to_code does (by
+        # (display_order, name), which reduces to plain name-order here since
+        # our parser never sets display_order) so that same-named elements
+        # across different screens are visited in the same relative order the
+        # code-builder emitted them in.
+        collected = []
+        for e in sorted(elems, key=lambda x: (getattr(x, "display_order", None) or 0, x.name)):
+            collected.append(e)
+            if hasattr(e, "view_elements") and e.view_elements:
+                collected.extend(walk(e.view_elements))
+        return collected
+
+    modules = sorted(getattr(gui_model, "modules", []) or [], key=lambda m: m.name)
+    screens = [s for m in modules for s in sorted(getattr(m, "screens", []) or [], key=lambda s: s.name)]
+    all_elements = walk(screens)
+    bound = [
+        e for e in all_elements
+        if isinstance(e, (Form, DataList)) and getattr(e, "data_binding", None) is not None
+        and getattr(e.data_binding, "domain_concept", None) is not None
+    ]
+    if not bound:
+        return
+
+    content = file_path.read_text(encoding="utf-8")
+    form_vars = _collect_constructor_variables(content, "Form")
+    datalist_vars = _collect_constructor_variables(content, "DataList")
+    next_index: dict[tuple[str, str], int] = {}
+
+    new_lines = []
+    for element in bound:
+        is_form = isinstance(element, Form)
+        occurrences = form_vars.get(element.name) if is_form else datalist_vars.get(element.name)
+        if not occurrences:
+            continue
+        key = ("Form" if is_form else "DataList", element.name)
+        idx = next_index.get(key, 0)
+        if idx >= len(occurrences):
+            continue
+        next_index[key] = idx + 1
+        var_name = occurrences[idx]
+        class_var = safe_class_name(element.data_binding.domain_concept.name)
+        new_lines.append(f"{var_name}.data_binding = DataBinding(domain_concept={class_var})\n")
+
+    if not new_lines:
+        return
+    # gui_model_to_code always emits `from besser.BUML.metamodel.gui.binding import
+    # DataBinding` unconditionally, so it's already available here.
+    content = (
+        content.rstrip("\n") + "\n\n"
+        "# Bound-entity data bindings resolved by the Mendix parser\n"
+        + "".join(new_lines)
+    )
+    file_path.write_text(content, encoding="utf-8")
+
+
 class PivotError(Exception):
     """Raised when the pivot model cannot be produced."""
 
@@ -191,6 +303,7 @@ def _serialize_gui(model: Any, pivot_dir: Path) -> tuple[str, str | None]:
             builder(model=model, file_path=str(out_path))
             _fix_digit_leading_vars(out_path)
             _fix_globals_domain_model_ref(out_path)
+            _fix_gui_data_bindings(out_path, model)
             return "gui_model.py", None
         except Exception as exc:
             # The builder may have written a partial file before failing; remove it so
@@ -383,6 +496,7 @@ def build_pivot(
                     model_path=gui_model_path,
                     module_name=mig_module,
                     openai_token=openai_token or "",
+                    domain_model=session.domain_model,
                 ).gui_model()
             except Exception as exc:
                 raise PivotError(f"GUI-model extraction failed: {exc}") from exc

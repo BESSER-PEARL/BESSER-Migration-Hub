@@ -96,10 +96,9 @@ def build_classes(entities: list, buml_model: DomainModel) -> set[Class]:
 def build_associations(associations: list[dict], entities: list[dict], buml_model: DomainModel) -> set[Association]:
     """Builds associations between classes from Mendix JSON data."""
     result_associations = set()
+    entities_by_id = {e.get("$ID"): e for e in entities}
 
     for association in associations:
-        parent_property = None
-        child_property = None
         # cardinality
         mul1 = Multiplicity(0, "*")
         mul2 = Multiplicity(1, 1)
@@ -109,15 +108,28 @@ def build_associations(associations: list[dict], entities: list[dict], buml_mode
         elif association.get("type") == "Reference" and association.get("owner") == "Both":
             mul1 = Multiplicity(1, 1)
 
-        for entity in entities:
-            class_name = entity.get("name")
-            safe_class = _safe_name(class_name)
-            if entity.get("$ID") == association.get("parent"):
-                comp_1 = association.get("deleteBehavior", {}).get("parentDeleteBehavior") == "DeleteMeAndReferences"
-                parent_property = Property(name=safe_class.lower(), type=buml_model.get_class_by_name(safe_class), multiplicity=mul1, is_composite=comp_1)
-            elif entity.get("$ID") == association.get("child"):
-                comp_2 = association.get("deleteBehavior", {}).get("childDeleteBehavior") == "DeleteMeAndReferences"
-                child_property = Property(name=safe_class.lower(), type=buml_model.get_class_by_name(safe_class), multiplicity=mul2, is_composite=comp_2)
+        parent_id = association.get("parent")
+        child_id = association.get("child")
+        parent_entity = entities_by_id.get(parent_id)
+        child_entity = entities_by_id.get(child_id)
+        # A self-association (e.g. "Trading Partners" between two Countries) has
+        # parent_id == child_id, so both ends would otherwise get the identical
+        # name (the same class, lowercased) -- disambiguate with a suffix.
+        is_self_association = parent_id is not None and parent_id == child_id
+
+        parent_property = None
+        if parent_entity is not None:
+            safe_class = _safe_name(parent_entity.get("name"))
+            comp_1 = association.get("deleteBehavior", {}).get("parentDeleteBehavior") == "DeleteMeAndReferences"
+            parent_name = f"{safe_class.lower()}_parent" if is_self_association else safe_class.lower()
+            parent_property = Property(name=parent_name, type=buml_model.get_class_by_name(safe_class), multiplicity=mul1, is_composite=comp_1)
+
+        child_property = None
+        if child_entity is not None:
+            safe_class = _safe_name(child_entity.get("name"))
+            comp_2 = association.get("deleteBehavior", {}).get("childDeleteBehavior") == "DeleteMeAndReferences"
+            child_name = f"{safe_class.lower()}_child" if is_self_association else safe_class.lower()
+            child_property = Property(name=child_name, type=buml_model.get_class_by_name(safe_class), multiplicity=mul2, is_composite=comp_2)
 
         # Check if both ends are defined before creating the association
         if parent_property and child_property:
