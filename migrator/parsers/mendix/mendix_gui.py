@@ -37,9 +37,14 @@ def extract_main_pages(unit) -> set[str]:
 
             # Check direct homePage
             if node_type == "Navigation$NavigationProfile":
-                main_page = node.get("homePage", {}).get("page", {}).split('.')[1]
-                if main_page:
-                    main_pages.add(main_page)
+                home_page = node.get("homePage", {}).get("page", "")
+                # The home page can instead be resolved via a microflow (e.g.
+                # a login/routing flow), in which case "page" is "" -- nothing
+                # to split, so skip rather than crash on split('.')[1].
+                if isinstance(home_page, str) and "." in home_page:
+                    main_page = home_page.split(".")[1]
+                    if main_page:
+                        main_pages.add(main_page)
 
             # Recurse deeper
             for value in node.values():
@@ -277,8 +282,9 @@ def _build_action_button(node: dict) -> Button:
 
     target_screen = None
     page_settings = action.get("pageSettings", {})
-    if isinstance(page_settings, dict) and page_settings.get("page"):
-        screen_name = page_settings.get("page", "").split(".")[1]
+    page_ref = page_settings.get("page", "") if isinstance(page_settings, dict) else ""
+    if isinstance(page_ref, str) and "." in page_ref:
+        screen_name = page_ref.split(".")[1]
         target_screen = Screen(
             name=screen_name,
             description="",

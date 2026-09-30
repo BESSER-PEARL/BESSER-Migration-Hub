@@ -313,6 +313,20 @@ def build_generalizations(entities: list[dict], buml_model: DomainModel) -> set[
                       f"parent class '{general_name}' is not part of the migrated module "
                       f"(likely a built-in Mendix module such as 'System').")
                 continue
+            if general is specific:
+                # Classes are resolved by bare name only (no module qualification),
+                # so two *different* Mendix entities from different modules that
+                # happen to share the same bare name (e.g. "TeamcenterToolkit.BOMLine"
+                # generalizing to "TcConnector.BOMLine", while TcConnector also has
+                # its own unrelated "BOMLine") can resolve to the very same Class
+                # object here. Building a Generalization would then make a class
+                # its own parent, which BUML rejects -- and would be semantically
+                # wrong even if it didn't, since these are two distinct entities.
+                print(f"Warning: Skipping generalization '{qualified_general}' -> "
+                      f"parent class '{general_name}' resolved to the same class as "
+                      f"'{entity.get('$QualifiedName')}' itself (a name collision between "
+                      f"two different entities across modules, not a real self-generalization).")
+                continue
             new_generalization: Generalization = Generalization(general, specific)
             result_generalizations.add(new_generalization)
     return result_generalizations
