@@ -1,0 +1,2 @@
+id,date_of_sale,id,item_price,quantity,transaction_id,oowdemostores_id,oowdemostoreproducts_id
+1,2024-01-01,1,sample_item_price,sample_quantity,sample_transaction_id,0,0
