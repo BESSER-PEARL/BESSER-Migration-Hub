@@ -1,0 +1,165 @@
+<GlobalFunctions>
+  <State id="isBulkUpdate" value="{{ false }}" />
+  <State id="bulkUpdateData" value="{{ [] }}" />
+  <SqlQueryUnified
+    id="selectMembers"
+    query={include("./lib/selectMembers.sql", "string")}
+    resourceDisplayName="retool_db"
+    resourceName="34065358-ee82-4b8f-974f-0b7b918d3034"
+    resourceTypeOverride=""
+    warningCodes={[]}
+  />
+  <SqlQueryUnified
+    id="selectDepartments"
+    query={include("./lib/selectDepartments.sql", "string")}
+    resourceDisplayName="retool_db"
+    resourceName="34065358-ee82-4b8f-974f-0b7b918d3034"
+    resourceTypeOverride=""
+    warningCodes={[]}
+  />
+  <SqlQueryUnified
+    id="updateMember"
+    actionType="UPDATE_BY"
+    changesetIsObject={true}
+    changesetObject="{{ { ...DetailForm.data } }}"
+    editorMode="gui"
+    filterBy={
+      '[{"key":"id","value":"{{ membersTable.selectedRow.id }}","operation":"="}]'
+    }
+    resourceDisplayName="retool_db"
+    resourceName="34065358-ee82-4b8f-974f-0b7b918d3034"
+    resourceTypeOverride=""
+    runWhenModelUpdates={false}
+    tableName="team_members"
+  >
+    <Event
+      id="aa11bb22"
+      event="success"
+      method="trigger"
+      params={{}}
+      pluginId="selectMembers"
+      type="datasource"
+      waitMs="0"
+      waitType="debounce"
+    />
+    <Event
+      id="cc33dd44"
+      event="success"
+      method="selectRow"
+      params={{ map: { 0: "key" } }}
+      pluginId="membersTable"
+      type="widget"
+      waitMs="100"
+      waitType="debounce"
+    />
+  </SqlQueryUnified>
+  <SqlQueryUnified
+    id="bulkUpdateMembers"
+    actionType="BULK_UPDATE_BY_KEY"
+    bulkUpdatePrimaryKey="id"
+    editorMode="gui"
+    records="{{ bulkUpdateData.value }}"
+    resourceName="REPLACE_WITH_RESOURCE_UUID"
+    resourceTypeOverride=""
+    runWhenModelUpdates={false}
+    tableName="public.team_members"
+  >
+    <Event
+      id="ee55ff66"
+      event="success"
+      method="trigger"
+      params={{ ordered: [] }}
+      pluginId="selectMembers"
+      type="datasource"
+      waitMs="0"
+      waitType="debounce"
+    />
+    <Event
+      id="11223344"
+      event="success"
+      method="setValue"
+      params={{ ordered: [{ 0: "value" }] }}
+      pluginId="isBulkUpdate"
+      type="state"
+      waitMs="0"
+      waitType="debounce"
+    />
+    <Event
+      id="55667788"
+      event="success"
+      method="hide"
+      params={{}}
+      pluginId="confirmBulkUpdate"
+      type="widget"
+      waitMs="0"
+      waitType="debounce"
+    />
+  </SqlQueryUnified>
+  <SqlQueryUnified
+    id="deleteMember"
+    actionType="DELETE_BY"
+    confirmationMessage="Are you sure you want to remove **{{ membersTable.selectedRow.name }}** from the team?"
+    editorMode="gui"
+    filterBy={
+      '[{"key":"id","value":"{{ membersTable.selectedRow.id }}","operation":"="}]'
+    }
+    requireConfirmation={true}
+    resourceDisplayName="retool_db"
+    resourceName="34065358-ee82-4b8f-974f-0b7b918d3034"
+    resourceTypeOverride=""
+    runWhenModelUpdates={false}
+    tableName="team_members"
+  >
+    <Event
+      id="99aabb00"
+      event="success"
+      method="trigger"
+      params={{}}
+      pluginId="selectMembers"
+      type="datasource"
+      waitMs="0"
+      waitType="debounce"
+    />
+    <Event
+      id="ccddee11"
+      event="success"
+      method="clearSelection"
+      params={{}}
+      pluginId="membersTable"
+      type="widget"
+      waitMs="100"
+      waitType="debounce"
+    />
+  </SqlQueryUnified>
+  <SqlQueryUnified
+    id="saveTableChanges"
+    actionType="BULK_UPSERT_BY_KEY"
+    bulkUpdatePrimaryKey="id"
+    editorMode="gui"
+    records="{{ membersTable.changesetArray }}"
+    resourceDisplayName="retool_db"
+    resourceName="34065358-ee82-4b8f-974f-0b7b918d3034"
+    resourceTypeOverride=""
+    runWhenModelUpdates={false}
+    tableName="team_members"
+  >
+    <Event
+      id="22334455"
+      event="success"
+      method="trigger"
+      params={{}}
+      pluginId="selectMembers"
+      type="datasource"
+      waitMs="0"
+      waitType="debounce"
+    />
+  </SqlQueryUnified>
+  <JavascriptQuery
+    id="applyFilters"
+    query={include("./lib/applyFilters.js", "string")}
+  />
+  <JavascriptQuery
+    id="setBulkUpdateData"
+    query={include("./lib/setBulkUpdateData.js", "string")}
+  />
+</GlobalFunctions>

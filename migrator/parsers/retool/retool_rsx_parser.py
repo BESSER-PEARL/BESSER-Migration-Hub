@@ -43,6 +43,7 @@ from migrator.parsers.retool._sql_source import sql_tables
 from migrator.parsers.retool.retool_csv_parser import _normalize_stem, _to_pascal
 from besser.BUML.metamodel.gui.binding import DataBinding
 from besser.BUML.metamodel.gui.dashboard import BarChart, LineChart, PieChart, Chart, Series
+from besser.BUML.metamodel.gui.events_actions import Event, EventType, Transition
 
 # Keyword -> (ButtonType, ButtonActionType) for button/query classification.
 # Order matters: first matching keyword wins.
@@ -77,6 +78,8 @@ _FIELD_TAG_MAP = {
     'RadioGroup': InputFieldType.RadioGroup,
     'MultiSelect': InputFieldType.MultiSelect,
     'Date':       InputFieldType.Date,
+    'DateRange':  InputFieldType.DateRange,
+    'Tags':       InputFieldType.Tags,
     'DateTime':   InputFieldType.DateTime,
     'Time':       InputFieldType.Time,
     'FileButton': InputFieldType.File,
@@ -402,10 +405,18 @@ def _build_button(attrs: str, inner: str, used_names: set):
     btn_type, act_type = _classify_best(plugin_id, label)
     name = _dedupe_name(_safe_name(widget_id), used_names)
     try:
-        return Button(
+        button = Button(
             name=name, description="", label=label,
             buttonType=btn_type, actionType=act_type,
         )
+        # Resolve direct dialog-opening events after every screen is known.
+        # Query triggers and scripts are deliberately not guessed from captions.
+        button._retool_navigation = [
+            (_attr(ev_attrs, 'event'), _attr(ev_attrs, 'pluginId'))
+            for _, ev_attrs, _ in _find_all_tags(inner, {'Event'})
+            if _attr(ev_attrs, 'type') == 'widget' and _attr(ev_attrs, 'method') == 'show'
+        ]
+        return button
     except ValueError:
         return None
 
@@ -540,6 +551,7 @@ def retool_rsx_to_gui(zip_path: str, module_name: str = None,
                 query_primary_table[query_id] = primary
 
     screens: set = set()
+    screen_targets = {}
     used_screen_names: set = {_safe_name(name)}
 
     if 'main.rsx' in source:
@@ -559,10 +571,12 @@ def retool_rsx_to_gui(zip_path: str, module_name: str = None,
                     screen_key = f"{prefix}_{screen_key}"
                 child_remaining = extract_screens(inner, screen_key)
                 elements = _parse_screen_content(child_remaining, query_primary_table, domain_model)
-                if elements or is_modal:
+                if elements or is_modal or tag in {'Screen', 'View'}:
                     screen_name = _dedupe_name(screen_key, used_screen_names)
-                    screens.add(Screen(name=screen_name, description='', view_elements=elements,
-                                       is_main_page=not is_modal))
+                    screen = Screen(name=screen_name, description='', view_elements=elements,
+                                    is_main_page=not is_modal)
+                    screens.add(screen)
+                    screen_targets.setdefault(_attr(attrs, 'id') or key, []).append(screen)
                     print(f"  Screen '{screen_name}' | elements={len(elements)}")
                 remaining = remaining[:start] + remaining[end:]
             return remaining
@@ -598,6 +612,17 @@ def retool_rsx_to_gui(zip_path: str, module_name: str = None,
     if not screens:
         print("  No screens extracted from RSX export")
         return None
+
+    for screen in screens:
+        for component in screen.view_elements:
+            for index, (event_name, target_id) in enumerate(getattr(component, '_retool_navigation', [])):
+                targets = screen_targets.get(target_id, [])
+                event_type = {'click': EventType.OnClick}.get(event_name)
+                if len(targets) == 1 and event_type is not None:
+                    action = Transition(name=f'{component.name}_open_{index}', target_screen=targets[0], triggered_by=component)
+                    if not hasattr(component, 'events'):
+                        component.events = set()
+                    component.events.add(Event(name=f'{component.name}_{event_name}_{index}', event_type=event_type, actions={action}))
 
     gui_model = GUIModel(
         name=name,

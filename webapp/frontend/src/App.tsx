@@ -169,6 +169,7 @@ export default function App() {
           loading={busy}
           error={stepError}
           hasDomainModel={pivot?.summary.classes !== null && pivot?.summary.classes !== undefined}
+          hasGuiModel={pivot?.summary.screens !== null && pivot?.summary.screens !== undefined}
           onBack={() => { setStepError(null); setStep(2); }}
           onGenerate={runGenerate}
         />

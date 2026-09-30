@@ -278,8 +278,14 @@ _RETOOL_TUTORIAL = """\
 
 1. In your Retool workspace, open the **Resources** tab and create a new **Database** resource (Retool DB).
 2. Import each generated CSV file (`csv/<table>.csv`) into its corresponding table via **Import CSV**.
-3. To import the app, go to the **Apps** tab, click **Create new → Import app**, and upload the generated `json/<app_name>_retool_app.json`.
+3. Import the generated `<app_name>.zip` as a classic Retool Toolscript app.
 4. Open the imported app and reconnect each query to your Retool DB resource.
+5. Review `generation_report.json` for components or actions that need manual wiring.
+
+CSVs contain headers only unless records were supplied to the generator. Use
+`csv/schema.json` to configure column types, primary keys, and foreign keys;
+CSV import does not carry database constraints. The GUI export uses a simple
+grid layout and translates supported widgets and explicit page transitions.
 """
 
 _SERVICE_NOW_TUTORIAL = """\
@@ -361,9 +367,9 @@ TARGETS: dict[str, TargetPlatform] = {
         label="Retool",
         implemented=True,
         supports_data=True,
-        supports_gui=False,
+        supports_gui=True,
         generator="retool",
-        output_desc="CSV files (one per entity) and a Retool app JSON importable via the Retool UI.",
+        output_desc="CSV table templates with a schema manifest and a classic Retool Toolscript GUI folder and ZIP.",
         tutorial=_RETOOL_TUTORIAL,
     ),
     "service_now": TargetPlatform(

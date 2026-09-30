@@ -1,0 +1,4 @@
+id,name,email,department,status,role,joined_date,notes
+1,Alice Johnson,alice@example.com,Engineering,active,Senior Engineer,2023-06-15,
+2,Bob Smith,bob@example.com,Marketing,active,Marketing Lead,2023-09-01,
+3,Carol Davis,carol@example.com,Engineering,on_leave,Junior Engineer,2024-01-10,

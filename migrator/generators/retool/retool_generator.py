@@ -3,21 +3,20 @@ Retool Generator for BESSER B-UML domain models.
 
 Generates:
   1. One CSV file per entity  → <output_dir>/csv/<table_name>.csv
-  2. One Retool app JSON      → <output_dir>/json/<app_name>_retool_app.json
+  2. A Retool Toolscript GUI folder and ZIP
+
+Legacy generate_json() emits a Retool app JSON      → <output_dir>/json/<app_name>_retool_app.json
 
 The JSON uses Retool's Transit-JSON app-state format (Cognitect Transit,
 no cache optimisation — valid, importable, but larger than a cached export).
 """
 
-import csv
-import io
 import json
 import os
 import re
 import uuid as _uuid_mod
 import random
 from besser.BUML.metamodel.structural import DomainModel, Class, Enumeration
-from besser.generators.structural_utils import get_foreign_keys
 
 
 # ─── naming helpers ───────────────────────────────────────────────
@@ -663,77 +662,45 @@ def _build_app_state(entities_info: list, ts: int) -> str:
 # ─── Domain-model introspection ───────────────────────────────────
 
 def _collect_entities_info(model: DomainModel) -> list:
-    """
-    Returns [(entity_name, table_name, columns), ...]
-    columns: [(col_name, retool_format), ...]  — includes id + attrs + FK cols
-    """
-    fkeys = get_foreign_keys(model)   # {assoc_name: [class_with_fk, ref_prop_name]}
-
-    # Build FK column map per class
-    fk_map: dict = {}
-    for assoc in model.associations:
-        ends = list(assoc.ends)
-        if len(ends) != 2:
-            continue
-        e0, e1 = ends[0], ends[1]
-        max0, max1 = e0.multiplicity.max, e1.multiplicity.max
-        if max0 > 1 and max1 > 1:
-            continue   # N:M handled via junction tables (omitted from single-entity CSV)
-        if assoc.name not in fkeys:
-            continue
-        class_with_fk, ref_prop_name = fkeys[assoc.name]
-        fk_col = _camel_to_snake(ref_prop_name) + '_id'
-        fk_map.setdefault(class_with_fk, []).append(fk_col)
-
-    result = []
-    try:
-        classes = list(model.classes_sorted_by_inheritance())
-    except Exception:
-        classes = list(model.classes)
-
-    for cls in classes:
-        table_name = _camel_to_snake(cls.name)
-        columns: list = [("id", "decimal")]
-
-        for attr in sorted(cls.attributes, key=lambda a: a.name):
-            col_name = _camel_to_snake(attr.name)
-            type_name = getattr(attr.type, 'name', 'str')
-            if isinstance(attr.type, Enumeration):
-                fmt = 'string'
-            else:
-                fmt = BUML_TO_RETOOL_FORMAT.get(type_name, 'string')
-            columns.append((col_name, fmt))
-
-        for fk_col in fk_map.get(cls.name, []):
-            columns.append((fk_col, 'decimal'))
-
-        result.append((cls.name, table_name, columns))
-
-    return result
+    from ._schema import entities_info
+    return entities_info(model)
 
 
 # ─── Public generator class ───────────────────────────────────────
 
 class RetoolGenerator:
     """
-    Generates ReTool-importable artefacts from a BESSER B-UML DomainModel.
+    Generate CSV tables and a classic Retool Toolscript app from BUML models.
 
     Args:
-        model (DomainModel): The B-UML domain model.
-        app_name (str): Name used for the JSON filename.
+        model (DomainModel): Domain schema, optional for GUI-only generation.
+        gui_model (GUIModel): Optional GUI model whose pages and widgets are exported.
+        app_name (str): Name used for the app folder and ZIP filename.
         output_dir (str): Root output directory.
             CSV files → <output_dir>/csv/<table>.csv
-            App JSON  → <output_dir>/json/<app_name>_retool_app.json
+            GUI folder/ZIP → <output_dir>/<app_name> and <app_name>.zip
         resource_id (str): UUID of the 'retool_db' resource in ReTool.
             Defaults to a stable placeholder UUID.
+        rows (dict): Optional table/class-name to row-dictionaries mapping.
+        include_sample_data (bool): Explicitly request demonstration CSV rows.
     """
 
     _DEFAULT_RESOURCE_ID = "2a86a318-80a0-4803-95d8-409396e41af2"
 
-    def __init__(self, model: DomainModel,
+    def __init__(self, model: DomainModel = None,
                  app_name: str = "app",
                  output_dir: str = None,
-                 resource_id: str = None):
+                 resource_id: str = None, gui_model=None, rows=None,
+                 include_sample_data: bool = False):
+        if model is None and gui_model is None:
+            raise ValueError("A domain model or GUI model is required")
+        from pathlib import Path
+        if app_name in {'.', '..'} or Path(app_name).name != app_name or '/' in app_name or '\\' in app_name:
+            raise ValueError('app_name must be a single folder name')
+        self.gui_model = gui_model
+        self.rows = rows
+        self.include_sample_data = include_sample_data
+        self.warnings = []
         self.model = model
         self.app_name = app_name
         self.output_dir = output_dir or os.path.join(os.getcwd(), "retool_output")
@@ -743,39 +710,16 @@ class RetoolGenerator:
 
     def generate_csv(self) -> list:
         """Write one CSV per entity; return list of written file paths."""
-        csv_dir = os.path.join(self.output_dir, "csv")
-        os.makedirs(csv_dir, exist_ok=True)
-
-        entities_info = _collect_entities_info(self.model)
-        written = []
-
-        for entity_name, table_name, columns in entities_info:
-            file_path = os.path.join(csv_dir, f"{table_name}.csv")
-            with open(file_path, 'w', newline='', encoding='utf-8') as f:
-                writer = csv.writer(f)
-                # Header row
-                writer.writerow([col for col, _ in columns])
-                # One sample row with type-appropriate placeholder values
-                sample = []
-                for col, fmt in columns:
-                    if col == "id":
-                        sample.append("1")
-                    elif fmt == "decimal":
-                        sample.append("0")
-                    elif "date" in col or "time" in col:
-                        sample.append("2024-01-01")
-                    else:
-                        sample.append(f"sample_{col}")
-                writer.writerow(sample)
-            written.append(file_path)
-            print(f"  CSV: {file_path}")
-
-        return written
+        from .retool_csv_generator import RetoolCSVGenerator
+        return RetoolCSVGenerator(self.model, output_dir=self.output_dir, rows=self.rows,
+                                  include_sample_data=self.include_sample_data).generate()
 
     # ── JSON generation ───────────────────────────────────────────
 
     def generate_json(self) -> str:
-        """Write the ReTool app JSON; return file path."""
+        """Write the legacy domain-only Transit JSON scaffold; return its path."""
+        if self.model is None:
+            raise ValueError('The legacy JSON generator requires a domain model')
         json_dir = os.path.join(self.output_dir, "json")
         os.makedirs(json_dir, exist_ok=True)
 
@@ -813,10 +757,22 @@ class RetoolGenerator:
 
     # ── Combined ──────────────────────────────────────────────────
 
+    def generate_gui(self):
+        """Write the GUI Toolscript folder and ZIP, returning the ZIP path."""
+        from .retool_rsx_app_generator import RetoolRsxAppGenerator
+        generator = RetoolRsxAppGenerator(
+            domain_model=self.model, gui_model=self.gui_model, app_name=self.app_name,
+            output_dir=self.output_dir, resource_id=self.resource_id,
+        )
+        result = generator.generate()
+        self.warnings = generator.warnings
+        return result
+
     def generate(self):
-        """Generate both CSV files and the ReTool app JSON."""
-        print(f"\n[RetoolGenerator] Generating for '{self.app_name}'")
-        csv_files = self.generate_csv()
-        json_file = self.generate_json()
-        print(f"[RetoolGenerator] Done — {len(csv_files)} CSV(s), 1 JSON")
-        return csv_files, json_file
+        """Generate CSVs when a domain model is present and a GUI Toolscript ZIP.
+
+        Returns (csv_paths, zip_path). Legacy Transit JSON remains available
+        explicitly via generate_json(); it scaffolds domain tables only.
+        """
+        csv_files = self.generate_csv() if self.model is not None else []
+        return csv_files, self.generate_gui()

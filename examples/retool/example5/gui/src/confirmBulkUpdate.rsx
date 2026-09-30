@@ -1,0 +1,106 @@
+<ModalFrame
+  id="confirmBulkUpdate"
+  hidden={true}
+  hideOnEscape={true}
+  overlayInteraction="close"
+  size="medium"
+>
+  <Header>
+    <Text
+      id="bulkTitle"
+      marginType="normal"
+      value="#### Bulk Update Confirmation"
+      verticalAlign="center"
+    />
+    <Button
+      id="bulkCloseBtn"
+      iconBefore="bold/interface-delete-1"
+      marginType="normal"
+      styleVariant="outline"
+    >
+      <Event
+        id="b1c2d3e4"
+        event="click"
+        method="hide"
+        params={{}}
+        pluginId="confirmBulkUpdate"
+        type="widget"
+        waitMs="0"
+        waitType="debounce"
+      />
+      <Event
+        id="f5a6b7c8"
+        event="click"
+        method="setValue"
+        params={{ ordered: [{ 0: "value" }] }}
+        pluginId="isBulkUpdate"
+        type="state"
+        waitMs="0"
+        waitType="debounce"
+      />
+    </Button>
+  </Header>
+  <Body>
+    <Text
+      id="bulkWarning"
+      marginType="normal"
+      value="You are about to update **{{ bulkUpdateData.value.length }}** team member(s). Please review the affected members below before confirming."
+    />
+    <Tags
+      id="bulkMemberTags"
+      marginType="normal"
+      value="{{ bulkUpdateData.value.map(r => r.name) }}"
+    />
+    <Text
+      id="bulkFieldSummary"
+      marginType="normal"
+      value="{{ '**Fields that will be updated:** status, role\n\n_Only editable columns from the table will be included in the update._' }}"
+    />
+  </Body>
+  <Footer>
+    <Button
+      id="bulkCancelBtn"
+      marginType="normal"
+      styleVariant="outline"
+      text="Cancel"
+    >
+      <Event
+        id="d9e0f1a2"
+        event="click"
+        method="hide"
+        params={{}}
+        pluginId="confirmBulkUpdate"
+        type="widget"
+        waitMs="0"
+        waitType="debounce"
+      />
+      <Event
+        id="b3c4d5e6"
+        event="click"
+        method="setValue"
+        params={{ ordered: [{ 0: "value" }] }}
+        pluginId="isBulkUpdate"
+        type="state"
+        waitMs="0"
+        waitType="debounce"
+      />
+    </Button>
+    <Button
+      id="bulkConfirmBtn"
+      disabled="{{ bulkUpdateData.value.length > 50 || bulkUpdateData.value.length === 0 }}"
+      marginType="normal"
+      text="Confirm update ({{ bulkUpdateData.value.length }})"
+    >
+      <Event
+        id="f7a8b9c0"
+        event="click"
+        method="trigger"
+        params={{ ordered: [] }}
+        pluginId="bulkUpdateMembers"
+        type="datasource"
+        waitMs="0"
+        waitType="debounce"
+      />
+    </Button>
+  </Footer>
+</ModalFrame>

@@ -8,14 +8,17 @@ interface Props {
   loading: boolean;
   error: string | null;
   hasDomainModel: boolean;
+  hasGuiModel: boolean;
   onBack: () => void;
   onGenerate: () => void;
 }
 
 export default function TargetStep({
-  targets, selectedId, onSelect, loading, error, hasDomainModel, onBack, onGenerate,
+  targets, selectedId, onSelect, loading, error, hasDomainModel, hasGuiModel, onBack, onGenerate,
 }: Props) {
   const selected = targets.find((t) => t.id === selectedId) || null;
+  const needsDataModel = (target: TargetPlatform) =>
+    target.supports_data && !hasDomainModel && !(target.id === "retool" && hasGuiModel);
 
   return (
     <div className="panel">
@@ -32,19 +35,19 @@ export default function TargetStep({
             description={
               !t.implemented
                 ? "Coming soon"
-                : t.supports_data && !hasDomainModel
+                : needsDataModel(t)
                 ? "Requires a data model"
                 : t.output_desc
             }
             badge={
               !t.implemented
                 ? { text: "Coming soon", kind: "soon" }
-                : t.supports_data && !hasDomainModel
+                : needsDataModel(t)
                 ? { text: "Data model needed", kind: "soon" }
                 : undefined
             }
             selected={selectedId === t.id}
-            disabled={!t.implemented || (t.supports_data && !hasDomainModel)}
+            disabled={!t.implemented || needsDataModel(t)}
             onClick={() => onSelect(t.id)}
           />
         ))}

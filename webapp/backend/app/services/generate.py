@@ -23,7 +23,7 @@ def _snapshot(output_dir: Path) -> set[Path]:
 
 
 def _run_generator(target_generator: str, sql_dialect: str | None,
-                   model: Any, output_dir: Path, gui_model=None) -> None:
+                   model: Any, output_dir: Path, gui_model=None) -> list[str]:
     out = str(output_dir)
 
     if target_generator == "oracle_apex":
@@ -47,7 +47,12 @@ def _run_generator(target_generator: str, sql_dialect: str | None,
 
     elif target_generator == "retool":
         from migrator.generators.retool.retool_generator import RetoolGenerator
-        RetoolGenerator(model=model, output_dir=out).generate()
+        generator = RetoolGenerator(
+            model=model, gui_model=gui_model, output_dir=out,
+            app_name=getattr(model, 'name', None) or getattr(gui_model, 'name', None) or 'retool_app',
+        )
+        generator.generate()
+        return generator.warnings
 
     elif target_generator == "service_now":
         from migrator.generators.service_now.service_now_generator import ServiceNowGenerator
@@ -55,6 +60,7 @@ def _run_generator(target_generator: str, sql_dialect: str | None,
 
     else:
         raise GenerateError(f"No generator wired for '{target_generator}'.")
+    return []
 
 
 def _run_apex_gui_generator(session: Session) -> list[Path]:
@@ -96,7 +102,8 @@ def generate_artifacts(session: Session, target_lcp: str) -> dict:
     if not target.implemented or not target.generator:
         raise GenerateError(f"Target platform '{target.label}' is not implemented yet.")
 
-    if target.supports_data and session.domain_model is None:
+    retool_gui_only = target_lcp == "retool" and session.gui_model is not None
+    if target.supports_data and session.domain_model is None and not retool_gui_only:
         raise GenerateError(
             "No domain model available in this session. "
             "Generate the pivot model with the data-model scope first."
@@ -106,10 +113,10 @@ def generate_artifacts(session: Session, target_lcp: str) -> dict:
     output_dir = session.output_dir
     before = _snapshot(output_dir)
 
-    gui_model_for_gen = session.gui_model if target_lcp == "oracle_apex" else None
+    gui_model_for_gen = session.gui_model if target_lcp in {"oracle_apex", "retool"} else None
     try:
-        _run_generator(target.generator, target.sql_dialect, session.domain_model,
-                       output_dir, gui_model=gui_model_for_gen)
+        warnings.extend(_run_generator(target.generator, target.sql_dialect, session.domain_model,
+                                       output_dir, gui_model=gui_model_for_gen))
     except Exception as exc:
         raise GenerateError(f"Generation failed: {exc}") from exc
 
