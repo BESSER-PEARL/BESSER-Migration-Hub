@@ -102,32 +102,38 @@ export const {{ get_table_name(class.name) }} = Table({
 // --- RELATED LISTS ---
 {%- for association in associations if association.ends | length == 2 %}
 {%- set ends = association.ends | list %}
-{%- set end1 = ends[0] %}
-{%- set end2 = ends[1] %}
-{%- set class1_name = get_table_name(end1.type.name) %}
-{%- set class2_name = get_table_name(end2.type.name) %}
-
-{%- if end1.multiplicity.max > 1 %}
+{#- Pick the "one" end and the "many" end by multiplicity, never by
+    position: association.ends is an unordered set, so ends[0]/ends[1]
+    can swap between runs on the exact same model. #}
+{%- set one_end = ends[0] if ends[0].multiplicity.max == 1 else ends[1] %}
+{%- set many_end = ends[1] if ends[0].multiplicity.max == 1 else ends[0] %}
+{%- if one_end.multiplicity.max == 1 and many_end.multiplicity.max > 1 %}
+{%- set parent_table = get_table_name(one_end.type.name) %}
+{%- set child_table = get_table_name(many_end.type.name) %}
+{#- The FK column that get_reference_columns() places on the child table
+    is named after one_end (see get_reference_columns): keep both in sync. #}
+{%- set fk_field = one_end.name %}
+{%- set rl_id = parent_table ~ '_' ~ child_table ~ '_related_list' %}
 
 /**
- * Related Lists for {{ class1_name }}: {{ end2.name }}
+ * Related List on {{ parent_table }}: {{ child_table }} records (via {{ child_table }}.{{ fk_field }})
  */
-const {{ class1_name }}_related_list = Record({
-    $id: Now.ID['{{ class1_name }}_related_list'],
+const {{ rl_id }} = Record({
+    $id: Now.ID['{{ rl_id }}'],
     table: 'sys_ui_related_list',
     data: {
-        name: '{{ class1_name }}',
+        name: '{{ parent_table }}',
         view: 'Default view',
     },
 });
 
 Record({
-    $id: Now.ID['{{ class1_name }}_rl_entry_{{ end2.name }}'],
+    $id: Now.ID['{{ rl_id }}_entry'],
     table: 'sys_ui_related_list_entry',
     data: {
-        list_id: {{ class1_name }}_related_list,
+        list_id: {{ rl_id }},
         position: 0,
-        related_list: '{{ class2_name }}.{{ end2.name }}',
+        related_list: '{{ child_table }}.{{ fk_field }}',
     },
 });
 {%- endif %}

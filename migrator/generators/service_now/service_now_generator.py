@@ -115,13 +115,18 @@ class ServiceNowGenerator(GeneratorInterface):
         for association in self.model.associations:
             if len(association.ends) == 2:
                 for end in association.ends:
-                    class_name = end.type.name
+                    other_end = [e for e in association.ends if e != end][0]
+                    # The reference column belongs on the class at the OTHER
+                    # end, since end.multiplicity describes how many "end"
+                    # instances a single "other_end" instance can have
+                    # (e.g. end=Project with max=1 means each Comment has at
+                    # most one Project, so the FK column goes on Comment).
+                    class_name = other_end.type.name
                     if class_name not in references:
                         references[class_name] = []
-                    other_end = [e for e in association.ends if e != end][0]
                     references[class_name].append({
                         "property_name": end.name,
-                        "reference_table": self.get_table_name(other_end.type.name),
+                        "reference_table": self.get_table_name(end.type.name),
                         "multiplicity_max": end.multiplicity.max,
                         "other_end_name": other_end.name,
                         "other_multiplicity_max": other_end.multiplicity.max
