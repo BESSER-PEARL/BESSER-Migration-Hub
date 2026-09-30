@@ -1,0 +1,1 @@
+select * from discount_codes where discount_code = {{select10.value}}

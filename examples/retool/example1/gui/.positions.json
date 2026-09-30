@@ -1,0 +1,525 @@
+{
+  "PopularBooksTable": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 25.8,
+    "height": 9,
+    "width": 12
+  },
+  "SalesReport": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 0.6,
+    "height": 7.2,
+    "width": 6
+  },
+  "booksInventoryTable": {
+    "container": "container1",
+    "subcontainer": "a6e1b",
+    "row": 0,
+    "height": 13,
+    "width": 7
+  },
+  "button10": {
+    "container": "container1",
+    "subcontainer": "a6e1b",
+    "row": 13.2,
+    "height": 1,
+    "width": 4
+  },
+  "button11": {
+    "container": "checkoutModal",
+    "row": 9.2,
+    "height": 1,
+    "width": 7
+  },
+  "button8": {
+    "container": "form5",
+    "rowGroup": "footer",
+    "height": 1,
+    "width": 5
+  },
+  "button9": {
+    "container": "tabbedContainer2",
+    "subcontainer": "505e6",
+    "col": 7,
+    "height": 1,
+    "width": 2
+  },
+  "chart1": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 1,
+    "col": 6,
+    "height": 7.2,
+    "width": 6
+  },
+  "chart2": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 9.8,
+    "height": 8.6,
+    "width": 12
+  },
+  "chart3": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 36.8,
+    "col": 5,
+    "height": 7.2,
+    "width": 7
+  },
+  "chart4": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 18.4,
+    "height": 7.4,
+    "width": 12
+  },
+  "checkbox1": {
+    "container": "form3",
+    "row": 3,
+    "height": 0.6,
+    "width": 12
+  },
+  "checkoutModal": {
+    "container": "container1",
+    "subcontainer": "a6e1b",
+    "row": 14,
+    "col": 8,
+    "height": 1
+  },
+  "container1": {
+    "container": "tabbedContainer2",
+    "subcontainer": "7d34a",
+    "row": 1,
+    "height": 0.2,
+    "width": 12
+  },
+  "containerTitle1": {
+    "container": "container1",
+    "rowGroup": "header",
+    "row": 0.2,
+    "height": 0.6,
+    "width": 12
+  },
+  "date1": {
+    "container": "form3",
+    "row": 2,
+    "height": 1,
+    "width": 12
+  },
+  "dateTime1": {
+    "container": "form4",
+    "row": 9.8,
+    "height": 1,
+    "width": 12
+  },
+  "dateTime2": {
+    "container": "form4",
+    "row": 11,
+    "height": 1,
+    "width": 12
+  },
+  "discountCodesTable": {
+    "container": "tabbedContainer1",
+    "subcontainer": "ec41b",
+    "row": 0.2,
+    "height": 10.2,
+    "width": 7
+  },
+  "divider1": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 8.6,
+    "height": 0.2,
+    "width": 12
+  },
+  "divider2": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 35.4,
+    "height": 0.2,
+    "width": 12
+  },
+  "divider3": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "row": 8.4,
+    "height": 0.2,
+    "width": 12
+  },
+  "form3": {
+    "container": "tabbedContainer1",
+    "subcontainer": "ec41b",
+    "row": 0.4,
+    "col": 7,
+    "height": 0.2,
+    "width": 5
+  },
+  "form4": {
+    "container": "modal1",
+    "width": 12
+  },
+  "form5": {
+    "container": "container1",
+    "subcontainer": "a6e1b",
+    "row": 0,
+    "col": 7,
+    "height": 0.2,
+    "width": 5
+  },
+  "formButton4": {
+    "container": "form3",
+    "rowGroup": "footer",
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "formButton5": {
+    "container": "form4",
+    "rowGroup": "footer",
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "formButton6": {
+    "container": "form5",
+    "rowGroup": "footer",
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "formTitle4": {
+    "container": "form3",
+    "rowGroup": "header",
+    "height": 0.6,
+    "width": 12
+  },
+  "formTitle5": {
+    "container": "form4",
+    "rowGroup": "header",
+    "height": 0.6,
+    "width": 12
+  },
+  "formTitle6": {
+    "container": "form5",
+    "rowGroup": "header",
+    "height": 0.6,
+    "width": 12
+  },
+  "icon1": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "height": 1,
+    "width": 1
+  },
+  "icon2": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "row": 9,
+    "height": 1,
+    "width": 1
+  },
+  "image2": {
+    "container": "form4",
+    "col": 9,
+    "height": 3
+  },
+  "image3": {
+    "container": "form5",
+    "col": 9,
+    "height": 3
+  },
+  "image4": {
+    "container": "checkoutModal",
+    "col": 9,
+    "height": 3
+  },
+  "modal1": {
+    "container": "tabbedContainer2",
+    "subcontainer": "505e6",
+    "col": 9,
+    "height": 1
+  },
+  "navigation1": {
+    "subcontainer": "header",
+    "height": 1,
+    "width": 12
+  },
+  "numberInput10": {
+    "container": "form5",
+    "row": 2,
+    "height": 1,
+    "width": 8
+  },
+  "numberInput11": {
+    "container": "form5",
+    "height": 1,
+    "width": 8
+  },
+  "numberInput7": {
+    "container": "form3",
+    "row": 1,
+    "height": 1,
+    "width": 12
+  },
+  "numberInput8": {
+    "container": "form4",
+    "row": 0.2,
+    "height": 1,
+    "width": 9
+  },
+  "numberInput9": {
+    "container": "form4",
+    "row": 2.6,
+    "height": 1,
+    "width": 9
+  },
+  "onlineBookSearchResultsTable": {
+    "container": "tabbedContainer2",
+    "subcontainer": "505e6",
+    "row": 1,
+    "height": 13.6,
+    "width": 12
+  },
+  "ordersTable": {
+    "container": "tabbedContainer1",
+    "subcontainer": "1cf04",
+    "height": 15.2,
+    "width": 12
+  },
+  "reportDateRange": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "col": 6,
+    "height": 1,
+    "width": 6
+  },
+  "searchBookOnlineTextInput": {
+    "container": "tabbedContainer2",
+    "subcontainer": "505e6",
+    "height": 1,
+    "width": 7
+  },
+  "searchInventoryTextInput": {
+    "container": "tabbedContainer2",
+    "subcontainer": "7d34a",
+    "height": 1,
+    "width": 12
+  },
+  "select10": {
+    "container": "checkoutModal",
+    "row": 5,
+    "height": 1,
+    "width": 9
+  },
+  "select7": {
+    "container": "form4",
+    "row": 3.6,
+    "height": 1,
+    "width": 9
+  },
+  "select8": {
+    "container": "form4",
+    "row": 1.4,
+    "height": 1,
+    "width": 9
+  },
+  "select9": {
+    "container": "form5",
+    "row": 7,
+    "height": 1,
+    "width": 12
+  },
+  "tab1": {
+    "container": "tabbedContainer1",
+    "rowGroup": "header",
+    "height": 0.8,
+    "width": 12
+  },
+  "tabbedContainer1": {
+    "row": 2.2,
+    "col": 1,
+    "height": 0.2,
+    "width": 11
+  },
+  "tabbedContainer2": {
+    "container": "tabbedContainer1",
+    "subcontainer": "a7fea",
+    "height": 0.2,
+    "width": 12
+  },
+  "table1": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 36.4,
+    "height": 7.2,
+    "width": 5
+  },
+  "table2": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "row": 1,
+    "height": 7,
+    "width": 12
+  },
+  "table3": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "row": 10,
+    "height": 7,
+    "width": 12
+  },
+  "tabs1": {
+    "container": "tabbedContainer2",
+    "rowGroup": "header",
+    "height": 0.8,
+    "width": 12
+  },
+  "text1": {
+    "row": 0.2,
+    "col": 1,
+    "height": 0.6,
+    "width": 11
+  },
+  "text2": {
+    "container": "checkoutModal",
+    "height": 0.6,
+    "width": 8
+  },
+  "text3": {
+    "container": "checkoutModal",
+    "row": 0.6,
+    "height": 0.6,
+    "width": 7
+  },
+  "text4": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "height": 0.6,
+    "width": 5
+  },
+  "text5": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 9.2,
+    "height": 0.6,
+    "width": 5
+  },
+  "text6": {
+    "container": "tabbedContainer1",
+    "subcontainer": "bb625",
+    "row": 35.8,
+    "height": 0.6,
+    "width": 5
+  },
+  "text7": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "col": 1,
+    "height": 0.6
+  },
+  "text8": {
+    "container": "tabbedContainer1",
+    "subcontainer": "5eac9",
+    "row": 9,
+    "col": 1,
+    "height": 0.6
+  },
+  "textInput16": {
+    "container": "form3",
+    "height": 1,
+    "width": 12
+  },
+  "textInput18": {
+    "container": "form4",
+    "row": 5.6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput19": {
+    "container": "form4",
+    "row": 6.6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput20": {
+    "container": "form4",
+    "row": 7.6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput22": {
+    "container": "form4",
+    "row": 8.6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput23": {
+    "container": "form4",
+    "row": 4.6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput24": {
+    "container": "form5",
+    "row": 3,
+    "height": 1,
+    "width": 12
+  },
+  "textInput25": {
+    "container": "form5",
+    "row": 4,
+    "height": 1,
+    "width": 12
+  },
+  "textInput26": {
+    "container": "form5",
+    "row": 5,
+    "height": 1,
+    "width": 12
+  },
+  "textInput27": {
+    "container": "form5",
+    "row": 6,
+    "height": 1,
+    "width": 12
+  },
+  "textInput28": {
+    "container": "form5",
+    "row": 8,
+    "height": 1,
+    "width": 12
+  },
+  "textInput29": {
+    "container": "form5",
+    "row": 1,
+    "height": 1,
+    "width": 8
+  },
+  "textInput30": {
+    "container": "checkoutModal",
+    "row": 4,
+    "height": 1,
+    "width": 9
+  },
+  "textInput31": {
+    "container": "checkoutModal",
+    "row": 6.2,
+    "height": 1,
+    "width": 9
+  },
+  "textInput32": {
+    "container": "checkoutModal",
+    "row": 8.2,
+    "height": 1,
+    "width": 9
+  },
+  "textInput33": {
+    "container": "checkoutModal",
+    "row": 7.2,
+    "height": 1,
+    "width": 9
+  }
+}

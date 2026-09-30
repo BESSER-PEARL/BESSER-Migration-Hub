@@ -65,7 +65,11 @@ if not CSV_DIR.is_dir():
 csv_count = len(list(CSV_DIR.glob('*.csv')))
 print(f"[1/4] Parsing {csv_count} CSV file(s)")
 with _silent():
-    domain_model = retool_csv_to_buml(csv_dir=str(CSV_DIR), module_name=MODULE_NAME)
+    domain_model = retool_csv_to_buml(
+        csv_dir=str(CSV_DIR),
+        module_name=MODULE_NAME,
+        rsx_dir=str(ZIP_PATH) if ZIP_PATH else None,
+    )
 if domain_model is None:
     raise RuntimeError(f"CSV parsing returned no model — check the directory: {CSV_DIR}")
 

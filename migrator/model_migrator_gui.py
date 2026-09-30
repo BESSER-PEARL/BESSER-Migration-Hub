@@ -82,6 +82,7 @@ class GUIModelMigrator:
             gui_model = retool_rsx_to_gui(
                 zip_path=self.model_path,
                 module_name=self.module_name or None,
+                domain_model=self.domain_model,
             )
         elif self.lcp == "oracle_apex":
             from migrator.parsers.oracle_apex.oracle_apex_gui import oracle_apex_to_gui

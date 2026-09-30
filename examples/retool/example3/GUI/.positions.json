@@ -1,0 +1,116 @@
+{
+  "CreateProductForm": {
+    "container": "createModal",
+    "height": 0.2,
+    "width": 12
+  },
+  "EditProductForm": {
+    "subcontainer": "editModal",
+    "height": 0.2,
+    "width": 12
+  },
+  "createCategory": {
+    "container": "CreateProductForm",
+    "row": 2,
+    "height": 1,
+    "width": 12
+  },
+  "createClearBtn": {
+    "container": "CreateProductForm",
+    "rowGroup": "footer",
+    "col": 4,
+    "height": 1,
+    "width": 4
+  },
+  "createDescription": {
+    "container": "CreateProductForm",
+    "row": 1,
+    "height": 1,
+    "width": 12
+  },
+  "createFormTitle": {
+    "container": "CreateProductForm",
+    "rowGroup": "header",
+    "height": 0.6,
+    "width": 12
+  },
+  "createModal": {
+    "col": 10,
+    "height": 1,
+    "width": 2
+  },
+  "createName": {
+    "container": "CreateProductForm",
+    "height": 1,
+    "width": 12
+  },
+  "createSubmitBtn": {
+    "container": "CreateProductForm",
+    "rowGroup": "footer",
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "editCancelBtn": {
+    "container": "EditProductForm",
+    "rowGroup": "footer",
+    "col": 4,
+    "height": 1,
+    "width": 4
+  },
+  "editCategory": {
+    "container": "EditProductForm",
+    "row": 2,
+    "height": 1,
+    "width": 12
+  },
+  "editDescription": {
+    "container": "EditProductForm",
+    "row": 1,
+    "height": 1,
+    "width": 12
+  },
+  "editName": {
+    "container": "EditProductForm",
+    "height": 1,
+    "width": 12
+  },
+  "editSaveBtn": {
+    "container": "EditProductForm",
+    "rowGroup": "footer",
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "editTitle": {
+    "rowGroup": "header",
+    "subcontainer": "editModal",
+    "height": 0.6,
+    "width": 12
+  },
+  "pageTitle": {
+    "height": 0.6,
+    "width": 8
+  },
+  "productsTable": {
+    "row": 1,
+    "height": 13.2,
+    "width": 12
+  },
+  "setupGuideBtn": {
+    "col": 8,
+    "height": 1,
+    "width": 2
+  },
+  "setupGuideText": {
+    "subcontainer": "setupGuideModal",
+    "height": 4,
+    "width": 12
+  },
+  "setupGuideTitle": {
+    "rowGroup": "header",
+    "subcontainer": "setupGuideModal",
+    "height": 0.6,
+    "width": 12
+  }
+}

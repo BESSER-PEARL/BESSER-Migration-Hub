@@ -1,0 +1,22 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "eda5d750-bcda-11f1-aebc-2f5d5a094eda",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "appThemeId": -1,
+    "experimentalFeatures": {
+      "object": {
+        "sourceControlTemplateDehydration": false
+      }
+    },
+    "notificationsSettings": {
+      "object": {
+        "globalQueryShowFailureToast": true,
+        "globalQueryShowSuccessToast": true,
+        "globalQueryToastDuration": 4.5
+      }
+    },
+    "version": "4.67.0"
+  }
+}

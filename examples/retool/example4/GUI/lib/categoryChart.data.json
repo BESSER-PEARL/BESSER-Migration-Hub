@@ -1,0 +1,19 @@
+[
+  {
+    "name": "Revenue",
+    "x": {{ Array.isArray(fetchCategoryData.data) ? formatDataAsObject(fetchCategoryData.data)['category'] : ["Supplements", "Food", "Beverages", "Personal Care", "Fitness"] }},
+    "y": {{ Array.isArray(fetchCategoryData.data) ? formatDataAsObject(fetchCategoryData.data)['revenue'] : [42500, 38200, 22800, 15600, 11400] }},
+    "type": "bar",
+    "marker": { "color": "#247BC7" },
+    "hovertemplate": "%{x} — Revenue: $%{y:,.0f}"
+  },
+  {
+    "name": "Orders",
+    "x": {{ Array.isArray(fetchCategoryData.data) ? formatDataAsObject(fetchCategoryData.data)['category'] : ["Supplements", "Food", "Beverages", "Personal Care", "Fitness"] }},
+    "y": {{ Array.isArray(fetchCategoryData.data) ? formatDataAsObject(fetchCategoryData.data)['orders'] : [580, 420, 310, 210, 150] }},
+    "type": "bar",
+    "marker": { "color": "#55A1E3" },
+    "yaxis": "y2",
+    "hovertemplate": "%{x} — Orders: %{y}"
+  }
+]

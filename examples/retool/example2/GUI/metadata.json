@@ -1,0 +1,20 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "0480d86c-bccc-11f1-aa24-d7cc9fda07d3",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "pageCodeFolders": {
+      "object": {
+        "inventory": {
+          "array": []
+        },
+        "addInventory": {
+          "array": []
+        }
+      }
+    },
+    "rootScreen": "addInventory",
+    "version": "4.67.0"
+  }
+}

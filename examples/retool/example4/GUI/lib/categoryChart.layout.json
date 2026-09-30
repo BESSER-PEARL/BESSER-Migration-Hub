@@ -1,0 +1,36 @@
+{
+  "showlegend": true,
+  "legend": { "orientation": "h", "x": 0, "y": 1.1 },
+  "barmode": "group",
+  "bargap": 0.2,
+  "margin": { "l": 60, "r": 60, "t": 30, "b": 40, "pad": 2 },
+  "hovermode": "closest",
+  "hoverlabel": {
+    "bgcolor": "#000",
+    "bordercolor": "#000",
+    "font": { "color": "#fff", "family": "Inter", "size": 12 }
+  },
+  "xaxis": {
+    "title": { "text": "" },
+    "type": "-",
+    "automargin": true,
+    "fixedrange": true
+  },
+  "yaxis": {
+    "title": { "text": "Revenue ($)", "standoff": 6, "font": { "size": 12 } },
+    "type": "linear",
+    "tickformat": "$,.0f",
+    "automargin": true,
+    "fixedrange": true,
+    "gridcolor": "#f0f0f0"
+  },
+  "yaxis2": {
+    "title": { "text": "Orders", "standoff": 6, "font": { "size": 12 } },
+    "type": "linear",
+    "automargin": true,
+    "fixedrange": true,
+    "overlaying": "y",
+    "side": "right",
+    "showgrid": false
+  }
+}

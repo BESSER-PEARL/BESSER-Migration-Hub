@@ -1,0 +1,1 @@
+SELECT * FROM inventory ORDER BY ID LIMIT {{inventoryTable.pagination.pageSize}} OFFSET {{inventoryTable.pagination.offset}};

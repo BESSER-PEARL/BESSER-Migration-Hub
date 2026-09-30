@@ -1,0 +1,69 @@
+{
+  "categoryChart": {
+    "row": 10.8,
+    "height": 8,
+    "width": 12
+  },
+  "categoryChartTitle": {
+    "row": 10.2,
+    "height": 0.6,
+    "width": 12
+  },
+  "dataTableTitle": {
+    "row": 18.8,
+    "height": 0.6,
+    "width": 12
+  },
+  "pageTitle": {
+    "height": 0.6,
+    "width": 8
+  },
+  "revenueChart": {
+    "row": 2.2,
+    "height": 8,
+    "width": 12
+  },
+  "revenueChartTitle": {
+    "row": 1.6,
+    "height": 0.6,
+    "width": 12
+  },
+  "salesTable": {
+    "row": 19.4,
+    "height": 13.2,
+    "width": 12
+  },
+  "setupGuideBtn": {
+    "col": 8,
+    "height": 1,
+    "width": 2
+  },
+  "setupGuideText": {
+    "subcontainer": "setupGuideModal",
+    "height": 4,
+    "width": 12
+  },
+  "setupGuideTitle": {
+    "rowGroup": "header",
+    "subcontainer": "setupGuideModal",
+    "height": 0.6,
+    "width": 12
+  },
+  "statConversion": {
+    "row": 0.6,
+    "col": 8,
+    "height": 1,
+    "width": 4
+  },
+  "statOrders": {
+    "row": 0.6,
+    "col": 4,
+    "height": 1,
+    "width": 4
+  },
+  "statRevenue": {
+    "row": 0.6,
+    "height": 1,
+    "width": 4
+  }
+}

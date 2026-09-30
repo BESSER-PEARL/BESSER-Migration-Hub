@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Revenue",
+    "x": {{ Array.isArray(fetchSalesData.data) ? formatDataAsObject(fetchSalesData.data)['month'] : ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] }},
+    "y": {{ Array.isArray(fetchSalesData.data) ? formatDataAsObject(fetchSalesData.data)['revenue'] : [8500, 9200, 11800, 10500, 13200, 12800, 14500, 15200, 13800, 16100, 17500, 18200] }},
+    "type": "scatter",
+    "mode": "lines+markers",
+    "marker": { "size": 6 },
+    "line": {
+      "width": 3,
+      "color": "#247BC7",
+      "shape": "spline"
+    },
+    "hovertemplate": "%{x} — Revenue: $%{y:,.0f}"
+  }
+]

@@ -1,0 +1,13 @@
+id,sku,description,quantity,replenish,location,latitude,longitude,image_url
+1,SKU-1001,Wireless mouse,42,15,Luxembourg,49.6116,6.1319,https://images.unsplash.com/photo-1527864550417-7fd91fc51a46
+2,SKU-1002,Mechanical keyboard,18,10,Luxembourg,49.6116,6.1319,https://images.unsplash.com/photo-1587829741301-dc798b83add3
+3,SKU-1003,27-inch monitor,8,5,Esch-sur-Alzette,49.4958,5.9806,https://images.unsplash.com/photo-1527443224154-c4a3942d3acf
+4,SKU-1004,USB-C docking station,13,8,Esch-sur-Alzette,49.4958,5.9806,https://images.unsplash.com/photo-1625842268584-8f3296236761
+5,SKU-1005,Laptop stand,31,12,Differdange,49.5242,5.8914,https://images.unsplash.com/photo-1524758631624-e2822e304c36
+6,SKU-1006,Noise-cancelling headphones,9,6,Differdange,49.5242,5.8914,https://images.unsplash.com/photo-1505740420928-5e560c06d30e
+7,SKU-1007,HD webcam,24,10,Dudelange,49.4806,6.0875,https://images.unsplash.com/photo-1587826080692-f439cd0b70da
+8,SKU-1008,Portable SSD 1TB,16,8,Dudelange,49.4806,6.0875,https://images.unsplash.com/photo-1597872200969-2b65d56bd16b
+9,SKU-1009,USB-C charger 65W,50,20,Mersch,49.7489,6.1061,https://images.unsplash.com/photo-1583863788434-e58a36330cf0
+10,SKU-1010,Bluetooth speaker,11,7,Mersch,49.7489,6.1061,https://images.unsplash.com/photo-1608043152269-423dbba4e7e1
+11,SKU-1011,Ergonomic office chair,6,4,Luxembourg,49.6116,6.1319,https://images.unsplash.com/photo-1580480055273-228ff5388ef8
+12,SKU-1012,Desk lamp,27,10,Esch-sur-Alzette,49.4958,5.9806,https://images.unsplash.com/photo-1507473885765-e6ed057f782c
