@@ -19,6 +19,7 @@ def _find_app_root(paths: list) -> str:
     main.rsx / metadata.json, so nested "<app_name>/..." export layouts are
     normalised the same way flat ones are.
     """
+    paths = sorted(paths, key=lambda p: (p.count('/'), p))
     for p in paths:
         if p == 'main.rsx' or p.endswith('/main.rsx'):
             return p[: -len('main.rsx')]
@@ -51,7 +52,8 @@ def load_rsx_source(path: str) -> dict:
                 if name.endswith('/') or not name.lower().endswith(_TEXT_EXTENSIONS):
                     continue
                 with zf.open(name) as fh:
-                    raw[name.replace(os.sep, '/')] = fh.read().decode('utf-8', errors='replace')
+                    text = fh.read().decode('utf-8-sig', errors='replace')
+                    raw[name.replace('\\', '/')] = text.replace('\r\n', '\n').replace('\r', '\n')
     elif os.path.isdir(path):
         for root, _dirs, files in os.walk(path):
             for fname in files:
@@ -59,7 +61,7 @@ def load_rsx_source(path: str) -> dict:
                     continue
                 full = os.path.join(root, fname)
                 rel = os.path.relpath(full, path).replace(os.sep, '/')
-                with open(full, 'r', encoding='utf-8', errors='replace') as fh:
+                with open(full, 'r', encoding='utf-8-sig', errors='replace') as fh:
                     raw[rel] = fh.read()
     else:
         return {}

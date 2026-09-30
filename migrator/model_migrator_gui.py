@@ -13,9 +13,9 @@ class GUIModelMigrator:
             be extracted.
         domain_model (DomainModel, optional): The already-built ``DomainModel`` for this
             same module, if available (i.e. data model and GUI model are being extracted
-            together). When supplied, Mendix Forms/DataLists resolve their bound entity as
-            a real ``Class`` reference instead of just a name string. Only used by the
-            ``mendix`` LCP today.
+            together). When supplied, Mendix and Retool Forms/DataLists resolve their bound entity as
+            a real ``Class`` reference instead of just a name string. Used by the
+            Mendix and Retool parsers.
 
     Attributes:
         lcp (str): The name of the low-code platform.

@@ -77,12 +77,14 @@ if domain_model is None:
 gui_model = None
 if ZIP_PATH:
     with _silent():
-        gui_model = retool_rsx_to_gui(zip_path=str(ZIP_PATH), module_name=MODULE_NAME)
+        gui_model = retool_rsx_to_gui(
+            zip_path=str(ZIP_PATH), module_name=MODULE_NAME, domain_model=domain_model,
+        )
 
 # If no RSX zip (or it yielded no screens), build a minimal GUIModel from the DomainModel
 if gui_model is None:
     gui_model = GUIModel(name=MODULE_NAME, package="", versionCode="",
-                         versionName="", modules={}, description="")
+                         versionName="", modules=set(), description="")
     screens = set()
     for cls in domain_model.get_classes():
         safe = cls.name.replace(' ', '_')
@@ -91,14 +93,17 @@ if gui_model is None:
             description="",
             view_elements={
                 DataList(name=f"{safe}_List", description="",
-                         list_sources={DataSourceElement(name=cls.name, dataSourceClass=cls.name)}),
+                         list_sources={DataSourceElement(
+                             name=cls.name, dataSourceClass=cls,
+                             fields=cls.attributes, field_names=sorted(a.name for a in cls.attributes),
+                         )}),
                 Button(name="Create", description="", label="Create",
                        buttonType=ButtonType.FloatingActionButton,
                        actionType=ButtonActionType.Add),
             },
             is_main_page=True,
         ))
-    gui_model.modules[MODULE_NAME] = Module(name=MODULE_NAME, screens=screens)
+    gui_model.modules.add(Module(name=MODULE_NAME, screens=screens))
 
 # Step 3 — Generate Oracle APEX DDL
 ddl_filename = f"{APP_NAME}_tables.sql"
@@ -131,7 +136,7 @@ if apex_export:
     apex_version   = next((p['p_version_yyyy_mm_dd'] for p in apex_pages if p.get('p_version_yyyy_mm_dd')), '2024.11.30')
     apex_release   = next((p['p_release']            for p in apex_pages if p.get('p_release')),            '24.2.6')
 
-    list_screens = [s for m in gui_model.modules.values() for s in m.screens
+    list_screens = [s for m in gui_model.modules for s in m.screens
                     if _screen_is_list_page(s.name) or s.is_main_page]
     matched_ids  = set()
 
@@ -176,7 +181,7 @@ if apex_export:
 else:
     # Mode B — fallback: sequential page numbering
     all_screens = sorted(
-        (s for m in gui_model.modules.values() for s in m.screens if s.is_main_page),
+        (s for m in gui_model.modules for s in m.screens if s.is_main_page),
         key=lambda s: s.name,
     )
     for idx, screen in enumerate(all_screens):

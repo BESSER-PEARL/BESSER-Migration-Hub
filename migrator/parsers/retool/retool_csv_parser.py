@@ -25,6 +25,7 @@ confirm or supplement what the CSV-only heuristic finds.
 import csv
 import os
 import re
+from datetime import date, datetime
 
 from besser.BUML.metamodel.structural import (
     BinaryAssociation,
@@ -41,6 +42,7 @@ from besser.BUML.metamodel.structural import (
 )
 
 from migrator.parsers.retool._rsx_source import load_rsx_source
+from migrator.parsers.retool._sql_source import IDENTIFIER, clean_identifier, sql_tables
 
 # Suffixes stripped from CSV filename stems when deriving entity class names
 _DROP_SUFFIXES = (
@@ -52,7 +54,7 @@ _SAMPLE_ROWS = 20
 
 _BOOL_LITERALS = {'true', 'false'}
 _INT_RE = re.compile(r'^[+-]?\d+$')
-_FLOAT_RE = re.compile(r'^[+-]?\d+\.\d+$')
+_FLOAT_RE = re.compile(r'^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$')
 _DATE_RE = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 _DATETIME_RE = re.compile(r'^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}')
 
@@ -77,14 +79,12 @@ def _to_pascal(name: str) -> str:
 def _stems_match(a: str, b: str) -> bool:
     """True if two identifier stems refer to the same entity, tolerating
     simple English singular/plural variation (book <-> books,
-    discount_code <-> discount_codes, category <-> categories is NOT
-    handled here on purpose -- kept to the simple +s/+es cases actually
-    seen in Retool exports).
+    discount_code <-> discount_codes, category <-> categories).
     """
     if a == b:
         return True
     for x, y in ((a, b), (b, a)):
-        if x + 's' == y or x + 'es' == y:
+        if x + 's' == y or x + 'es' == y or (x.endswith('y') and x[:-1] + 'ies' == y):
             return True
     return False
 
@@ -93,6 +93,8 @@ def _infer_type_from_name(col_name: str):
     """Heuristic B-UML type from a column name (fallback when no sampled
     values are available)."""
     lower = col_name.lower()
+    if lower == 'id' or lower.endswith('_id'):
+        return IntegerType
     if re.search(r'(^date$|_date$|_at$|_on$|birth|^start$|^end$)', lower):
         return DateType
     if re.search(r'(time|timestamp)', lower):
@@ -116,9 +118,16 @@ def _infer_type_from_values(values: list, col_name: str):
     lowered = [v.lower() for v in non_empty]
     if all(v in _BOOL_LITERALS for v in lowered):
         return BooleanType
-    if all(_DATETIME_RE.match(v) for v in non_empty):
+    def valid_iso(value, parser):
+        try:
+            parser(value)
+            return True
+        except ValueError:
+            return False
+
+    if all(_DATETIME_RE.match(v) and valid_iso(v, datetime.fromisoformat) for v in non_empty):
         return DateTimeType
-    if all(_DATE_RE.match(v) for v in non_empty):
+    if all(_DATE_RE.match(v) and valid_iso(v, date.fromisoformat) for v in non_empty):
         return DateType
     if all(_INT_RE.match(v) for v in non_empty):
         return IntegerType
@@ -133,11 +142,9 @@ def _mine_sql_joins(rsx_dir: str, norm_to_raw: dict) -> list:
     tuples, matching table names against known CSV stems (singular/plural
     tolerant).
 
-    Retool's generated SQL joins on literal table names rather than
-    abbreviated aliases (e.g. ``ON books.book_id = orders.book_id``), so
-    the `t1`/`t2` identifiers on each side of the `=` are treated directly
-    as candidate table names; whichever column ends in `_id` (and isn't
-    the bare `id`) identifies the FK side.
+    Resolve aliases and quoted/schema-qualified tables. A side named
+    ``id`` or ``<table>_id`` is treated as the referenced primary key;
+    equalities with no clear primary-key side are ignored.
     """
     source = load_rsx_source(rsx_dir)
     sql_files = {k: v for k, v in source.items() if k.startswith('lib/') and k.lower().endswith('.sql')}
@@ -153,40 +160,26 @@ def _mine_sql_joins(rsx_dir: str, norm_to_raw: dict) -> list:
         return None
 
     fk_tuples = []
-    join_re = re.compile(
-        r'JOIN\s+[A-Za-z_][\w]*\s+ON\s+'
-        r'([A-Za-z_][\w]*)\.([A-Za-z_][\w]*)\s*=\s*([A-Za-z_][\w]*)\.([A-Za-z_][\w]*)',
-        re.IGNORECASE,
+    equality = re.compile(
+        rf'({IDENTIFIER})\s*\.\s*({IDENTIFIER})\s*=\s*'
+        rf'({IDENTIFIER})\s*\.\s*({IDENTIFIER})', re.IGNORECASE,
     )
-    for _fname, text in sql_files.items():
-        for m in join_re.finditer(text):
-            t1, c1, t2, c2 = m.groups()
-            c1_lower, c2_lower = c1.lower(), c2.lower()
-            c1_is_fk = c1_lower != 'id' and c1_lower.endswith('_id')
-            c2_is_fk = c2_lower != 'id' and c2_lower.endswith('_id')
-            if c1_is_fk and not c2_is_fk:
-                from_raw, fk_col, to_raw = resolve_table(t1), c1_lower, resolve_table(t2)
-            elif c2_is_fk and not c1_is_fk:
-                from_raw, fk_col, to_raw = resolve_table(t2), c2_lower, resolve_table(t1)
-            elif c1_is_fk and c2_is_fk and c1_lower == c2_lower:
-                # Both sides share the same "_id" column name (Retool often
-                # names a table's own PK "<table>_id"), so the ambiguity is
-                # resolved by which table stem the column prefix matches:
-                # that side is the referenced ("to") table, the other holds
-                # the FK ("from").
-                fk_prefix = c1_lower[:-3]
-                t1_matches = _stems_match(fk_prefix, t1.lower())
-                t2_matches = _stems_match(fk_prefix, t2.lower())
-                if t1_matches and not t2_matches:
-                    from_raw, fk_col, to_raw = resolve_table(t2), c1_lower, resolve_table(t1)
-                elif t2_matches and not t1_matches:
-                    from_raw, fk_col, to_raw = resolve_table(t1), c1_lower, resolve_table(t2)
-                else:
+    for text in sql_files.values():
+        _primary, aliases, sql = sql_tables(text)
+        for on in re.finditer(r'\bON\b(.*?)(?=\b(?:JOIN|WHERE|GROUP|ORDER|LIMIT|UNION)\b|;|$)',
+                              sql, re.IGNORECASE | re.DOTALL):
+            for match in equality.finditer(on[1]):
+                t1, c1, t2, c2 = map(clean_identifier, match.groups())
+                t1, t2 = aliases.get(t1, t1), aliases.get(t2, t2)
+                raw1, raw2 = resolve_table(t1), resolve_table(t2)
+                if not raw1 or not raw2:
                     continue
-            else:
-                continue
-            if from_raw and to_raw:
-                fk_tuples.append((from_raw, fk_col, to_raw))
+                pk1 = c1 == 'id' or (c1.endswith('_id') and _stems_match(c1[:-3], t1))
+                pk2 = c2 == 'id' or (c2.endswith('_id') and _stems_match(c2[:-3], t2))
+                if pk1 and not pk2:
+                    fk_tuples.append((raw2, c2, raw1))
+                elif pk2 and not pk1:
+                    fk_tuples.append((raw1, c1, raw2))
     return fk_tuples
 
 
@@ -223,7 +216,12 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
         path = os.path.join(csv_dir, fname)
         with open(path, 'r', encoding='utf-8-sig', newline='') as fh:
             reader = csv.reader(fh)
-            headers = [h.strip() for h in next(reader)]
+            headers = [h.strip() for h in next(reader, [])]
+            if not headers:
+                print(f"  Skipping empty CSV: {fname}")
+                continue
+            if any(not h for h in headers) or len({h.lower() for h in headers}) != len(headers):
+                raise ValueError(f"CSV {fname!r} has empty or duplicate column names")
             rows = []
             for i, row in enumerate(reader):
                 if i >= _SAMPLE_ROWS:
@@ -237,8 +235,14 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
             'class_name': class_name,
         }
 
+    if not table_info:
+        return None
+
     # Build norm_stem → raw_stem mapping for FK resolution
     norm_to_raw: dict = {info['norm_stem']: raw for raw, info in table_info.items()}
+    if len(norm_to_raw) != len(table_info):
+        raise ValueError('CSV filenames normalize to duplicate entity names')
+    sql_fks = {(f, c): t for f, c, t in _mine_sql_joins(rsx_dir, norm_to_raw)} if rsx_dir else {}
 
     name = module_name or 'RetoolApp'
     domain_model = DomainModel(name=name)
@@ -254,9 +258,18 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
         # Detect FK columns (ending in _id whose prefix maps to another table,
         # tolerating simple singular/plural variation).
         fk_cols: dict = {}  # col_lower → to_raw_stem
+        pk_col = next((c.lower() for c in headers if c.lower() == 'id'), None)
+        if pk_col is None:
+            pk_col = next((c.lower() for c in headers if c.lower().endswith('_id')
+                           and _stems_match(c.lower()[:-3], info['norm_stem'])), None)
         for col in headers:
             col_lower = col.lower()
-            if col_lower == 'id':
+            if col_lower == pk_col:
+                continue
+            if (raw_stem, col_lower) in sql_fks:
+                target = sql_fks[(raw_stem, col_lower)]
+                fk_cols[col_lower] = target
+                pending_fks.append((raw_stem, col_lower, target))
                 continue
             if not col_lower.endswith('_id'):
                 continue
@@ -280,7 +293,7 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
                         matched_raw = candidate_raw
                         break
 
-            if matched_raw is not None:
+            if matched_raw is not None and matched_raw != raw_stem:
                 fk_cols[col_lower] = matched_raw
                 pending_fks.append((raw_stem, col_lower, matched_raw))
 
@@ -291,20 +304,13 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
             col_lower = col.lower()
             if col_lower in fk_cols:
                 continue
-            if col_lower == 'id':
-                properties.add(Property(
-                    name='id',
-                    type=IntegerType,
-                    multiplicity=Multiplicity(1, 1),
-                    is_id=True,
-                ))
-                continue
             values = [row[col_idx] for row in rows if col_idx < len(row)]
             buml_type = _infer_type_from_values(values, col_lower)
             properties.add(Property(
                 name=col_lower,
                 type=buml_type,
-                multiplicity=Multiplicity(0, 1),
+                multiplicity=Multiplicity(1, 1) if col_lower == pk_col else Multiplicity(0, 1),
+                is_id=col_lower == pk_col,
             ))
 
         cls = Class(name=class_name, attributes=properties)
@@ -312,34 +318,25 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
         domain_model.types.add(cls)
         print(f"  Class '{class_name}': {sorted(p.name for p in properties)}")
 
-    # ── Third pass (optional): mine RSX lib/*.sql JOINs for extra FK evidence
-    if rsx_dir:
-        print(f"  Mining SQL JOINs from RSX export: {rsx_dir}")
-        existing = {(f, c) for f, c, _t in pending_fks}
-        for from_raw, fk_col, to_raw in _mine_sql_joins(rsx_dir, norm_to_raw):
-            if from_raw not in table_info or to_raw not in table_info:
-                continue
-            if (from_raw, fk_col) in existing:
-                print(f"    SQL confirms FK '{from_raw}.{fk_col}' -> '{to_raw}'")
-                continue
-            print(f"    SQL adds missed FK '{from_raw}.{fk_col}' -> '{to_raw}'")
-            pending_fks.append((from_raw, fk_col, to_raw))
-            existing.add((from_raw, fk_col))
-
     # ── Fourth pass: build BinaryAssociation objects from FK edges ──────────
-    print(f"  Building {len(pending_fks)} association(s) from FK columns…")
+    print(f"  Building {len(pending_fks)} association(s) from FK columns...")
     seen_assocs = set()
+    used_assoc_names = set()
     for from_raw, fk_col, to_raw in pending_fks:
         if from_raw not in classes or to_raw not in classes:
-            print(f"  ⚠  Skipping FK '{from_raw}.{fk_col}' → unknown table '{to_raw}'")
+            print(f"  Skipping FK '{from_raw}.{fk_col}' -> unknown table '{to_raw}'")
             continue
         if (from_raw, fk_col, to_raw) in seen_assocs:
             continue
         seen_assocs.add((from_raw, fk_col, to_raw))
         from_cls = classes[from_raw]
         to_cls   = classes[to_raw]
+        inverse_name = from_cls.name.lower()
+        existing_roles = {e.name for e in to_cls.all_association_ends()}
+        if inverse_name in existing_roles:
+            inverse_name += f'_{fk_col}'
         end_many = Property(
-            name=from_cls.name.lower(),
+            name=inverse_name,
             type=from_cls,
             multiplicity=Multiplicity(0, '*'),
         )
@@ -348,12 +345,17 @@ def retool_csv_to_buml(csv_dir: str, module_name: str = None, rsx_dir: str = Non
             type=to_cls,
             multiplicity=Multiplicity(0, 1),
         )
+        assoc_name = f"{from_cls.name}_{to_cls.name}"
+        if assoc_name in used_assoc_names:
+            assoc_name += f"_{fk_col}"
+        used_assoc_names.add(assoc_name)
+        end_one.name = fk_col[:-3] if fk_col.endswith('_id') else fk_col
         assoc = BinaryAssociation(
-            name=f"{from_cls.name}_{to_cls.name}",
+            name=assoc_name,
             ends={end_many, end_one},
         )
         domain_model.associations.add(assoc)
-        print(f"  Association: {from_cls.name} ──→ {to_cls.name}  (FK: {fk_col})")
+        print(f"  Association: {from_cls.name} -> {to_cls.name}  (FK: {fk_col})")
 
     print(
         f"  Total: {len(classes)} class(es), "
