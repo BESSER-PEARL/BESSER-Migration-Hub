@@ -429,10 +429,9 @@ def _build_data_list(tag: str, attrs: str, inner: str, query_primary_table: dict
 def _build_button(attrs: str, inner: str, used_names: set):
     if _bool_attr(attrs, 'submit'):
         return None
-    label = _attr(attrs, 'text') or _attr(attrs, 'label')
-    widget_id = _attr(attrs, 'id') or label or 'button'
-    if not label:
-        label = widget_id
+    caption = _attr(attrs, 'text') or _attr(attrs, 'label')
+    widget_id = _attr(attrs, 'id') or caption or 'button'
+    label = caption or widget_id
     # The button's wired-up Events are checked before its caption: what a
     # button actually does (runs a named delete/update query, opens a modal,
     # closes one) is real evidence, whereas the caption is only ever a guess.
@@ -444,6 +443,16 @@ def _build_button(attrs: str, inner: str, used_names: set):
             name=name, description="", label=label,
             buttonType=btn_type, actionType=act_type,
         )
+        # Recorded here, at the one place that actually knows: `label` is a
+        # genuine source caption, or a raw-id fallback invented because the
+        # source had none. Downstream consumers (e.g. the evaluation
+        # scripts' Labels count) should trust this flag instead of guessing
+        # from `label == name` - that guess is specific to this parser's own
+        # fallback shape and misfires on BUML models from any other source
+        # (e.g. independently-authored oracle models, where a human-chosen
+        # `name` deliberately matching its `label` is routine, not a sign of
+        # a missing caption).
+        button._synthetic_label = not bool(caption)
         # Resolve direct dialog-opening events after every screen is known.
         button._retool_navigation = [
             (_attr(ev_attrs, 'event'), _attr(ev_attrs, 'pluginId'))

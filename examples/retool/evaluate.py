@@ -356,7 +356,17 @@ def pivot_inventory(domain, gui):
                         navigation_count += type(action).__name__ == 'Transition'
                     record['events'].append({'name': event.name, 'type': event.event_type.name, 'actions': actions})
                 if isinstance(widget, Button):
-                    record.update(label=widget.label, action_type=widget.actionType.name)
+                    # Trust the parser's own marker (set at the one place that
+                    # actually knows) for whether this label is a genuine
+                    # source caption or an invented raw-id fallback, rather
+                    # than guessing from label == name - that guess is
+                    # specific to this parser's fallback shape and misfires
+                    # on BUML models built any other way (e.g. an
+                    # independently-authored oracle model, where routinely
+                    # naming a button after its own label is not a sign of a
+                    # missing caption). Absent on any non-parser-built Button.
+                    record.update(label=widget.label, action_type=widget.actionType.name,
+                                  synthetic_label=getattr(widget, '_synthetic_label', False))
                     action_types.add(widget.actionType.name)
                 if isinstance(widget, Form):
                     record.update(title=widget.title, submit_label=widget.submit_label,
@@ -387,7 +397,7 @@ def pivot_inventory(domain, gui):
               # artifact of that bucketing (no example form sets show_cancel, so
               # one implicit button per Form is exact, not an approximation).
               'Buttons': count['Button'] + count['Form'], 'Action types': len(action_types), 'Navigation': navigation_count,
-              'Forms': count['Form'], 'Labels': sum(bool(w.get('label')) and w.get('label') != w.get('name') for w in widgets if w['kind'] == 'Button') + sum(bool(w.get('submit_label')) for w in widgets if w['kind'] == 'Form'),
+              'Forms': count['Form'], 'Labels': sum(bool(w.get('label')) and not w.get('synthetic_label') for w in widgets if w['kind'] == 'Button') + sum(bool(w.get('submit_label')) for w in widgets if w['kind'] == 'Form'),
               'DataLists': count['DataList'], 'DataSources': sum(len(w.get('sources', [])) for w in widgets),
               'Input fields': count['InputField'] + sum(len(w.get('fields', [])) for w in widgets)}
     return {'counts': counts, 'classes': classes, 'associations': associations,
@@ -417,6 +427,12 @@ def serialize(domain, gui, folder):
                 if not candidates:
                     continue
                 variable = candidates.pop(0)
+                if isinstance(widget, Button) and getattr(widget, '_synthetic_label', False):
+                    # Non-metamodel marker (see retool_rsx_parser._build_button);
+                    # the code builder has no field for it, so it must be
+                    # reattached explicitly or Labels' count would silently
+                    # change after this round-trip.
+                    repairs.append(f'{variable}._synthetic_label = True')
                 if isinstance(widget, Form):
                     for key in ('title', 'submit_label'):
                         repairs.append(f'{variable}.{key} = {getattr(widget, key)!r}')

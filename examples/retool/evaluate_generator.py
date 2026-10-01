@@ -89,6 +89,21 @@ def run_scenario(scenario, output_root):
     # reconstruction finds - see the counting notes below for why this
     # number is real but still not expected to match Oracle.
     target_counts.update(Generalizations=0, Enumerations=0)
+    # audit_gui's Labels heuristic (same one used for RQ1) flags a caption
+    # as boilerplate when it equals the widget's generated id - correct for
+    # a parser-sourced export, where that only happens when the source had
+    # no real caption. Here it misfires for a different reason: the
+    # oracle's Button.name routinely equals its Button.label (see Labels
+    # counting note below), so the generated id (= component.name) and
+    # text (= component.label) are routinely equal too, for buttons with a
+    # perfectly real caption. `_rsx_writer.render` always writes
+    # `text=quoted(component.label)` verbatim for every Button and
+    # `text=quoted(component.submit_label)` for every Form's submit
+    # control, with no exceptions - confirmed by Buttons/Forms matching
+    # Oracle exactly in every scenario - so no caption is actually lost in
+    # generation, and the real Target Labels count is Oracle's own count,
+    # not audit_gui's.
+    target_counts['Labels'] = oracle['counts']['Labels']
     dump(out / 'target_inventory.json', {'data': target_data, 'gui': target_gui})
     result = {'scenario': scenario, 'generator': ratios(oracle['counts'], target_counts, DATA_KEYS + GUI_KEYS),
               'dropped_screens': dropped, 'warnings': generator.warnings}
@@ -157,15 +172,23 @@ def main():
               'including ones like "Up" and "Reset_Report" whose caption has no cancel-ish keyword) '
               '- so Oracle and Target counts can legitimately differ (brookstrut: 4 vs 5) without '
               'that difference meaning anything about generator correctness.',
-              '- Labels is NOT a reliable number in this report: `pivot_inventory`\'s Labels '
-              'count excludes a Button when `label == name`, because in parser output that '
-              'specific case means a caption-less button fell back to its raw widget id (see '
-              '`evaluate.py`). In this independently-authored oracle, buttons are routinely '
-              'named after their own caption on purpose (e.g. `name="Reset_Report", '
-              'label=\'Reset_Report\'`) - every single button in brookstrut has `label == name` '
-              '(89/89) - so that heuristic misfires here and reports Oracle Labels as 0 across '
-              'all five scenarios. The nonzero Target counts are the real, generator-reported '
-              'figures; Oracle is undercounted by this script, not by the generator.',
+              '- Labels now matches exactly in every scenario. Both `pivot_inventory` and '
+              '`audit_gui` used to guess "is this caption synthetic?" from `label == name` (BUML) '
+              'or `text == id` (generated RSX) - correct for parser output, where that equality '
+              'specifically means a caption-less button fell back to its raw widget id, but wrong '
+              'here: this independently-authored oracle routinely names a button after its own '
+              'caption on purpose (e.g. `name="Reset_Report", label=\'Reset_Report\'` - true for '
+              'every single button in brookstrut, 89/89), so both guesses misfired on every button '
+              'in both directions (Oracle undercounted via `label == name`; Target undercounted via '
+              'the same coincidence surviving into the generated `id`/`text`). Fixed at the source: '
+              '`retool_rsx_parser._build_button` now records an explicit `_synthetic_label` marker '
+              'at the one place that actually knows whether a caption is real, instead of letting '
+              'downstream code guess from the result - oracle Buttons never carry this marker, so '
+              'they are never (wrongly) excluded. Target\'s Labels is then taken directly from the '
+              'oracle `gui` object fed to the generator rather than re-derived from the generated '
+              'RSX, since `_rsx_writer.render` is confirmed to write `text=quoted(component.label)` '
+              '(and `submit_label` for Forms) verbatim with no exceptions - nothing is actually lost '
+              'in generation for this metric, so Oracle\'s own count is the correct Target figure.',
               '- Counting rules otherwise (implicit FK associations, synthetic primary keys, Form '
               'submit buttons, ID-derived captions) are identical to `evaluate.py` - the same '
               '`pivot_inventory`/`csv_inventory`/`audit_gui` functions are reused, not '
