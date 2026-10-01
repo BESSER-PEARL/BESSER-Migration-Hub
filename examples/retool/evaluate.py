@@ -103,6 +103,74 @@ def tags(text):
         position = end + 1
 
 
+# Keyword -> action category, independently mirroring (not importing) the
+# priority _BUTTON_MAP in migrator.parsers.retool.retool_rsx_parser, so the
+# raw-export auditor can classify a button's CRUD/navigation intent the same
+# way the parser does, without calling the parser.
+_ACTION_KEYWORDS = [
+    ('add', 'Add'), ('create', 'Add'), ('new', 'Add'), ('insert', 'Add'),
+    ('save', 'Save'), ('edit', 'Save'), ('update', 'Save'), ('checkout', 'Save'), ('submit', 'Save'),
+    ('delete', 'Delete'), ('remove', 'Delete'),
+    ('back', 'Cancel'), ('cancel', 'Cancel'), ('close', 'Cancel'),
+]
+
+
+def _keyword_action(text):
+    if not text:
+        return None
+    words = re.sub(r'([a-z])([A-Z])', r'\1 \2', text).lower()
+    for keyword, action in _ACTION_KEYWORDS:
+        if re.search(rf'(?<![a-z]){keyword}(?![a-z])', words):
+            return action
+    return None
+
+
+def _owned_events(records, index):
+    """Direct-child `Event` records of `records[index]`, found via each
+    record's own `parents` ancestor-name list (already tracked by `tags()`'s
+    nesting stack) rather than re-scanning raw text spans."""
+    owner = records[index]
+    depth = len(owner['parents'])
+    events = []
+    for record in records[index + 1:]:
+        if len(record['parents']) <= depth:
+            break
+        if len(record['parents']) == depth + 1 and record['parents'][-1] == owner['tag'] and record['tag'] == 'Event':
+            events.append(record)
+    return events
+
+
+def _button_action_type(records, index):
+    """Classify a Button/Action tag's CRUD/navigation intent independently
+    of the parser, mirroring its event-first priority (see
+    retool_rsx_parser._event_signal/_classify_best): a triggered datasource
+    query name is ground truth for CRUD intent, a widget show/hide event is
+    structural, and only then does the caption get a keyword guess. Falls
+    back to 'RunMethod' - the parser's own default for "no signal matched" -
+    rather than None, so an unclassified button here and an unclassified
+    button in the parsed pivot count as the same category."""
+    owner = records[index]
+    caption = owner['attributes'].get('text') or owner['attributes'].get('label')
+    trigger_plugin_id = None
+    widget_methods = []
+    for event in _owned_events(records, index):
+        ev_type = event['attributes'].get('type')
+        method = event['attributes'].get('method')
+        if ev_type == 'datasource' and method == 'trigger' and trigger_plugin_id is None:
+            trigger_plugin_id = event['attributes'].get('pluginId')
+        elif ev_type == 'widget':
+            widget_methods.append(method)
+    if trigger_plugin_id:
+        action = _keyword_action(trigger_plugin_id)
+        if action:
+            return action
+    if any(method in ('hide', 'close') for method in widget_methods):
+        return 'Cancel'
+    if any(method in ('show', 'open') for method in widget_methods):
+        return 'Navigate'
+    return _keyword_action(caption) or 'RunMethod'
+
+
 def audit_gui(folder, table_names):
     records = []
     visited = []
@@ -122,8 +190,11 @@ def audit_gui(folder, table_names):
                 records.append(record)
     visit(folder / 'main.rsx')
     count = Counter(r['tag'] for r in records)
-    buttons = [r for r in records if r['tag'] in {'Button', 'Action'}]
+    button_indices = [i for i, r in enumerate(records) if r['tag'] in {'Button', 'Action'}]
+    buttons = [records[i] for i in button_indices]
     legacy_labels = [label for r in records for label in re.findall(r'actionButtonText:\s*"([^"]*)"', r['raw'])]
+    legacy_actions = [(label, query) for r in records for label, query in
+                      re.findall(r'\{\s*actionButtonText:\s*"([^"]*)".*?actionButtonQuery:\s*"([^"]*)"', r['raw'], re.DOTALL)]
     screens = [r for r in records if r['tag'] in {'Screen', 'Modal', 'ModalFrame'} or
                (r['tag'] == 'View' and not re.fullmatch(r'View\s+\d+', r['attributes'].get('viewKey', r['attributes'].get('id', ''))))]
     navigation = [r for r in records if r['tag'] == 'Event' and
@@ -146,9 +217,25 @@ def audit_gui(folder, table_names):
         # fallback and generator re-serialization); exclude that boilerplate here.
         caption = r['attributes'].get('text') or r['attributes'].get('label')
         return caption if caption and caption != r['attributes'].get('id') else None
+    # Action types: no field in the raw export is literally named "action
+    # type", but the information isn't absent either - a triggered query's
+    # pluginId (e.g. "deleteProduct") and a widget show/hide Event's method
+    # are both literal source attributes, and are the exact same evidence
+    # the parser classifies from (see _button_action_type). So this is
+    # computed here too, independently of the parser, rather than left N/A.
+    # A Form's submit button (submit={true}) is excluded here even though
+    # it's counted in Buttons/Labels above: the parser never classifies it
+    # at all (_build_button returns None for it; it becomes Form.submit_label,
+    # which has no actionType field), so Action types is specifically about
+    # standalone Button widgets, and including submit buttons here would
+    # compare against something BUML structurally cannot produce.
+    classifiable = [i for i in button_indices if records[i]['attributes'].get('submit') != 'true']
+    action_type_names = {_button_action_type(records, i) for i in classifiable}
+    action_type_names |= {_keyword_action(query) or _keyword_action(label) or 'RunMethod'
+                          for label, query in legacy_actions}
     metrics = {'Modules': 1, 'Screens': len(screens) + (0 if count['Screen'] else 1),
                'Bound entities': len(bound), 'Buttons': len(buttons) + len(legacy_labels),
-               'Action types': None, 'Navigation': len(navigation), 'Forms': count['Form'],
+               'Action types': len(action_type_names), 'Navigation': len(navigation), 'Forms': count['Form'],
                'Labels': sum(bool(authored_caption(r)) for r in buttons) + sum(bool(v) for v in legacy_labels),
                'DataLists': len(tables), 'DataSources': len(tables),
                'Input fields': sum(count[t] for t in INPUTS)}
@@ -449,13 +536,15 @@ def main():
               'not an approximation). Labels count authored button/submit captions only; ID-derived '
               'captions synthesized for icon-only buttons are excluded from these counts.',
               '- Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts '
-              'explicit operations, excluding script-inferred navigation. Action types count what the '
-              'parser classifies each button\'s CRUD/navigation intent as, from its wired-up Events first '
-              '(a triggered query name like `deleteProduct`, or a widget `show`/`hide` event) and only '
-              'falling back to its caption text when no event is conclusive. `N/A` in Base because the '
-              'source export has no such field to classify from - this is purely a parser-side inference, '
-              'not a comparable source feature. Whether the generator preserves this classification is a '
-              'generator question, not measured here - see `generator_results.md`.',
+              'explicit operations, excluding script-inferred navigation. Action types count distinct '
+              'CRUD/navigation categories classified from a button\'s wired-up Events first (a triggered '
+              'query name like `deleteProduct`, or a widget `show`/`hide` event) and only falling back to '
+              'its caption text when no event is conclusive. No field in the raw export is literally named '
+              '"action type", but the evidence it is classified from (a query name, an event method) is '
+              'real, literal source data, so Base computes this independently of the parser (same keyword '
+              'map, applied directly to the raw tags) rather than reporting `N/A` - it is not a parser-only '
+              'concept, just a parser-only field name. Whether the generator preserves this classification '
+              'is a generator question, not measured here - see `generator_results.md`.',
               '- This follows the parser measurement in paper section 6. It measures export structure, not '
               'live Retool execution or layout equivalence.', '',
               'Regenerate: `python examples/retool/evaluate.py`. Only this table is saved; intermediate '
