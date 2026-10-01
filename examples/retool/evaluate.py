@@ -161,11 +161,51 @@ def audit_gui(folder, table_names):
             'unresolved_expression_references': unresolved}
 
 
+def _stems_match(a, b):
+    """Singular/plural tolerant match between two lower-case table stems
+    (mirrors migrator.parsers.retool.retool_csv_parser._stems_match)."""
+    if a == b:
+        return True
+    for x, y in ((a, b), (b, a)):
+        if x + 's' == y or x + 'es' == y or (x.endswith('y') and x[:-1] + 'ies' == y):
+            return True
+    return False
+
+
+def _fk_columns(tables):
+    """Columns ending in `_id` whose prefix names another table in this same
+    export are an implicit (naming-convention) association, not a plain
+    scalar attribute - independently of whether the parser recognises them.
+    This mirrors the parser's own FK heuristic so the Base/BUML/Target counts
+    classify the same column the same way."""
+    stems = {t['table'].lower() for t in tables}
+    fk = {}
+    for t in tables:
+        own = t['table'].lower()
+        pk = next((c for c in t['columns'] if c.lower() == 'id'), None)
+        if pk is None:
+            pk = next((c for c in t['columns'] if c.lower().endswith('_id')
+                       and _stems_match(c.lower()[:-3], own)), None)
+        for c in t['columns']:
+            lower = c.lower()
+            if lower == (pk or '').lower() or not lower.endswith('_id'):
+                continue
+            prefix = lower[:-3]
+            if any(_stems_match(prefix, s) for s in stems if s != own):
+                fk.setdefault(t['table'], set()).add(c)
+    return fk
+
+
 def csv_inventory(folder, synthetic_columns=None):
     """synthetic_columns maps table name -> column names the generator added as
     boilerplate (e.g. a primary key for a table with no natural key); these are
     excluded from the Attributes count so it isn't inflated by generator output
-    that was never present in, or derived from, the model."""
+    that was never present in, or derived from, the model.
+
+    FK-shaped columns (see _fk_columns) are implicit associations: they are
+    counted as Associations/Multiplicities, not Attributes, at every stage
+    (Base, BUML, Target) so a column isn't an "attribute" in the source export
+    and an "association" once parsed."""
     synthetic_columns = synthetic_columns or {}
     tables = []
     rows = {}
@@ -176,9 +216,12 @@ def csv_inventory(folder, synthetic_columns=None):
             tables.append({'table': file.stem, 'columns': reader.fieldnames, 'rows': len(records), 'file': file.name})
             rows[file.stem] = records
     boilerplate = sum(len(synthetic_columns.get(t['table'], ())) for t in tables)
+    fk = _fk_columns(tables)
+    fk_count = sum(len(cols) for cols in fk.values())
     return {'tables': tables, 'counts': {'Entities': len(tables),
-            'Attributes': sum(len(t['columns']) for t in tables) - boilerplate, 'Associations': None,
-            'Multiplicities': None, 'Generalizations': 0, 'Enumerations': 0}}, rows
+            'Attributes': sum(len(t['columns']) for t in tables) - boilerplate - fk_count,
+            'Associations': fk_count, 'Multiplicities': fk_count * 2,
+            'Generalizations': 0, 'Enumerations': 0}}, rows
 
 
 def pivot_inventory(domain, gui):
@@ -343,9 +386,11 @@ def run_example(number, run, from_snapshots=False, output_root=None):
     dump(out / 'roundtrip_inventory.json', pivot_inventory(domain, roundtrip))
     parser_reference = data['counts'] | source['counts']
     target_counts = target_data['counts'] | target_gui['counts']
-    # CSV has no native relationship/constraint declarations; schema.json is supplementary.
-    target_counts.update(Associations=0, Multiplicities=0, Generalizations=0, Enumerations=0,
-                         **{'Action types': 0})
+    # Associations/Multiplicities now come from the same FK-naming heuristic
+    # csv_inventory applies to Base and BUML (see _fk_columns), so they are
+    # genuine counts here too, not forced zeros. CSV has no native
+    # generalization/enum declarations, so those stay zero.
+    target_counts.update(Generalizations=0, Enumerations=0, **{'Action types': 0})
     result = {'example': name, 'run': run, 'parser': ratios(parser_reference, pivot['counts'], DATA_KEYS + GUI_KEYS),
               'generator': ratios(pivot['counts'], target_counts, DATA_KEYS + GUI_KEYS),
               'warnings': generator.warnings, 'source_events': source['events'],
@@ -413,13 +458,18 @@ def main():
             target = result['generator'][key]['output']
             lines.append(f"| {result['example']} | {key} | {display(source)} | {display(pivot)} | {display(target)} |")
     lines += ['', 'Counting notes:', '',
-              '- N/A means the source export does not declare a comparable element. CSV relationships '
-              'and cardinalities cannot be verified; the two BUML associations are inferred. Target counts '
-              'exclude supplementary `schema.json` constraints.',
-              '- Attributes count scalar properties/columns. Two source FK columns become BUML association '
-              'roles; generation restores them. Synthetic primary-key columns the generator adds for tables '
-              'with no natural key are excluded from these counts, since they are generator boilerplate, not '
-              'model- or source-derived data.',
+              '- N/A means the source export does not declare a comparable element (e.g. CSV has no '
+              'generalization/enumeration syntax). Associations/Multiplicities are not N/A: a `*_id` '
+              'column whose prefix names another table in the same export is counted as an implicit '
+              'association at every stage (Base, BUML, Target), via the same naming convention the '
+              'parser itself uses to build associations - not just once the parser has run. Target '
+              'counts exclude supplementary `schema.json` constraints.',
+              '- Attributes count scalar properties/columns, excluding columns classified as an implicit '
+              'association (see above). Two source FK columns are counted as associations at every stage, '
+              'not as attributes anywhere, so Base/BUML/Target no longer disagree on their classification. '
+              'Synthetic primary-key columns the generator adds for tables with no natural key are also '
+              'excluded from the Attributes count, since they are generator boilerplate, not model- or '
+              'source-derived data.',
               '- Buttons include source/target submit controls. BUML puts seven submit controls into Forms, '
               'giving 22 standalone buttons plus seven form controls. Labels count authored button/submit '
               'captions only; ID-derived captions synthesized for icon-only buttons are excluded from these '

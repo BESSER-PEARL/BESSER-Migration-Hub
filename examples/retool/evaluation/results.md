@@ -5,9 +5,9 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | Example | Element | Base | BUML | Target |
 |---|---|---:|---:|---:|
 | example1 | Entities | 3 | 3 | 3 |
-| example1 | Attributes | 16 | 14 | 16 |
-| example1 | Associations | N/A | 2 | 0 |
-| example1 | Multiplicities | N/A | 4 | 0 |
+| example1 | Attributes | 14 | 14 | 14 |
+| example1 | Associations | 2 | 2 | 2 |
+| example1 | Multiplicities | 4 | 4 | 4 |
 | example1 | Generalizations | 0 | 0 | 0 |
 | example1 | Enumerations | 0 | 0 | 0 |
 | example1 | Modules | 1 | 1 | 1 |
@@ -23,8 +23,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example1 | Input fields | 32 | 32 | 32 |
 | example2 | Entities | 1 | 1 | 1 |
 | example2 | Attributes | 9 | 9 | 9 |
-| example2 | Associations | N/A | 0 | 0 |
-| example2 | Multiplicities | N/A | 0 | 0 |
+| example2 | Associations | 0 | 0 | 0 |
+| example2 | Multiplicities | 0 | 0 | 0 |
 | example2 | Generalizations | 0 | 0 | 0 |
 | example2 | Enumerations | 0 | 0 | 0 |
 | example2 | Modules | 1 | 1 | 1 |
@@ -40,8 +40,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example2 | Input fields | 6 | 6 | 6 |
 | example3 | Entities | 1 | 1 | 1 |
 | example3 | Attributes | 6 | 6 | 6 |
-| example3 | Associations | N/A | 0 | 0 |
-| example3 | Multiplicities | N/A | 0 | 0 |
+| example3 | Associations | 0 | 0 | 0 |
+| example3 | Multiplicities | 0 | 0 | 0 |
 | example3 | Generalizations | 0 | 0 | 0 |
 | example3 | Enumerations | 0 | 0 | 0 |
 | example3 | Modules | 1 | 1 | 1 |
@@ -57,8 +57,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example3 | Input fields | 6 | 6 | 6 |
 | example4 | Entities | 2 | 2 | 2 |
 | example4 | Attributes | 6 | 6 | 6 |
-| example4 | Associations | N/A | 0 | 0 |
-| example4 | Multiplicities | N/A | 0 | 0 |
+| example4 | Associations | 0 | 0 | 0 |
+| example4 | Multiplicities | 0 | 0 | 0 |
 | example4 | Generalizations | 0 | 0 | 0 |
 | example4 | Enumerations | 0 | 0 | 0 |
 | example4 | Modules | 1 | 1 | 1 |
@@ -74,8 +74,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example4 | Input fields | 0 | 0 | 0 |
 | example5 | Entities | 1 | 1 | 1 |
 | example5 | Attributes | 8 | 8 | 8 |
-| example5 | Associations | N/A | 0 | 0 |
-| example5 | Multiplicities | N/A | 0 | 0 |
+| example5 | Associations | 0 | 0 | 0 |
+| example5 | Multiplicities | 0 | 0 | 0 |
 | example5 | Generalizations | 0 | 0 | 0 |
 | example5 | Enumerations | 0 | 0 | 0 |
 | example5 | Modules | 1 | 1 | 1 |
@@ -92,8 +92,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 
 Counting notes:
 
-- N/A means the source export does not declare a comparable element. CSV relationships and cardinalities cannot be verified; the two BUML associations are inferred. Target counts exclude supplementary `schema.json` constraints.
-- Attributes count scalar properties/columns. Two source FK columns become BUML association roles; generation restores them. Synthetic primary-key columns the generator adds for tables with no natural key are excluded from these counts, since they are generator boilerplate, not model- or source-derived data.
+- N/A means the source export does not declare a comparable element (e.g. CSV has no generalization/enumeration syntax). Associations/Multiplicities are not N/A: a `*_id` column whose prefix names another table in the same export is counted as an implicit association at every stage (Base, BUML, Target), via the same naming convention the parser itself uses to build associations - not just once the parser has run. Target counts exclude supplementary `schema.json` constraints.
+- Attributes count scalar properties/columns, excluding columns classified as an implicit association (see above). Two source FK columns are counted as associations at every stage, not as attributes anywhere, so Base/BUML/Target no longer disagree on their classification. Synthetic primary-key columns the generator adds for tables with no natural key are also excluded from the Attributes count, since they are generator boilerplate, not model- or source-derived data.
 - Buttons include source/target submit controls. BUML puts seven submit controls into Forms, giving 22 standalone buttons plus seven form controls. Labels count authored button/submit captions only; ID-derived captions synthesized for icon-only buttons are excluded from these counts rather than inflating BUML/Target.
 - Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts explicit operations, excluding script-inferred navigation. Action types count BUML enum intent; the target does not preserve it as explicit CRUD/cancel actions.
 - This follows the separate parser/generator measurements in paper section 6. It measures export structure, not live Retool execution or layout equivalence.
