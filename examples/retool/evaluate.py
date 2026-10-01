@@ -277,7 +277,12 @@ def pivot_inventory(domain, gui):
               'Generalizations': len(domain.generalizations),
               'Enumerations': sum(type(t).__name__ == 'Enumeration' for t in domain.types),
               'Modules': len(gui.modules), 'Screens': len(screens), 'Bound entities': len(bindings),
-              'Buttons': count['Button'], 'Action types': len(action_types), 'Navigation': navigation_count,
+              # Each Form's submit control renders as a standalone <Button> in the
+              # export (Base/Target), but BUML models it as Form.submit_label, not
+              # a separate Button widget - count it here too so Buttons isn't an
+              # artifact of that bucketing (no example form sets show_cancel, so
+              # one implicit button per Form is exact, not an approximation).
+              'Buttons': count['Button'] + count['Form'], 'Action types': len(action_types), 'Navigation': navigation_count,
               'Forms': count['Form'], 'Labels': sum(bool(w.get('label')) and w.get('label') != w.get('name') for w in widgets if w['kind'] == 'Button') + sum(bool(w.get('submit_label')) for w in widgets if w['kind'] == 'Form'),
               'DataLists': count['DataList'], 'DataSources': sum(len(w.get('sources', [])) for w in widgets),
               'Input fields': count['InputField'] + sum(len(w.get('fields', [])) for w in widgets)}
@@ -410,9 +415,7 @@ def run_example(number, run, from_snapshots=False, output_root=None):
                     retained_cells += 1
                 else:
                     missing_cells.append({'table': name_, 'row': row_number + 1, 'column': column})
-    result['supplementary'] = {'logical_buttons_including_form_submit': pivot['counts']['Buttons'] + pivot['counts']['Forms'],
-                               'scalar_attributes_plus_fk_roles': pivot['counts']['Attributes'] + pivot['counts']['Associations'],
-                               'source_cells': source_cells, 'retained_cells': retained_cells,
+    result['supplementary'] = {'source_cells': source_cells, 'retained_cells': retained_cells,
                                'changed_or_missing_cells': missing_cells,
                                'csv_schema_manifest_references': sum(bool(c['references']) for t in schema_manifest['tables'] for c in t['columns'])}
     dump(out / 'results.json', result)
@@ -429,7 +432,7 @@ def run_example(number, run, from_snapshots=False, output_root=None):
     report += '## BUML → Retool (RQ2)\n\n' + table(result['generator']) + '\n\n'
     report += f"Source/pivot/generated event declarations: **{source['events']} / {pivot['native_events']} / {target_gui['events']}**. Button classifications are naming heuristics; they do not establish executable CRUD behavior.\n\n"
     report += f"Records supplied separately from CSV: `{result['row_counts']}`. These are not instances recovered from BUML.\n\n"
-    report += f"Supplementary accounting: **{result['supplementary']['logical_buttons_including_form_submit']}** logical buttons including Form submit controls; **{result['supplementary']['scalar_attributes_plus_fk_roles']}** scalar attributes plus inferred FK roles; **{retained_cells}/{source_cells}** original CSV cells retained exactly. The schema manifest contains **{result['supplementary']['csv_schema_manifest_references']}** FK references, without enforcing them in CSV.\n\n"
+    report += f"Supplementary accounting: **{retained_cells}/{source_cells}** original CSV cells retained exactly. The schema manifest contains **{result['supplementary']['csv_schema_manifest_references']}** FK references, without enforcing them in CSV.\n\n"
     report += '## Artifacts\n\n- `source_inventory.json`: file hashes, independent tag/header counts and source evidence.\n- `retool_to_buml/project.py`: executable combined model, with documented serializer repairs.\n- `retool_to_buml/pivot.pkl`: exact locally produced reference model (load only trusted local snapshots).\n- `retool_to_buml/inventory.json`: classes, relationships, screens, widgets, bindings.\n- `buml_to_retool/csv/`: generated records and supplementary schema manifest.\n- `buml_to_retool/' + name + '.zip`: generated Toolscript archive; matching folder alongside it.\n- `roundtrip_inventory.json`: supplementary reparse check; not the generator ground truth.\n- `pipeline.log`, `results.json`: diagnostics and machine-readable results.\n\n'
     report += '## Generator warnings\n\n' + '\n'.join('- ' + w for w in generator.warnings) + '\n'
     report += '\n## Unresolved generated expressions\n\n'
@@ -470,13 +473,19 @@ def main():
               'Synthetic primary-key columns the generator adds for tables with no natural key are also '
               'excluded from the Attributes count, since they are generator boilerplate, not model- or '
               'source-derived data.',
-              '- Buttons include source/target submit controls. BUML puts seven submit controls into Forms, '
-              'giving 22 standalone buttons plus seven form controls. Labels count authored button/submit '
-              'captions only; ID-derived captions synthesized for icon-only buttons are excluded from these '
-              'counts rather than inflating BUML/Target.',
+              '- Buttons include each Form\'s submit control: BUML models it as `Form.submit_label`, not a '
+              'separate Button widget, but it renders as a standalone `<Button>` in the export, so it is '
+              'counted here at every stage (no example form sets `show_cancel`, so this is exact, not an '
+              'approximation). Labels count authored button/submit captions only; ID-derived captions '
+              'synthesized for icon-only buttons are excluded from these counts rather than inflating '
+              'BUML/Target.',
               '- Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts '
-              'explicit operations, excluding script-inferred navigation. Action types count BUML enum intent; '
-              'the target does not preserve it as explicit CRUD/cancel actions.',
+              'explicit operations, excluding script-inferred navigation. Action types is a genuine, '
+              'one-directional gap, not a counting artifact: the parser classifies each button\'s CRUD/'
+              'navigation intent into a BUML enum from its query/label text (`N/A` in Base because the '
+              'source export has no such field to classify from), but the generator never serializes '
+              '`Button.actionType` back into the output - the generated RSX carries the button\'s executable '
+              'event/plugin wiring, but not this classification, so Target is always 0.',
               '- This follows the separate parser/generator measurements in paper section 6. It measures '
               'export structure, not live Retool execution or layout equivalence.', '',
               'Regenerate: `python examples/retool/evaluate.py`. Only this table is saved; intermediate '
