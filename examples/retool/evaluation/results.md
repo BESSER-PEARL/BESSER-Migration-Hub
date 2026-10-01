@@ -56,7 +56,7 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example3 | DataSources | 1 | 1 | 1 |
 | example3 | Input fields | 6 | 6 | 6 |
 | example4 | Entities | 2 | 2 | 2 |
-| example4 | Attributes | 6 | 6 | 8 |
+| example4 | Attributes | 6 | 6 | 6 |
 | example4 | Associations | N/A | 0 | 0 |
 | example4 | Multiplicities | N/A | 0 | 0 |
 | example4 | Generalizations | 0 | 0 | 0 |
@@ -85,7 +85,7 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 | example5 | Action types | N/A | 3 | 0 |
 | example5 | Navigation | 6 | 1 | 1 |
 | example5 | Forms | 1 | 1 | 1 |
-| example5 | Labels | 7 | 9 | 9 |
+| example5 | Labels | 7 | 7 | 7 |
 | example5 | DataLists | 1 | 1 | 1 |
 | example5 | DataSources | 1 | 1 | 1 |
 | example5 | Input fields | 12 | 12 | 12 |
@@ -93,8 +93,8 @@ Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the gene
 Counting notes:
 
 - N/A means the source export does not declare a comparable element. CSV relationships and cardinalities cannot be verified; the two BUML associations are inferred. Target counts exclude supplementary `schema.json` constraints.
-- Attributes count scalar properties/columns. Two source FK columns become BUML association roles; generation restores them and adds two synthetic IDs.
-- Buttons include source/target submit controls. BUML puts seven submit controls into Forms, giving 22 standalone buttons plus seven form controls. Labels count button/submit captions; two icon-only source buttons gain ID-derived captions.
+- Attributes count scalar properties/columns. Two source FK columns become BUML association roles; generation restores them. Synthetic primary-key columns the generator adds for tables with no natural key are excluded from these counts, since they are generator boilerplate, not model- or source-derived data.
+- Buttons include source/target submit controls. BUML puts seven submit controls into Forms, giving 22 standalone buttons plus seven form controls. Labels count authored button/submit captions only; ID-derived captions synthesized for icon-only buttons are excluded from these counts rather than inflating BUML/Target.
 - Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts explicit operations, excluding script-inferred navigation. Action types count BUML enum intent; the target does not preserve it as explicit CRUD/cancel actions.
 - This follows the separate parser/generator measurements in paper section 6. It measures export structure, not live Retool execution or layout equivalence.
 

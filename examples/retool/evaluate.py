@@ -133,10 +133,15 @@ def audit_gui(folder, table_names):
                 if re.search(r'\b' + re.escape(query) + r'\b', r['raw']) and table in table_names:
                     bound.add(table)
     # Binding coverage uses CSV-backed SQL tables, not missing external tables.
+    def authored_caption(r):
+        # Icon-only buttons without a source caption get an ID-derived one (parser
+        # fallback and generator re-serialization); exclude that boilerplate here.
+        caption = r['attributes'].get('text') or r['attributes'].get('label')
+        return caption if caption and caption != r['attributes'].get('id') else None
     metrics = {'Modules': 1, 'Screens': len(screens) + (0 if count['Screen'] else 1),
                'Bound entities': len(bound), 'Buttons': len(buttons) + len(legacy_labels),
                'Action types': None, 'Navigation': len(navigation), 'Forms': count['Form'],
-               'Labels': sum(bool(r['attributes'].get('text') or r['attributes'].get('label')) for r in buttons) + sum(bool(v) for v in legacy_labels),
+               'Labels': sum(bool(authored_caption(r)) for r in buttons) + sum(bool(v) for v in legacy_labels),
                'DataLists': len(tables), 'DataSources': len(tables),
                'Input fields': sum(count[t] for t in INPUTS)}
     ids = {r['attributes'].get('id') for r in records}
@@ -156,7 +161,12 @@ def audit_gui(folder, table_names):
             'unresolved_expression_references': unresolved}
 
 
-def csv_inventory(folder):
+def csv_inventory(folder, synthetic_columns=None):
+    """synthetic_columns maps table name -> column names the generator added as
+    boilerplate (e.g. a primary key for a table with no natural key); these are
+    excluded from the Attributes count so it isn't inflated by generator output
+    that was never present in, or derived from, the model."""
+    synthetic_columns = synthetic_columns or {}
     tables = []
     rows = {}
     for file in sorted(folder.glob('*.csv')):
@@ -165,8 +175,9 @@ def csv_inventory(folder):
             records = list(reader)
             tables.append({'table': file.stem, 'columns': reader.fieldnames, 'rows': len(records), 'file': file.name})
             rows[file.stem] = records
+    boilerplate = sum(len(synthetic_columns.get(t['table'], ())) for t in tables)
     return {'tables': tables, 'counts': {'Entities': len(tables),
-            'Attributes': sum(len(t['columns']) for t in tables), 'Associations': None,
+            'Attributes': sum(len(t['columns']) for t in tables) - boilerplate, 'Associations': None,
             'Multiplicities': None, 'Generalizations': 0, 'Enumerations': 0}}, rows
 
 
@@ -224,7 +235,7 @@ def pivot_inventory(domain, gui):
               'Enumerations': sum(type(t).__name__ == 'Enumeration' for t in domain.types),
               'Modules': len(gui.modules), 'Screens': len(screens), 'Bound entities': len(bindings),
               'Buttons': count['Button'], 'Action types': len(action_types), 'Navigation': navigation_count,
-              'Forms': count['Form'], 'Labels': sum(bool(w.get('label')) for w in widgets if w['kind'] == 'Button') + sum(bool(w.get('submit_label')) for w in widgets if w['kind'] == 'Form'),
+              'Forms': count['Form'], 'Labels': sum(bool(w.get('label')) and w.get('label') != w.get('name') for w in widgets if w['kind'] == 'Button') + sum(bool(w.get('submit_label')) for w in widgets if w['kind'] == 'Form'),
               'DataLists': count['DataList'], 'DataSources': sum(len(w.get('sources', [])) for w in widgets),
               'Input fields': count['InputField'] + sum(len(w.get('fields', [])) for w in widgets)}
     return {'counts': counts, 'classes': classes, 'associations': associations,
@@ -321,7 +332,9 @@ def run_example(number, run, from_snapshots=False, output_root=None):
         generator = RetoolGenerator(domain, gui_model=gui, app_name=name,
                                     output_dir=str(out / 'buml_to_retool'), rows=rows)
         paths, archive = generator.generate()
-        target_data, target_rows = csv_inventory(out / 'buml_to_retool' / 'csv')
+        schema_manifest = json.loads((out / 'buml_to_retool' / 'csv' / 'schema.json').read_text())
+        synthetic_columns = {t['name']: {c['name'] for c in t['columns'] if c['synthetic']} for t in schema_manifest['tables']}
+        target_data, target_rows = csv_inventory(out / 'buml_to_retool' / 'csv', synthetic_columns=synthetic_columns)
         target_gui = audit_gui(out / 'buml_to_retool' / name, {t['table'] for t in target_data['tables']})
         roundtrip = retool_rsx_to_gui(archive, module_name=name, domain_model=domain)
     (out / ('audit_refresh.log' if from_snapshots else 'pipeline.log')).write_text(log.getvalue(), encoding='utf-8')
@@ -356,7 +369,7 @@ def run_example(number, run, from_snapshots=False, output_root=None):
                                'scalar_attributes_plus_fk_roles': pivot['counts']['Attributes'] + pivot['counts']['Associations'],
                                'source_cells': source_cells, 'retained_cells': retained_cells,
                                'changed_or_missing_cells': missing_cells,
-                               'csv_schema_manifest_references': sum(bool(c['references']) for t in json.loads((out / 'buml_to_retool/csv/schema.json').read_text())['tables'] for c in t['columns'])}
+                               'csv_schema_manifest_references': sum(bool(c['references']) for t in schema_manifest['tables'] for c in t['columns'])}
     dump(out / 'results.json', result)
     (out.parent / 'README.md').write_text(
         f'# {name}: saved pipeline evaluations\n\n'
@@ -404,10 +417,13 @@ def main():
               'and cardinalities cannot be verified; the two BUML associations are inferred. Target counts '
               'exclude supplementary `schema.json` constraints.',
               '- Attributes count scalar properties/columns. Two source FK columns become BUML association '
-              'roles; generation restores them and adds two synthetic IDs.',
+              'roles; generation restores them. Synthetic primary-key columns the generator adds for tables '
+              'with no natural key are excluded from these counts, since they are generator boilerplate, not '
+              'model- or source-derived data.',
               '- Buttons include source/target submit controls. BUML puts seven submit controls into Forms, '
-              'giving 22 standalone buttons plus seven form controls. Labels count button/submit captions; '
-              'two icon-only source buttons gain ID-derived captions.',
+              'giving 22 standalone buttons plus seven form controls. Labels count authored button/submit '
+              'captions only; ID-derived captions synthesized for icon-only buttons are excluded from these '
+              'counts rather than inflating BUML/Target.',
               '- Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts '
               'explicit operations, excluding script-inferred navigation. Action types count BUML enum intent; '
               'the target does not preserve it as explicit CRUD/cancel actions.',
