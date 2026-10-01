@@ -1,6 +1,15 @@
-"""Reproduce the five-example Retool evaluation (paper section 6).
+"""Reproduce the five-example Retool PARSER evaluation (paper section 6, RQ1 only).
 
-The source/target auditor deliberately does not call the migration parser.
+This script measures Retool -> BUML (the parser) exclusively: Base (the raw
+Retool CSV/GUI export) vs BUML (the parsed pivot). It does not run the
+generator and does not measure BUML -> Retool (RQ2) at all - that is a
+separate question, answered by `evaluate_generator.py` against an
+independently-authored oracle BUML model, not against this script's own
+parser output. Grading the generator against the parser's own pivot would
+let a parser bug silently become the "ground truth" the generator is judged
+against, so RQ1 and RQ2 are intentionally kept apart as separate scripts.
+
+The source auditor deliberately does not call the migration parser.
 Run from the repository: python examples/retool/evaluate.py
 Only the counts table is retained; pipeline artifacts use a temporary directory.
 """
@@ -26,7 +35,6 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 from migrator.parsers.retool.retool_csv_parser import retool_csv_to_buml
 from migrator.parsers.retool.retool_rsx_parser import retool_rsx_to_gui
-from migrator.generators.retool import RetoolGenerator
 from besser.utilities.buml_code_builder import domain_model_to_code, gui_model_to_code
 from besser.BUML.metamodel.gui.graphical_ui import Button, Form, DataList, InputField
 
@@ -196,7 +204,7 @@ def _fk_columns(tables):
     return fk
 
 
-def csv_inventory(folder, synthetic_columns=None):
+def csv_inventory(folder, synthetic_columns=None, known_fk_columns=None):
     """synthetic_columns maps table name -> column names the generator added as
     boilerplate (e.g. a primary key for a table with no natural key); these are
     excluded from the Attributes count so it isn't inflated by generator output
@@ -205,8 +213,15 @@ def csv_inventory(folder, synthetic_columns=None):
     FK-shaped columns (see _fk_columns) are implicit associations: they are
     counted as Associations/Multiplicities, not Attributes, at every stage
     (Base, BUML, Target) so a column isn't an "attribute" in the source export
-    and an "association" once parsed."""
+    and an "association" once parsed. `_fk_columns`'s naming-convention
+    heuristic is the only option for raw source CSVs, but it can miss FK
+    columns whose name doesn't resemble the referenced table's name (e.g. an
+    association end role name that isn't just the class name). For generated
+    output, the generator's own `schema.json` manifest marks `references`
+    authoritatively; pass that in as `known_fk_columns` (table name -> column
+    names) to use ground truth instead of re-guessing from column names."""
     synthetic_columns = synthetic_columns or {}
+    known_fk_columns = known_fk_columns or {}
     tables = []
     rows = {}
     for file in sorted(folder.glob('*.csv')):
@@ -217,6 +232,8 @@ def csv_inventory(folder, synthetic_columns=None):
             rows[file.stem] = records
     boilerplate = sum(len(synthetic_columns.get(t['table'], ())) for t in tables)
     fk = _fk_columns(tables)
+    for table_name, columns in known_fk_columns.items():
+        fk.setdefault(table_name, set()).update(columns)
     fk_count = sum(len(cols) for cols in fk.values())
     return {'tables': tables, 'counts': {'Entities': len(tables),
             'Attributes': sum(len(t['columns']) for t in tables) - boilerplate - fk_count,
@@ -375,69 +392,24 @@ def run_example(number, run, from_snapshots=False, output_root=None):
             gui = retool_rsx_to_gui(str(gui_dir), module_name=name, domain_model=domain)
         pivot = pivot_inventory(domain, gui)
         serialize(domain, gui, out / 'retool_to_buml')
-        namespace = runpy.run_path(str(out / 'retool_to_buml' / 'project.py'))
-        domain, gui = namespace['domain_model'], namespace['gui_model']
-        generator = RetoolGenerator(domain, gui_model=gui, app_name=name,
-                                    output_dir=str(out / 'buml_to_retool'), rows=rows)
-        paths, archive = generator.generate()
-        schema_manifest = json.loads((out / 'buml_to_retool' / 'csv' / 'schema.json').read_text())
-        synthetic_columns = {t['name']: {c['name'] for c in t['columns'] if c['synthetic']} for t in schema_manifest['tables']}
-        target_data, target_rows = csv_inventory(out / 'buml_to_retool' / 'csv', synthetic_columns=synthetic_columns)
-        target_gui = audit_gui(out / 'buml_to_retool' / name, {t['table'] for t in target_data['tables']})
-        roundtrip = retool_rsx_to_gui(archive, module_name=name, domain_model=domain)
     (out / ('audit_refresh.log' if from_snapshots else 'pipeline.log')).write_text(log.getvalue(), encoding='utf-8')
     dump(out / 'retool_to_buml' / 'inventory.json', pivot)
-    dump(out / 'buml_to_retool' / 'inventory.json', {'data': target_data, 'gui': target_gui})
-    dump(out / 'roundtrip_inventory.json', pivot_inventory(domain, roundtrip))
     parser_reference = data['counts'] | source['counts']
-    target_counts = target_data['counts'] | target_gui['counts']
-    # Associations/Multiplicities now come from the same FK-naming heuristic
-    # csv_inventory applies to Base and BUML (see _fk_columns), so they are
-    # genuine counts here too, not forced zeros. CSV has no native
-    # generalization/enum declarations, so those stay zero.
-    target_counts.update(Generalizations=0, Enumerations=0, **{'Action types': 0})
     result = {'example': name, 'run': run, 'parser': ratios(parser_reference, pivot['counts'], DATA_KEYS + GUI_KEYS),
-              'generator': ratios(pivot['counts'], target_counts, DATA_KEYS + GUI_KEYS),
-              'warnings': generator.warnings, 'source_events': source['events'],
-              'pivot_events': pivot['native_events'], 'generated_events': target_gui['events'],
-              'row_counts': {'source': {k: len(v) for k, v in rows.items()}, 'target': {k: len(v) for k, v in target_rows.items()}},
+              'source_events': source['events'], 'pivot_events': pivot['native_events'],
+              'row_counts': {'source': {k: len(v) for k, v in rows.items()}},
               'source_tag_counts': source['tag_counts'], 'serialization_passed': True}
-    result['generated_unresolved_expression_references'] = target_gui['unresolved_expression_references']
     result['frozen_baseline_reference'] = from_snapshots
-    source_cells = retained_cells = 0
-    missing_cells = []
-    for name_, records in rows.items():
-        target_records = target_rows[name_]
-        for row_number, record in enumerate(records):
-            for column, value in record.items():
-                source_cells += 1
-                if row_number < len(target_records) and target_records[row_number].get(column) == value:
-                    retained_cells += 1
-                else:
-                    missing_cells.append({'table': name_, 'row': row_number + 1, 'column': column})
-    result['supplementary'] = {'source_cells': source_cells, 'retained_cells': retained_cells,
-                               'changed_or_missing_cells': missing_cells,
-                               'csv_schema_manifest_references': sum(bool(c['references']) for t in schema_manifest['tables'] for c in t['columns'])}
     dump(out / 'results.json', result)
-    (out.parent / 'README.md').write_text(
-        f'# {name}: saved pipeline evaluations\n\n'
-        'Start with [the updated evaluation](improved/README.md). '
-        'It includes both migration directions and links to the generated artifacts.\n\n'
-        '- [Baseline](baseline/README.md)\n'
-        '- [Updated pipeline](improved/README.md)\n'
-        '- [Shared protocol and aggregate findings](../../evaluation/README.md)\n', encoding='utf-8')
-    report = f'# {name}: {run} pipeline evaluation\n\n'
-    report += 'Method and limitations: [shared evaluation protocol](../../../evaluation/README.md).\n\n'
+    report = f'# {name}: {run} parser evaluation (RQ1 only)\n\n'
+    report += ('Generator evaluation (RQ2) is not measured here: see '
+               '`evaluate_generator.py` / `generator_results.md`, which grades the '
+               'generator against an independently-authored oracle BUML model '
+               'instead of this script\'s own parser output.\n\n')
     report += '## Retool → BUML (RQ1)\n\n' + table(result['parser']) + '\n\n'
-    report += '## BUML → Retool (RQ2)\n\n' + table(result['generator']) + '\n\n'
-    report += f"Source/pivot/generated event declarations: **{source['events']} / {pivot['native_events']} / {target_gui['events']}**. Button classifications are naming heuristics; they do not establish executable CRUD behavior.\n\n"
-    report += f"Records supplied separately from CSV: `{result['row_counts']}`. These are not instances recovered from BUML.\n\n"
-    report += f"Supplementary accounting: **{retained_cells}/{source_cells}** original CSV cells retained exactly. The schema manifest contains **{result['supplementary']['csv_schema_manifest_references']}** FK references, without enforcing them in CSV.\n\n"
-    report += '## Artifacts\n\n- `source_inventory.json`: file hashes, independent tag/header counts and source evidence.\n- `retool_to_buml/project.py`: executable combined model, with documented serializer repairs.\n- `retool_to_buml/pivot.pkl`: exact locally produced reference model (load only trusted local snapshots).\n- `retool_to_buml/inventory.json`: classes, relationships, screens, widgets, bindings.\n- `buml_to_retool/csv/`: generated records and supplementary schema manifest.\n- `buml_to_retool/' + name + '.zip`: generated Toolscript archive; matching folder alongside it.\n- `roundtrip_inventory.json`: supplementary reparse check; not the generator ground truth.\n- `pipeline.log`, `results.json`: diagnostics and machine-readable results.\n\n'
-    report += '## Generator warnings\n\n' + '\n'.join('- ' + w for w in generator.warnings) + '\n'
-    report += '\n## Unresolved generated expressions\n\n'
-    report += ('\n'.join(f"- `{r['file']}:{r['line']}`: `{r['widget']}.{r['property']}` refers to undeclared `{r['symbol']}`." for r in target_gui['unresolved_expression_references'])
-               or 'No unresolved references found by the limited `.data` / `.value` / `.selectedRow` identifier audit.') + '\n'
+    report += f"Source/pivot event declarations: **{source['events']} / {pivot['native_events']}**. Button classifications are naming heuristics; they do not establish executable CRUD behavior.\n\n"
+    report += f"Records present in source CSV (not instances recovered from BUML): `{result['row_counts']['source']}`.\n\n"
+    report += '## Artifacts\n\n- `source_inventory.json`: file hashes, independent tag/header counts and source evidence.\n- `retool_to_buml/project.py`: executable combined model, with documented serializer repairs.\n- `retool_to_buml/pivot.pkl`: exact locally produced reference model (load only trusted local snapshots).\n- `retool_to_buml/inventory.json`: classes, relationships, screens, widgets, bindings.\n- `pipeline.log`, `results.json`: diagnostics and machine-readable results.\n\n'
     (out / 'README.md').write_text(report, encoding='utf-8')
     return result
 
@@ -448,49 +420,44 @@ def main():
     args = parser.parse_args()
     with tempfile.TemporaryDirectory(prefix='retool-evaluation-') as workdir:
         results = [run_example(number, 'current', output_root=workdir) for number in range(1, 6)]
-    lines = ['# Retool pipeline element counts', '',
-             'Base = original Retool CSV/GUI exports; BUML = parsed pivot supplied to the generator; '
-             'Target = generated Retool CSV/GUI exports. Counts use the current parser and generator.', '',
-             '| Example | Element | Base | BUML | Target |',
-             '|---|---|---:|---:|---:|']
+    lines = ['# Retool parser element counts (RQ1 only)', '',
+             'Base = original Retool CSV/GUI exports; BUML = parsed pivot (output of the '
+             'migration parser). Counts use the current parser. This file does not measure '
+             'the generator (BUML -> Retool, RQ2): see `generator_results.md`, which grades '
+             'the generator against an independently-authored oracle BUML model rather than '
+             'the parser\'s own output measured here.', '',
+             '| Example | Element | Base | BUML |',
+             '|---|---|---:|---:|']
     display = lambda value: 'N/A' if value is None else str(value)
     for result in results:
         for key in DATA_KEYS + GUI_KEYS:
             source = result['parser'][key]['reference']
             pivot = result['parser'][key]['output']
-            target = result['generator'][key]['output']
-            lines.append(f"| {result['example']} | {key} | {display(source)} | {display(pivot)} | {display(target)} |")
+            lines.append(f"| {result['example']} | {key} | {display(source)} | {display(pivot)} |")
     lines += ['', 'Counting notes:', '',
               '- N/A means the source export does not declare a comparable element (e.g. CSV has no '
               'generalization/enumeration syntax). Associations/Multiplicities are not N/A: a `*_id` '
               'column whose prefix names another table in the same export is counted as an implicit '
-              'association at every stage (Base, BUML, Target), via the same naming convention the '
-              'parser itself uses to build associations - not just once the parser has run. Target '
-              'counts exclude supplementary `schema.json` constraints.',
+              'association at every stage (Base, BUML), via the same naming convention the '
+              'parser itself uses to build associations - not just once the parser has run.',
               '- Attributes count scalar properties/columns, excluding columns classified as an implicit '
               'association (see above). Two source FK columns are counted as associations at every stage, '
-              'not as attributes anywhere, so Base/BUML/Target no longer disagree on their classification. '
-              'Synthetic primary-key columns the generator adds for tables with no natural key are also '
-              'excluded from the Attributes count, since they are generator boilerplate, not model- or '
-              'source-derived data.',
+              'not as attributes anywhere, so Base and BUML no longer disagree on their classification.',
               '- Buttons include each Form\'s submit control: BUML models it as `Form.submit_label`, not a '
-              'separate Button widget, but it renders as a standalone `<Button>` in the export, so it is '
-              'counted here at every stage (no example form sets `show_cancel`, so this is exact, not an '
-              'approximation). Labels count authored button/submit captions only; ID-derived captions '
-              'synthesized for icon-only buttons are excluded from these counts rather than inflating '
-              'BUML/Target.',
+              'separate Button widget, but it renders as a standalone `<Button>` in the source export, so '
+              'it is counted here at every stage (no example form sets `show_cancel`, so this is exact, '
+              'not an approximation). Labels count authored button/submit captions only; ID-derived '
+              'captions synthesized for icon-only buttons are excluded from these counts.',
               '- Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts '
-              'explicit operations, excluding script-inferred navigation. Action types is a genuine, '
-              'one-directional gap, not a counting artifact: the parser classifies each button\'s CRUD/'
-              'navigation intent from its wired-up Events first (a triggered query name like '
-              '`deleteProduct`, or a widget `show`/`hide` event) and only falls back to its caption text '
-              'when no event is conclusive, so a button is not misclassified just because its caption '
-              'resembles an unrelated keyword. `N/A` in Base because the source export has no such field '
-              'to classify from. The generator never serializes `Button.actionType` back into the output - '
-              'the generated RSX carries the button\'s executable event/plugin wiring, but not this '
-              'classification, so Target is always 0.',
-              '- This follows the separate parser/generator measurements in paper section 6. It measures '
-              'export structure, not live Retool execution or layout equivalence.', '',
+              'explicit operations, excluding script-inferred navigation. Action types count what the '
+              'parser classifies each button\'s CRUD/navigation intent as, from its wired-up Events first '
+              '(a triggered query name like `deleteProduct`, or a widget `show`/`hide` event) and only '
+              'falling back to its caption text when no event is conclusive. `N/A` in Base because the '
+              'source export has no such field to classify from - this is purely a parser-side inference, '
+              'not a comparable source feature. Whether the generator preserves this classification is a '
+              'generator question, not measured here - see `generator_results.md`.',
+              '- This follows the parser measurement in paper section 6. It measures export structure, not '
+              'live Retool execution or layout equivalence.', '',
               'Regenerate: `python examples/retool/evaluate.py`. Only this table is saved; intermediate '
               'models and exports are temporary.', '']
     args.output.parent.mkdir(parents=True, exist_ok=True)
