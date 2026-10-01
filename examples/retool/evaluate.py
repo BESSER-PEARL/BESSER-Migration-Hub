@@ -482,10 +482,13 @@ def main():
               '- Screens include named views/wrappers, dialogs, and implicit main pages. Navigation counts '
               'explicit operations, excluding script-inferred navigation. Action types is a genuine, '
               'one-directional gap, not a counting artifact: the parser classifies each button\'s CRUD/'
-              'navigation intent into a BUML enum from its query/label text (`N/A` in Base because the '
-              'source export has no such field to classify from), but the generator never serializes '
-              '`Button.actionType` back into the output - the generated RSX carries the button\'s executable '
-              'event/plugin wiring, but not this classification, so Target is always 0.',
+              'navigation intent from its wired-up Events first (a triggered query name like '
+              '`deleteProduct`, or a widget `show`/`hide` event) and only falls back to its caption text '
+              'when no event is conclusive, so a button is not misclassified just because its caption '
+              'resembles an unrelated keyword. `N/A` in Base because the source export has no such field '
+              'to classify from. The generator never serializes `Button.actionType` back into the output - '
+              'the generated RSX carries the button\'s executable event/plugin wiring, but not this '
+              'classification, so Target is always 0.',
               '- This follows the separate parser/generator measurements in paper section 6. It measures '
               'export structure, not live Retool execution or layout equivalence.', '',
               'Regenerate: `python examples/retool/evaluate.py`. Only this table is saved; intermediate '

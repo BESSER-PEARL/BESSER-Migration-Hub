@@ -87,7 +87,7 @@ _FIELD_TAG_MAP = {
 }
 
 
-_DEFAULT_CLASSIFICATION = (ButtonType.TextButton, ButtonActionType.Cancel)
+_DEFAULT_CLASSIFICATION = (ButtonType.TextButton, ButtonActionType.RunMethod)
 
 
 def _classify(keyword_source: str):
@@ -113,7 +113,43 @@ def _classify_best(*candidates: str):
             words = re.sub(r'([a-z])([A-Z])', r'\1 \2', candidate).lower()
             if any(re.search(rf'(?<![a-z]){keyword}(?![a-z])', words) for keyword, _ in _BUTTON_MAP):
                 return _classify(candidate)
-    return _DEFAULT_CLASSIFICATION
+    return None
+
+
+def _event_signal(inner: str):
+    """Classify a button from its wired-up Events, when they conclusively
+    signal an action type - this takes priority over guessing from the
+    caption, since it reflects what the button actually does.
+
+    A `type="datasource" method="trigger"` event runs a named query,
+    and Retool query names are real ground truth for CRUD intent (e.g.
+    `pluginId="deleteProduct"`), not a label-text guess. `type="widget"`
+    events are structural, independent of either name: `show`/`open`
+    reveals another widget (typically a modal) and `hide`/`close` dismisses
+    one, regardless of what the button or target happens to be called -
+    e.g. a "Setup Guide" button that only `show`s a modal is navigating,
+    not cancelling, even though its caption matches no keyword.
+    Returns None, not a default, when nothing conclusive is found, so the
+    caller can still fall back to a caption-based guess before giving up.
+    """
+    trigger_plugin_id = None
+    widget_methods = []
+    for _, ev_attrs, _ in _find_all_tags(inner, {'Event'}):
+        ev_type = _attr(ev_attrs, 'type')
+        method = _attr(ev_attrs, 'method')
+        if ev_type == 'datasource' and method == 'trigger' and trigger_plugin_id is None:
+            trigger_plugin_id = _attr(ev_attrs, 'pluginId')
+        elif ev_type == 'widget':
+            widget_methods.append(method)
+    if trigger_plugin_id:
+        pair = _classify_best(trigger_plugin_id)
+        if pair is not None:
+            return pair
+    if any(method in ('hide', 'close') for method in widget_methods):
+        return (ButtonType.TextButton, ButtonActionType.Cancel)
+    if any(method in ('show', 'open') for method in widget_methods):
+        return (ButtonType.TextButton, ButtonActionType.Navigate)
+    return None
 
 
 def _safe_name(text: str) -> str:
@@ -377,7 +413,7 @@ def _build_data_list(tag: str, attrs: str, inner: str, query_primary_table: dict
         attrs, re.DOTALL,
     ):
         label, query = ab_m.group(1), ab_m.group(2)
-        btn_type, act_type = _classify_best(query, label)
+        btn_type, act_type = _classify_best(query, label) or _DEFAULT_CLASSIFICATION
         btn_name = _dedupe_name(_safe_name(f"{widget_id}_{label}"), used_names)
         action_buttons.append(Button(
             name=btn_name, description="", label=label,
@@ -397,12 +433,11 @@ def _build_button(attrs: str, inner: str, used_names: set):
     widget_id = _attr(attrs, 'id') or label or 'button'
     if not label:
         label = widget_id
-    plugin_id = None
-    for tag, ev_attrs, _span in _find_all_tags(inner, {'Event'}):
-        if _attr(ev_attrs, 'method') == 'trigger':
-            plugin_id = _attr(ev_attrs, 'pluginId')
-            break
-    btn_type, act_type = _classify_best(plugin_id, label)
+    # The button's wired-up Events are checked before its caption: what a
+    # button actually does (runs a named delete/update query, opens a modal,
+    # closes one) is real evidence, whereas the caption is only ever a guess.
+    btn_type, act_type = (_event_signal(inner) or _classify_best(label)
+                          or _DEFAULT_CLASSIFICATION)
     name = _dedupe_name(_safe_name(widget_id), used_names)
     try:
         button = Button(
@@ -410,7 +445,6 @@ def _build_button(attrs: str, inner: str, used_names: set):
             buttonType=btn_type, actionType=act_type,
         )
         # Resolve direct dialog-opening events after every screen is known.
-        # Query triggers and scripts are deliberately not guessed from captions.
         button._retool_navigation = [
             (_attr(ev_attrs, 'event'), _attr(ev_attrs, 'pluginId'))
             for _, ev_attrs, _ in _find_all_tags(inner, {'Event'})
