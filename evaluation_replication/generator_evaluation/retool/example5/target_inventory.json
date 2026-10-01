@@ -1,0 +1,6726 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "eba_demo_da_dept",
+        "columns": [
+          "id",
+          "deptno",
+          "dname",
+          "loc"
+        ],
+        "rows": 1,
+        "file": "eba_demo_da_dept.csv"
+      },
+      {
+        "table": "eba_demo_da_emp",
+        "columns": [
+          "id",
+          "comm",
+          "empno",
+          "ename",
+          "hiredate",
+          "job",
+          "sal",
+          "ebademodadept_id",
+          "ebademodaemp_mgr_id"
+        ],
+        "rows": 1,
+        "file": "eba_demo_da_emp.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 2,
+      "Attributes": 9,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 25,
+      "Bound entities": 2,
+      "Buttons": 32,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 8,
+      "Labels": 30,
+      "DataLists": 26,
+      "DataSources": 26,
+      "Input fields": 66
+    },
+    "tag_counts": {
+      "App": 1,
+      "Body": 8,
+      "Button": 32,
+      "Column": 169,
+      "Date": 7,
+      "Footer": 8,
+      "Form": 8,
+      "Frame": 25,
+      "GlobalFunctions": 1,
+      "NumberInput": 14,
+      "Screen": 25,
+      "Select": 22,
+      "SqlQueryUnified": 2,
+      "Table": 26,
+      "Text": 8,
+      "TextInput": 23
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App >",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions >",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "get_eba_demo_da_dept",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "2a86a318-80a0-4803-95d8-409396e41af2"
+        },
+        "raw": "<SqlQueryUnified id=\"get_eba_demo_da_dept\" query={include(\"./lib/get_eba_demo_da_dept.sql\", \"string\")} resourceDisplayName=\"retool_db\" resourceName=\"2a86a318-80a0-4803-95d8-409396e41af2\" />",
+        "line": 2,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "get_eba_demo_da_emp",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "2a86a318-80a0-4803-95d8-409396e41af2"
+        },
+        "raw": "<SqlQueryUnified id=\"get_eba_demo_da_emp\" query={include(\"./lib/get_eba_demo_da_emp.sql\", \"string\")} resourceDisplayName=\"retool_db\" resourceName=\"2a86a318-80a0-4803-95d8-409396e41af2\" />",
+        "line": 3,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__List",
+          "title": "Add_Remove_Class__Error__List"
+        },
+        "raw": "<Screen id=\"Add_Remove_Class__Error__List\" title=\"Add_Remove_Class__Error__List\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Add_Remove_Class__Error_",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Add_Remove_Class__Error__id"
+        },
+        "raw": "<Table id=\"Add_Remove_Class__Error_\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Add_Remove_Class__Error__id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Add_Remove_Class__Error__2_id"
+        },
+        "raw": "<Table id=\"Add_Remove_Class__Error__2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Add_Remove_Class__Error__2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Error__2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__List",
+          "title": "Add_Remove_Class__Focus__List"
+        },
+        "raw": "<Screen id=\"Add_Remove_Class__Focus__List\" title=\"Add_Remove_Class__Focus__List\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus_",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Add_Remove_Class__Focus__id"
+        },
+        "raw": "<Table id=\"Add_Remove_Class__Focus_\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Add_Remove_Class__Focus__id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Add_Remove_Class__Focus__2_id"
+        },
+        "raw": "<Table id=\"Add_Remove_Class__Focus__2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Add_Remove_Class__Focus__2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Add_Remove_Class__Focus__2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_2",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_2\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Data",
+          "text": "Reset Data"
+        },
+        "raw": "<Button id=\"Reset_Data\" text=\"Reset Data\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style_Form",
+          "title": "Application_Theme_Style_Form"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style_Form\" title=\"Application_Theme_Style_Form\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Application_Theme_Style_fields_1",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Application_Theme_Style_fields_1\" showBody={true} showFooter={true}>",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Application_Theme_Style_fields_1_title",
+          "value": "Application Theme Style"
+        },
+        "raw": "<Text id=\"Application_Theme_Style_fields_1_title\" value=\"Application Theme Style\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P24_DESKTOP_THEME_STYLE_ID",
+          "formDataKey": "P24_DESKTOP_THEME_STYLE_ID",
+          "label": "Desktop Theme Style",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P24_DESKTOP_THEME_STYLE_ID\" formDataKey=\"P24_DESKTOP_THEME_STYLE_ID\" label=\"Desktop Theme Style\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Application_Theme_Style_fields_1_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Application_Theme_Style_fields_1"
+        },
+        "raw": "<Button id=\"Application_Theme_Style_fields_1_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Application_Theme_Style_fields_1\" />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_2",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_2\" text=\"Cancel\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Delete_and_Refresh_List",
+          "title": "Delete_and_Refresh_List"
+        },
+        "raw": "<Screen id=\"Delete_and_Refresh_List\" title=\"Delete_and_Refresh_List\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Delete_and_Refresh",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Delete_and_Refresh_id"
+        },
+        "raw": "<Table id=\"Delete_and_Refresh\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Delete_and_Refresh_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Delete_and_Refresh_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Delete_and_Refresh_2_id"
+        },
+        "raw": "<Table id=\"Delete_and_Refresh_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Delete_and_Refresh_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Delete_and_Refresh_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Delete_and_Refresh_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_3",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_3\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Disable_Enable_List",
+          "title": "Disable_Enable_List"
+        },
+        "raw": "<Screen id=\"Disable_Enable_List\" title=\"Disable_Enable_List\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Disable_Enable",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Disable_Enable_id"
+        },
+        "raw": "<Table id=\"Disable_Enable\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Disable_Enable_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Disable_Enable_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Disable_Enable_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Disable_Enable_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Disable_Enable_2_id"
+        },
+        "raw": "<Table id=\"Disable_Enable_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Disable_Enable_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Disable_Enable_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Disable_Enable_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_4",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_4\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form",
+          "title": "Edit_Form"
+        },
+        "raw": "<Screen id=\"Edit_Form\" title=\"Edit_Form\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_3",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_3\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P3_COMM",
+          "formDataKey": "P3_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P3_COMM\" formDataKey=\"P3_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P3_DEPTNO",
+          "formDataKey": "P3_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P3_DEPTNO\" formDataKey=\"P3_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P3_EMPNO",
+          "formDataKey": "P3_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P3_EMPNO\" formDataKey=\"P3_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P3_ENAME",
+          "formDataKey": "P3_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P3_ENAME\" formDataKey=\"P3_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P3_HIREDATE",
+          "formDataKey": "P3_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P3_HIREDATE\" formDataKey=\"P3_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P3_JOB",
+          "formDataKey": "P3_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P3_JOB\" formDataKey=\"P3_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P3_MGR",
+          "formDataKey": "P3_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P3_MGR\" formDataKey=\"P3_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P3_ROWID",
+          "formDataKey": "P3_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P3_ROWID\" formDataKey=\"P3_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P3_SAL",
+          "formDataKey": "P3_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P3_SAL\" formDataKey=\"P3_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1"
+        },
+        "raw": "<Button id=\"Edit_fields_1_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p13",
+          "title": "Edit_Form_p13"
+        },
+        "raw": "<Screen id=\"Edit_Form_p13\" title=\"Edit_Form_p13\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_4",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_4\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_2",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_2\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_2_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_2_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P13_COMM",
+          "formDataKey": "P13_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P13_COMM\" formDataKey=\"P13_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P13_DEPTNO",
+          "formDataKey": "P13_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P13_DEPTNO\" formDataKey=\"P13_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P13_EMPNO",
+          "formDataKey": "P13_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P13_EMPNO\" formDataKey=\"P13_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P13_ENAME",
+          "formDataKey": "P13_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P13_ENAME\" formDataKey=\"P13_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P13_HIREDATE",
+          "formDataKey": "P13_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P13_HIREDATE\" formDataKey=\"P13_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P13_JOB",
+          "formDataKey": "P13_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P13_JOB\" formDataKey=\"P13_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P13_LOCATION",
+          "formDataKey": "P13_LOCATION",
+          "label": "Location",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "true"
+        },
+        "raw": "<TextInput id=\"P13_LOCATION\" formDataKey=\"P13_LOCATION\" label=\"Location\" placeholder=\"\" required={false} disabled={false} readOnly={true} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P13_MGR",
+          "formDataKey": "P13_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P13_MGR\" formDataKey=\"P13_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P13_NO_OF_EMPLOYEES",
+          "formDataKey": "P13_NO_OF_EMPLOYEES",
+          "label": "Number of Employees",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "true"
+        },
+        "raw": "<TextInput id=\"P13_NO_OF_EMPLOYEES\" formDataKey=\"P13_NO_OF_EMPLOYEES\" label=\"Number of Employees\" placeholder=\"\" required={false} disabled={false} readOnly={true} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P13_ROWID",
+          "formDataKey": "P13_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P13_ROWID\" formDataKey=\"P13_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P13_SAL",
+          "formDataKey": "P13_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P13_SAL\" formDataKey=\"P13_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_2_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_2"
+        },
+        "raw": "<Button id=\"Edit_fields_1_2_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_2\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p15",
+          "title": "Edit_Form_p15"
+        },
+        "raw": "<Screen id=\"Edit_Form_p15\" title=\"Edit_Form_p15\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_5",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_5\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_3",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_3\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_3_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_3_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P15_COMM",
+          "formDataKey": "P15_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P15_COMM\" formDataKey=\"P15_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P15_DEPTNO",
+          "formDataKey": "P15_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P15_DEPTNO\" formDataKey=\"P15_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P15_EMPNO",
+          "formDataKey": "P15_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P15_EMPNO\" formDataKey=\"P15_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P15_ENAME",
+          "formDataKey": "P15_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P15_ENAME\" formDataKey=\"P15_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P15_HIREDATE",
+          "formDataKey": "P15_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P15_HIREDATE\" formDataKey=\"P15_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P15_JOB",
+          "formDataKey": "P15_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P15_JOB\" formDataKey=\"P15_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P15_MGR",
+          "formDataKey": "P15_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P15_MGR\" formDataKey=\"P15_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P15_ROWID",
+          "formDataKey": "P15_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P15_ROWID\" formDataKey=\"P15_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P15_SAL",
+          "formDataKey": "P15_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P15_SAL\" formDataKey=\"P15_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_3_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_3"
+        },
+        "raw": "<Button id=\"Edit_fields_1_3_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_3\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p22",
+          "title": "Edit_Form_p22"
+        },
+        "raw": "<Screen id=\"Edit_Form_p22\" title=\"Edit_Form_p22\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_6",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_6\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_4",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_4\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_4_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_4_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P22_COMM",
+          "formDataKey": "P22_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P22_COMM\" formDataKey=\"P22_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P22_DEPTNO",
+          "formDataKey": "P22_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P22_DEPTNO\" formDataKey=\"P22_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P22_EMPNO",
+          "formDataKey": "P22_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P22_EMPNO\" formDataKey=\"P22_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P22_ENAME",
+          "formDataKey": "P22_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P22_ENAME\" formDataKey=\"P22_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P22_HIREDATE",
+          "formDataKey": "P22_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P22_HIREDATE\" formDataKey=\"P22_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P22_JOB",
+          "formDataKey": "P22_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P22_JOB\" formDataKey=\"P22_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P22_MGR",
+          "formDataKey": "P22_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P22_MGR\" formDataKey=\"P22_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P22_ROWID",
+          "formDataKey": "P22_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P22_ROWID\" formDataKey=\"P22_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P22_SAL",
+          "formDataKey": "P22_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P22_SAL\" formDataKey=\"P22_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_4_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_4"
+        },
+        "raw": "<Button id=\"Edit_fields_1_4_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_4\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p5",
+          "title": "Edit_Form_p5"
+        },
+        "raw": "<Screen id=\"Edit_Form_p5\" title=\"Edit_Form_p5\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_7",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_7\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_5",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_5\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_5_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_5_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P5_COMM",
+          "formDataKey": "P5_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P5_COMM\" formDataKey=\"P5_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P5_DEPTNO",
+          "formDataKey": "P5_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P5_DEPTNO\" formDataKey=\"P5_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P5_EMPNO",
+          "formDataKey": "P5_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P5_EMPNO\" formDataKey=\"P5_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P5_ENAME",
+          "formDataKey": "P5_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P5_ENAME\" formDataKey=\"P5_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P5_HIREDATE",
+          "formDataKey": "P5_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P5_HIREDATE\" formDataKey=\"P5_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P5_JOB",
+          "formDataKey": "P5_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P5_JOB\" formDataKey=\"P5_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P5_MGR",
+          "formDataKey": "P5_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P5_MGR\" formDataKey=\"P5_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P5_ROWID",
+          "formDataKey": "P5_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P5_ROWID\" formDataKey=\"P5_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P5_SAL",
+          "formDataKey": "P5_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P5_SAL\" formDataKey=\"P5_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_5_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_5"
+        },
+        "raw": "<Button id=\"Edit_fields_1_5_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_5\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p7",
+          "title": "Edit_Form_p7"
+        },
+        "raw": "<Screen id=\"Edit_Form_p7\" title=\"Edit_Form_p7\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_8",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_8\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_6",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_6\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_6_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_6_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P7_COMM",
+          "formDataKey": "P7_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P7_COMM\" formDataKey=\"P7_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P7_DEPTNO",
+          "formDataKey": "P7_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P7_DEPTNO\" formDataKey=\"P7_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P7_EMPNO",
+          "formDataKey": "P7_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P7_EMPNO\" formDataKey=\"P7_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P7_ENAME",
+          "formDataKey": "P7_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P7_ENAME\" formDataKey=\"P7_ENAME\" label=\"Name\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P7_HIREDATE",
+          "formDataKey": "P7_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P7_HIREDATE\" formDataKey=\"P7_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P7_JOB",
+          "formDataKey": "P7_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P7_JOB\" formDataKey=\"P7_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P7_MGR",
+          "formDataKey": "P7_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P7_MGR\" formDataKey=\"P7_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P7_ROWID",
+          "formDataKey": "P7_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P7_ROWID\" formDataKey=\"P7_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P7_SAL",
+          "formDataKey": "P7_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P7_SAL\" formDataKey=\"P7_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_6_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_6"
+        },
+        "raw": "<Button id=\"Edit_fields_1_6_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_6\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p9",
+          "title": "Edit_Form_p9"
+        },
+        "raw": "<Screen id=\"Edit_Form_p9\" title=\"Edit_Form_p9\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_9",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_9\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "Edit_fields_1_7",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form id=\"Edit_fields_1_7\" showBody={true} showFooter={true}>",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "Edit_fields_1_7_title",
+          "value": "Edit"
+        },
+        "raw": "<Text id=\"Edit_fields_1_7_title\" value=\"Edit\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P9_COMM",
+          "formDataKey": "P9_COMM",
+          "label": "Commission",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P9_COMM\" formDataKey=\"P9_COMM\" label=\"Commission\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P9_DEPTNO",
+          "formDataKey": "P9_DEPTNO",
+          "label": "Department",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P9_DEPTNO\" formDataKey=\"P9_DEPTNO\" label=\"Department\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P9_EMPNO",
+          "formDataKey": "P9_EMPNO",
+          "label": "Employee Number",
+          "placeholder": "",
+          "required": "true",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P9_EMPNO\" formDataKey=\"P9_EMPNO\" label=\"Employee Number\" placeholder=\"\" required={true} disabled={false} readOnly={false} />",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P9_ENAME",
+          "formDataKey": "P9_ENAME",
+          "label": "Name",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P9_ENAME\" formDataKey=\"P9_ENAME\" label=\"Name\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "P9_HIREDATE",
+          "formDataKey": "P9_HIREDATE",
+          "label": "Hire date",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Date id=\"P9_HIREDATE\" formDataKey=\"P9_HIREDATE\" label=\"Hire date\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P9_JOB",
+          "formDataKey": "P9_JOB",
+          "label": "Job",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P9_JOB\" formDataKey=\"P9_JOB\" label=\"Job\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "P9_MGR",
+          "formDataKey": "P9_MGR",
+          "label": "Manager",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<Select id=\"P9_MGR\" formDataKey=\"P9_MGR\" label=\"Manager\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "P9_ROWID",
+          "formDataKey": "P9_ROWID",
+          "label": "",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<TextInput id=\"P9_ROWID\" formDataKey=\"P9_ROWID\" label=\"\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "P9_SAL",
+          "formDataKey": "P9_SAL",
+          "label": "Salary",
+          "placeholder": "",
+          "required": "false",
+          "disabled": "false",
+          "readOnly": "false"
+        },
+        "raw": "<NumberInput id=\"P9_SAL\" formDataKey=\"P9_SAL\" label=\"Salary\" placeholder=\"\" required={false} disabled={false} readOnly={false} />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Body"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer >",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Edit_fields_1_7_submit",
+          "text": "Apply Changes",
+          "submit": "true",
+          "submitTargetId": "Edit_fields_1_7"
+        },
+        "raw": "<Button id=\"Edit_fields_1_7_submit\" text=\"Apply Changes\" submit={true} submitTargetId=\"Edit_fields_1_7\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_List",
+          "title": "Execute_PL_SQL_Code_List"
+        },
+        "raw": "<Screen id=\"Execute_PL_SQL_Code_List\" title=\"Execute_PL_SQL_Code_List\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Execute_PL_SQL_Code_id"
+        },
+        "raw": "<Table id=\"Execute_PL_SQL_Code\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Execute_PL_SQL_Code_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Execute_PL_SQL_Code_2_id"
+        },
+        "raw": "<Table id=\"Execute_PL_SQL_Code_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Execute_PL_SQL_Code_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Execute_PL_SQL_Code_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_5",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_5\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Update_Salary",
+          "text": "Update Salary by 10%"
+        },
+        "raw": "<Button id=\"Update_Salary\" text=\"Update Salary by 10%\" />",
+        "line": 21,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Filter_and_Refresh_List",
+          "title": "Filter_and_Refresh_List"
+        },
+        "raw": "<Screen id=\"Filter_and_Refresh_List\" title=\"Filter_and_Refresh_List\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Filter_and_Refresh",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Filter_and_Refresh_id"
+        },
+        "raw": "<Table id=\"Filter_and_Refresh\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Filter_and_Refresh_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Filter_and_Refresh_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Filter_and_Refresh_2_id"
+        },
+        "raw": "<Table id=\"Filter_and_Refresh_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Filter_and_Refresh_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Filter_and_Refresh_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Filter_and_Refresh_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "P19_Reset",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"P19_Reset\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Hide_Show_List",
+          "title": "Hide_Show_List"
+        },
+        "raw": "<Screen id=\"Hide_Show_List\" title=\"Hide_Show_List\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Hide_Show",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Hide_Show_id"
+        },
+        "raw": "<Table id=\"Hide_Show\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Hide_Show_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Hide_Show_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Hide_Show_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Hide_Show_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Hide_Show_2_id"
+        },
+        "raw": "<Table id=\"Hide_Show_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Hide_Show_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Hide_Show_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Hide_Show_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Hide_Show_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Hide_Show_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Hide_Show_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_6",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_6\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Refresh_List",
+          "title": "Refresh_List"
+        },
+        "raw": "<Screen id=\"Refresh_List\" title=\"Refresh_List\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Refresh",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Refresh_id"
+        },
+        "raw": "<Table id=\"Refresh\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Refresh_id\">",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Refresh_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Refresh_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Refresh_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Refresh_2_id"
+        },
+        "raw": "<Table id=\"Refresh_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Refresh_2_id\">",
+        "line": 9,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Refresh_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Refresh_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Refresh_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Refresh_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Refresh_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_7",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_7\" text=\"Reset\" />",
+        "line": 20,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__List",
+          "title": "Set_Values__PL_SQL__List"
+        },
+        "raw": "<Screen id=\"Set_Values__PL_SQL__List\" title=\"Set_Values__PL_SQL__List\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_8",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_8\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Set_Values__PL_SQL_",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Set_Values__PL_SQL__id"
+        },
+        "raw": "<Table id=\"Set_Values__PL_SQL_\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Set_Values__PL_SQL__id\">",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Set_Values__PL_SQL__2_id"
+        },
+        "raw": "<Table id=\"Set_Values__PL_SQL__2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Set_Values__PL_SQL__2_id\">",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__PL_SQL__2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Set_Values__SQL__List",
+          "title": "Set_Values__SQL__List"
+        },
+        "raw": "<Screen id=\"Set_Values__SQL__List\" title=\"Set_Values__SQL__List\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_9",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_9\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Set_Values__SQL_",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Set_Values__SQL__id"
+        },
+        "raw": "<Table id=\"Set_Values__SQL_\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Set_Values__SQL__id\">",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Set_Values__SQL__2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Set_Values__SQL__2_id"
+        },
+        "raw": "<Table id=\"Set_Values__SQL__2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Set_Values__SQL__2_id\">",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Set_Values__SQL__2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Set_Values__SQL__2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Shuttle_Refresh_List",
+          "title": "Shuttle_Refresh_List"
+        },
+        "raw": "<Screen id=\"Shuttle_Refresh_List\" title=\"Shuttle_Refresh_List\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_10",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_10\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Shuttle_Refresh",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Shuttle_Refresh_id"
+        },
+        "raw": "<Table id=\"Shuttle_Refresh\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Shuttle_Refresh_id\">",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Shuttle_Refresh_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Shuttle_Refresh_2_id"
+        },
+        "raw": "<Table id=\"Shuttle_Refresh_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Shuttle_Refresh_2_id\">",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Shuttle_Refresh_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Shuttle_Refresh_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Stripe_Report_List",
+          "title": "Stripe_Report_List"
+        },
+        "raw": "<Screen id=\"Stripe_Report_List\" title=\"Stripe_Report_List\" _order={20}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_11",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_11\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Stripe_Report",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Stripe_Report_id"
+        },
+        "raw": "<Table id=\"Stripe_Report\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Stripe_Report_id\">",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Stripe_Report_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Stripe_Report_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Stripe_Report_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Stripe_Report_2_id"
+        },
+        "raw": "<Table id=\"Stripe_Report_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Stripe_Report_2_id\">",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Stripe_Report_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Stripe_Report_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Timer_List",
+          "title": "Timer_List"
+        },
+        "raw": "<Screen id=\"Timer_List\" title=\"Timer_List\" _order={21}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_12",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_12\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Timer",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_dept.data }}",
+          "primaryKeyColumnId": "Timer_id"
+        },
+        "raw": "<Table id=\"Timer\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_dept.data }}\" primaryKeyColumnId=\"Timer_id\">",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_deptno",
+          "key": "deptno",
+          "label": "Deptno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_deptno\" key=\"deptno\" label=\"Deptno\" format=\"decimal\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_dname",
+          "key": "dname",
+          "label": "Dname",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Timer_dname\" key=\"dname\" label=\"Dname\" format=\"string\" />",
+        "line": 7,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_loc",
+          "key": "loc",
+          "label": "Loc",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Timer_loc\" key=\"loc\" label=\"Loc\" format=\"string\" />",
+        "line": 8,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Timer_2",
+          "showHeader": "true",
+          "showFooter": "true",
+          "data": "{{ get_eba_demo_da_emp.data }}",
+          "primaryKeyColumnId": "Timer_2_id"
+        },
+        "raw": "<Table id=\"Timer_2\" showHeader={true} showFooter={true} data=\"{{ get_eba_demo_da_emp.data }}\" primaryKeyColumnId=\"Timer_2_id\">",
+        "line": 10,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_id",
+          "key": "id",
+          "label": "Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_id\" key=\"id\" label=\"Id\" format=\"decimal\" />",
+        "line": 11,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_comm",
+          "key": "comm",
+          "label": "Comm",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_comm\" key=\"comm\" label=\"Comm\" format=\"decimal\" />",
+        "line": 12,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_empno",
+          "key": "empno",
+          "label": "Empno",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_empno\" key=\"empno\" label=\"Empno\" format=\"decimal\" />",
+        "line": 13,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_ename",
+          "key": "ename",
+          "label": "Ename",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Timer_2_ename\" key=\"ename\" label=\"Ename\" format=\"string\" />",
+        "line": 14,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_hiredate",
+          "key": "hiredate",
+          "label": "Hiredate",
+          "format": "date"
+        },
+        "raw": "<Column id=\"Timer_2_hiredate\" key=\"hiredate\" label=\"Hiredate\" format=\"date\" />",
+        "line": 15,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_job",
+          "key": "job",
+          "label": "Job",
+          "format": "string"
+        },
+        "raw": "<Column id=\"Timer_2_job\" key=\"job\" label=\"Job\" format=\"string\" />",
+        "line": 16,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_sal",
+          "key": "sal",
+          "label": "Sal",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_sal\" key=\"sal\" label=\"Sal\" format=\"decimal\" />",
+        "line": 17,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_ebademodadept_id",
+          "key": "ebademodadept_id",
+          "label": "Ebademodadept Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_ebademodadept_id\" key=\"ebademodadept_id\" label=\"Ebademodadept Id\" format=\"decimal\" />",
+        "line": 18,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "Timer_2_ebademodaemp_mgr_id",
+          "key": "ebademodaemp_mgr_id",
+          "label": "Ebademodaemp Mgr Id",
+          "format": "decimal"
+        },
+        "raw": "<Column id=\"Timer_2_ebademodaemp_mgr_id\" key=\"ebademodaemp_mgr_id\" label=\"Ebademodaemp Mgr Id\" format=\"decimal\" />",
+        "line": 19,
+        "parents": [
+          "Screen",
+          "Frame",
+          "Table"
+        ],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration_p26",
+          "title": "Administration_p26"
+        },
+        "raw": "<Screen id=\"Administration_p26\" title=\"Administration_p26\" _order={22}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration_p26.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Administration_p26.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Debounce_and_Throttle",
+          "title": "Debounce_and_Throttle"
+        },
+        "raw": "<Screen id=\"Debounce_and_Throttle\" title=\"Debounce_and_Throttle\" _order={23}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Debounce_and_Throttle.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Debounce_and_Throttle.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={24}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Help.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Add_Remove_Class__Error__List",
+          "title": "Add_Remove_Class__Error__List"
+        },
+        "raw": "<Screen id=\"Add_Remove_Class__Error__List\" title=\"Add_Remove_Class__Error__List\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Add_Remove_Class__Error__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Add_Remove_Class__Focus__List",
+          "title": "Add_Remove_Class__Focus__List"
+        },
+        "raw": "<Screen id=\"Add_Remove_Class__Focus__List\" title=\"Add_Remove_Class__Focus__List\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Add_Remove_Class__Focus__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style_Form",
+          "title": "Application_Theme_Style_Form"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style_Form\" title=\"Application_Theme_Style_Form\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style_Form.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Delete_and_Refresh_List",
+          "title": "Delete_and_Refresh_List"
+        },
+        "raw": "<Screen id=\"Delete_and_Refresh_List\" title=\"Delete_and_Refresh_List\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Delete_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Disable_Enable_List",
+          "title": "Disable_Enable_List"
+        },
+        "raw": "<Screen id=\"Disable_Enable_List\" title=\"Disable_Enable_List\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Disable_Enable_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form",
+          "title": "Edit_Form"
+        },
+        "raw": "<Screen id=\"Edit_Form\" title=\"Edit_Form\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p13",
+          "title": "Edit_Form_p13"
+        },
+        "raw": "<Screen id=\"Edit_Form_p13\" title=\"Edit_Form_p13\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p13.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p15",
+          "title": "Edit_Form_p15"
+        },
+        "raw": "<Screen id=\"Edit_Form_p15\" title=\"Edit_Form_p15\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p15.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p22",
+          "title": "Edit_Form_p22"
+        },
+        "raw": "<Screen id=\"Edit_Form_p22\" title=\"Edit_Form_p22\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p22.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p5",
+          "title": "Edit_Form_p5"
+        },
+        "raw": "<Screen id=\"Edit_Form_p5\" title=\"Edit_Form_p5\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p5.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p7",
+          "title": "Edit_Form_p7"
+        },
+        "raw": "<Screen id=\"Edit_Form_p7\" title=\"Edit_Form_p7\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p7.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Edit_Form_p9",
+          "title": "Edit_Form_p9"
+        },
+        "raw": "<Screen id=\"Edit_Form_p9\" title=\"Edit_Form_p9\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Form_p9.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Execute_PL_SQL_Code_List",
+          "title": "Execute_PL_SQL_Code_List"
+        },
+        "raw": "<Screen id=\"Execute_PL_SQL_Code_List\" title=\"Execute_PL_SQL_Code_List\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Execute_PL_SQL_Code_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Filter_and_Refresh_List",
+          "title": "Filter_and_Refresh_List"
+        },
+        "raw": "<Screen id=\"Filter_and_Refresh_List\" title=\"Filter_and_Refresh_List\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Filter_and_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Hide_Show_List",
+          "title": "Hide_Show_List"
+        },
+        "raw": "<Screen id=\"Hide_Show_List\" title=\"Hide_Show_List\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Hide_Show_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Refresh_List",
+          "title": "Refresh_List"
+        },
+        "raw": "<Screen id=\"Refresh_List\" title=\"Refresh_List\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Set_Values__PL_SQL__List",
+          "title": "Set_Values__PL_SQL__List"
+        },
+        "raw": "<Screen id=\"Set_Values__PL_SQL__List\" title=\"Set_Values__PL_SQL__List\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Set_Values__PL_SQL__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Set_Values__SQL__List",
+          "title": "Set_Values__SQL__List"
+        },
+        "raw": "<Screen id=\"Set_Values__SQL__List\" title=\"Set_Values__SQL__List\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Set_Values__SQL__List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Shuttle_Refresh_List",
+          "title": "Shuttle_Refresh_List"
+        },
+        "raw": "<Screen id=\"Shuttle_Refresh_List\" title=\"Shuttle_Refresh_List\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Shuttle_Refresh_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Stripe_Report_List",
+          "title": "Stripe_Report_List"
+        },
+        "raw": "<Screen id=\"Stripe_Report_List\" title=\"Stripe_Report_List\" _order={20}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Stripe_Report_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Timer_List",
+          "title": "Timer_List"
+        },
+        "raw": "<Screen id=\"Timer_List\" title=\"Timer_List\" _order={21}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Timer_List.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration_p26",
+          "title": "Administration_p26"
+        },
+        "raw": "<Screen id=\"Administration_p26\" title=\"Administration_p26\" _order={22}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration_p26.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Debounce_and_Throttle",
+          "title": "Debounce_and_Throttle"
+        },
+        "raw": "<Screen id=\"Debounce_and_Throttle\" title=\"Debounce_and_Throttle\" _order={23}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Debounce_and_Throttle.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={24}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      }
+    ],
+    "navigation_evidence": [],
+    "bound_tables": [
+      "eba_demo_da_dept",
+      "eba_demo_da_emp"
+    ],
+    "sql_primary_tables": {
+      "get_eba_demo_da_dept": "eba_demo_da_dept",
+      "get_eba_demo_da_emp": "eba_demo_da_emp"
+    },
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/Add_Remove_Class__Error__List.rsx",
+      "src/Add_Remove_Class__Focus__List.rsx",
+      "src/Administration.rsx",
+      "src/Application_Theme_Style_Form.rsx",
+      "src/Delete_and_Refresh_List.rsx",
+      "src/Disable_Enable_List.rsx",
+      "src/Edit_Form.rsx",
+      "src/Edit_Form_p13.rsx",
+      "src/Edit_Form_p15.rsx",
+      "src/Edit_Form_p22.rsx",
+      "src/Edit_Form_p5.rsx",
+      "src/Edit_Form_p7.rsx",
+      "src/Edit_Form_p9.rsx",
+      "src/Execute_PL_SQL_Code_List.rsx",
+      "src/Filter_and_Refresh_List.rsx",
+      "src/Hide_Show_List.rsx",
+      "src/Refresh_List.rsx",
+      "src/Set_Values__PL_SQL__List.rsx",
+      "src/Set_Values__SQL__List.rsx",
+      "src/Shuttle_Refresh_List.rsx",
+      "src/Stripe_Report_List.rsx",
+      "src/Timer_List.rsx",
+      "src/Administration_p26.rsx",
+      "src/Debounce_and_Throttle.rsx",
+      "src/Help.rsx"
+    ],
+    "events": 0,
+    "unresolved_expression_references": [],
+    "caption_inferred_action_type_count": 3
+  },
+  "captions": [
+    "Reset",
+    "Reset",
+    "Cancel",
+    "Reset Data",
+    "Apply Changes",
+    "Cancel",
+    "Reset",
+    "Reset",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Cancel",
+    "Apply Changes",
+    "Reset",
+    "Update Salary by 10%",
+    "Reset",
+    "Reset",
+    "Reset",
+    "Reset",
+    "Reset",
+    "Reset",
+    "Reset",
+    "Reset"
+  ],
+  "warnings": [
+    "Button 'Reset' has no executable action binding.",
+    "Button 'Cancel' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Form 'Application_Theme_Style_fields_1' has no executable submit action binding.",
+    "Input type Hidden on 'P3_ROWID' uses a TextInput fallback.",
+    "Form 'Edit_fields_1' has no executable submit action binding.",
+    "Input type Hidden on 'P13_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P15_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P22_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P5_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P7_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P9_ROWID' uses a TextInput fallback.",
+    "Button 'Update_Salary' has no executable action binding.",
+    "Button 'P19_Reset' has no executable action binding."
+  ]
+}

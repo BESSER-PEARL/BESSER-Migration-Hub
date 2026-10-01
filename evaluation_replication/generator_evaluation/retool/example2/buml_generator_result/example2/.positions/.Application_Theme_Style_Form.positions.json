@@ -1,0 +1,41 @@
+{
+  "Application_Theme_Style_fields_1": {
+    "row": 0,
+    "col": 0,
+    "height": 6,
+    "width": 12
+  },
+  "Application_Theme_Style_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Application_Theme_Style_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_DESKTOP_THEME_STYLE_ID": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Application_Theme_Style_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Application_Theme_Style_fields_1_submit": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Application_Theme_Style_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Cancel": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

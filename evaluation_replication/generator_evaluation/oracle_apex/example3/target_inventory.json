@@ -1,0 +1,327 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "ebademodgcustomers": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "email_address": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "full_name": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademodgdept": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "dname": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "loc": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademodgproducts": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "image_charset": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "image_filename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "image_last_updated": {
+          "type": "date",
+          "identity": false
+        },
+        "image_mime_type": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "product_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "unit_price": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "ebademodgorders": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "order_datetime": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "order_status": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "ebademodgcustomers_id": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "ebademodgemp": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodgdept_id": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodgemp_mgr_id": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "ebademodgorderitems": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "line_item_id": {
+          "type": "number",
+          "identity": false
+        },
+        "quantity": {
+          "type": "number",
+          "identity": false
+        },
+        "unit_price": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodgproducts_id": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodgorders_id": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "ebademodgcustomers",
+        "email_address"
+      ],
+      [
+        "ebademodgcustomers",
+        "full_name"
+      ],
+      [
+        "ebademodgdept",
+        "dname"
+      ],
+      [
+        "ebademodgdept",
+        "loc"
+      ],
+      [
+        "ebademodgproducts",
+        "image_charset"
+      ],
+      [
+        "ebademodgproducts",
+        "image_filename"
+      ],
+      [
+        "ebademodgproducts",
+        "image_last_updated"
+      ],
+      [
+        "ebademodgproducts",
+        "image_mime_type"
+      ],
+      [
+        "ebademodgproducts",
+        "product_name"
+      ],
+      [
+        "ebademodgproducts",
+        "unit_price"
+      ],
+      [
+        "ebademodgorders",
+        "order_datetime"
+      ],
+      [
+        "ebademodgorders",
+        "order_status"
+      ],
+      [
+        "ebademodgemp",
+        "comm"
+      ],
+      [
+        "ebademodgemp",
+        "ename"
+      ],
+      [
+        "ebademodgemp",
+        "hiredate"
+      ],
+      [
+        "ebademodgemp",
+        "job"
+      ],
+      [
+        "ebademodgemp",
+        "sal"
+      ],
+      [
+        "ebademodgorderitems",
+        "line_item_id"
+      ],
+      [
+        "ebademodgorderitems",
+        "quantity"
+      ],
+      [
+        "ebademodgorderitems",
+        "unit_price"
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "ebademodgemp",
+        [
+          "ebademodgdept_id"
+        ],
+        "ebademodgdept"
+      ],
+      [
+        "ebademodgemp",
+        [
+          "ebademodgemp_mgr_id"
+        ],
+        "ebademodgemp"
+      ],
+      [
+        "ebademodgorderitems",
+        [
+          "ebademodgorders_id"
+        ],
+        "ebademodgorders"
+      ],
+      [
+        "ebademodgorderitems",
+        [
+          "ebademodgproducts_id"
+        ],
+        "ebademodgproducts"
+      ],
+      [
+        "ebademodgorders",
+        [
+          "ebademodgcustomers_id"
+        ],
+        "ebademodgcustomers"
+      ]
+    ]
+  },
+  "gui": {
+    "counts": {
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0
+    },
+    "pages": [
+      {
+        "file": "page_00002.sql",
+        "id": "2",
+        "name": "About",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [],
+    "action_types": []
+  },
+  "excluded_platform_pages": [
+    {
+      "id": "101",
+      "name": "Login",
+      "alias": "LOGIN",
+      "step_title": "Sign In",
+      "reload_on_submit": "A",
+      "warn_on_unsaved_changes": "N",
+      "autocomplete_on_off": "OFF",
+      "step_template": "2102634289808461002",
+      "page_template_options": "#DEFAULT#",
+      "page_is_public_y_n": "Y",
+      "protection_level": "C",
+      "page_component_map": "16"
+    },
+    {
+      "id": "0",
+      "name": "Global Page",
+      "step_title": "Global Page",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "D",
+      "page_component_map": "08"
+    },
+    {
+      "id": "1",
+      "name": "example3",
+      "step_title": "example3",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "C",
+      "page_component_map": "08"
+    }
+  ],
+  "warnings": []
+}

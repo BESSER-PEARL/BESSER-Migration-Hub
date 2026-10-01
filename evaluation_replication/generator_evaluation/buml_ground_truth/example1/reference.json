@@ -1,0 +1,26 @@
+{
+  "scenario": "example1",
+  "origin": "improved Oracle APEX parser; not independently authored",
+  "source": "evaluation_replication/examples/oracle_apex/example1",
+  "excluded_attributes": {},
+  "source_files": {
+    "data/create-eba-demo-cs-emp-table.sql": "1958f927c95b83065d5fdee232c3e5bf6aea74212bf37236368118adf9c6c2d1",
+    "data/sample-data.sql": "c7d25de22ef3b097aaff951f5e62eaaee435ec5ac34342820d2992831d88edf0",
+    "data/set-plscope-settings.sql": "a714e51414f0fdc475f02af79fe3e6a73e3a53a0c417f4746f7a351360391a6f",
+    "screens/page_00001.sql": "6dbd07fc16a793a413d3bbd9284a800f7b4b191cce888a51163a91e8be62ef4e",
+    "screens/page_00002.sql": "bfa01d736b3faa6b0a759637a91d34d992c2c7e116b2db70ac7a58d952474c9d",
+    "screens/page_00003.sql": "f0b95bf10930109cf7d787d86c42bb48ffe68f8c6f304801bc5bd8bc392c35a7",
+    "screens/page_00004.sql": "e65a56d3778d03ee2b2426c346065248aae8f6d4d17a019d6382e5e44e3cabd8",
+    "screens/page_00005.sql": "76aa58c9700c7297ded57335c9b04ae8c17bfbb1872a214b27920df192e7a43d",
+    "screens/page_00006.sql": "fef9e81d38167652f1d1b8887cd8fb83c18e7b31df206d1eed46b84d97d4889f",
+    "screens/page_00007.sql": "6d155c1253bc4998af126b14379303438c4617d1e03f381668e39915b6f03b5e",
+    "screens/page_00008.sql": "6e1b2e6e7a404b8d22222d07137391e1db048537dac6e4c8d88d463efa5358b6",
+    "screens/page_00012.sql": "e6b96c53270bfb61fcd8447f30ef7325e3b50700a901254720b049cfb06da988",
+    "screens/page_00035.sql": "6679d0b8bf5263b16f11b44b5db2ac7cd4afbf251e6e41169d95553b2d47c87c",
+    "screens/page_00036.sql": "50e9268b55ca1b908874cc0ea81d5e467d14864675b76db9e5b5eec98067064d",
+    "screens/page_00039.sql": "e0b9dea5fd5c52cafbd29178f45d39fb8426ab74849efa98e94f85decbf5dfb4",
+    "screens/page_00100.sql": "3fd1435c55fae54bc79e656b4d169ea1f26f99e2635b4cbdf1cb58528e26d32e",
+    "screens/page_00101.sql": "e48bf9aef5659e9caae7eb441e8a01b12be1d75f8b4b874f45bad8feb8df1be3",
+    "screens/page_groups.sql": "4209a825bc8c643ed7b693765d1f2529fb250357c390a834f8a01ff5c1b5409a"
+  }
+}

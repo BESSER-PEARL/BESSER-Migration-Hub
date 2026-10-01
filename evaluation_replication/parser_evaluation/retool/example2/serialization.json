@@ -1,0 +1,11 @@
+{
+  "builder_repairs": [
+    "form1.title = '#### Inventory item'",
+    "form1.submit_label = 'Submit'",
+    "form1.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Inventory'))",
+    "inventorytable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Inventory'))",
+    "_evaluation_builtins.next(s for s in inventorytable_list.list_sources if s.name == 'inventory').field_names = ['id', 'sku', 'description', 'quantity', 'replenish', 'location', 'latitude', 'longitude', 'image_url']"
+  ],
+  "inventory_equal_after_python_reload": true,
+  "generator_reference": "project.py reloaded and inventory checked"
+}

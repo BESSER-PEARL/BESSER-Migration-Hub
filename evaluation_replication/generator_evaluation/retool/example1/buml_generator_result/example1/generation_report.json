@@ -1,0 +1,40 @@
+{
+  "app": "example1",
+  "screens": [
+    "Application_Theme_Style_Form",
+    "Data_Synchronization",
+    "Login_Page_Form",
+    "Modify_Collection_Form",
+    "Remove_Collections",
+    "Reset_Data",
+    "Administration",
+    "Help",
+    "Sample_Collections___API_Examples",
+    "Add_Edit_Collection_Member_Form",
+    "Create_Collection_Form",
+    "Modify_Collection_Member_Form"
+  ],
+  "resource_id": "2a86a318-80a0-4803-95d8-409396e41af2",
+  "warnings": [
+    "Form 'Application_Theme_Style_fields_1' has no executable submit action binding.",
+    "Button 'Cancel' has no executable action binding.",
+    "Button 'Add_Member' has no executable action binding.",
+    "Button 'Apply_Collection' has no executable action binding.",
+    "Button 'Populate' has no executable action binding.",
+    "Form 'Login_Page_fields_1' has no executable submit action binding.",
+    "Button 'Add_Member_Add_Another' has no executable action binding.",
+    "Button 'Delete_Collection' has no executable action binding.",
+    "Form 'Modify_Collection_fields_1' has no executable submit action binding.",
+    "Button 'Resequence' has no executable action binding.",
+    "Button 'Truncate_Collection' has no executable action binding.",
+    "Button 'Remove_Collections' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Input type Hidden on 'P7_SEQ' uses a TextInput fallback.",
+    "Form 'Add_Edit_Collection_Member_fields_1' has no executable submit action binding.",
+    "Button 'Delete_Member' has no executable action binding.",
+    "Button 'Update_Member' has no executable action binding.",
+    "Form 'Create_Collection_fields_1' has no executable submit action binding.",
+    "Button 'Create_Replace' has no executable action binding.",
+    "Form 'Modify_Collection_Member_fields_1' has no executable submit action binding."
+  ]
+}

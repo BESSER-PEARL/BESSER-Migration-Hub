@@ -1,0 +1,761 @@
+{
+  "data": {
+    "tables": {
+      "u_eba_demo_tree_emp": {
+        "deptno": {
+          "kind": "IntegerColumn"
+        },
+        "ename": {
+          "kind": "StringColumn"
+        },
+        "empno": {
+          "kind": "IntegerColumn"
+        },
+        "sal": {
+          "kind": "IntegerColumn"
+        },
+        "hiredate": {
+          "kind": "DateColumn"
+        },
+        "job": {
+          "kind": "StringColumn"
+        },
+        "comm": {
+          "kind": "IntegerColumn"
+        },
+        "ebademotreeemp_mgr": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_tree_emp"
+        }
+      },
+      "u_eba_demo_tree_dept": {
+        "loc": {
+          "kind": "StringColumn"
+        },
+        "dname": {
+          "kind": "StringColumn"
+        },
+        "deptno": {
+          "kind": "IntegerColumn"
+        }
+      },
+      "u_eba_demo_tree_population": {
+        "region": {
+          "kind": "IntegerColumn"
+        },
+        "state_name": {
+          "kind": "StringColumn"
+        },
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "state_code": {
+          "kind": "StringColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "id": {
+          "kind": "IntegerColumn"
+        },
+        "population": {
+          "kind": "IntegerColumn"
+        }
+      },
+      "u_eba_demo_tree_stocks": {
+        "low": {
+          "kind": "IntegerColumn"
+        },
+        "closing_val": {
+          "kind": "IntegerColumn"
+        },
+        "stock_code": {
+          "kind": "StringColumn"
+        },
+        "high": {
+          "kind": "IntegerColumn"
+        },
+        "opening_val": {
+          "kind": "IntegerColumn"
+        },
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "stock_name": {
+          "kind": "StringColumn"
+        },
+        "pricing_date": {
+          "kind": "DateColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "id": {
+          "kind": "IntegerColumn"
+        }
+      },
+      "u_eba_demo_tree_proj_files": {
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "file_charset": {
+          "kind": "StringColumn"
+        },
+        "file_name": {
+          "kind": "StringColumn"
+        },
+        "file_mimetype": {
+          "kind": "StringColumn"
+        },
+        "file_lastupd": {
+          "kind": "DateColumn"
+        },
+        "tags": {
+          "kind": "StringColumn"
+        },
+        "id": {
+          "kind": "IntegerColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "file_comments": {
+          "kind": "StringColumn"
+        },
+        "ebademotreeprojects": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_tree_projects"
+        }
+      },
+      "u_eba_demo_tree_projects": {
+        "description": {
+          "kind": "StringColumn"
+        },
+        "status": {
+          "kind": "IntegerColumn"
+        },
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "start_date": {
+          "kind": "DateColumn"
+        },
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "estimated_completion": {
+          "kind": "DateColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "proj_id": {
+          "kind": "IntegerColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "completion_date": {
+          "kind": "DateColumn"
+        },
+        "project_name": {
+          "kind": "StringColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        }
+      },
+      "u_eba_demo_tree_subtask": {
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "sub_assign": {
+          "kind": "StringColumn"
+        },
+        "sub_id": {
+          "kind": "IntegerColumn"
+        },
+        "sub_priority": {
+          "kind": "StringColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "sub_desc": {
+          "kind": "StringColumn"
+        },
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "task_id": {
+          "kind": "IntegerColumn"
+        },
+        "sub_est_comp": {
+          "kind": "DateColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "proj_id": {
+          "kind": "IntegerColumn"
+        },
+        "sub_name": {
+          "kind": "StringColumn"
+        },
+        "sub_status": {
+          "kind": "StringColumn"
+        },
+        "sub_start": {
+          "kind": "DateColumn"
+        },
+        "sub_comp": {
+          "kind": "DateColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        }
+      },
+      "u_eba_demo_tree_task": {
+        "task_desc": {
+          "kind": "StringColumn"
+        },
+        "created_by": {
+          "kind": "StringColumn"
+        },
+        "created": {
+          "kind": "DateTimeColumn"
+        },
+        "task_assign": {
+          "kind": "IntegerColumn"
+        },
+        "updated_by": {
+          "kind": "StringColumn"
+        },
+        "updated": {
+          "kind": "DateTimeColumn"
+        },
+        "task_name": {
+          "kind": "StringColumn"
+        },
+        "task_est_comp": {
+          "kind": "DateColumn"
+        },
+        "task_start": {
+          "kind": "DateColumn"
+        },
+        "task_comp": {
+          "kind": "DateColumn"
+        },
+        "row_version_number": {
+          "kind": "IntegerColumn"
+        },
+        "task_status": {
+          "kind": "IntegerColumn"
+        },
+        "task_priority": {
+          "kind": "IntegerColumn"
+        },
+        "task_id": {
+          "kind": "IntegerColumn"
+        }
+      }
+    },
+    "related_lists": [
+      "u_eba_demo_tree_emp.ebademotreeemp_mgr",
+      "u_eba_demo_tree_proj_files.ebademotreeprojects"
+    ],
+    "duplicate_declarations": [],
+    "counts": {
+      "Entities": 8,
+      "Attributes": 87,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "matched_attributes": [
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "region",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "state_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "state_code",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_population",
+        "column": "population",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_dept",
+        "column": "loc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_dept",
+        "column": "dname",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_dept",
+        "column": "deptno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "low",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "closing_val",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "stock_code",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "high",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "opening_val",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "stock_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "pricing_date",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_stocks",
+        "column": "id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_desc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_assign",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_est_comp",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_start",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_comp",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_status",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_priority",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_task",
+        "column": "task_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "description",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "status",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "start_date",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "estimated_completion",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "proj_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "completion_date",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "project_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_projects",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "deptno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "ename",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "empno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "sal",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "hiredate",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "job",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_emp",
+        "column": "comm",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "file_charset",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "file_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "file_mimetype",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "file_lastupd",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "tags",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_proj_files",
+        "column": "file_comments",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "updated",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_assign",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_priority",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "created_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_desc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "updated_by",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "task_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_est_comp",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "row_version_number",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "proj_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_status",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_start",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "sub_comp",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_tree_subtask",
+        "column": "created",
+        "kind": "DateTimeColumn"
+      }
+    ],
+    "relationships": [
+      {
+        "association": "EbaDemoTreeEmp_EbaDemoTreeEmp",
+        "child": "u_eba_demo_tree_emp",
+        "column": "ebademotreeemp_mgr",
+        "parent": "u_eba_demo_tree_emp",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoTreeProjFiles_EbaDemoTreeProjects",
+        "child": "u_eba_demo_tree_proj_files",
+        "column": "ebademotreeprojects",
+        "parent": "u_eba_demo_tree_projects",
+        "reference_present": true,
+        "related_list_present": true
+      }
+    ],
+    "generated_file": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\generator_evaluation\\servicenow\\example4\\buml_generator_result\\tables.now.ts",
+    "counting_rule": "Input scalar columns; association ends represented by reference columns and related lists. This does not verify cardinality bounds or live platform execution."
+  }
+}

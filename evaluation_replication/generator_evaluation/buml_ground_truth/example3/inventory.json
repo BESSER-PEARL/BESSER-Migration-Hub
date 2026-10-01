@@ -1,0 +1,137 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "classes": {
+      "EbaDemoDgEmp": [
+        "comm",
+        "ename",
+        "hiredate",
+        "job",
+        "sal"
+      ],
+      "EbaDemoDgOrders": [
+        "order_datetime",
+        "order_status"
+      ],
+      "EbaDemoDgProducts": [
+        "image_charset",
+        "image_filename",
+        "image_last_updated",
+        "image_mime_type",
+        "product_name",
+        "unit_price"
+      ],
+      "EbaDemoDgOrderItems": [
+        "line_item_id",
+        "quantity",
+        "unit_price"
+      ],
+      "EbaDemoDgDept": [
+        "dname",
+        "loc"
+      ],
+      "EbaDemoDgCustomers": [
+        "email_address",
+        "full_name"
+      ]
+    },
+    "raw_classes": {
+      "EbaDemoDgEmp": [
+        "comm",
+        "empno",
+        "ename",
+        "hiredate",
+        "job",
+        "sal"
+      ],
+      "EbaDemoDgOrders": [
+        "order_datetime",
+        "order_id",
+        "order_status"
+      ],
+      "EbaDemoDgProducts": [
+        "image_charset",
+        "image_filename",
+        "image_last_updated",
+        "image_mime_type",
+        "product_id",
+        "product_name",
+        "unit_price"
+      ],
+      "EbaDemoDgOrderItems": [
+        "line_item_id",
+        "quantity",
+        "unit_price"
+      ],
+      "EbaDemoDgDept": [
+        "deptno",
+        "dname",
+        "loc"
+      ],
+      "EbaDemoDgCustomers": [
+        "customer_id",
+        "email_address",
+        "full_name"
+      ]
+    },
+    "excluded_attributes": {
+      "EbaDemoDgEmp": [
+        {
+          "name": "empno",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgOrders": [
+        {
+          "name": "order_id",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgProducts": [
+        {
+          "name": "product_id",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgDept": [
+        {
+          "name": "deptno",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgCustomers": [
+        {
+          "name": "customer_id",
+          "reason": "platform_identity"
+        }
+      ]
+    }
+  },
+  "gui": {
+    "counts": {
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0
+    },
+    "widget_types": {},
+    "bound_entities": [],
+    "action_types": [],
+    "screens": [
+      {
+        "name": "About",
+        "widgets": []
+      }
+    ]
+  }
+}

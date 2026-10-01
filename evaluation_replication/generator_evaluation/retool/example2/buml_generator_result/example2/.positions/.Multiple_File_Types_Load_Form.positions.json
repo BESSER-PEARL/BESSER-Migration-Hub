@@ -1,0 +1,86 @@
+{
+  "Clear_2": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Multiple_File_Types_Load_fields_1": {
+    "row": 2,
+    "col": 0,
+    "height": 16,
+    "width": 12
+  },
+  "Multiple_File_Types_Load_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_ERROR_ROW_COUNT": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_FILE": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_FILE_NAME": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_FILE_TYPE": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_PROCESSED_ROW_COUNT": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P16_XLSX_WORKSHEET": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Multiple_File_Types_Load_fields_1_submit": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Multiple_File_Types_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  }
+}

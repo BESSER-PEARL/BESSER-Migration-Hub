@@ -1,0 +1,2 @@
+id,comm,empno,ename,hiredate,job,sal,ebademodadept_id,ebademodaemp_mgr_id
+1,0,0,sample_ename,2024-01-01,sample_job,0,1,1

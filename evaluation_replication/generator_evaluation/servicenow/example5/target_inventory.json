@@ -1,0 +1,125 @@
+{
+  "data": {
+    "tables": {
+      "u_eba_demo_da_emp": {
+        "comm": {
+          "kind": "IntegerColumn"
+        },
+        "empno": {
+          "kind": "IntegerColumn"
+        },
+        "hiredate": {
+          "kind": "DateColumn"
+        },
+        "job": {
+          "kind": "StringColumn"
+        },
+        "sal": {
+          "kind": "IntegerColumn"
+        },
+        "ename": {
+          "kind": "StringColumn"
+        },
+        "ebademodadept": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_da_dept"
+        },
+        "ebademodaemp_mgr": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_da_emp"
+        }
+      },
+      "u_eba_demo_da_dept": {
+        "loc": {
+          "kind": "StringColumn"
+        },
+        "dname": {
+          "kind": "StringColumn"
+        },
+        "deptno": {
+          "kind": "IntegerColumn"
+        }
+      }
+    },
+    "related_lists": [
+      "u_eba_demo_da_emp.ebademodadept",
+      "u_eba_demo_da_emp.ebademodaemp_mgr"
+    ],
+    "duplicate_declarations": [],
+    "counts": {
+      "Entities": 2,
+      "Attributes": 9,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "matched_attributes": [
+      {
+        "table": "u_eba_demo_da_dept",
+        "column": "loc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_da_dept",
+        "column": "dname",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_da_dept",
+        "column": "deptno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "comm",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "empno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "hiredate",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "job",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "sal",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_da_emp",
+        "column": "ename",
+        "kind": "StringColumn"
+      }
+    ],
+    "relationships": [
+      {
+        "association": "EbaDemoDaEmp_EbaDemoDaDept",
+        "child": "u_eba_demo_da_emp",
+        "column": "ebademodadept",
+        "parent": "u_eba_demo_da_dept",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoDaEmp_EbaDemoDaEmp",
+        "child": "u_eba_demo_da_emp",
+        "column": "ebademodaemp_mgr",
+        "parent": "u_eba_demo_da_emp",
+        "reference_present": true,
+        "related_list_present": true
+      }
+    ],
+    "generated_file": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\generator_evaluation\\servicenow\\example5\\buml_generator_result\\tables.now.ts",
+    "counting_rule": "Input scalar columns; association ends represented by reference columns and related lists. This does not verify cardinality bounds or live platform execution."
+  }
+}

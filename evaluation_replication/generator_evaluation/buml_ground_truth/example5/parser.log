@@ -1,0 +1,36 @@
+Merging 1 DDL file(s):
+  + create-tables.sql
+Parsing Oracle APEX DDL: tmptsptwmbx.sql
+  Class 'EbaDemoDaDept': ['deptno', 'dname', 'loc']
+  Class 'EbaDemoDaEmp': ['comm', 'empno', 'ename', 'hiredate', 'job', 'sal']
+  Total: 2 classes, 2 associations
+Parsing 28 APEX page files in: screens
+  Skipped: page_00001.sql
+  Screen 'Disable_Enable_List' | main=True | elements=2
+  Screen 'Edit_Form' | main=True | elements=2
+  Screen 'Hide_Show_List' | main=True | elements=2
+  Screen 'Edit_Form_p5' | main=True | elements=2
+  Screen 'Add_Remove_Class__Error__List' | main=True | elements=2
+  Screen 'Edit_Form_p7' | main=True | elements=2
+  Screen 'Add_Remove_Class__Focus__List' | main=True | elements=2
+  Screen 'Edit_Form_p9' | main=True | elements=2
+  Screen 'Stripe_Report_List' | main=True | elements=2
+  Screen 'Execute_PL_SQL_Code_List' | main=True | elements=3
+  Screen 'Set_Values__SQL__List' | main=True | elements=2
+  Screen 'Edit_Form_p13' | main=True | elements=2
+  Screen 'Set_Values__PL_SQL__List' | main=True | elements=2
+  Screen 'Edit_Form_p15' | main=True | elements=2
+  Screen 'Timer_List' | main=True | elements=2
+  Screen 'Refresh_List' | main=True | elements=2
+  Screen 'Delete_and_Refresh_List' | main=True | elements=2
+  Screen 'Filter_and_Refresh_List' | main=True | elements=2
+  Screen 'Shuttle_Refresh_List' | main=True | elements=2
+  Screen 'Debounce_and_Throttle' | main=True | elements=0
+  Screen 'Edit_Form_p22' | main=True | elements=2
+  Screen 'Administration' | main=True | elements=2
+  Screen 'Application_Theme_Style_Form' | main=True | elements=2
+  Screen 'Help' | main=True | elements=0
+  Screen 'Administration_p26' | main=True | elements=0
+  Skipped: page_00101.sql
+  Skipped: page_groups.sql
+  Total: 25 screens extracted

@@ -13,9 +13,9 @@ class GUIModelMigrator:
             be extracted.
         domain_model (DomainModel, optional): The already-built ``DomainModel`` for this
             same module, if available (i.e. data model and GUI model are being extracted
-            together). When supplied, Mendix and Retool Forms/DataLists resolve their bound entity as
-            a real ``Class`` reference instead of just a name string. Used by the
-            Mendix and Retool parsers.
+            together). When supplied, Mendix, Retool, and Oracle APEX Forms/DataLists
+            resolve their bound entity as a real ``Class`` reference instead of
+            just a name string.
 
     Attributes:
         lcp (str): The name of the low-code platform.
@@ -89,6 +89,7 @@ class GUIModelMigrator:
             gui_model = oracle_apex_to_gui(
                 pages_dir=self.model_path,
                 module_name=self.module_name or None,
+                domain_model=self.domain_model,
             )
         else:
             raise ValueError("Low code platform not supported")

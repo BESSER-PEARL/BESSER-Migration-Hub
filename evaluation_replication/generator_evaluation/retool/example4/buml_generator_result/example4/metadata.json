@@ -1,0 +1,35 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "7dc58fe1-680a-5331-836b-c131f10b2c4b",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Application_Theme_Style_Form",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Application_Theme_Style_Form": {
+          "array": []
+        },
+        "Create_Edit_Tasks_Form": {
+          "array": []
+        },
+        "Manage_Sample_Data": {
+          "array": []
+        },
+        "Project_Dashboard": {
+          "array": []
+        },
+        "Project_Tracking": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        }
+      }
+    }
+  }
+}

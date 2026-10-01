@@ -1,0 +1,87 @@
+{
+  "data": {
+    "tables": {
+      "u_eba_demo_cs_emp": {
+        "empno": {
+          "kind": "IntegerColumn"
+        },
+        "job": {
+          "kind": "StringColumn"
+        },
+        "hiredate": {
+          "kind": "DateColumn"
+        },
+        "deptno": {
+          "kind": "IntegerColumn"
+        },
+        "mgr": {
+          "kind": "IntegerColumn"
+        },
+        "ename": {
+          "kind": "StringColumn"
+        },
+        "sal": {
+          "kind": "IntegerColumn"
+        },
+        "comm": {
+          "kind": "IntegerColumn"
+        }
+      }
+    },
+    "related_lists": [],
+    "duplicate_declarations": [],
+    "counts": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "matched_attributes": [
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "empno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "job",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "hiredate",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "deptno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "mgr",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "ename",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "sal",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_cs_emp",
+        "column": "comm",
+        "kind": "IntegerColumn"
+      }
+    ],
+    "relationships": [],
+    "generated_file": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\generator_evaluation\\servicenow\\example1\\buml_generator_result\\tables.now.ts",
+    "counting_rule": "Input scalar columns; association ends represented by reference columns and related lists. This does not verify cardinality bounds or live platform execution."
+  }
+}

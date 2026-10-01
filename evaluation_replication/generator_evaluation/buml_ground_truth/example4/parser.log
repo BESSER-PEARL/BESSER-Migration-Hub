@@ -1,0 +1,29 @@
+Merging 4 DDL file(s):
+  + create-funtion.sql
+  + create-tables.sql
+  + create-view.sql
+  + sample-data.sql
+Parsing Oracle APEX DDL: tmpokb732kn.sql
+  Class 'EbaDemoTreeProjects': ['completion_date', 'created', 'created_by', 'description', 'estimated_completion', 'proj_id', 'project_name', 'row_version_number', 'start_date', 'status', 'updated', 'updated_by']
+  Class 'EbaDemoTreeTask': ['created', 'created_by', 'proj_id', 'row_version_number', 'task_assign', 'task_comp', 'task_desc', 'task_est_comp', 'task_id', 'task_name', 'task_priority', 'task_start', 'task_status', 'updated', 'updated_by']
+  Class 'EbaDemoTreeSubtask': ['created', 'created_by', 'proj_id', 'row_version_number', 'sub_assign', 'sub_comp', 'sub_desc', 'sub_est_comp', 'sub_id', 'sub_name', 'sub_priority', 'sub_start', 'sub_status', 'task_id', 'updated', 'updated_by']
+  Class 'EbaDemoTreeStocks': ['closing_val', 'created', 'created_by', 'high', 'id', 'low', 'opening_val', 'pricing_date', 'row_version_number', 'stock_code', 'stock_name', 'updated', 'updated_by']
+  Class 'EbaDemoTreePopulation': ['created', 'created_by', 'id', 'population', 'region', 'row_version_number', 'state_code', 'state_name', 'updated', 'updated_by']
+  Class 'EbaDemoTreeDept': ['deptno', 'dname', 'loc']
+  Class 'EbaDemoTreeEmp': ['comm', 'deptno', 'empno', 'ename', 'hiredate', 'job', 'sal']
+  Class 'EbaDemoTreeProjFiles': ['created', 'created_by', 'file_charset', 'file_comments', 'file_lastupd', 'file_mimetype', 'file_name', 'id', 'row_version_number', 'tags', 'updated', 'updated_by']
+  Total: 8 classes, 2 associations
+Parsing 12 APEX page files in: screens
+  Skipped: page_00001.sql
+  Screen 'Manage_Sample_Data' | main=True | elements=2
+  Screen 'Project_Tracking' | main=True | elements=3
+  Screen 'Help' | main=True | elements=0
+  Screen 'Administration' | main=True | elements=0
+  Screen 'Project_Dashboard' | main=True | elements=1
+  Screen 'Create_Edit_Project_Form' | main=False | elements=4
+  Screen 'Application_Theme_Style_Form' | main=True | elements=2
+  Screen 'Create_Edit_Tasks_Form' | main=True | elements=7
+  Screen 'Modify_Subtask_Information_Form' | main=False | elements=4
+  Skipped: page_00101.sql
+  Skipped: page_groups.sql
+  Total: 9 screens extracted

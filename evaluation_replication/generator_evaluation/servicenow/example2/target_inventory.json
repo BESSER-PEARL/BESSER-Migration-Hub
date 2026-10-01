@@ -1,0 +1,271 @@
+{
+  "data": {
+    "tables": {
+      "u_eba_demo_load_sales": {
+        "created": {
+          "kind": "DateColumn"
+        },
+        "total_profit": {
+          "kind": "IntegerColumn"
+        },
+        "units_sold": {
+          "kind": "IntegerColumn"
+        },
+        "unit_price": {
+          "kind": "IntegerColumn"
+        },
+        "ship_date": {
+          "kind": "DateColumn"
+        },
+        "order_id": {
+          "kind": "IntegerColumn"
+        },
+        "order_date": {
+          "kind": "DateColumn"
+        },
+        "country": {
+          "kind": "StringColumn"
+        },
+        "unit_cost": {
+          "kind": "IntegerColumn"
+        },
+        "order_priority": {
+          "kind": "StringColumn"
+        },
+        "sales_channel": {
+          "kind": "StringColumn"
+        },
+        "last_updated": {
+          "kind": "DateColumn"
+        },
+        "item_type": {
+          "kind": "StringColumn"
+        },
+        "total_cost": {
+          "kind": "IntegerColumn"
+        },
+        "region": {
+          "kind": "StringColumn"
+        },
+        "total_revenue": {
+          "kind": "IntegerColumn"
+        }
+      },
+      "u_eba_demo_load_emp": {
+        "comm": {
+          "kind": "IntegerColumn"
+        },
+        "hiredate": {
+          "kind": "DateColumn"
+        },
+        "sal": {
+          "kind": "IntegerColumn"
+        },
+        "created": {
+          "kind": "DateColumn"
+        },
+        "ename": {
+          "kind": "StringColumn"
+        },
+        "job": {
+          "kind": "StringColumn"
+        },
+        "last_updated": {
+          "kind": "DateColumn"
+        },
+        "empno": {
+          "kind": "IntegerColumn"
+        },
+        "ebademoloademp_mgr": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_load_emp"
+        },
+        "ebademoloaddept": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_load_dept"
+        }
+      },
+      "u_eba_demo_load_dept": {
+        "loc": {
+          "kind": "StringColumn"
+        },
+        "deptno": {
+          "kind": "IntegerColumn"
+        },
+        "dname": {
+          "kind": "StringColumn"
+        }
+      }
+    },
+    "related_lists": [
+      "u_eba_demo_load_emp.ebademoloaddept",
+      "u_eba_demo_load_emp.ebademoloademp_mgr"
+    ],
+    "duplicate_declarations": [],
+    "counts": {
+      "Entities": 3,
+      "Attributes": 27,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "matched_attributes": [
+      {
+        "table": "u_eba_demo_load_dept",
+        "column": "loc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_dept",
+        "column": "deptno",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_dept",
+        "column": "dname",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "created",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "total_profit",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "units_sold",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "unit_price",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "ship_date",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "order_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "order_date",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "country",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "unit_cost",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "order_priority",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "sales_channel",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "last_updated",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "item_type",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "total_cost",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "region",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_sales",
+        "column": "total_revenue",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "comm",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "hiredate",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "sal",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "created",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "ename",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "job",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "last_updated",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_load_emp",
+        "column": "empno",
+        "kind": "IntegerColumn"
+      }
+    ],
+    "relationships": [
+      {
+        "association": "EbaDemoLoadEmp_EbaDemoLoadEmp",
+        "child": "u_eba_demo_load_emp",
+        "column": "ebademoloademp_mgr",
+        "parent": "u_eba_demo_load_emp",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoLoadEmp_EbaDemoLoadDept",
+        "child": "u_eba_demo_load_emp",
+        "column": "ebademoloaddept",
+        "parent": "u_eba_demo_load_dept",
+        "reference_present": true,
+        "related_list_present": true
+      }
+    ],
+    "generated_file": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\generator_evaluation\\servicenow\\example2\\buml_generator_result\\tables.now.ts",
+    "counting_rule": "Input scalar columns; association ends represented by reference columns and related lists. This does not verify cardinality bounds or live platform execution."
+  }
+}

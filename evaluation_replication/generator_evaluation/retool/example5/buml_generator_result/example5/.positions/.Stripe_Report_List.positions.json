@@ -1,0 +1,20 @@
+{
+  "Reset_11": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Stripe_Report": {
+    "row": 2,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Stripe_Report_2": {
+    "row": 12,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  }
+}

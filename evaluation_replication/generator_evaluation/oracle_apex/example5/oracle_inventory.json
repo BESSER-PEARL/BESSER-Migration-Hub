@@ -1,0 +1,1070 @@
+{
+  "counts": {
+    "Entities": 2,
+    "Attributes": 9,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 25,
+    "Bound entities": 2,
+    "Buttons": 32,
+    "Action types": 2,
+    "Navigation": 0,
+    "Forms": 8,
+    "Labels": 32
+  },
+  "gui": {
+    "counts": {
+      "Screens": 25,
+      "Bound entities": 2,
+      "Buttons": 32,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 8,
+      "Labels": 32
+    },
+    "widget_types": {
+      "DataList": 13,
+      "Button": 24,
+      "Form": 8
+    },
+    "bound_entities": [
+      "EbaDemoDaDept",
+      "EbaDemoDaEmp"
+    ],
+    "action_types": [
+      "Cancel",
+      "Save"
+    ],
+    "screens": [
+      {
+        "name": "Add_Remove_Class__Error__List",
+        "widgets": [
+          {
+            "name": "Add/Remove_Class_(Error)_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Add_Remove_Class__Focus__List",
+        "widgets": [
+          {
+            "name": "Add/Remove_Class_(Focus)_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Administration",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Reset_Data",
+            "kind": "Button",
+            "label": "Reset Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Administration_p26",
+        "widgets": []
+      },
+      {
+        "name": "Application_Theme_Style_Form",
+        "widgets": [
+          {
+            "name": "Application_Theme_Style_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Application Theme Style",
+            "fields": [
+              {
+                "name": "P24_DESKTOP_THEME_STYLE_ID",
+                "type": "Dropdown",
+                "label": "Desktop Theme Style",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Debounce_and_Throttle",
+        "widgets": []
+      },
+      {
+        "name": "Delete_and_Refresh_List",
+        "widgets": [
+          {
+            "name": "Delete_and_Refresh_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Disable_Enable_List",
+        "widgets": [
+          {
+            "name": "Disable/Enable_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P3_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P3_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P3_EMPNO",
+                "type": "Number",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P3_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P3_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P3_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P3_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P3_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P3_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p13",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P13_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P13_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P13_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P13_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P13_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P13_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P13_LOCATION",
+                "type": "Text",
+                "label": "Location",
+                "required": false
+              },
+              {
+                "name": "P13_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P13_NO_OF_EMPLOYEES",
+                "type": "Text",
+                "label": "Number of Employees",
+                "required": false
+              },
+              {
+                "name": "P13_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P13_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p15",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P15_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P15_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P15_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P15_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P15_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P15_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P15_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P15_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P15_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p22",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P22_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P22_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P22_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P22_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P22_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P22_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P22_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P22_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P22_SAL",
+                "type": "Text",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p5",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P5_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P5_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P5_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P5_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P5_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P5_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P5_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P5_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P5_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p7",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P7_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P7_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P7_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P7_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": true
+              },
+              {
+                "name": "P7_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P7_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P7_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P7_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P7_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Edit_Form_p9",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Edit_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Edit",
+            "fields": [
+              {
+                "name": "P9_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P9_DEPTNO",
+                "type": "Dropdown",
+                "label": "Department",
+                "required": false
+              },
+              {
+                "name": "P9_EMPNO",
+                "type": "Text",
+                "label": "Employee Number",
+                "required": true
+              },
+              {
+                "name": "P9_ENAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P9_HIREDATE",
+                "type": "Date",
+                "label": "Hire date",
+                "required": false
+              },
+              {
+                "name": "P9_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P9_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P9_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P9_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Execute_PL_SQL_Code_List",
+        "widgets": [
+          {
+            "name": "Execute_PL/SQL_Code_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Update_Salary",
+            "kind": "Button",
+            "label": "Update Salary by 10%",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Filter_and_Refresh_List",
+        "widgets": [
+          {
+            "name": "Filter_and_Refresh_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "P19_Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Help",
+        "widgets": []
+      },
+      {
+        "name": "Hide_Show_List",
+        "widgets": [
+          {
+            "name": "Hide/Show_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Refresh_List",
+        "widgets": [
+          {
+            "name": "Refresh_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          },
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Set_Values__PL_SQL__List",
+        "widgets": [
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Set_Values_(PL/SQL)_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      },
+      {
+        "name": "Set_Values__SQL__List",
+        "widgets": [
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Set_Values_(SQL)_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      },
+      {
+        "name": "Shuttle_Refresh_List",
+        "widgets": [
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Shuttle_Refresh_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      },
+      {
+        "name": "Stripe_Report_List",
+        "widgets": [
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Stripe_Report_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      },
+      {
+        "name": "Timer_List",
+        "widgets": [
+          {
+            "name": "Reset",
+            "kind": "Button",
+            "label": "Reset",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Timer_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoDaEmp",
+            "sources": [
+              {
+                "name": "EbaDemoDaDept",
+                "class": "EbaDemoDaDept"
+              },
+              {
+                "name": "EbaDemoDaEmp",
+                "class": "EbaDemoDaEmp"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      }
+    ]
+  }
+}

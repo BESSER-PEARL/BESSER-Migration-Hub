@@ -1,0 +1,103 @@
+{
+  "example": "example3",
+  "run": "current",
+  "parser": {
+    "Entities": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Attributes": {
+      "reference": 6,
+      "output": 6,
+      "percent": 100.0
+    },
+    "Associations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Multiplicities": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Generalizations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Enumerations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Screens": {
+      "reference": 4,
+      "output": 4,
+      "percent": 100.0
+    },
+    "Bound entities": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Buttons": {
+      "reference": 7,
+      "output": 7,
+      "percent": 100.0
+    },
+    "Action types": {
+      "reference": 5,
+      "output": 5,
+      "percent": 100.0
+    },
+    "Navigation": {
+      "reference": 4,
+      "output": 1,
+      "percent": 25.0
+    },
+    "Forms": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Labels": {
+      "reference": 7,
+      "output": 7,
+      "percent": 100.0
+    }
+  },
+  "source_events": 14,
+  "pivot_events": 1,
+  "row_counts": {
+    "source": {
+      "products": 3
+    }
+  },
+  "source_tag_counts": {
+    "Action": 2,
+    "App": 1,
+    "Body": 4,
+    "Button": 5,
+    "Column": 6,
+    "Event": 14,
+    "Footer": 2,
+    "Form": 2,
+    "Frame": 1,
+    "GlobalFunctions": 1,
+    "Header": 3,
+    "Modal": 1,
+    "ModalFrame": 2,
+    "Option": 6,
+    "Select": 2,
+    "SqlQueryUnified": 4,
+    "State": 1,
+    "Table": 1,
+    "Text": 5,
+    "TextArea": 2,
+    "TextInput": 2
+  },
+  "serialization_passed": true,
+  "frozen_baseline_reference": false
+}

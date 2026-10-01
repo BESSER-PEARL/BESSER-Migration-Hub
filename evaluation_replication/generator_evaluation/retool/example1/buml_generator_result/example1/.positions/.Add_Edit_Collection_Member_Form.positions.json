@@ -1,0 +1,143 @@
+{
+  "Add_Edit_Collection_Member_fields_1": {
+    "row": 0,
+    "col": 0,
+    "height": 26,
+    "width": 12
+  },
+  "Add_Edit_Collection_Member_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_COMM": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_DEPTNO": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_EMPNO": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_ENAME": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_HIREDATE": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_JOB": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_MGR": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_SAL": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_SEQ": {
+    "row": 18,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_STATUS": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_XMLTYPE": {
+    "row": 22,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Add_Edit_Collection_Member_fields_1_submit": {
+    "row": 24,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Add_Edit_Collection_Member_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Cancel_5": {
+    "row": 26,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Delete_Member": {
+    "row": 28,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Update_Member": {
+    "row": 30,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

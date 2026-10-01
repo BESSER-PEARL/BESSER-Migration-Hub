@@ -1,0 +1,513 @@
+{
+  "counts": {
+    "Entities": 3,
+    "Attributes": 27,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 16,
+    "Bound entities": 1,
+    "Buttons": 24,
+    "Action types": 2,
+    "Navigation": 0,
+    "Forms": 7,
+    "Labels": 24
+  },
+  "gui": {
+    "counts": {
+      "Screens": 16,
+      "Bound entities": 1,
+      "Buttons": 24,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 7,
+      "Labels": 24
+    },
+    "widget_types": {
+      "Button": 17,
+      "Form": 7,
+      "DataList": 1
+    },
+    "bound_entities": [
+      "EbaDemoLoadSales"
+    ],
+    "action_types": [
+      "Cancel",
+      "Save"
+    ],
+    "screens": [
+      {
+        "name": "Administration",
+        "widgets": []
+      },
+      {
+        "name": "Application_Theme_Style_Form",
+        "widgets": [
+          {
+            "name": "Application_Theme_Style_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Application Theme Style",
+            "fields": [
+              {
+                "name": "P7_DESKTOP_THEME_STYLE_ID",
+                "type": "Dropdown",
+                "label": "Desktop Theme Style",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Background_Load_Form",
+        "widgets": [
+          {
+            "name": "Background_Load_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Load Data",
+            "title": "Background Load",
+            "fields": [
+              {
+                "name": "P17_ERROR_ROWS",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P17_FILE",
+                "type": "File",
+                "label": "Upload a File",
+                "required": false
+              },
+              {
+                "name": "P17_FILE_NAME",
+                "type": "Text",
+                "label": "Loaded File",
+                "required": false
+              },
+              {
+                "name": "P17_LOAD_EXEC_ID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P17_PROCESSED_ROWS",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Clear",
+            "kind": "Button",
+            "label": "Clear",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "CSV_Load_Form",
+        "widgets": [
+          {
+            "name": "CSV_Load_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Load Data",
+            "title": "CSV Load",
+            "fields": [
+              {
+                "name": "P11_COPY_PASTE_ERROR_ROW_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P11_DATA",
+                "type": "TextArea",
+                "label": "Copy and Paste Delimited Data",
+                "required": false
+              },
+              {
+                "name": "P11_FILE",
+                "type": "File",
+                "label": "Upload a File",
+                "required": false
+              },
+              {
+                "name": "P11_FILE_ERROR_ROW_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P11_FILE_NAME",
+                "type": "Text",
+                "label": "Loaded File",
+                "required": false
+              },
+              {
+                "name": "P11_PASTED_DATA",
+                "type": "Text",
+                "label": "Pasted Data",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Clear_Data",
+            "kind": "Button",
+            "label": "Clear",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Clear_File",
+            "kind": "Button",
+            "label": "Clear",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Load_File",
+            "kind": "Button",
+            "label": "Load Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          },
+          {
+            "name": "Next",
+            "kind": "Button",
+            "label": "Next",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Data_Load_Results",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Finish",
+            "kind": "Button",
+            "label": "Finish",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Data_Load_Source",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Next",
+            "kind": "Button",
+            "label": "Next",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Data_Loading",
+        "widgets": []
+      },
+      {
+        "name": "Data_Validation",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Next",
+            "kind": "Button",
+            "label": "Load Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          },
+          {
+            "name": "Previous",
+            "kind": "Button",
+            "label": "Previous",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Eba_demo_load_sales_List",
+        "widgets": [
+          {
+            "name": "Eba_demo_load_sales_List",
+            "kind": "DataList",
+            "label": null,
+            "binding": "EbaDemoLoadSales",
+            "sources": [
+              {
+                "name": "EbaDemoLoadSales",
+                "class": "EbaDemoLoadSales"
+              }
+            ],
+            "action_type": null
+          }
+        ]
+      },
+      {
+        "name": "Help",
+        "widgets": []
+      },
+      {
+        "name": "Load_Data_using_PL_SQL_API_Form",
+        "widgets": [
+          {
+            "name": "Load_Data_using_PL_SQL_API_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Load Data",
+            "title": "Load Data using PL/SQL API",
+            "fields": [
+              {
+                "name": "P32_DATA",
+                "type": "TextArea",
+                "label": "Copy and Paste Delimited Data",
+                "required": false
+              },
+              {
+                "name": "P32_ROWS_FAILED",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P32_ROWS_LOADED",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P32_SAMPLE_DATA",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Manual_Data_Loading",
+        "widgets": []
+      },
+      {
+        "name": "Multiple_File_Types_Load_Form",
+        "widgets": [
+          {
+            "name": "Clear",
+            "kind": "Button",
+            "label": "Clear",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Multiple_File_Types_Load_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Load Data",
+            "title": "Multiple File Types Load",
+            "fields": [
+              {
+                "name": "P16_ERROR_ROW_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P16_FILE",
+                "type": "File",
+                "label": "Upload a File",
+                "required": false
+              },
+              {
+                "name": "P16_FILE_NAME",
+                "type": "Text",
+                "label": "Loaded File",
+                "required": false
+              },
+              {
+                "name": "P16_FILE_TYPE",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P16_PROCESSED_ROW_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P16_XLSX_WORKSHEET",
+                "type": "Dropdown",
+                "label": "XLSX Worksheet",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "PL_SQL_Parser_Form",
+        "widgets": [
+          {
+            "name": "PL_SQL_Parser_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Upload File",
+            "title": "PL/SQL Parser",
+            "fields": [
+              {
+                "name": "P31_FILE",
+                "type": "File",
+                "label": "Upload a File",
+                "required": false
+              },
+              {
+                "name": "P31_XLSX_WORKSHEET",
+                "type": "Dropdown",
+                "label": "XLSX Worksheet",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Reset_Data",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Reset_Data",
+            "kind": "Button",
+            "label": "Reset Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Transform_and_Lookup_Form",
+        "widgets": [
+          {
+            "name": "Clear",
+            "kind": "Button",
+            "label": "Clear",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Transform_and_Lookup_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Load Data",
+            "title": "Transform and Lookup",
+            "fields": [
+              {
+                "name": "P15_ERROR_ROW_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P15_FILE",
+                "type": "File",
+                "label": "Upload a File",
+                "required": false
+              },
+              {
+                "name": "P15_FILE_NAME",
+                "type": "Text",
+                "label": "Loaded File",
+                "required": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

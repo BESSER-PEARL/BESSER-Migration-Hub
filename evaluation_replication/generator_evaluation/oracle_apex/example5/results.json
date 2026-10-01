@@ -1,0 +1,35 @@
+{
+  "scenario": "example5",
+  "platform": "APEX",
+  "reference": {
+    "Entities": 2,
+    "Attributes": 9,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 25,
+    "Bound entities": 2,
+    "Buttons": 32,
+    "Action types": 2,
+    "Navigation": 0,
+    "Forms": 8,
+    "Labels": 32
+  },
+  "generated": {
+    "Entities": 2,
+    "Attributes": 9,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 25,
+    "Bound entities": 2,
+    "Buttons": 32,
+    "Action types": 2,
+    "Navigation": 0,
+    "Forms": 8,
+    "Labels": 32
+  },
+  "reference_sha256": "3f0deb6a9102ea129a867e63df1530b708bd7b49f6531ebe5df15c88be0704c7"
+}

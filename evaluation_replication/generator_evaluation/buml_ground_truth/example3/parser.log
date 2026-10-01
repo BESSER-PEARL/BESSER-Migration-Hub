@@ -1,0 +1,18 @@
+Merging 2 DDL file(s):
+  + emp-dept.sql
+  + order-items.sql
+Parsing Oracle APEX DDL: tmp0t_5cgd0.sql
+  Class 'EbaDemoDgDept': ['deptno', 'dname', 'loc']
+  Class 'EbaDemoDgEmp': ['comm', 'empno', 'ename', 'hiredate', 'job', 'sal']
+  Class 'EbaDemoDgCustomers': ['customer_id', 'email_address', 'full_name']
+  Class 'EbaDemoDgProducts': ['image_charset', 'image_filename', 'image_last_updated', 'image_mime_type', 'product_id', 'product_name', 'unit_price']
+  Class 'EbaDemoDgOrders': ['order_datetime', 'order_id', 'order_status']
+  Class 'EbaDemoDgOrderItems': ['line_item_id', 'quantity', 'unit_price']
+  Total: 6 classes, 5 associations
+Parsing 5 APEX page files in: screens
+  Skipped: page_00000.sql
+  Skipped: page_00001.sql
+  Skipped: page_09999.sql
+  Screen 'About' | main=True | elements=0
+  Skipped: page_groups.sql
+  Total: 1 screens extracted

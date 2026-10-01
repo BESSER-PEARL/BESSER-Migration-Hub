@@ -1,0 +1,484 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 3,
+      "Attributes": 27,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "ebademoloaddept": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        },
+        "dname": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "loc": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademoloadsales": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "country": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "created": {
+          "type": "date",
+          "identity": false
+        },
+        "item_type": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "last_updated": {
+          "type": "date",
+          "identity": false
+        },
+        "order_date": {
+          "type": "date",
+          "identity": false
+        },
+        "order_id": {
+          "type": "number",
+          "identity": false
+        },
+        "order_priority": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "region": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sales_channel": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "ship_date": {
+          "type": "date",
+          "identity": false
+        },
+        "total_cost": {
+          "type": "number",
+          "identity": false
+        },
+        "total_profit": {
+          "type": "number",
+          "identity": false
+        },
+        "total_revenue": {
+          "type": "number",
+          "identity": false
+        },
+        "unit_cost": {
+          "type": "number",
+          "identity": false
+        },
+        "unit_price": {
+          "type": "number",
+          "identity": false
+        },
+        "units_sold": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "ebademoloademp": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "created": {
+          "type": "date",
+          "identity": false
+        },
+        "empno": {
+          "type": "number",
+          "identity": false
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "last_updated": {
+          "type": "date",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademoloaddept_id": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademoloademp_mgr_id": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "ebademoloaddept",
+        "deptno"
+      ],
+      [
+        "ebademoloaddept",
+        "dname"
+      ],
+      [
+        "ebademoloaddept",
+        "loc"
+      ],
+      [
+        "ebademoloadsales",
+        "country"
+      ],
+      [
+        "ebademoloadsales",
+        "created"
+      ],
+      [
+        "ebademoloadsales",
+        "item_type"
+      ],
+      [
+        "ebademoloadsales",
+        "last_updated"
+      ],
+      [
+        "ebademoloadsales",
+        "order_date"
+      ],
+      [
+        "ebademoloadsales",
+        "order_id"
+      ],
+      [
+        "ebademoloadsales",
+        "order_priority"
+      ],
+      [
+        "ebademoloadsales",
+        "region"
+      ],
+      [
+        "ebademoloadsales",
+        "sales_channel"
+      ],
+      [
+        "ebademoloadsales",
+        "ship_date"
+      ],
+      [
+        "ebademoloadsales",
+        "total_cost"
+      ],
+      [
+        "ebademoloadsales",
+        "total_profit"
+      ],
+      [
+        "ebademoloadsales",
+        "total_revenue"
+      ],
+      [
+        "ebademoloadsales",
+        "unit_cost"
+      ],
+      [
+        "ebademoloadsales",
+        "unit_price"
+      ],
+      [
+        "ebademoloadsales",
+        "units_sold"
+      ],
+      [
+        "ebademoloademp",
+        "comm"
+      ],
+      [
+        "ebademoloademp",
+        "created"
+      ],
+      [
+        "ebademoloademp",
+        "empno"
+      ],
+      [
+        "ebademoloademp",
+        "ename"
+      ],
+      [
+        "ebademoloademp",
+        "hiredate"
+      ],
+      [
+        "ebademoloademp",
+        "job"
+      ],
+      [
+        "ebademoloademp",
+        "last_updated"
+      ],
+      [
+        "ebademoloademp",
+        "sal"
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "ebademoloademp",
+        [
+          "ebademoloaddept_id"
+        ],
+        "ebademoloaddept"
+      ],
+      [
+        "ebademoloademp",
+        [
+          "ebademoloademp_mgr_id"
+        ],
+        "ebademoloademp"
+      ]
+    ]
+  },
+  "gui": {
+    "counts": {
+      "Screens": 16,
+      "Bound entities": 1,
+      "Buttons": 24,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 7,
+      "Labels": 24
+    },
+    "pages": [
+      {
+        "file": "page_00002.sql",
+        "id": "2",
+        "name": "Administration",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00003.sql",
+        "id": "3",
+        "name": "Application_Theme_Style_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00004.sql",
+        "id": "4",
+        "name": "Background_Load_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00005.sql",
+        "id": "5",
+        "name": "CSV_Load_Form",
+        "buttons": 5,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00006.sql",
+        "id": "6",
+        "name": "Data_Load_Results",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00007.sql",
+        "id": "7",
+        "name": "Data_Load_Source",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00008.sql",
+        "id": "8",
+        "name": "Data_Loading",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00009.sql",
+        "id": "9",
+        "name": "Data_Validation",
+        "buttons": 3,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00010.sql",
+        "id": "10",
+        "name": "Eba_demo_load_sales_List",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00011.sql",
+        "id": "11",
+        "name": "Help",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00012.sql",
+        "id": "12",
+        "name": "Load_Data_using_PL_SQL_API_Form",
+        "buttons": 1,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00013.sql",
+        "id": "13",
+        "name": "Manual_Data_Loading",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00014.sql",
+        "id": "14",
+        "name": "Multiple_File_Types_Load_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00015.sql",
+        "id": "15",
+        "name": "PL_SQL_Parser_Form",
+        "buttons": 1,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00016.sql",
+        "id": "16",
+        "name": "Reset_Data",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00017.sql",
+        "id": "17",
+        "name": "Transform_and_Lookup_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [
+      "ebademoloadsales"
+    ],
+    "action_types": [
+      "Cancel",
+      "Save"
+    ]
+  },
+  "excluded_platform_pages": [
+    {
+      "id": "101",
+      "name": "Login",
+      "alias": "LOGIN",
+      "step_title": "Sign In",
+      "reload_on_submit": "A",
+      "warn_on_unsaved_changes": "N",
+      "autocomplete_on_off": "OFF",
+      "step_template": "2102634289808461002",
+      "page_template_options": "#DEFAULT#",
+      "page_is_public_y_n": "Y",
+      "protection_level": "C",
+      "page_component_map": "16"
+    },
+    {
+      "id": "0",
+      "name": "Global Page",
+      "step_title": "Global Page",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "D",
+      "page_component_map": "08"
+    },
+    {
+      "id": "1",
+      "name": "example2",
+      "step_title": "example2",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "C",
+      "page_component_map": "08"
+    }
+  ],
+  "warnings": [
+    "Form 'Application_Theme_Style_fields_1' has no persistence binding.",
+    "Input type Dropdown on 'P7_DESKTOP_THEME_STYLE_ID' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Background_Load_fields_1' has no persistence binding.",
+    "Input type File on 'P17_FILE' uses a text fallback.",
+    "Button 'CLEAR' has no executable action binding.",
+    "Form 'CSV_Load_fields_1' has no persistence binding.",
+    "Input type File on 'P11_FILE' uses a text fallback.",
+    "Button 'CLEAR_DATA' has no executable action binding.",
+    "Button 'CLEAR_FILE' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'PREVIOUS' has no executable action binding.",
+    "Form 'Load_Data_using_PL_SQL_API_fields_1' has no persistence binding.",
+    "Button 'CLEAR' has no executable action binding.",
+    "Form 'Multiple_File_Types_Load_fields_1' has no persistence binding.",
+    "Input type File on 'P16_FILE' uses a text fallback.",
+    "Input type Dropdown on 'P16_XLSX_WORKSHEET' uses a text fallback.",
+    "Form 'PL_SQL_Parser_fields_1' has no persistence binding.",
+    "Input type File on 'P31_FILE' uses a text fallback.",
+    "Input type Dropdown on 'P31_XLSX_WORKSHEET' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CLEAR' has no executable action binding.",
+    "Form 'Transform_and_Lookup_fields_1' has no persistence binding.",
+    "Input type File on 'P15_FILE' uses a text fallback."
+  ]
+}

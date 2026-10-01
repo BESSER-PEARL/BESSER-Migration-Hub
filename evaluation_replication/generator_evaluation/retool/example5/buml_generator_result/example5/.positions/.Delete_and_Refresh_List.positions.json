@@ -1,0 +1,20 @@
+{
+  "Delete_and_Refresh": {
+    "row": 0,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Delete_and_Refresh_2": {
+    "row": 10,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Reset_3": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

@@ -1,0 +1,449 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 2,
+      "Attributes": 9,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "ebademodadept": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        },
+        "dname": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "loc": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademodaemp": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "empno": {
+          "type": "number",
+          "identity": false
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodadept_id": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademodaemp_mgr_id": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "ebademodadept",
+        "deptno"
+      ],
+      [
+        "ebademodadept",
+        "dname"
+      ],
+      [
+        "ebademodadept",
+        "loc"
+      ],
+      [
+        "ebademodaemp",
+        "comm"
+      ],
+      [
+        "ebademodaemp",
+        "empno"
+      ],
+      [
+        "ebademodaemp",
+        "ename"
+      ],
+      [
+        "ebademodaemp",
+        "hiredate"
+      ],
+      [
+        "ebademodaemp",
+        "job"
+      ],
+      [
+        "ebademodaemp",
+        "sal"
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "ebademodaemp",
+        [
+          "ebademodadept_id"
+        ],
+        "ebademodadept"
+      ],
+      [
+        "ebademodaemp",
+        [
+          "ebademodaemp_mgr_id"
+        ],
+        "ebademodaemp"
+      ]
+    ]
+  },
+  "gui": {
+    "counts": {
+      "Screens": 25,
+      "Bound entities": 2,
+      "Buttons": 32,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 8,
+      "Labels": 32
+    },
+    "pages": [
+      {
+        "file": "page_00002.sql",
+        "id": "2",
+        "name": "Add_Remove_Class__Error__List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00003.sql",
+        "id": "3",
+        "name": "Add_Remove_Class__Focus__List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00004.sql",
+        "id": "4",
+        "name": "Administration",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00005.sql",
+        "id": "5",
+        "name": "Administration_p26",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00006.sql",
+        "id": "6",
+        "name": "Application_Theme_Style_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00007.sql",
+        "id": "7",
+        "name": "Debounce_and_Throttle",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00008.sql",
+        "id": "8",
+        "name": "Delete_and_Refresh_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00009.sql",
+        "id": "9",
+        "name": "Disable_Enable_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00010.sql",
+        "id": "10",
+        "name": "Edit_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00011.sql",
+        "id": "11",
+        "name": "Edit_Form_p13",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00012.sql",
+        "id": "12",
+        "name": "Edit_Form_p15",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00013.sql",
+        "id": "13",
+        "name": "Edit_Form_p22",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00014.sql",
+        "id": "14",
+        "name": "Edit_Form_p5",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00015.sql",
+        "id": "15",
+        "name": "Edit_Form_p7",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00016.sql",
+        "id": "16",
+        "name": "Edit_Form_p9",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00017.sql",
+        "id": "17",
+        "name": "Execute_PL_SQL_Code_List",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00018.sql",
+        "id": "18",
+        "name": "Filter_and_Refresh_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00019.sql",
+        "id": "19",
+        "name": "Help",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00020.sql",
+        "id": "20",
+        "name": "Hide_Show_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00021.sql",
+        "id": "21",
+        "name": "Refresh_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00022.sql",
+        "id": "22",
+        "name": "Set_Values__PL_SQL__List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00023.sql",
+        "id": "23",
+        "name": "Set_Values__SQL__List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00024.sql",
+        "id": "24",
+        "name": "Shuttle_Refresh_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00025.sql",
+        "id": "25",
+        "name": "Stripe_Report_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00026.sql",
+        "id": "26",
+        "name": "Timer_List",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [
+      "ebademodadept",
+      "ebademodaemp"
+    ],
+    "action_types": [
+      "Cancel",
+      "Save"
+    ]
+  },
+  "excluded_platform_pages": [
+    {
+      "id": "101",
+      "name": "Login",
+      "alias": "LOGIN",
+      "step_title": "Sign In",
+      "reload_on_submit": "A",
+      "warn_on_unsaved_changes": "N",
+      "autocomplete_on_off": "OFF",
+      "step_template": "2102634289808461002",
+      "page_template_options": "#DEFAULT#",
+      "page_is_public_y_n": "Y",
+      "protection_level": "C",
+      "page_component_map": "16"
+    },
+    {
+      "id": "0",
+      "name": "Global Page",
+      "step_title": "Global Page",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "D",
+      "page_component_map": "08"
+    },
+    {
+      "id": "1",
+      "name": "example5",
+      "step_title": "example5",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "C",
+      "page_component_map": "08"
+    }
+  ],
+  "warnings": [
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Application_Theme_Style_fields_1' has no persistence binding.",
+    "Input type Dropdown on 'P24_DESKTOP_THEME_STYLE_ID' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P3_DEPTNO' uses a text fallback.",
+    "Field 'P3_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P3_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P3_MGR' uses a text fallback.",
+    "Field 'P3_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P3_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P13_DEPTNO' uses a text fallback.",
+    "Field 'P13_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P13_JOB' uses a text fallback.",
+    "Field 'P13_LOCATION' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P13_MGR' uses a text fallback.",
+    "Field 'P13_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P13_NO_OF_EMPLOYEES' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P13_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P15_DEPTNO' uses a text fallback.",
+    "Field 'P15_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P15_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P15_MGR' uses a text fallback.",
+    "Field 'P15_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P15_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P22_DEPTNO' uses a text fallback.",
+    "Field 'P22_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P22_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P22_MGR' uses a text fallback.",
+    "Field 'P22_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P22_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P5_DEPTNO' uses a text fallback.",
+    "Field 'P5_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P5_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P5_MGR' uses a text fallback.",
+    "Field 'P5_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P5_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P7_DEPTNO' uses a text fallback.",
+    "Field 'P7_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P7_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P7_MGR' uses a text fallback.",
+    "Field 'P7_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P7_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P9_DEPTNO' uses a text fallback.",
+    "Field 'P9_DEPTNO' has no matching column in 'EbaDemoDaEmp'.",
+    "Input type Dropdown on 'P9_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P9_MGR' uses a text fallback.",
+    "Field 'P9_MGR' has no matching column in 'EbaDemoDaEmp'.",
+    "Field 'P9_ROWID' has no matching column in 'EbaDemoDaEmp'.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'P19_RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding.",
+    "Button 'RESET' has no executable action binding."
+  ]
+}

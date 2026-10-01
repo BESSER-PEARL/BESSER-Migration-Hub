@@ -1,0 +1,17 @@
+{
+  "builder_repairs": [
+    "application_theme_style_fields_1.title = 'Application Theme Style'",
+    "application_theme_style_fields_1.submit_label = 'Apply Changes'",
+    "create_edit_project_fields_1.title = 'Create/Edit Project'",
+    "create_edit_project_fields_1.submit_label = 'Create'",
+    "create_edit_project_fields_1.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('EbaDemoTreeProjects'))",
+    "create_edit_tasks_fields_1.title = 'Create/Edit Tasks'",
+    "create_edit_tasks_fields_1.submit_label = 'Create'",
+    "create_edit_tasks_fields_1.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('EbaDemoTreeTask'))",
+    "modify_subtask_information_fields_1.title = 'Modify Subtask Information'",
+    "modify_subtask_information_fields_1.submit_label = 'Create Subtask'",
+    "modify_subtask_information_fields_1.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('EbaDemoTreeSubtask'))"
+  ],
+  "inventory_equal_after_python_reload": true,
+  "generator_reference": "project.py reloaded and inventory checked"
+}

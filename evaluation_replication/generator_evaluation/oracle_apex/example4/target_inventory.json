@@ -1,0 +1,918 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 8,
+      "Attributes": 87,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "ebademotreedept": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        },
+        "dname": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "loc": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreeemp": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        },
+        "empno": {
+          "type": "number",
+          "identity": false
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        },
+        "ebademotreeemp_mgr_id": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "ebademotreepopulation": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "population": {
+          "type": "number",
+          "identity": false
+        },
+        "region": {
+          "type": "number",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "state_code": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "state_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreeprojects": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "completion_date": {
+          "type": "date",
+          "identity": false
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "description": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "estimated_completion": {
+          "type": "date",
+          "identity": false
+        },
+        "proj_id": {
+          "type": "number",
+          "identity": false
+        },
+        "project_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "start_date": {
+          "type": "date",
+          "identity": false
+        },
+        "status": {
+          "type": "number",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreestocks": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "closing_val": {
+          "type": "number",
+          "identity": false
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "high": {
+          "type": "number",
+          "identity": false
+        },
+        "low": {
+          "type": "number",
+          "identity": false
+        },
+        "opening_val": {
+          "type": "number",
+          "identity": false
+        },
+        "pricing_date": {
+          "type": "date",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "stock_code": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "stock_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreesubtask": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "proj_id": {
+          "type": "number",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "sub_assign": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sub_comp": {
+          "type": "date",
+          "identity": false
+        },
+        "sub_desc": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sub_est_comp": {
+          "type": "date",
+          "identity": false
+        },
+        "sub_id": {
+          "type": "number",
+          "identity": false
+        },
+        "sub_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sub_priority": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "sub_start": {
+          "type": "date",
+          "identity": false
+        },
+        "sub_status": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "task_id": {
+          "type": "number",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreetask": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "task_assign": {
+          "type": "number",
+          "identity": false
+        },
+        "task_comp": {
+          "type": "date",
+          "identity": false
+        },
+        "task_desc": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "task_est_comp": {
+          "type": "date",
+          "identity": false
+        },
+        "task_id": {
+          "type": "number",
+          "identity": false
+        },
+        "task_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "task_priority": {
+          "type": "number",
+          "identity": false
+        },
+        "task_start": {
+          "type": "date",
+          "identity": false
+        },
+        "task_status": {
+          "type": "number",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "ebademotreeprojfiles": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "created": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "created_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "file_charset": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "file_comments": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "file_lastupd": {
+          "type": "date",
+          "identity": false
+        },
+        "file_mimetype": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "file_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "row_version_number": {
+          "type": "number",
+          "identity": false
+        },
+        "tags": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "updated": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "updated_by": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "ebademotreeprojects_id": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "ebademotreedept",
+        "deptno"
+      ],
+      [
+        "ebademotreedept",
+        "dname"
+      ],
+      [
+        "ebademotreedept",
+        "loc"
+      ],
+      [
+        "ebademotreeemp",
+        "comm"
+      ],
+      [
+        "ebademotreeemp",
+        "deptno"
+      ],
+      [
+        "ebademotreeemp",
+        "empno"
+      ],
+      [
+        "ebademotreeemp",
+        "ename"
+      ],
+      [
+        "ebademotreeemp",
+        "hiredate"
+      ],
+      [
+        "ebademotreeemp",
+        "job"
+      ],
+      [
+        "ebademotreeemp",
+        "sal"
+      ],
+      [
+        "ebademotreepopulation",
+        "created"
+      ],
+      [
+        "ebademotreepopulation",
+        "created_by"
+      ],
+      [
+        "ebademotreepopulation",
+        "population"
+      ],
+      [
+        "ebademotreepopulation",
+        "region"
+      ],
+      [
+        "ebademotreepopulation",
+        "row_version_number"
+      ],
+      [
+        "ebademotreepopulation",
+        "state_code"
+      ],
+      [
+        "ebademotreepopulation",
+        "state_name"
+      ],
+      [
+        "ebademotreepopulation",
+        "updated"
+      ],
+      [
+        "ebademotreepopulation",
+        "updated_by"
+      ],
+      [
+        "ebademotreeprojects",
+        "completion_date"
+      ],
+      [
+        "ebademotreeprojects",
+        "created"
+      ],
+      [
+        "ebademotreeprojects",
+        "created_by"
+      ],
+      [
+        "ebademotreeprojects",
+        "description"
+      ],
+      [
+        "ebademotreeprojects",
+        "estimated_completion"
+      ],
+      [
+        "ebademotreeprojects",
+        "proj_id"
+      ],
+      [
+        "ebademotreeprojects",
+        "project_name"
+      ],
+      [
+        "ebademotreeprojects",
+        "row_version_number"
+      ],
+      [
+        "ebademotreeprojects",
+        "start_date"
+      ],
+      [
+        "ebademotreeprojects",
+        "status"
+      ],
+      [
+        "ebademotreeprojects",
+        "updated"
+      ],
+      [
+        "ebademotreeprojects",
+        "updated_by"
+      ],
+      [
+        "ebademotreestocks",
+        "closing_val"
+      ],
+      [
+        "ebademotreestocks",
+        "created"
+      ],
+      [
+        "ebademotreestocks",
+        "created_by"
+      ],
+      [
+        "ebademotreestocks",
+        "high"
+      ],
+      [
+        "ebademotreestocks",
+        "low"
+      ],
+      [
+        "ebademotreestocks",
+        "opening_val"
+      ],
+      [
+        "ebademotreestocks",
+        "pricing_date"
+      ],
+      [
+        "ebademotreestocks",
+        "row_version_number"
+      ],
+      [
+        "ebademotreestocks",
+        "stock_code"
+      ],
+      [
+        "ebademotreestocks",
+        "stock_name"
+      ],
+      [
+        "ebademotreestocks",
+        "updated"
+      ],
+      [
+        "ebademotreestocks",
+        "updated_by"
+      ],
+      [
+        "ebademotreesubtask",
+        "created"
+      ],
+      [
+        "ebademotreesubtask",
+        "created_by"
+      ],
+      [
+        "ebademotreesubtask",
+        "proj_id"
+      ],
+      [
+        "ebademotreesubtask",
+        "row_version_number"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_assign"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_comp"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_desc"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_est_comp"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_id"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_name"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_priority"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_start"
+      ],
+      [
+        "ebademotreesubtask",
+        "sub_status"
+      ],
+      [
+        "ebademotreesubtask",
+        "task_id"
+      ],
+      [
+        "ebademotreesubtask",
+        "updated"
+      ],
+      [
+        "ebademotreesubtask",
+        "updated_by"
+      ],
+      [
+        "ebademotreetask",
+        "created"
+      ],
+      [
+        "ebademotreetask",
+        "created_by"
+      ],
+      [
+        "ebademotreetask",
+        "row_version_number"
+      ],
+      [
+        "ebademotreetask",
+        "task_assign"
+      ],
+      [
+        "ebademotreetask",
+        "task_comp"
+      ],
+      [
+        "ebademotreetask",
+        "task_desc"
+      ],
+      [
+        "ebademotreetask",
+        "task_est_comp"
+      ],
+      [
+        "ebademotreetask",
+        "task_id"
+      ],
+      [
+        "ebademotreetask",
+        "task_name"
+      ],
+      [
+        "ebademotreetask",
+        "task_priority"
+      ],
+      [
+        "ebademotreetask",
+        "task_start"
+      ],
+      [
+        "ebademotreetask",
+        "task_status"
+      ],
+      [
+        "ebademotreetask",
+        "updated"
+      ],
+      [
+        "ebademotreetask",
+        "updated_by"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "created"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "created_by"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "file_charset"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "file_comments"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "file_lastupd"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "file_mimetype"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "file_name"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "row_version_number"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "tags"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "updated"
+      ],
+      [
+        "ebademotreeprojfiles",
+        "updated_by"
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "ebademotreeemp",
+        [
+          "ebademotreeemp_mgr_id"
+        ],
+        "ebademotreeemp"
+      ],
+      [
+        "ebademotreeprojfiles",
+        [
+          "ebademotreeprojects_id"
+        ],
+        "ebademotreeprojects"
+      ]
+    ]
+  },
+  "gui": {
+    "counts": {
+      "Screens": 9,
+      "Bound entities": 3,
+      "Buttons": 23,
+      "Action types": 4,
+      "Navigation": 0,
+      "Forms": 4,
+      "Labels": 23
+    },
+    "pages": [
+      {
+        "file": "page_00002.sql",
+        "id": "2",
+        "name": "Administration",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00003.sql",
+        "id": "3",
+        "name": "Application_Theme_Style_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00004.sql",
+        "id": "4",
+        "name": "Create_Edit_Project_Form",
+        "buttons": 4,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00005.sql",
+        "id": "5",
+        "name": "Create_Edit_Tasks_Form",
+        "buttons": 7,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00006.sql",
+        "id": "6",
+        "name": "Help",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00007.sql",
+        "id": "7",
+        "name": "Manage_Sample_Data",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00008.sql",
+        "id": "8",
+        "name": "Modify_Subtask_Information_Form",
+        "buttons": 4,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00009.sql",
+        "id": "9",
+        "name": "Project_Dashboard",
+        "buttons": 1,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00010.sql",
+        "id": "10",
+        "name": "Project_Tracking",
+        "buttons": 3,
+        "forms": 0,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [
+      "ebademotreeprojects",
+      "ebademotreesubtask",
+      "ebademotreetask"
+    ],
+    "action_types": [
+      "Add",
+      "Cancel",
+      "Delete",
+      "Save"
+    ]
+  },
+  "excluded_platform_pages": [
+    {
+      "id": "101",
+      "name": "Login",
+      "alias": "LOGIN",
+      "step_title": "Sign In",
+      "reload_on_submit": "A",
+      "warn_on_unsaved_changes": "N",
+      "autocomplete_on_off": "OFF",
+      "step_template": "2102634289808461002",
+      "page_template_options": "#DEFAULT#",
+      "page_is_public_y_n": "Y",
+      "protection_level": "C",
+      "page_component_map": "16"
+    },
+    {
+      "id": "0",
+      "name": "Global Page",
+      "step_title": "Global Page",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "D",
+      "page_component_map": "08"
+    },
+    {
+      "id": "1",
+      "name": "example4",
+      "step_title": "example4",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "C",
+      "page_component_map": "08"
+    }
+  ],
+  "warnings": [
+    "Form 'Application_Theme_Style_fields_1' has no persistence binding.",
+    "Input type Dropdown on 'P8_DESKTOP_THEME_STYLE_ID' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P7_STATUS' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P9_PROJ_ID' uses a text fallback.",
+    "Field 'P9_PROJ_ID' has no matching column in 'EbaDemoTreeTask'.",
+    "Field 'P9_TASK_ID_COUNT' has no matching column in 'EbaDemoTreeTask'.",
+    "Field 'P9_TASK_ID_NEXT' has no matching column in 'EbaDemoTreeTask'.",
+    "Field 'P9_TASK_ID_PREV' has no matching column in 'EbaDemoTreeTask'.",
+    "Input type Dropdown on 'P9_TASK_PRIORITY' uses a text fallback.",
+    "Input type Dropdown on 'P9_TASK_STATUS' uses a text fallback.",
+    "Button 'CREATE_SUBTASK' has no executable action binding.",
+    "Button 'GET_NEXT_TASK_ID' has no executable action binding.",
+    "Button 'GET_PREVIOUS_TASK_ID' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Input type Dropdown on 'P10_PROJ_ID' uses a text fallback.",
+    "Field 'P10_ROWID' has no matching column in 'EbaDemoTreeSubtask'.",
+    "Input type Dropdown on 'P10_SUB_PRIORITY' uses a text fallback.",
+    "Input type Dropdown on 'P10_SUB_STATUS' uses a text fallback.",
+    "Input type Dropdown on 'P10_TASK_ID' uses a text fallback.",
+    "Button 'CONTRACT_ALL' has no executable action binding.",
+    "Button 'EXPAND_ALL' has no executable action binding.",
+    "Button 'RESET_TREE' has no executable action binding."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "b45b2889-3068-5d25-b9f7-78d53b786e70",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "About",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "About": {
+          "array": []
+        }
+      }
+    }
+  }
+}

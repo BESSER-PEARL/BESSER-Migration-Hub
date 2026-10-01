@@ -1,0 +1,498 @@
+{
+  "counts": {
+    "Entities": 8,
+    "Attributes": 87,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 9,
+    "Bound entities": 3,
+    "Buttons": 23,
+    "Action types": 4,
+    "Navigation": 0,
+    "Forms": 4,
+    "Labels": 23
+  },
+  "gui": {
+    "counts": {
+      "Screens": 9,
+      "Bound entities": 3,
+      "Buttons": 23,
+      "Action types": 4,
+      "Navigation": 0,
+      "Forms": 4,
+      "Labels": 23
+    },
+    "widget_types": {
+      "Button": 19,
+      "Form": 4
+    },
+    "bound_entities": [
+      "EbaDemoTreeProjects",
+      "EbaDemoTreeSubtask",
+      "EbaDemoTreeTask"
+    ],
+    "action_types": [
+      "Add",
+      "Cancel",
+      "Delete",
+      "Save"
+    ],
+    "screens": [
+      {
+        "name": "Administration",
+        "widgets": []
+      },
+      {
+        "name": "Application_Theme_Style_Form",
+        "widgets": [
+          {
+            "name": "Application_Theme_Style_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Application Theme Style",
+            "fields": [
+              {
+                "name": "P8_DESKTOP_THEME_STYLE_ID",
+                "type": "Dropdown",
+                "label": "Desktop Theme Style",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Create_Edit_Project_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Create_Edit_Project_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoTreeProjects",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Create",
+            "title": "Create/Edit Project",
+            "fields": [
+              {
+                "name": "P7_COMPLETION_DATE",
+                "type": "Date",
+                "label": "Completion Date",
+                "required": false
+              },
+              {
+                "name": "P7_ESTIMATED_COMPLETION",
+                "type": "Date",
+                "label": "Estimated Completion",
+                "required": false
+              },
+              {
+                "name": "P7_PROJECT_NAME",
+                "type": "Text",
+                "label": "Project Name",
+                "required": true
+              },
+              {
+                "name": "P7_PROJ_ID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P7_START_DATE",
+                "type": "Date",
+                "label": "Start Date",
+                "required": false
+              },
+              {
+                "name": "P7_STATUS",
+                "type": "Dropdown",
+                "label": "Status",
+                "required": false
+              },
+              {
+                "name": "P7_UPDATED",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Delete",
+            "kind": "Button",
+            "label": "Delete",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Save",
+            "kind": "Button",
+            "label": "Apply Changes",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Create_Edit_Tasks_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Create_Edit_Tasks_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoTreeTask",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Create",
+            "title": "Create/Edit Tasks",
+            "fields": [
+              {
+                "name": "P9_PROJ_ID",
+                "type": "Dropdown",
+                "label": "Project:",
+                "required": true
+              },
+              {
+                "name": "P9_TASK_ASSIGN",
+                "type": "Text",
+                "label": "Task Assign",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_COMP",
+                "type": "Date",
+                "label": "Completed",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_DESC",
+                "type": "TextArea",
+                "label": "Details",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_EST_COMP",
+                "type": "Date",
+                "label": "Estimated Completion",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_ID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_ID_COUNT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_ID_NEXT",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_ID_PREV",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_NAME",
+                "type": "Text",
+                "label": "Task Name",
+                "required": true
+              },
+              {
+                "name": "P9_TASK_PRIORITY",
+                "type": "Dropdown",
+                "label": "Priority",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_START",
+                "type": "Date",
+                "label": "Start Date",
+                "required": false
+              },
+              {
+                "name": "P9_TASK_STATUS",
+                "type": "Dropdown",
+                "label": "Status",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Create_Subtask",
+            "kind": "Button",
+            "label": "Create Subtask",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Delete",
+            "kind": "Button",
+            "label": "Delete",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Get_Next_Task_Id",
+            "kind": "Button",
+            "label": "&gt;",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Get_Previous_Task_Id",
+            "kind": "Button",
+            "label": "&lt;",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Save",
+            "kind": "Button",
+            "label": "Apply Changes",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Help",
+        "widgets": []
+      },
+      {
+        "name": "Manage_Sample_Data",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Reset_Data",
+            "kind": "Button",
+            "label": "Reset Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Modify_Subtask_Information_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Delete",
+            "kind": "Button",
+            "label": "Delete",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Modify_Subtask_Information_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": "EbaDemoTreeSubtask",
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Create Subtask",
+            "title": "Modify Subtask Information",
+            "fields": [
+              {
+                "name": "P10_CREATED",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P10_PROJ_ID",
+                "type": "Dropdown",
+                "label": "Project:",
+                "required": true
+              },
+              {
+                "name": "P10_ROWID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_ASSIGN",
+                "type": "Text",
+                "label": "Assignee",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_COMP",
+                "type": "Date",
+                "label": "Completed",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_DESC",
+                "type": "TextArea",
+                "label": "Description",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_EST_COMP",
+                "type": "Date",
+                "label": "Estimated Completion",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_ID",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_NAME",
+                "type": "Text",
+                "label": "Name",
+                "required": true
+              },
+              {
+                "name": "P10_SUB_PRIORITY",
+                "type": "Dropdown",
+                "label": "Priority",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_START",
+                "type": "Date",
+                "label": "Start Date",
+                "required": false
+              },
+              {
+                "name": "P10_SUB_STATUS",
+                "type": "Dropdown",
+                "label": "Status",
+                "required": false
+              },
+              {
+                "name": "P10_TASK_ID",
+                "type": "Dropdown",
+                "label": "Task",
+                "required": true
+              },
+              {
+                "name": "P10_UPDATED",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Save",
+            "kind": "Button",
+            "label": "Apply Changes",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Project_Dashboard",
+        "widgets": [
+          {
+            "name": "Create",
+            "kind": "Button",
+            "label": "Create",
+            "binding": null,
+            "sources": [],
+            "action_type": "Add"
+          }
+        ]
+      },
+      {
+        "name": "Project_Tracking",
+        "widgets": [
+          {
+            "name": "Contract_All",
+            "kind": "Button",
+            "label": "Collapse All",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Expand_All",
+            "kind": "Button",
+            "label": "Expand All",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Reset_Tree",
+            "kind": "Button",
+            "label": "Reset Tree",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      }
+    ]
+  }
+}

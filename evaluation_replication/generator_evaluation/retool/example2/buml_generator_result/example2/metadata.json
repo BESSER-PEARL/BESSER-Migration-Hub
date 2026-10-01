@@ -1,0 +1,62 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "364e6a4a-3b2b-5a3b-91aa-702c9b593a2c",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Application_Theme_Style_Form",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Application_Theme_Style_Form": {
+          "array": []
+        },
+        "Background_Load_Form": {
+          "array": []
+        },
+        "CSV_Load_Form": {
+          "array": []
+        },
+        "Data_Load_Results": {
+          "array": []
+        },
+        "Data_Load_Source": {
+          "array": []
+        },
+        "Data_Validation": {
+          "array": []
+        },
+        "Eba_demo_load_sales_List": {
+          "array": []
+        },
+        "Load_Data_using_PL_SQL_API_Form": {
+          "array": []
+        },
+        "Multiple_File_Types_Load_Form": {
+          "array": []
+        },
+        "PL_SQL_Parser_Form": {
+          "array": []
+        },
+        "Reset_Data": {
+          "array": []
+        },
+        "Transform_and_Lookup_Form": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Data_Loading": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        },
+        "Manual_Data_Loading": {
+          "array": []
+        }
+      }
+    }
+  }
+}

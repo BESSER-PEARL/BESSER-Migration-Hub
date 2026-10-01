@@ -1,0 +1,33 @@
+{
+  "scenario": "example4",
+  "origin": "improved Oracle APEX parser; not independently authored",
+  "source": "evaluation_replication/examples/oracle_apex/example4",
+  "excluded_attributes": {
+    "EbaDemoTreeTask": [
+      {
+        "name": "proj_id",
+        "reason": "foreign_key"
+      }
+    ]
+  },
+  "source_files": {
+    "data/create-funtion.sql": "0931503ad2a2b2bbc87229d50ab1187c5be873f8c4902eb332cdaa00b516d912",
+    "data/create-tables.sql": "45a26e5328e7384d4ef5da3da347609b0fa5eb0b606359489d82c0280b977856",
+    "data/create-triggers.sql": "bc393b3159271140ad56a3e81f252555b18e6dfeab48581874e100768da2e907",
+    "data/create-view.sql": "d4194a6aba1080e404115d90a5e9976804f55515d1f2d9636554eb7cc7aec356",
+    "data/sample-data.sql": "7f3ce1067111ea958db9921e5927b8b8eb0a2c87c2bca44e8c16545171bc5504",
+    "data/set-plscope-settings.sql": "a714e51414f0fdc475f02af79fe3e6a73e3a53a0c417f4746f7a351360391a6f",
+    "screens/page_00001.sql": "a9954de8d91f1e1e8c7e0de6b6d5ae8ab9849baa96d490ec05e495b10a94486e",
+    "screens/page_00002.sql": "0e1d2448bae687a7e3825baf322de19246f07df5a9bc92d051a1456d482fb8c6",
+    "screens/page_00003.sql": "2ac7373bfe589929bd82535ee35f6f53c4d128c40c25217e5488e4f5e6527041",
+    "screens/page_00004.sql": "f04bfaac4548e64d84f80bc43f563928fa1685172413c0530b61d2c6d6811b07",
+    "screens/page_00005.sql": "8a58fdc2033bca83a9a906526f4f234ab2c407c76343f56253eebe870eab1299",
+    "screens/page_00006.sql": "c18b92eb24ba519f713d0a552cf416a8599da0fa9765d0088176798a3bb108c1",
+    "screens/page_00007.sql": "f26a0fbc3bb59cd9feb0efcf496345699fe01f5427d31c74982c45e71db4890e",
+    "screens/page_00008.sql": "47116c1c5342ca2fed060e1c68c6df765fbae8a93aa437f7d831499f9279daea",
+    "screens/page_00009.sql": "dab819c925de82bf38ec1069b36f241d59e322c4a15f6abb127d4f620845e97c",
+    "screens/page_00010.sql": "69c305e0ebc14cdf1954237f463ab31ea255467c3489654e652537de34739ebf",
+    "screens/page_00101.sql": "dde91f3549df40abf938743d8fae32cb1e97ea8a0d325884df9bb17a5c8f3d4f",
+    "screens/page_groups.sql": "30bac1401c34c9ab15445417d0584fd05a7358598d2f970aec9ffab3bbd03a9d"
+  }
+}

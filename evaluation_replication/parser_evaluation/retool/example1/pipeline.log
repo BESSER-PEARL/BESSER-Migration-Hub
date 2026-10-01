@@ -1,0 +1,23 @@
+Parsing 3 CSV file(s) in: data
+  Class 'Books': ['author', 'bookshelf', 'category', 'cover_image', 'id', 'isbn', 'price', 'quantity_in_stock', 'title']
+  Class 'DiscountCodes': ['discount_code', 'discount_percent', 'id']
+  Class 'Orders': ['id', 'total_amount']
+  Building 2 association(s) from FK columns...
+  Association: Orders -> Books  (FK: book_id)
+  Association: Orders -> DiscountCodes  (FK: discount_code_id)
+  Total: 3 class(es), 2 association(s)
+Parsing RSX export: gui
+  Screen 'Sales_Reports' | elements=10
+  Screen 'Inventory_Report' | elements=4
+  Screen 'Orders' | elements=2
+  Screen 'Discount_Codes' | elements=4
+  Screen 'modal1' | elements=3
+  Screen 'Books_Add_Books' | elements=4
+  Screen 'checkoutModal' | elements=9
+  Screen 'Books_Search_Store_Inventory' | elements=9
+  Screen 'Books' | elements=0
+  Screen 'example1_Main' (root) | elements=1
+  Total: 10 screen(s) extracted from RSX
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example1\data_model.py
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example1\gui_model.py
+GUI model code saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example1\gui_model.py

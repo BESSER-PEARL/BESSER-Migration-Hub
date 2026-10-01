@@ -1,0 +1,353 @@
+{
+  "model": "example2",
+  "sample_data": true,
+  "tables": [
+    {
+      "name": "eba_demo_load_dept",
+      "entity": "EbaDemoLoadDept",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "deptno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "dname",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "loc",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_load_emp",
+      "entity": "EbaDemoLoadEmp",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "comm",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "empno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ename",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "hiredate",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "job",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "last_updated",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sal",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademoloaddept_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_load_dept",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademoloademp_mgr_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_load_emp",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_load_sales",
+      "entity": "EbaDemoLoadSales",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "country",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "item_type",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "last_updated",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "order_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "order_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "order_priority",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "region",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sales_channel",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ship_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "total_cost",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "total_profit",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "total_revenue",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "unit_cost",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "unit_price",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "units_sold",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    }
+  ]
+}

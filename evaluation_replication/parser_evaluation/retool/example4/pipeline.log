@@ -1,0 +1,12 @@
+Parsing 2 CSV file(s) in: DATA
+  Class 'CategorySales': ['category', 'orders', 'revenue']
+  Class 'MonthlySales': ['month', 'month_number', 'revenue']
+  Building 0 association(s) from FK columns...
+  Total: 2 class(es), 0 association(s)
+Parsing RSX export: GUI
+  Screen 'setupGuideModal' | elements=2
+  Screen 'example4_Main' (root) | elements=11
+  Total: 2 screen(s) extracted from RSX
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example4\data_model.py
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example4\gui_model.py
+GUI model code saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example4\gui_model.py

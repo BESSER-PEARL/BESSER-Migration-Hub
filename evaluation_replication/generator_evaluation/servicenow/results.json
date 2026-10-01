@@ -1,0 +1,142 @@
+[
+  {
+    "scenario": "example1",
+    "platform": "ServiceNow",
+    "reference": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0,
+      "Screens": 12,
+      "Bound entities": 0,
+      "Buttons": 26,
+      "Action types": 3,
+      "Navigation": 0,
+      "Forms": 6,
+      "Labels": 26
+    },
+    "generated": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "reference_sha256": "469b213e31a7aadb90cd8fdf23db2f01f9e0749e6b166d55a969029b2a3f9ea6"
+  },
+  {
+    "scenario": "example2",
+    "platform": "ServiceNow",
+    "reference": {
+      "Entities": 3,
+      "Attributes": 27,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0,
+      "Screens": 16,
+      "Bound entities": 1,
+      "Buttons": 24,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 7,
+      "Labels": 24
+    },
+    "generated": {
+      "Entities": 3,
+      "Attributes": 27,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "reference_sha256": "36ee3542830b12740c649c29267da06eb6d88dadb2aa1a75fd211aa343611b28"
+  },
+  {
+    "scenario": "example3",
+    "platform": "ServiceNow",
+    "reference": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0,
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0
+    },
+    "generated": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "reference_sha256": "1dfb34df44f685352362edb5fe977dd6cfa2a0e861e0794bcb5463d9d12386d1"
+  },
+  {
+    "scenario": "example4",
+    "platform": "ServiceNow",
+    "reference": {
+      "Entities": 8,
+      "Attributes": 87,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0,
+      "Screens": 9,
+      "Bound entities": 3,
+      "Buttons": 23,
+      "Action types": 4,
+      "Navigation": 0,
+      "Forms": 4,
+      "Labels": 23
+    },
+    "generated": {
+      "Entities": 8,
+      "Attributes": 87,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "reference_sha256": "1d1a130e90c4dc3a35b313374b185e03238148bbb43b15f68beb874709ae8670"
+  },
+  {
+    "scenario": "example5",
+    "platform": "ServiceNow",
+    "reference": {
+      "Entities": 2,
+      "Attributes": 9,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0,
+      "Screens": 25,
+      "Bound entities": 2,
+      "Buttons": 32,
+      "Action types": 2,
+      "Navigation": 0,
+      "Forms": 8,
+      "Labels": 32
+    },
+    "generated": {
+      "Entities": 2,
+      "Attributes": 9,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "reference_sha256": "3f0deb6a9102ea129a867e63df1530b708bd7b49f6531ebe5df15c88be0704c7"
+  }
+]

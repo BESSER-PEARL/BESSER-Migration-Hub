@@ -1,0 +1,1404 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "products",
+        "columns": [
+          "id",
+          "name",
+          "description",
+          "category",
+          "price",
+          "created_at"
+        ],
+        "rows": 3,
+        "file": "products.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 1,
+      "Attributes": 6,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 4,
+      "Bound entities": 1,
+      "Buttons": 7,
+      "Action types": 5,
+      "Navigation": 4,
+      "Forms": 2,
+      "Labels": 7,
+      "DataLists": 1,
+      "DataSources": 1,
+      "Input fields": 6
+    },
+    "tag_counts": {
+      "Action": 2,
+      "App": 1,
+      "Body": 4,
+      "Button": 5,
+      "Column": 6,
+      "Event": 14,
+      "Footer": 2,
+      "Form": 2,
+      "Frame": 1,
+      "GlobalFunctions": 1,
+      "Header": 3,
+      "Modal": 1,
+      "ModalFrame": 2,
+      "Option": 6,
+      "Select": 2,
+      "SqlQueryUnified": 4,
+      "State": 1,
+      "Table": 1,
+      "Text": 5,
+      "TextArea": 2,
+      "TextInput": 2
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App>",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions>",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "State",
+        "attributes": {
+          "id": "editingRowId",
+          "value": "{{ null }}"
+        },
+        "raw": "<State id=\"editingRowId\" value=\"{{ null }}\" />",
+        "line": 2,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "selectProducts",
+          "resourceName": "REPLACE_WITH_RESOURCE_UUID",
+          "resourceTypeOverride": ""
+        },
+        "raw": "<SqlQueryUnified\n    id=\"selectProducts\"\n    query={include(\"./lib/selectProducts.sql\", \"string\")}\n    resourceName=\"REPLACE_WITH_RESOURCE_UUID\"\n    resourceTypeOverride=\"\"\n    warningCodes={[]}\n  />",
+        "line": 3,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "insertProduct",
+          "actionType": "INSERT",
+          "changesetIsObject": "true",
+          "changesetObject": "{{ { ...CreateProductForm.data } }}",
+          "editorMode": "gui",
+          "resourceName": "REPLACE_WITH_RESOURCE_UUID",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "public.products"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"insertProduct\"\n    actionType=\"INSERT\"\n    changesetIsObject={true}\n    changesetObject=\"{{ { ...CreateProductForm.data } }}\"\n    editorMode=\"gui\"\n    resourceName=\"REPLACE_WITH_RESOURCE_UUID\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"public.products\"\n  >",
+        "line": 10,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "77aa88bb",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectProducts",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"77aa88bb\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{ ordered: [] }}\n      pluginId=\"selectProducts\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 21,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "99cc00dd",
+          "event": "success",
+          "method": "close",
+          "pluginId": "createModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"99cc00dd\"\n      event=\"success\"\n      method=\"close\"\n      params={{}}\n      pluginId=\"createModal\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 31,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "updateProduct",
+          "actionType": "UPDATE_BY",
+          "changesetIsObject": "true",
+          "changesetObject": "{{ { ...EditProductForm.data } }}",
+          "editorMode": "gui",
+          "resourceName": "REPLACE_WITH_RESOURCE_UUID",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "public.products"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"updateProduct\"\n    actionType=\"UPDATE_BY\"\n    changesetIsObject={true}\n    changesetObject=\"{{ { ...EditProductForm.data } }}\"\n    editorMode=\"gui\"\n    filterBy={\n      '[{\"key\":\"id\",\"value\":\"{{ productsTable.selectedRow.id }}\",\"operation\":\"=\"}]'\n    }\n    resourceName=\"REPLACE_WITH_RESOURCE_UUID\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"public.products\"\n  >",
+        "line": 42,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "aabb1122",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectProducts",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"aabb1122\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{ ordered: [] }}\n      pluginId=\"selectProducts\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 56,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "ccdd3344",
+          "event": "success",
+          "method": "hide",
+          "pluginId": "editModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"ccdd3344\"\n      event=\"success\"\n      method=\"hide\"\n      params={{}}\n      pluginId=\"editModal\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 66,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "eeff7788",
+          "event": "success",
+          "method": "selectRow",
+          "pluginId": "productsTable",
+          "type": "widget",
+          "waitMs": "100",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"eeff7788\"\n      event=\"success\"\n      method=\"selectRow\"\n      params={{ ordered: [{ 0: \"key\" }] }}\n      pluginId=\"productsTable\"\n      type=\"widget\"\n      waitMs=\"100\"\n      waitType=\"debounce\"\n    />",
+        "line": 76,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "deleteProduct",
+          "actionType": "DELETE_BY",
+          "confirmationMessage": "Are you sure you want to delete **{{ productsTable.selectedRow.name }}**?",
+          "editorMode": "gui",
+          "requireConfirmation": "true",
+          "resourceName": "REPLACE_WITH_RESOURCE_UUID",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "public.products"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"deleteProduct\"\n    actionType=\"DELETE_BY\"\n    confirmationMessage=\"Are you sure you want to delete **{{ productsTable.selectedRow.name }}**?\"\n    editorMode=\"gui\"\n    filterBy={\n      '[{\"key\":\"id\",\"value\":\"{{ productsTable.selectedRow.id }}\",\"operation\":\"=\"}]'\n    }\n    requireConfirmation={true}\n    resourceName=\"REPLACE_WITH_RESOURCE_UUID\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"public.products\"\n  >",
+        "line": 87,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "eeff5566",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectProducts",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"eeff5566\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{ ordered: [] }}\n      pluginId=\"selectProducts\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 101,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "aabb9900",
+          "event": "success",
+          "method": "clearSelection",
+          "pluginId": "productsTable",
+          "type": "widget",
+          "waitMs": "100",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"aabb9900\"\n      event=\"success\"\n      method=\"clearSelection\"\n      params={{}}\n      pluginId=\"productsTable\"\n      type=\"widget\"\n      waitMs=\"100\"\n      waitType=\"debounce\"\n    />",
+        "line": 111,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "editModal",
+          "hidden": "true",
+          "hideOnEscape": "true",
+          "overlayInteraction": "true",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"editModal\"\n  hidden={true}\n  hideOnEscape={true}\n  overlayInteraction={true}\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 9,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "editTitle",
+          "marginType": "normal",
+          "value": "#### Edit product",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"editTitle\"\n      marginType=\"normal\"\n      value=\"#### Edit product\"\n      verticalAlign=\"center\"\n    />",
+        "line": 10,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 17,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "EditProductForm",
+          "disableSubmit": "{{ updateProduct.isFetching }}",
+          "initialData": "{{ productsTable.selectedSourceRow }}",
+          "loading": "{{ updateProduct.isFetching }}",
+          "marginType": "normal",
+          "padding": "12px",
+          "paddingType": "normal",
+          "requireValidation": "true",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form\n      id=\"EditProductForm\"\n      disableSubmit=\"{{ updateProduct.isFetching }}\"\n      initialData=\"{{ productsTable.selectedSourceRow }}\"\n      loading=\"{{ updateProduct.isFetching }}\"\n      marginType=\"normal\"\n      padding=\"12px\"\n      paddingType=\"normal\"\n      requireValidation={true}\n      showBody={true}\n      showFooter={true}\n    >",
+        "line": 18,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 30,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "editName",
+          "formDataKey": "name",
+          "label": "Name",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Enter product name",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"editName\"\n          formDataKey=\"name\"\n          label=\"Name\"\n          labelPosition=\"top\"\n          marginType=\"normal\"\n          placeholder=\"Enter product name\"\n          required={true}\n        />",
+        "line": 31,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "TextArea",
+        "attributes": {
+          "id": "editDescription",
+          "autoResize": "true",
+          "formDataKey": "description",
+          "label": "Description",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Enter description"
+        },
+        "raw": "<TextArea\n          id=\"editDescription\"\n          autoResize={true}\n          formDataKey=\"description\"\n          label=\"Description\"\n          labelPosition=\"top\"\n          marginType=\"normal\"\n          minLines={2}\n          placeholder=\"Enter description\"\n        />",
+        "line": 40,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "editCategory",
+          "emptyMessage": "No options",
+          "formDataKey": "category",
+          "itemMode": "static",
+          "label": "Category",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Select category",
+          "required": "true",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n          id=\"editCategory\"\n          emptyMessage=\"No options\"\n          formDataKey=\"category\"\n          itemMode=\"static\"\n          label=\"Category\"\n          labelPosition=\"top\"\n          marginType=\"normal\"\n          placeholder=\"Select category\"\n          required={true}\n          showSelectionIndicator={true}\n        >",
+        "line": 50,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "j7k8l",
+          "value": "Electronics"
+        },
+        "raw": "<Option id=\"j7k8l\" value=\"Electronics\" />",
+        "line": 62,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "m9n0o",
+          "value": "Clothing"
+        },
+        "raw": "<Option id=\"m9n0o\" value=\"Clothing\" />",
+        "line": 63,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "p1q2r",
+          "value": "Books"
+        },
+        "raw": "<Option id=\"p1q2r\" value=\"Books\" />",
+        "line": 64,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 67,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "editCancelBtn",
+          "marginType": "normal",
+          "styleVariant": "outline",
+          "text": "Cancel"
+        },
+        "raw": "<Button\n          id=\"editCancelBtn\"\n          marginType=\"normal\"\n          styleVariant=\"outline\"\n          text=\"Cancel\"\n        >",
+        "line": 68,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "33cc44dd",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "editModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n            id=\"33cc44dd\"\n            event=\"click\"\n            method=\"hide\"\n            params={{}}\n            pluginId=\"editModal\"\n            type=\"widget\"\n            waitMs=\"0\"\n            waitType=\"debounce\"\n          />",
+        "line": 74,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "editSaveBtn",
+          "marginType": "normal",
+          "submit": "true",
+          "submitTargetId": "EditProductForm",
+          "text": "Save"
+        },
+        "raw": "<Button\n          id=\"editSaveBtn\"\n          marginType=\"normal\"\n          submit={true}\n          submitTargetId=\"EditProductForm\"\n          text=\"Save\"\n        />",
+        "line": 85,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "55ee66ff",
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "updateProduct",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"55ee66ff\"\n        event=\"submit\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"updateProduct\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 93,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideTitle",
+          "marginType": "normal",
+          "value": "## 🚀 Setup Guide",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"setupGuideTitle\"\n      marginType=\"normal\"\n      value=\"## 🚀 Setup Guide\"\n      verticalAlign=\"center\"\n    />",
+        "line": 9,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 16,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideText",
+          "marginType": "normal",
+          "value": "{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}"
+        },
+        "raw": "<Text\n      id=\"setupGuideText\"\n      marginType=\"normal\"\n      value=\"{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}\"\n    />",
+        "line": 17,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "isHiddenOnDesktop": "false",
+          "isHiddenOnMobile": "false",
+          "padding": "8px 12px",
+          "paddingType": "normal",
+          "sticky": "false",
+          "type": "main"
+        },
+        "raw": "<Frame\n    id=\"$main\"\n    isHiddenOnDesktop={false}\n    isHiddenOnMobile={false}\n    padding=\"8px 12px\"\n    paddingType=\"normal\"\n    sticky={false}\n    type=\"main\"\n  >",
+        "line": 5,
+        "parents": [
+          "App"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "pageTitle",
+          "marginType": "normal",
+          "value": "### Products",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"pageTitle\"\n      marginType=\"normal\"\n      value=\"### Products\"\n      verticalAlign=\"center\"\n    />",
+        "line": 14,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "setupGuideBtn",
+          "marginType": "normal",
+          "text": "Setup Guide"
+        },
+        "raw": "<Button id=\"setupGuideBtn\" marginType=\"normal\" text=\"Setup Guide\">",
+        "line": 20,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fa1b2c3d",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fa1b2c3d\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 21,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "createModal",
+          "buttonText": "Add product",
+          "closeOnOutsideClick": "true",
+          "modalHeightType": "auto"
+        },
+        "raw": "<Modal\n      id=\"createModal\"\n      buttonText=\"Add product\"\n      closeOnOutsideClick={true}\n      events={[]}\n      modalHeightType=\"auto\"\n    >",
+        "line": 32,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "CreateProductForm",
+          "disableSubmit": "{{ insertProduct.isFetching }}",
+          "footerPadding": "4px 12px",
+          "footerPaddingType": "normal",
+          "headerPadding": "4px 12px",
+          "headerPaddingType": "normal",
+          "loading": "{{ insertProduct.isFetching }}",
+          "marginType": "normal",
+          "padding": "12px",
+          "paddingType": "normal",
+          "requireValidation": "true",
+          "resetAfterSubmit": "true",
+          "showBody": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Form\n        id=\"CreateProductForm\"\n        disableSubmit=\"{{ insertProduct.isFetching }}\"\n        footerPadding=\"4px 12px\"\n        footerPaddingType=\"normal\"\n        headerPadding=\"4px 12px\"\n        headerPaddingType=\"normal\"\n        loading=\"{{ insertProduct.isFetching }}\"\n        marginType=\"normal\"\n        padding=\"12px\"\n        paddingType=\"normal\"\n        requireValidation={true}\n        resetAfterSubmit={true}\n        showBody={true}\n        showFooter={true}\n        showHeader={true}\n      >",
+        "line": 39,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 56,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "createFormTitle",
+          "marginType": "normal",
+          "value": "#### New product",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n            id=\"createFormTitle\"\n            marginType=\"normal\"\n            value=\"#### New product\"\n            verticalAlign=\"center\"\n          />",
+        "line": 57,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Header"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 64,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "createName",
+          "formDataKey": "name",
+          "label": "Name",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Enter product name",
+          "required": "true"
+        },
+        "raw": "<TextInput\n            id=\"createName\"\n            formDataKey=\"name\"\n            label=\"Name\"\n            labelPosition=\"top\"\n            marginType=\"normal\"\n            placeholder=\"Enter product name\"\n            required={true}\n          />",
+        "line": 65,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "TextArea",
+        "attributes": {
+          "id": "createDescription",
+          "autoResize": "true",
+          "formDataKey": "description",
+          "label": "Description",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Enter description"
+        },
+        "raw": "<TextArea\n            id=\"createDescription\"\n            autoResize={true}\n            formDataKey=\"description\"\n            label=\"Description\"\n            labelPosition=\"top\"\n            marginType=\"normal\"\n            minLines={2}\n            placeholder=\"Enter description\"\n          />",
+        "line": 74,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "createCategory",
+          "emptyMessage": "No options",
+          "formDataKey": "category",
+          "itemMode": "static",
+          "label": "Category",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "Select category",
+          "required": "true",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n            id=\"createCategory\"\n            emptyMessage=\"No options\"\n            formDataKey=\"category\"\n            itemMode=\"static\"\n            label=\"Category\"\n            labelPosition=\"top\"\n            marginType=\"normal\"\n            placeholder=\"Select category\"\n            required={true}\n            showSelectionIndicator={true}\n          >",
+        "line": 84,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "a1b2c",
+          "value": "Electronics"
+        },
+        "raw": "<Option id=\"a1b2c\" value=\"Electronics\" />",
+        "line": 96,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "d3e4f",
+          "value": "Clothing"
+        },
+        "raw": "<Option id=\"d3e4f\" value=\"Clothing\" />",
+        "line": 97,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "g5h6i",
+          "value": "Books"
+        },
+        "raw": "<Option id=\"g5h6i\" value=\"Books\" />",
+        "line": 98,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 101,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "createClearBtn",
+          "marginType": "normal",
+          "styleVariant": "outline",
+          "text": "Clear"
+        },
+        "raw": "<Button\n            id=\"createClearBtn\"\n            marginType=\"normal\"\n            styleVariant=\"outline\"\n            text=\"Clear\"\n          >",
+        "line": 102,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Footer"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "aa11bb22",
+          "event": "click",
+          "method": "clear",
+          "pluginId": "CreateProductForm",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n              id=\"aa11bb22\"\n              event=\"click\"\n              method=\"clear\"\n              params={{ ordered: [] }}\n              pluginId=\"CreateProductForm\"\n              type=\"widget\"\n              waitMs=\"0\"\n              waitType=\"debounce\"\n            />",
+        "line": 108,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Footer",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "createSubmitBtn",
+          "marginType": "normal",
+          "submit": "true",
+          "submitTargetId": "CreateProductForm",
+          "text": "Create"
+        },
+        "raw": "<Button\n            id=\"createSubmitBtn\"\n            marginType=\"normal\"\n            submit={true}\n            submitTargetId=\"CreateProductForm\"\n            text=\"Create\"\n          />",
+        "line": 119,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form",
+          "Footer"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "cc33dd44",
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "insertProduct",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"cc33dd44\"\n          event=\"submit\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"insertProduct\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 127,
+        "parents": [
+          "App",
+          "Frame",
+          "Modal",
+          "Form"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "productsTable",
+          "cellSelection": "none",
+          "clearChangesetOnSave": "true",
+          "data": "{{ Array.isArray(selectProducts.data) ? selectProducts.data : [{ id: 1, name: 'Organic Green Tea', description: 'Premium loose leaf', category: 'Beverages', price: 12.99, created_at: '2024-01-15' }, { id: 2, name: 'Vitamin D3 1000IU', description: 'Daily supplement', category: 'Supplements', price: 8.49, created_at: '2024-02-20' }, { id: 3, name: 'Almond Butter', description: 'Smooth, no added sugar', category: 'Food', price: 6.99, created_at: '2024-03-10' }] }}",
+          "enableSaveActions": "true",
+          "heightType": "auto",
+          "primaryKeyColumnId": "c01a1",
+          "rowHeight": "medium",
+          "searchMode": "caseInsensitive",
+          "showBorder": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Table\n      id=\"productsTable\"\n      cellSelection=\"none\"\n      changesetArray={[]}\n      clearChangesetOnSave={true}\n      data=\"{{ Array.isArray(selectProducts.data) ? selectProducts.data : [{ id: 1, name: 'Organic Green Tea', description: 'Premium loose leaf', category: 'Beverages', price: 12.99, created_at: '2024-01-15' }, { id: 2, name: 'Vitamin D3 1000IU', description: 'Daily supplement', category: 'Supplements', price: 8.49, created_at: '2024-02-20' }, { id: 3, name: 'Almond Butter', description: 'Smooth, no added sugar', category: 'Food', price: 6.99, created_at: '2024-03-10' }] }}\"\n      defaultSelectedRow={{ mode: \"index\", indexType: \"display\", index: 0 }}\n      enableSaveActions={true}\n      heightType=\"auto\"\n      primaryKeyColumnId=\"c01a1\"\n      rowHeight=\"medium\"\n      searchMode=\"caseInsensitive\"\n      selectedDataIndexes={[]}\n      selectedRowKeys={[]}\n      selectedRows={[]}\n      selectedSourceRows={[]}\n      showBorder={true}\n      showFooter={true}\n      showHeader={true}\n      sortArray={[]}\n      templatePageSize={20}\n    >",
+        "line": 139,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c01a1",
+          "alignment": "left",
+          "editable": "false",
+          "format": "string",
+          "key": "id",
+          "label": "ID",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c01a1\"\n        alignment=\"left\"\n        editable={false}\n        format=\"string\"\n        key=\"id\"\n        label=\"ID\"\n        position=\"center\"\n        size={60}\n      />",
+        "line": 161,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c02b2",
+          "alignment": "left",
+          "format": "string",
+          "key": "name",
+          "label": "Name",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c02b2\"\n        alignment=\"left\"\n        format=\"string\"\n        key=\"name\"\n        label=\"Name\"\n        position=\"center\"\n        size={200}\n      />",
+        "line": 171,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c03c3",
+          "alignment": "left",
+          "format": "multilineString",
+          "key": "description",
+          "label": "Description",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c03c3\"\n        alignment=\"left\"\n        format=\"multilineString\"\n        key=\"description\"\n        label=\"Description\"\n        position=\"center\"\n        size={300}\n      />",
+        "line": 180,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c04d4",
+          "alignment": "left",
+          "format": "tag",
+          "key": "category",
+          "label": "Category",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c04d4\"\n        alignment=\"left\"\n        format=\"tag\"\n        formatOptions={{ automaticColors: true }}\n        key=\"category\"\n        label=\"Category\"\n        position=\"center\"\n        size={120}\n      />",
+        "line": 189,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c05e5",
+          "alignment": "right",
+          "format": "decimal",
+          "key": "price",
+          "label": "Price",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c05e5\"\n        alignment=\"right\"\n        format=\"decimal\"\n        formatOptions={{ showSeparators: true, notation: \"standard\" }}\n        key=\"price\"\n        label=\"Price\"\n        position=\"center\"\n        size={100}\n      />",
+        "line": 199,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c06f6",
+          "alignment": "left",
+          "format": "datetime",
+          "key": "created_at",
+          "label": "Created",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c06f6\"\n        alignment=\"left\"\n        format=\"datetime\"\n        key=\"created_at\"\n        label=\"Created\"\n        position=\"center\"\n        size={140}\n      />",
+        "line": 209,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Action",
+        "attributes": {
+          "id": "a01a1",
+          "icon": "bold/interface-edit-pencil",
+          "label": "Edit"
+        },
+        "raw": "<Action id=\"a01a1\" icon=\"bold/interface-edit-pencil\" label=\"Edit\">",
+        "line": 218,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "ee55ff66",
+          "event": "clickAction",
+          "method": "run",
+          "pluginId": "",
+          "type": "script",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"ee55ff66\"\n          event=\"clickAction\"\n          method=\"run\"\n          params={{ map: { src: \"editModal.show()\" } }}\n          pluginId=\"\"\n          type=\"script\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 219,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "Action"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Action",
+        "attributes": {
+          "id": "a02b2",
+          "icon": "bold/interface-delete-bin-5-alternate",
+          "label": "Delete"
+        },
+        "raw": "<Action\n        id=\"a02b2\"\n        icon=\"bold/interface-delete-bin-5-alternate\"\n        label=\"Delete\"\n      >",
+        "line": 230,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "11aa22bb",
+          "event": "clickAction",
+          "method": "trigger",
+          "pluginId": "deleteProduct",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"11aa22bb\"\n          event=\"clickAction\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"deleteProduct\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 235,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "Action"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "editModal",
+          "hidden": "true",
+          "hideOnEscape": "true",
+          "overlayInteraction": "true",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"editModal\"\n  hidden={true}\n  hideOnEscape={true}\n  overlayInteraction={true}\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "createModal",
+          "buttonText": "Add product",
+          "closeOnOutsideClick": "true",
+          "modalHeightType": "auto"
+        },
+        "raw": "<Modal\n      id=\"createModal\"\n      buttonText=\"Add product\"\n      closeOnOutsideClick={true}\n      events={[]}\n      modalHeightType=\"auto\"\n    >",
+        "line": 32,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "navigation_evidence": [
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "99cc00dd",
+          "event": "success",
+          "method": "close",
+          "pluginId": "createModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"99cc00dd\"\n      event=\"success\"\n      method=\"close\"\n      params={{}}\n      pluginId=\"createModal\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 31,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "ccdd3344",
+          "event": "success",
+          "method": "hide",
+          "pluginId": "editModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"ccdd3344\"\n      event=\"success\"\n      method=\"hide\"\n      params={{}}\n      pluginId=\"editModal\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 66,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "33cc44dd",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "editModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n            id=\"33cc44dd\"\n            event=\"click\"\n            method=\"hide\"\n            params={{}}\n            pluginId=\"editModal\"\n            type=\"widget\"\n            waitMs=\"0\"\n            waitType=\"debounce\"\n          />",
+        "line": 74,
+        "parents": [
+          "ModalFrame",
+          "Body",
+          "Form",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/editModal.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fa1b2c3d",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fa1b2c3d\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 21,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "bound_tables": [
+      "products"
+    ],
+    "sql_primary_tables": {
+      "selectProducts": "products"
+    },
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/editModal.rsx",
+      "src/setupGuideModal.rsx"
+    ],
+    "events": 14,
+    "unresolved_expression_references": []
+  },
+  "sha256": {
+    "DATA/products.csv": "979d7bf915b50398a42bb73c204447e5cfb35f1409a5c65f97b94df76cb0f833",
+    "GUI/.positions.json": "db56ca228b584ea4daeff1ad4a14b7ccebb4490be1d6accc5231d7a3e6715114",
+    "GUI/functions.rsx": "e99bb0ca0bd0e3ccaecb21ad0a55d9f3a6eafc783a95fe40325b92615c0e3627",
+    "GUI/lib/selectProducts.sql": "7ce1067ad2ae3da8873fb63e94817f8e910621c61026de324c38e9e49cd45ff7",
+    "GUI/main.rsx": "46bd7a9cbe93955b311b784dfba650cf4162644efb76f2008b4149851c75fed8",
+    "GUI/metadata.json": "c612ed603d62d8941aa021e03668692e0a6479daf2a52961e8caf7252a988254",
+    "GUI/src/editModal.rsx": "3ba41bec4a538ac4dec99290cd52dcf5b5a34307a058e03d7f6405d9301063c7",
+    "GUI/src/setupGuideModal.rsx": "108fafeb20a8888072b0ae5b076a6f66548a26bf7258fc3b55737fd7e3533156"
+  }
+}

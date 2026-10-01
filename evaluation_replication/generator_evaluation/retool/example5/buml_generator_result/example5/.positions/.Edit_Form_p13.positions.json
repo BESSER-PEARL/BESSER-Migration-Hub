@@ -1,0 +1,131 @@
+{
+  "Cancel_4": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Edit_fields_1_2": {
+    "row": 2,
+    "col": 0,
+    "height": 26,
+    "width": 12
+  },
+  "Edit_fields_1_2_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_COMM": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_DEPTNO": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_EMPNO": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_ENAME": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_HIREDATE": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_JOB": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_LOCATION": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_MGR": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_NO_OF_EMPLOYEES": {
+    "row": 18,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_ROWID": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P13_SAL": {
+    "row": 22,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Edit_fields_1_2_submit": {
+    "row": 24,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_2",
+    "rowGroup": "body",
+    "subcontainer": ""
+  }
+}

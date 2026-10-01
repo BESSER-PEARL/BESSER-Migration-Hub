@@ -14,3 +14,10 @@ __pycache__/
 
 # vite cache
 **/.vite/
+
+# local test/build/session artifacts
+.pytest_cache/
+*.egg-info/
+output/
+tmp/
+build/

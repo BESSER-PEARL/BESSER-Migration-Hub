@@ -68,6 +68,7 @@ class OracleApexFullAppGenerator:
         self._auth_id = self._uid()
         self._nav_list_id = self._uid()
         self._nav_bar_list_id = self._uid()
+        self.warnings = []
 
     # ── ID helpers ────────────────────────────────────────────────────────────
 
@@ -1040,72 +1041,9 @@ class OracleApexFullAppGenerator:
         return 'other', None
 
     def _assign_gui_page_numbers(self) -> list:
-        """Pair list/form GUI screens and assign consecutive page numbers.
-
-        List screens get even numbers (2, 4, 6, …); the corresponding form
-        screen gets the immediately following odd number (3, 5, 7, …).  This
-        matches the template's hard-coded detail-link assumption
-        (screen_number + 1 = form page).
-
-        Returns [(screen, page_num, entity_name_or_None)] where entity_name
-        is set only for form screens (to look up the domain model class).
-        """
-        all_screens: list = []
-        modules_iter = (self.gui_model.modules.values()
-                        if isinstance(self.gui_model.modules, dict)
-                        else self.gui_model.modules)
-        for module in modules_iter:
-            all_screens.extend(module.screens)
-
-        # Group by entity name derived from screen name convention
-        entity_groups: dict = {}  # entity -> {'list': screen, 'form': screen}
-        others: list = []
-
-        for screen in all_screens:
-            kind, entity = self._classify_screen(screen.name)
-            if kind == 'list':
-                entity_groups.setdefault(entity, {})['list'] = screen
-            elif kind == 'form':
-                entity_groups.setdefault(entity, {})['form'] = screen
-            else:
-                others.append(screen)
-
-        # Second pass: screens with unrecognised names (e.g. BESSER generator
-        # produces 'wrapper', 'wrapper_2', …).  Try to identify the entity from
-        # screen.description or screen.route_path.
-        class_names_lower = {c.name.lower(): c.name for c in self._classes()}
-        unmatched = []
-        for screen in others:
-            entity = None
-            desc = (getattr(screen, 'description', None) or '').strip()
-            route = (getattr(screen, 'route_path', None) or '').strip().lstrip('/')
-            for candidate in (desc, route):
-                if candidate.lower() in class_names_lower:
-                    entity = class_names_lower[candidate.lower()]
-                    break
-            if entity is not None:
-                entity_groups.setdefault(entity, {})['list'] = screen
-            else:
-                unmatched.append(screen)
-
-        result: list = []
-        page_num = 2
-
-        for entity in sorted(entity_groups.keys()):
-            group = entity_groups[entity]
-            if 'list' in group:
-                result.append((group['list'], page_num, entity, 'list'))
-            page_num += 1          # list page always occupies this slot
-            if 'form' in group:
-                result.append((group['form'], page_num, entity, 'form'))
-            page_num += 1          # form page always occupies this slot
-
-        for screen in sorted(unmatched, key=lambda s: s.name):
-            result.append((screen, page_num, None, 'other'))
-            page_num += 1
-
-        return result
-
+        """Assign a unique page to every actual Screen, reserving platform pages."""
+        from .oracle_apex_gui_export import assign_pages
+        return assign_pages(self)
     def _find_class_for_entity(self, entity_name: str):
         """Return the domain model Class whose name matches entity_name."""
         for cls in self._classes():
@@ -1193,15 +1131,7 @@ class OracleApexFullAppGenerator:
         return self._extract_page_content(content)
 
     def _navigation_gui(self, assignments: list) -> str:
-        """Navigation menu built from GUI model screens (one entry per entity)."""
-        # Build page-map: entity -> [list_page_num, form_page_num]
-        page_map: dict = {}
-        for screen, page_num, entity, kind in assignments:
-            if kind == 'list':
-                page_map.setdefault(entity, [None, None])[0] = page_num
-            elif kind == 'form':
-                page_map.setdefault(entity, [None, None])[1] = page_num
-
+        """Navigation menu with one entry per emitted GUI screen."""
         lines = [
             "prompt --application/shared_components/navigation/lists/navigation_menu",
             self._comp_begin(),
@@ -1223,15 +1153,10 @@ class OracleApexFullAppGenerator:
             ");",
         ]
 
-        for i, entity in enumerate(sorted(page_map.keys())):
-            list_pn, form_pn = page_map[entity]
-            if list_pn is None:
-                continue  # no list page → skip from nav
+        for i, (screen, list_pn, entity, kind) in enumerate(assignments):
             item_id = self._uid()
-            safe_label = entity.replace("'", "''").replace('_', ' ')
+            safe_label = screen.name.replace("'", "''").replace('_', ' ')
             active_pages = str(list_pn)
-            if form_pn is not None:
-                active_pages += f",{form_pn}"
             lines += [
                 "wwv_flow_imp_shared.create_list_item(",
                 f" p_id=>{self._wid(item_id)}",
@@ -1269,16 +1194,15 @@ class OracleApexFullAppGenerator:
         return "\n".join(lines)
 
     def _home_page_gui(self, assignments: list) -> str:
-        """Home page with links to each entity list page (from GUI model)."""
+        """Home page with links to all generated GUI screens."""
         list_links = []
         for screen, page_num, entity_raw, kind in assignments:
-            if kind == 'list':
-                entity = (entity_raw or screen.name).replace('_', ' ')
-                safe_entity = entity.replace("'", "''")
-                list_links.append(
-                    f'<li><a href="f?p=&APP_ID.:{page_num}:&SESSION.">'
-                    f'{safe_entity}</a></li>'
-                )
+            entity = screen.name.replace('_', ' ')
+            safe_entity = entity.replace("'", "''")
+            list_links.append(
+                f'<li><a href="f?p=&APP_ID.:{page_num}:&SESSION.">'
+                f'{safe_entity}</a></li>'
+            )
 
         html = '<ul>\n' + '\n'.join(list_links) + '\n</ul>'
         safe_html = html.replace("'", "''")
@@ -1552,22 +1476,9 @@ class OracleApexFullAppGenerator:
             parts.append(self._navigation_gui(assignments))
             parts.append(self._global_page())
             parts.append(self._home_page_gui(assignments))
+            from .oracle_apex_gui_export import render_page
             for screen, page_num, entity_name, kind in assignments:
-                if kind == 'list':
-                    sql = self._generate_ir_page_from_gui(screen, page_num)
-                    if sql:
-                        parts.append(sql)
-                    else:
-                        # IR generation produced nothing (no DataList) —
-                        # fall back to domain-model list page
-                        cls = self._find_class_for_entity(entity_name) if entity_name else None
-                        if cls is not None:
-                            parts.append(self._list_page(cls, page_num))
-                elif kind == 'form' and entity_name is not None:
-                    cls = self._find_class_for_entity(entity_name)
-                    if cls is not None:
-                        parts.append(self._form_page(cls, page_num))
-                # other screen types are skipped for now
+                parts.append(render_page(self, screen, page_num, assignments))
         else:
             parts.append(self._navigation(classes))
             parts.append(self._global_page())

@@ -1,0 +1,107 @@
+{
+  "Cancel_4": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Create_Edit_Project_fields_1": {
+    "row": 2,
+    "col": 0,
+    "height": 18,
+    "width": 12
+  },
+  "Create_Edit_Project_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_COMPLETION_DATE": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_ESTIMATED_COMPLETION": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_PROJECT_NAME": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_PROJ_ID": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_START_DATE": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_STATUS": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P7_UPDATED": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Create_Edit_Project_fields_1_submit": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Create_Edit_Project_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Delete_2": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Save_2": {
+    "row": 22,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

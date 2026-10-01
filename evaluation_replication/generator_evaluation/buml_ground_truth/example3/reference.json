@@ -1,0 +1,46 @@
+{
+  "scenario": "example3",
+  "origin": "improved Oracle APEX parser; not independently authored",
+  "source": "evaluation_replication/examples/oracle_apex/example3",
+  "excluded_attributes": {
+    "EbaDemoDgEmp": [
+      {
+        "name": "empno",
+        "reason": "platform_identity"
+      }
+    ],
+    "EbaDemoDgOrders": [
+      {
+        "name": "order_id",
+        "reason": "platform_identity"
+      }
+    ],
+    "EbaDemoDgProducts": [
+      {
+        "name": "product_id",
+        "reason": "platform_identity"
+      }
+    ],
+    "EbaDemoDgDept": [
+      {
+        "name": "deptno",
+        "reason": "platform_identity"
+      }
+    ],
+    "EbaDemoDgCustomers": [
+      {
+        "name": "customer_id",
+        "reason": "platform_identity"
+      }
+    ]
+  },
+  "source_files": {
+    "data/emp-dept.sql": "e408f570cedf84de735d06befc5e8bf308d2eb6834bfe060ff6623e94d62dccf",
+    "data/order-items.sql": "4d16e4102fe915ea0037eee2a8578aa4adcfb71cec544e22c019c384553dbf19",
+    "screens/page_00000.sql": "1624f106cd74c676c3dec73d5d8c9b4625d0c87b9fd7fe4f20a84d576ce59f20",
+    "screens/page_00001.sql": "285054e32add7160ed1f7e6826c7c84fce3685b1aa51d513e38a1d3dd6c1637a",
+    "screens/page_09999.sql": "a77c4241fcbbdd55baaf5a276524f1e48573a3801cda47c066a9c8f27e334d2d",
+    "screens/page_10010.sql": "0ead4292c5bd60a524d2a740037cc9fb5a3e30e4c3b699c501ffca83eb01294c",
+    "screens/page_groups.sql": "48546ed66f5fee00724672c7c72f25cbd8305c40aca4734d3280ad6677cacfe1"
+  }
+}

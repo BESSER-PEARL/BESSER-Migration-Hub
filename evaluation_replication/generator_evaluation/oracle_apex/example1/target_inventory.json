@@ -1,0 +1,261 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "ebademocsemp": {
+        "id": {
+          "type": "number",
+          "identity": true
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        },
+        "empno": {
+          "type": "number",
+          "identity": false
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "mgr": {
+          "type": "number",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "ebademocsemp",
+        "comm"
+      ],
+      [
+        "ebademocsemp",
+        "deptno"
+      ],
+      [
+        "ebademocsemp",
+        "empno"
+      ],
+      [
+        "ebademocsemp",
+        "ename"
+      ],
+      [
+        "ebademocsemp",
+        "hiredate"
+      ],
+      [
+        "ebademocsemp",
+        "job"
+      ],
+      [
+        "ebademocsemp",
+        "mgr"
+      ],
+      [
+        "ebademocsemp",
+        "sal"
+      ]
+    ],
+    "foreign_keys": []
+  },
+  "gui": {
+    "counts": {
+      "Screens": 12,
+      "Bound entities": 0,
+      "Buttons": 26,
+      "Action types": 3,
+      "Navigation": 0,
+      "Forms": 6,
+      "Labels": 26
+    },
+    "pages": [
+      {
+        "file": "page_00002.sql",
+        "id": "2",
+        "name": "Add_Edit_Collection_Member_Form",
+        "buttons": 4,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00003.sql",
+        "id": "3",
+        "name": "Administration",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00004.sql",
+        "id": "4",
+        "name": "Application_Theme_Style_Form",
+        "buttons": 2,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00005.sql",
+        "id": "5",
+        "name": "Create_Collection_Form",
+        "buttons": 3,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00006.sql",
+        "id": "6",
+        "name": "Data_Synchronization",
+        "buttons": 3,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00007.sql",
+        "id": "7",
+        "name": "Help",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00008.sql",
+        "id": "8",
+        "name": "Login_Page_Form",
+        "buttons": 1,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00009.sql",
+        "id": "9",
+        "name": "Modify_Collection_Form",
+        "buttons": 6,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00010.sql",
+        "id": "10",
+        "name": "Modify_Collection_Member_Form",
+        "buttons": 3,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_00011.sql",
+        "id": "11",
+        "name": "Remove_Collections",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00012.sql",
+        "id": "12",
+        "name": "Reset_Data",
+        "buttons": 2,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00013.sql",
+        "id": "13",
+        "name": "Sample_Collections___API_Examples",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [],
+    "action_types": [
+      "Cancel",
+      "Delete",
+      "Save"
+    ]
+  },
+  "excluded_platform_pages": [
+    {
+      "id": "101",
+      "name": "Login",
+      "alias": "LOGIN",
+      "step_title": "Sign In",
+      "reload_on_submit": "A",
+      "warn_on_unsaved_changes": "N",
+      "autocomplete_on_off": "OFF",
+      "step_template": "2102634289808461002",
+      "page_template_options": "#DEFAULT#",
+      "page_is_public_y_n": "Y",
+      "protection_level": "C",
+      "page_component_map": "16"
+    },
+    {
+      "id": "0",
+      "name": "Global Page",
+      "step_title": "Global Page",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "D",
+      "page_component_map": "08"
+    },
+    {
+      "id": "1",
+      "name": "example1",
+      "step_title": "example1",
+      "autocomplete_on_off": "OFF",
+      "page_template_options": "#DEFAULT#",
+      "protection_level": "C",
+      "page_component_map": "08"
+    }
+  ],
+  "warnings": [
+    "Form 'Add_Edit_Collection_Member_fields_1' has no persistence binding.",
+    "Input type Dropdown on 'P7_DEPTNO' uses a text fallback.",
+    "Input type Dropdown on 'P7_JOB' uses a text fallback.",
+    "Input type Dropdown on 'P7_MGR' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Application_Theme_Style_fields_1' has no persistence binding.",
+    "Input type Dropdown on 'P5_DESKTOP_THEME_STYLE_ID' uses a text fallback.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Create_Collection_fields_1' has no persistence binding.",
+    "Button 'ADD_MEMBER' has no executable action binding.",
+    "Button 'APPLY_COLLECTION' has no executable action binding.",
+    "Button 'POPULATE' has no executable action binding.",
+    "Form 'Login_Page_fields_1' has no persistence binding.",
+    "Button 'ADD_MEMBER_ADD_ANOTHER' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Modify_Collection_fields_1' has no persistence binding.",
+    "Button 'RESEQUENCE' has no executable action binding.",
+    "Button 'TRUNCATE_COLLECTION' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Form 'Modify_Collection_Member_fields_1' has no persistence binding.",
+    "Button 'CANCEL' has no executable action binding.",
+    "Button 'CANCEL' has no executable action binding."
+  ]
+}

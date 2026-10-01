@@ -1,0 +1,37 @@
+{
+  "counts": {
+    "Entities": 6,
+    "Attributes": 20,
+    "Associations": 5,
+    "Multiplicities": 10,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 1,
+    "Bound entities": 0,
+    "Buttons": 0,
+    "Action types": 0,
+    "Navigation": 0,
+    "Forms": 0,
+    "Labels": 0
+  },
+  "gui": {
+    "counts": {
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0
+    },
+    "widget_types": {},
+    "bound_entities": [],
+    "action_types": [],
+    "screens": [
+      {
+        "name": "About",
+        "widgets": []
+      }
+    ]
+  }
+}

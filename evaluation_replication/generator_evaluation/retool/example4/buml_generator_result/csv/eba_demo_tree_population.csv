@@ -1,0 +1,2 @@
+id,created,created_by,population,region,row_version_number,state_code,state_name,updated,updated_by
+1,2024-01-01T00:00:00,sample_created_by,0,0,0,sample_state_code,sample_state_name,2024-01-01T00:00:00,sample_updated_by

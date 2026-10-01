@@ -1,0 +1,195 @@
+prompt --application/pages/page_00010
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.11.30'
+,p_release=>'24.2.6'
+,p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)
+,p_default_application_id=>8002
+,p_default_id_offset=>80671573584977288
+,p_default_owner=>USER
+);
+
+wwv_flow_imp_page.create_page(
+ p_id=>10
+,p_name=>'Eba_demo_load_sales_List'
+,p_step_title=>'Eba_demo_load_sales_List'
+,p_page_mode=>'NORMAL'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1075000)
+,p_plug_name=>'Eba_demo_load_sales_List'
+,p_plug_display_sequence=>10
+,p_region_template_options=>'#DEFAULT#'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1076000)
+,p_plug_name=>'Eba_demo_load_sales_List_EbaDemoLoadSales'
+,p_plug_display_sequence=>20
+,p_query_type=>'TABLE'
+,p_query_table=>'EBADEMOLOADSALES'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_IR'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(1077000)
+,p_name=>'Eba_demo_load_sales_List'
+,p_internal_uid=>1078000
+,p_base_pk1=>'ID'
+,p_show_detail_link=>'N'
+,p_owner=>USER
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_report_list_mode=>'TABS'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1079000)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'ID'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1080000)
+,p_db_column_name=>'COUNTRY'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'COUNTRY'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1081000)
+,p_db_column_name=>'CREATED'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'CREATED'
+,p_column_type=>'DATE'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1082000)
+,p_db_column_name=>'ITEM_TYPE'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'ITEM_TYPE'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1083000)
+,p_db_column_name=>'LAST_UPDATED'
+,p_display_order=>5
+,p_column_identifier=>'E'
+,p_column_label=>'LAST_UPDATED'
+,p_column_type=>'DATE'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1084000)
+,p_db_column_name=>'ORDER_DATE'
+,p_display_order=>6
+,p_column_identifier=>'F'
+,p_column_label=>'ORDER_DATE'
+,p_column_type=>'DATE'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1085000)
+,p_db_column_name=>'ORDER_ID'
+,p_display_order=>7
+,p_column_identifier=>'G'
+,p_column_label=>'ORDER_ID'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1086000)
+,p_db_column_name=>'ORDER_PRIORITY'
+,p_display_order=>8
+,p_column_identifier=>'H'
+,p_column_label=>'ORDER_PRIORITY'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1087000)
+,p_db_column_name=>'REGION'
+,p_display_order=>9
+,p_column_identifier=>'I'
+,p_column_label=>'REGION'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1088000)
+,p_db_column_name=>'SALES_CHANNEL'
+,p_display_order=>10
+,p_column_identifier=>'J'
+,p_column_label=>'SALES_CHANNEL'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1089000)
+,p_db_column_name=>'SHIP_DATE'
+,p_display_order=>11
+,p_column_identifier=>'K'
+,p_column_label=>'SHIP_DATE'
+,p_column_type=>'DATE'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1090000)
+,p_db_column_name=>'TOTAL_COST'
+,p_display_order=>12
+,p_column_identifier=>'L'
+,p_column_label=>'TOTAL_COST'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1091000)
+,p_db_column_name=>'TOTAL_PROFIT'
+,p_display_order=>13
+,p_column_identifier=>'M'
+,p_column_label=>'TOTAL_PROFIT'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1092000)
+,p_db_column_name=>'TOTAL_REVENUE'
+,p_display_order=>14
+,p_column_identifier=>'N'
+,p_column_label=>'TOTAL_REVENUE'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1093000)
+,p_db_column_name=>'UNITS_SOLD'
+,p_display_order=>15
+,p_column_identifier=>'O'
+,p_column_label=>'UNITS_SOLD'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1094000)
+,p_db_column_name=>'UNIT_COST'
+,p_display_order=>16
+,p_column_identifier=>'P'
+,p_column_label=>'UNIT_COST'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1095000)
+,p_db_column_name=>'UNIT_PRICE'
+,p_display_order=>17
+,p_column_identifier=>'Q'
+,p_column_label=>'UNIT_PRICE'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(1096000)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'1076000'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'ID:COUNTRY:CREATED:ITEM_TYPE:LAST_UPDATED:ORDER_DATE:ORDER_ID:ORDER_PRIORITY:REGION:SALES_CHANNEL:SHIP_DATE:TOTAL_COST:TOTAL_PROFIT:TOTAL_REVENUE:UNITS_SOLD:UNIT_COST:UNIT_PRICE'
+);
+wwv_flow_imp.component_end;
+end;
+/
+
+

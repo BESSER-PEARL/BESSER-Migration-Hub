@@ -1,0 +1,186 @@
+prompt --application/pages/page_00025
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.11.30'
+,p_release=>'24.2.6'
+,p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)
+,p_default_application_id=>8005
+,p_default_id_offset=>49461010066525635
+,p_default_owner=>USER
+);
+
+wwv_flow_imp_page.create_page(
+ p_id=>25
+,p_name=>'Stripe_Report_List'
+,p_step_title=>'Stripe_Report_List'
+,p_page_mode=>'NORMAL'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1400000)
+,p_plug_name=>'Stripe_Report_List'
+,p_plug_display_sequence=>10
+,p_region_template_options=>'#DEFAULT#'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1401000)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(1400000)
+,p_button_name=>'RESET'
+,p_button_image_alt=>'Reset'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'DEFINED_BY_DA'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1402000)
+,p_plug_name=>'Stripe_Report_List_EbaDemoDaDept'
+,p_plug_display_sequence=>30
+,p_query_type=>'TABLE'
+,p_query_table=>'EBADEMODADEPT'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_IR'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(1403000)
+,p_name=>'Stripe_Report_List'
+,p_internal_uid=>1404000
+,p_base_pk1=>'ID'
+,p_show_detail_link=>'N'
+,p_owner=>USER
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_report_list_mode=>'TABS'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1405000)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'ID'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1406000)
+,p_db_column_name=>'DEPTNO'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'DEPTNO'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1407000)
+,p_db_column_name=>'DNAME'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'DNAME'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1408000)
+,p_db_column_name=>'LOC'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'LOC'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(1409000)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'1402000'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'ID:DEPTNO:DNAME:LOC'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1410000)
+,p_plug_name=>'Stripe_Report_List_EbaDemoDaEmp'
+,p_plug_display_sequence=>30
+,p_query_type=>'TABLE'
+,p_query_table=>'EBADEMODAEMP'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_IR'
+);
+wwv_flow_imp_page.create_worksheet(
+ p_id=>wwv_flow_imp.id(1411000)
+,p_name=>'Stripe_Report_List'
+,p_internal_uid=>1412000
+,p_base_pk1=>'ID'
+,p_show_detail_link=>'N'
+,p_owner=>USER
+,p_pagination_type=>'ROWS_X_TO_Y'
+,p_report_list_mode=>'TABS'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1413000)
+,p_db_column_name=>'ID'
+,p_display_order=>1
+,p_column_identifier=>'A'
+,p_column_label=>'ID'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1414000)
+,p_db_column_name=>'COMM'
+,p_display_order=>2
+,p_column_identifier=>'B'
+,p_column_label=>'COMM'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1415000)
+,p_db_column_name=>'EMPNO'
+,p_display_order=>3
+,p_column_identifier=>'C'
+,p_column_label=>'EMPNO'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1416000)
+,p_db_column_name=>'ENAME'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'ENAME'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1417000)
+,p_db_column_name=>'HIREDATE'
+,p_display_order=>5
+,p_column_identifier=>'E'
+,p_column_label=>'HIREDATE'
+,p_column_type=>'DATE'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1418000)
+,p_db_column_name=>'JOB'
+,p_display_order=>6
+,p_column_identifier=>'F'
+,p_column_label=>'JOB'
+,p_column_type=>'STRING'
+);
+wwv_flow_imp_page.create_worksheet_column(
+ p_id=>wwv_flow_imp.id(1419000)
+,p_db_column_name=>'SAL'
+,p_display_order=>7
+,p_column_identifier=>'G'
+,p_column_label=>'SAL'
+,p_column_type=>'NUMBER'
+);
+wwv_flow_imp_page.create_worksheet_rpt(
+ p_id=>wwv_flow_imp.id(1420000)
+,p_application_user=>'APXWS_DEFAULT'
+,p_report_seq=>10
+,p_report_alias=>'1410000'
+,p_status=>'PUBLIC'
+,p_is_default=>'Y'
+,p_report_columns=>'ID:COMM:EMPNO:ENAME:HIREDATE:JOB:SAL'
+);
+wwv_flow_imp.component_end;
+end;
+/
+
+

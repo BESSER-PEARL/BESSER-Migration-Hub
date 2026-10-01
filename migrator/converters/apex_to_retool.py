@@ -55,7 +55,8 @@ print(f"[2/4] Parsing APEX pages: {PAGES_DIR.name}")
 if not PAGES_DIR.is_dir():
     raise FileNotFoundError(f"Pages directory not found: {PAGES_DIR}")
 with _silent():
-    gui_model = oracle_apex_to_gui(pages_dir=str(PAGES_DIR), module_name=MODULE_NAME)
+    gui_model = oracle_apex_to_gui(pages_dir=str(PAGES_DIR), module_name=MODULE_NAME,
+                                 domain_model=domain_model)
 
 # Step 3 — Generate CSV files (one per entity, for Retool DB import)
 print(f"[3/4] Generating CSV files")

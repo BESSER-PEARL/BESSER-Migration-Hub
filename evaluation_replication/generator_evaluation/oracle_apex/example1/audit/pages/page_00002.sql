@@ -1,0 +1,238 @@
+prompt --application/pages/page_00002
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.11.30'
+,p_release=>'24.2.6'
+,p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)
+,p_default_application_id=>8001
+,p_default_id_offset=>73028955463439562
+,p_default_owner=>USER
+);
+
+wwv_flow_imp_page.create_page(
+ p_id=>2
+,p_name=>'Add_Edit_Collection_Member_Form'
+,p_step_title=>'Add_Edit_Collection_Member_Form'
+,p_page_mode=>'MODAL'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1029000)
+,p_plug_name=>'Add_Edit_Collection_Member_Form'
+,p_plug_display_sequence=>10
+,p_region_template_options=>'#DEFAULT#'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1030000)
+,p_plug_name=>'Add/Edit Collection Member'
+,p_plug_display_sequence=>20
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_source_type=>'NATIVE_FORM'
+,p_query_type=>'SQL'
+,p_plug_source=>'select cast(null as number) as COMM, cast(null as varchar2(4000)) as DEPTNO, cast(null as number) as EMPNO, cast(null as varchar2(4000)) as ENAME, cast(null as date) as HIREDATE, cast(null as varchar2(4000)) as JOB, cast(null as varchar2(4000)) as MGR, cast(null as number) as SAL, cast(null as varchar2(4000)) as SEQ, cast(null as varchar2(4000)) as STATUS, cast(null as varchar2(4000)) as XMLTYPE from dual'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1031000)
+,p_name=>'P2_COMM'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Commission'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'COMM'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1032000)
+,p_name=>'P2_DEPTNO'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Dept&nbsp;No'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'DEPTNO'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1033000)
+,p_name=>'P2_EMPNO'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Emp&nbsp;No'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'EMPNO'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1034000)
+,p_name=>'P2_ENAME'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Employee&nbsp;Name'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'ENAME'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1035000)
+,p_name=>'P2_HIREDATE'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Hire&nbsp;Date'
+,p_display_as=>'NATIVE_DATE_PICKER_APEX'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'HIREDATE'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1036000)
+,p_name=>'P2_JOB'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Job'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'JOB'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1037000)
+,p_name=>'P2_MGR'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Manager'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'MGR'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1038000)
+,p_name=>'P2_SAL'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Salary'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'SAL'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1039000)
+,p_name=>'P2_SEQ'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>''
+,p_display_as=>'NATIVE_HIDDEN'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'SEQ'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1040000)
+,p_name=>'P2_STATUS'
+,p_item_sequence=>100
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'Status'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_read_only_when_type=>'ALWAYS'
+,p_source=>'STATUS'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1041000)
+,p_name=>'P2_XMLTYPE'
+,p_item_sequence=>110
+,p_item_plug_id=>wwv_flow_imp.id(1030000)
+,p_prompt=>'XMLType'
+,p_display_as=>'NATIVE_TEXTAREA'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'XMLTYPE'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1042000)
+,p_button_sequence=>1000
+,p_button_plug_id=>wwv_flow_imp.id(1030000)
+,p_button_name=>'FORM_1_SUBMIT'
+,p_button_image_alt=>'Add Member'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'SUBMIT'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(1043000)
+,p_process_sequence=>20
+,p_process_point=>'BEFORE_HEADER'
+,p_process_type=>'NATIVE_FORM_INIT'
+,p_process_name=>'Initialize Add_Edit_Collection_Member_fields_1'
+,p_form_region_id=>wwv_flow_imp.id(1030000)
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1044000)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_imp.id(1029000)
+,p_button_name=>'CANCEL'
+,p_button_image_alt=>'Cancel'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'DEFINED_BY_DA'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1045000)
+,p_button_sequence=>40
+,p_button_plug_id=>wwv_flow_imp.id(1029000)
+,p_button_name=>'DELETE_MEMBER'
+,p_button_image_alt=>'Delete Member'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'SUBMIT'
+,p_database_action=>'DELETE'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1046000)
+,p_button_sequence=>50
+,p_button_plug_id=>wwv_flow_imp.id(1029000)
+,p_button_name=>'UPDATE_MEMBER'
+,p_button_image_alt=>'Update Member'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'SUBMIT'
+,p_database_action=>'UPDATE'
+);
+wwv_flow_imp.component_end;
+end;
+/
+
+

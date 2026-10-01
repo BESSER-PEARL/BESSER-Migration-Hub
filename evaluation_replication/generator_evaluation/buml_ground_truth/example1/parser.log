@@ -1,0 +1,23 @@
+Merging 2 DDL file(s):
+  + create-eba-demo-cs-emp-table.sql
+  + sample-data.sql
+Parsing Oracle APEX DDL: tmptfa8un6_.sql
+  Class 'EbaDemoCsEmp': ['comm', 'deptno', 'empno', 'ename', 'hiredate', 'job', 'mgr', 'sal']
+  Total: 1 classes, 0 associations
+Parsing 15 APEX page files in: screens
+  Skipped: page_00001.sql
+  Screen 'Create_Collection_Form' | main=False | elements=3
+  Screen 'Modify_Collection_Form' | main=True | elements=6
+  Screen 'Modify_Collection_Member_Form' | main=False | elements=3
+  Screen 'Application_Theme_Style_Form' | main=True | elements=2
+  Screen 'Data_Synchronization' | main=True | elements=3
+  Screen 'Add_Edit_Collection_Member_Form' | main=False | elements=4
+  Screen 'Help' | main=True | elements=0
+  Screen 'Sample_Collections___API_Examples' | main=True | elements=0
+  Screen 'Administration' | main=True | elements=0
+  Screen 'Remove_Collections' | main=True | elements=2
+  Screen 'Reset_Data' | main=True | elements=2
+  Skipped: page_00100.sql
+  Screen 'Login_Page_Form' | main=True | elements=1
+  Skipped: page_groups.sql
+  Total: 12 screens extracted

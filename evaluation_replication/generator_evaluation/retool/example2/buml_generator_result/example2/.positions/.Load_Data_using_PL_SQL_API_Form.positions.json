@@ -1,0 +1,62 @@
+{
+  "Load_Data_using_PL_SQL_API_fields_1": {
+    "row": 0,
+    "col": 0,
+    "height": 12,
+    "width": 12
+  },
+  "Load_Data_using_PL_SQL_API_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P32_DATA": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P32_ROWS_FAILED": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P32_ROWS_LOADED": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P32_SAMPLE_DATA": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Load_Data_using_PL_SQL_API_fields_1_submit": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Load_Data_using_PL_SQL_API_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  }
+}

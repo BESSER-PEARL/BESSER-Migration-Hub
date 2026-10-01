@@ -1,0 +1,38 @@
+{
+  "scenario": "example2",
+  "origin": "improved Oracle APEX parser; not independently authored",
+  "source": "evaluation_replication/examples/oracle_apex/example2",
+  "excluded_attributes": {
+    "EbaDemoLoadSales": [
+      {
+        "name": "id",
+        "reason": "platform_identity"
+      }
+    ]
+  },
+  "source_files": {
+    "data/create-tables.sql": "c8390f828417306cac454633af05e15b18315cd4ab22eee08f7ce30422004043",
+    "data/eba-demo-data-load.sql": "7bada302d5ab82230eafad63e5c6a8584873df4fcc77eb693ad8d22efe31fee3",
+    "data/seed-sample-data.sql": "14ffce63b140c922258ad9c45708a2552411b46f82cbe38e59211e830278ecf5",
+    "data/set-plscope-settings.sql": "a714e51414f0fdc475f02af79fe3e6a73e3a53a0c417f4746f7a351360391a6f",
+    "screens/page_00001.sql": "0ef6ca5d09da08aa304564b8debafcc174a834b3c8ce4432bb74ed1e3d7cb1f6",
+    "screens/page_00006.sql": "561e36fc7686db2b8f3ae285c01e814b9b0fb1104ea8588600fa9e0594e050df",
+    "screens/page_00007.sql": "17e324d22814813dd5d1e5884f7b4121914dac1724addb731ebee2d0e979e7af",
+    "screens/page_00008.sql": "1ea8a441327173f690a74ec57907f5ca0ca1b3f81fea5a6ec73cc02d20c2547d",
+    "screens/page_00009.sql": "fa0cd93efb5f57b1ae217af86a7df65cd6c46a417d603539688cf3eaf648b22b",
+    "screens/page_00010.sql": "6e6682d445e8ebe31b5cbb521cdb0bb11710e20951b00317e9331a8910086d5a",
+    "screens/page_00011.sql": "2c4dfacaf74a1e9f20e012639b0589d09f403d6e692aa85ddaa2e463bf9f745b",
+    "screens/page_00015.sql": "5c410a6d7a677614521be74d7781ffe6d2448531330f1522802294b20fdc2416",
+    "screens/page_00016.sql": "59e31b212ac1713a311d326d5a9d17f59d15f618f9b8bba882cc7059a070ce03",
+    "screens/page_00017.sql": "5dc9dee16060f163ebc27afe9f4f98bf8d9d6092075f1a9db2bdb47a5978f4c9",
+    "screens/page_00018.sql": "3db395f156ea724198b7b8ccff54ed9ea13c97b18aa241b591687ee2777e16b3",
+    "screens/page_00021.sql": "05463de67a4b0ba0313219c72bad9c366bd74eb550bfc8119c27937b7b93433d",
+    "screens/page_00023.sql": "61d2e26ffdd0e41ad3a6424685e127ff48c2c45092f9d1e3313944dcfee139af",
+    "screens/page_00024.sql": "b80886c4fa5c026388ed15c337ce221338b34ca47679dd06692371ccde56ef00",
+    "screens/page_00030.sql": "2ba26c80473c1c1f30d7749e298b281563faa6b53a69d47c237b52668c9e494e",
+    "screens/page_00031.sql": "a44335a5af917d7461a0bb7f1087e541cfcbeed65bf4bb1eae66c6bad934aa33",
+    "screens/page_00032.sql": "df6551e5aeadd6594b1170c75d504a460c2d27a5bad4feebae22cb7f03c4bf1e",
+    "screens/page_00101.sql": "5178dee9c8e5b0e3ed350fe0855138a853fff4329d048d5c724b8bfc34389c35",
+    "screens/page_groups.sql": "086125e9069ba9cc2ad592833af1811ad6ab6bcd203306afbdcaa6b81a9e62c4"
+  }
+}

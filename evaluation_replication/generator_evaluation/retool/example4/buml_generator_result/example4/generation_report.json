@@ -1,0 +1,42 @@
+{
+  "app": "example4",
+  "screens": [
+    "Application_Theme_Style_Form",
+    "Create_Edit_Tasks_Form",
+    "Manage_Sample_Data",
+    "Project_Dashboard",
+    "Project_Tracking",
+    "Administration",
+    "Help",
+    "Create_Edit_Project_Form",
+    "Modify_Subtask_Information_Form"
+  ],
+  "resource_id": "2a86a318-80a0-4803-95d8-409396e41af2",
+  "warnings": [
+    "Form 'Application_Theme_Style_fields_1' has no executable submit action binding.",
+    "Button 'Cancel' has no executable action binding.",
+    "Input type Hidden on 'P9_TASK_ID' uses a TextInput fallback.",
+    "Input type Hidden on 'P9_TASK_ID_COUNT' uses a TextInput fallback.",
+    "Input type Hidden on 'P9_TASK_ID_NEXT' uses a TextInput fallback.",
+    "Input type Hidden on 'P9_TASK_ID_PREV' uses a TextInput fallback.",
+    "Form 'Create_Edit_Tasks_fields_1' has no executable submit action binding.",
+    "Button 'Create_Subtask' has no executable action binding.",
+    "Button 'Delete' has no executable action binding.",
+    "Button 'Get_Next_Task_Id' has no executable action binding.",
+    "Button 'Get_Previous_Task_Id' has no executable action binding.",
+    "Button 'Save' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Button 'Create' has no executable action binding.",
+    "Button 'Contract_All' has no executable action binding.",
+    "Button 'Expand_All' has no executable action binding.",
+    "Button 'Reset_Tree' has no executable action binding.",
+    "Input type Hidden on 'P7_PROJ_ID' uses a TextInput fallback.",
+    "Input type Hidden on 'P7_UPDATED' uses a TextInput fallback.",
+    "Form 'Create_Edit_Project_fields_1' has no executable submit action binding.",
+    "Input type Hidden on 'P10_CREATED' uses a TextInput fallback.",
+    "Input type Hidden on 'P10_ROWID' uses a TextInput fallback.",
+    "Input type Hidden on 'P10_SUB_ID' uses a TextInput fallback.",
+    "Input type Hidden on 'P10_UPDATED' uses a TextInput fallback.",
+    "Form 'Modify_Subtask_Information_fields_1' has no executable submit action binding."
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "example": "example1",
+  "run": "current",
+  "parser": {
+    "Entities": {
+      "reference": 3,
+      "output": 3,
+      "percent": 100.0
+    },
+    "Attributes": {
+      "reference": 14,
+      "output": 14,
+      "percent": 100.0
+    },
+    "Associations": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Multiplicities": {
+      "reference": 4,
+      "output": 4,
+      "percent": 100.0
+    },
+    "Generalizations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Enumerations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Screens": {
+      "reference": 10,
+      "output": 10,
+      "percent": 100.0
+    },
+    "Bound entities": {
+      "reference": 3,
+      "output": 3,
+      "percent": 100.0
+    },
+    "Buttons": {
+      "reference": 11,
+      "output": 11,
+      "percent": 100.0
+    },
+    "Action types": {
+      "reference": 4,
+      "output": 4,
+      "percent": 100.0
+    },
+    "Navigation": {
+      "reference": 1,
+      "output": 0,
+      "percent": 0.0
+    },
+    "Forms": {
+      "reference": 3,
+      "output": 3,
+      "percent": 100.0
+    },
+    "Labels": {
+      "reference": 11,
+      "output": 11,
+      "percent": 100.0
+    }
+  },
+  "source_events": 19,
+  "pivot_events": 0,
+  "row_counts": {
+    "source": {
+      "books": 20,
+      "discount_codes": 5,
+      "orders": 10
+    }
+  },
+  "source_tag_counts": {
+    "App": 1,
+    "AppStyles": 1,
+    "Body": 3,
+    "Button": 7,
+    "Checkbox": 1,
+    "Container": 3,
+    "Date": 1,
+    "DateTime": 2,
+    "Divider": 3,
+    "Event": 19,
+    "Folder": 5,
+    "Footer": 3,
+    "Form": 3,
+    "Frame": 2,
+    "Function": 2,
+    "GlobalFunctions": 1,
+    "Header": 6,
+    "Icon": 2,
+    "Image": 3,
+    "JavascriptQuery": 4,
+    "KeyValueMap": 1,
+    "Modal": 2,
+    "Navigation": 1,
+    "NumberInput": 5,
+    "Option": 12,
+    "PlotlyChart": 4,
+    "RESTQuery": 2,
+    "Select": 5,
+    "SqlQueryUnified": 22,
+    "TableLegacy": 8,
+    "Tabs": 2,
+    "Text": 12,
+    "TextInput": 18,
+    "View": 8
+  },
+  "serialization_passed": true,
+  "frozen_baseline_reference": false
+}

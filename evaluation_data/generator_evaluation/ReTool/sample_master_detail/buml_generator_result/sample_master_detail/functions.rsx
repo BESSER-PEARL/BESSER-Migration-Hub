@@ -1,3 +1,0 @@
-<GlobalFunctions >
-
-</GlobalFunctions>

@@ -1,0 +1,1008 @@
+{
+  "model": "example4",
+  "sample_data": true,
+  "tables": [
+    {
+      "name": "eba_demo_tree_dept",
+      "entity": "EbaDemoTreeDept",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "deptno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "dname",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "loc",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_emp",
+      "entity": "EbaDemoTreeEmp",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "comm",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "deptno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "empno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ename",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "hiredate",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "job",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sal",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademotreeemp_mgr_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_tree_emp",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_population",
+      "entity": "EbaDemoTreePopulation",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "population",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "region",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "state_code",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "state_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_proj_files",
+      "entity": "EbaDemoTreeProjFiles",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "file_charset",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "file_comments",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "file_lastupd",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "file_mimetype",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "file_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "tags",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademotreeprojects_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_tree_projects",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_projects",
+      "entity": "EbaDemoTreeProjects",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "completion_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "estimated_completion",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "proj_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "project_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "status",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_stocks",
+      "entity": "EbaDemoTreeStocks",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "closing_val",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "high",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "low",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "opening_val",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "pricing_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "stock_code",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "stock_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_subtask",
+      "entity": "EbaDemoTreeSubtask",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "proj_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_assign",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_comp",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_desc",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_est_comp",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_priority",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_start",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sub_status",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_tree_task",
+      "entity": "EbaDemoTreeTask",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "row_version_number",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_assign",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_comp",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_desc",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_est_comp",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_priority",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_start",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "task_status",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    }
+  ]
+}

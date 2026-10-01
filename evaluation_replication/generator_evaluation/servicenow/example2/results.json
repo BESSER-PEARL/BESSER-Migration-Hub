@@ -1,0 +1,28 @@
+{
+  "scenario": "example2",
+  "platform": "ServiceNow",
+  "reference": {
+    "Entities": 3,
+    "Attributes": 27,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 16,
+    "Bound entities": 1,
+    "Buttons": 24,
+    "Action types": 2,
+    "Navigation": 0,
+    "Forms": 7,
+    "Labels": 24
+  },
+  "generated": {
+    "Entities": 3,
+    "Attributes": 27,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0
+  },
+  "reference_sha256": "36ee3542830b12740c649c29267da06eb6d88dadb2aa1a75fd211aa343611b28"
+}

@@ -1,0 +1,113 @@
+{
+  "Cancel_9": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Edit_fields_1_7": {
+    "row": 2,
+    "col": 0,
+    "height": 22,
+    "width": 12
+  },
+  "Edit_fields_1_7_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_COMM": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_DEPTNO": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_EMPNO": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_ENAME": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_HIREDATE": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_JOB": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_MGR": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_ROWID": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P9_SAL": {
+    "row": 18,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Edit_fields_1_7_submit": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Edit_fields_1_7",
+    "rowGroup": "body",
+    "subcontainer": ""
+  }
+}

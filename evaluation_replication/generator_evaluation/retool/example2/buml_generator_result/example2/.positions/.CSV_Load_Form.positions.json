@@ -1,0 +1,104 @@
+{
+  "CSV_Load_fields_1": {
+    "row": 0,
+    "col": 0,
+    "height": 16,
+    "width": 12
+  },
+  "CSV_Load_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_COPY_PASTE_ERROR_ROW_COUNT": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_DATA": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_FILE": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_FILE_ERROR_ROW_COUNT": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_FILE_NAME": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P11_PASTED_DATA": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "CSV_Load_fields_1_submit": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "CSV_Load_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Clear_Data": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Clear_File": {
+    "row": 18,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Load_File": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Next": {
+    "row": 22,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

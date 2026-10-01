@@ -1,116 +1,45 @@
-# Migration Hub — Web Interface
+# Migration Hub web interface
 
-A standalone web interface for the BESSER Migration Hub. It guides an end user
-through migrating a low-code application from a **source** platform to a
-**target** platform via the platform-independent **B-UML pivot model**.
+The interface guides users through source selection, upload, B-UML inspection, target selection and artifact download. The FastAPI backend calls the shared [`migrator`](../migrator/README.md) library; the frontend uses React and Vite.
 
-It is a thin UI over the existing `migrator/` library — no migration logic is
-reimplemented here.
+Dedicated parsers support Mendix, Oracle APEX and ReTool. Screenshot-based sources use the BESSER mockup pipeline and require an OpenAI key. Targets include Oracle APEX, ReTool, ServiceNow, spreadsheets and SQL databases. ServiceNow supports data models only.
 
-```
-webapp/
-  backend/    FastAPI app wrapping the migrator parsers + generators
-  frontend/   Vite + React + TypeScript wizard
-```
+## Run
 
-## The 5-step wizard
-
-1. **Source platform** — Mendix uses a *deterministic* transformation (dedicated
-   parsers); screenshot-based sources use BESSER's *LLM-based mockup pipeline*.
-2. **Upload & scope** — upload the Mendix export JSON (or screenshots for the LLM
-   path) and choose **data model / GUI model / both**. For Mendix the module list
-   is auto-detected into a dropdown.
-3. **Pivot model** — see an extraction summary and download the B-UML model.
-4. **Target platform** — pick where to migrate to; the fitting generator runs.
-5. **Artifacts** — download the generated files and follow the import tutorial.
-
-## Supported paths (v1)
-
-| Source | Transformation | Data | GUI |
-|--------|----------------|------|-----|
-| Mendix | deterministic | ✅ | ✅ (parser)* |
-| Power Apps | LLM (screenshot + CSVs, needs OpenAI key) | ✅ | 🔜 |
-| OutSystems / Appian / Salesforce | LLM | 🔜 | 🔜 |
-
-| Target | Output |
-|--------|--------|
-| Oracle APEX | `tables_oracle_apex.sql` |
-| Power Apps (Excel) | `model.xlsx` |
-| PostgreSQL / MySQL | `tables_<dialect>.sql` |
-| OutSystems / Appian | 🔜 |
-
-For Oracle APEX, the generated table script covers the data model. GUI page
-generation requires a split APEX export because page SQL must be matched to an
-existing application. The interface therefore uses two stages: first import
-the table SQL in **SQL Workshop > SQL Scripts**, run it, and accept APEX's
-prompt to create the template application and pages. Then export that app using
-**Custom Export** and **Split into multiple files**, upload the resulting ZIP in
-the artifacts step, generate the GUI page SQL, and run that SQL to create the
-final application. For screenshot sources, the same flow is used after
-`mockup_to_buml` creates the GUI pivot model.
-
-\* GUI-model download uses BESSER's GUI code-builder when it can serialize the
-model; otherwise a readable text dump is provided. Target generation is
-currently wired for the **domain** model; GUI-only migrations can still download
-the GUI pivot model. Screenshot GUI extraction uses BESSER's `mockup_to_buml`
-pipeline and the upstream GUI-model fixer.
-
-## Running
-
-### Prerequisites
-- Python 3.11 (3.9+)
-- Node.js 18+
-
-### 1. Backend (from the repository root)
+Use Python 3.11+ and Node.js 18+. From the repository root:
 
 ```bash
 python -m venv .venv
-.\.venv\Scripts\activate           # Windows
-# source .venv/bin/activate        # macOS/Linux
-
-pip install -r requirements.txt
-pip install besser
-pip install -r webapp/backend/requirements.txt
-
-# IMPORTANT: run from the repo root so the `migrator` package is importable
+# Activate .venv, then:
+python -m pip install -e . -r webapp/backend/requirements.txt
 uvicorn webapp.backend.app.main:app --reload --port 8000
 ```
 
-Check it: <http://localhost:8000/api/platforms> and interactive docs at
-<http://localhost:8000/docs>.
-
-### 2. Frontend
+In another terminal:
 
 ```bash
 cd webapp/frontend
 npm install
-npm run dev            # http://localhost:5173
+npm run dev
 ```
 
-The dev server proxies `/api` to `http://localhost:8000`, so start the backend
-first.
+Open <http://localhost:5173>. The frontend proxies `/api` to port 8000. Backend health is available at <http://localhost:8000/api/health>; API documentation is at <http://localhost:8000/docs>.
 
-## Try it with the bundled example
+## Examples and imports
 
-Use `examples/mendix/base_examples/library_catalog/library.json` as the Mendix upload, pick the
-`MyFirstModule` module, scope **Both**, generate the pivot, then target
-**Oracle APEX** or **Power Apps (Excel)**.
+The [replication package](../evaluation_replication/README.md) contains native exports. Mendix JSON includes data and GUI definitions; select the module listed in its example metadata. APEX uses table DDL and page SQL. ReTool uses CSV tables and a Toolscript ZIP.
 
-## API summary
+Follow the target import instructions shown after generation. APEX produces application SQL; ReTool produces CSV/schema files and a Toolscript ZIP; ServiceNow produces SDK TypeScript. APEX also supports adding GUI pages to an existing split export.
+
+## API
 
 | Method | Path | Purpose |
-|--------|------|---------|
-| GET | `/api/platforms` | Source/target registry + capabilities + tutorials |
-| POST | `/api/mendix/modules` | List modules in an uploaded Mendix JSON |
-| POST | `/api/pivot` | Build + serialize the pivot model (multipart) |
-| GET | `/api/sessions/{id}/download/pivot?artifact=domain\|gui\|all` | Download pivot |
-| POST | `/api/sessions/{id}/generate` | Run the target generator |
-| GET | `/api/sessions/{id}/download/artifacts?name=<file>\|all` | Download artifacts |
+|---|---|---|
+| GET | `/api/platforms` | Platform capabilities and import instructions |
+| POST | `/api/mendix/modules` | List modules in uploaded Mendix JSON |
+| POST | `/api/pivot` | Extract and serialize B-UML |
+| GET | `/api/sessions/{id}/download/pivot` | Download pivot artifacts |
+| POST | `/api/sessions/{id}/generate` | Generate target artifacts |
+| GET | `/api/sessions/{id}/download/artifacts` | Download generated artifacts |
 
-## Notes
-
-- Sessions are kept **in memory** (single process) with a temp working
-  directory per migration — fine for a standalone tool; swap for a persistent
-  store when embedding into the BESSER editor.
-- The backend forces UTF-8 on stdout/stderr because the migrator parsers print
-  progress with emoji, which crashes on Windows' default console encoding.
+Sessions use in-memory state and temporary working directories. The current implementation is intended for standalone use.

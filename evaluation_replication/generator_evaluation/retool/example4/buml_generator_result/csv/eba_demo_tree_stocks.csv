@@ -1,0 +1,2 @@
+id,closing_val,created,created_by,high,low,opening_val,pricing_date,row_version_number,stock_code,stock_name,updated,updated_by
+1,0,2024-01-01T00:00:00,sample_created_by,0,0,0,2024-01-01,0,sample_stock_code,sample_stock_name,2024-01-01T00:00:00,sample_updated_by

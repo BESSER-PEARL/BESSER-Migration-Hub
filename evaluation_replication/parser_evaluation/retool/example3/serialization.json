@@ -1,0 +1,16 @@
+{
+  "builder_repairs": [
+    "createproductform.title = '#### New product'",
+    "createproductform.submit_label = 'Create'",
+    "createproductform.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Products'))",
+    "editproductform.title = None",
+    "editproductform.submit_label = 'Save'",
+    "editproductform.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Products'))",
+    "productstable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Products'))",
+    "_evaluation_builtins.next(s for s in productstable_list.list_sources if s.name == 'products').field_names = ['id', 'name', 'description', 'category', 'price', 'created_at']",
+    "setupguidebtn.events = set()",
+    "setupguidebtn.events.add(Event(name='setupGuideBtn_click_0', event_type=EventType.OnClick, actions={Transition(name='setupGuideBtn_open_0', target_screen=_evaluation_builtins.next(s for m in gui_model.modules for s in m.screens if s.name == 'setupGuideModal'), triggered_by=setupguidebtn)}))"
+  ],
+  "inventory_equal_after_python_reload": true,
+  "generator_reference": "project.py reloaded and inventory checked"
+}

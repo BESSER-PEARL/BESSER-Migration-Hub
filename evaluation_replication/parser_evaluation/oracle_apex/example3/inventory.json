@@ -1,0 +1,461 @@
+{
+  "example": "example3",
+  "input": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\examples\\oracle_apex\\example3",
+  "source_data": {
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "tables": {
+      "eba_demo_dg_dept": {
+        "deptno": {
+          "type": "number",
+          "identity": true
+        },
+        "dname": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "loc": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "eba_demo_dg_emp": {
+        "empno": {
+          "type": "number",
+          "identity": true
+        },
+        "ename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "job": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "mgr": {
+          "type": "number",
+          "identity": false
+        },
+        "hiredate": {
+          "type": "date",
+          "identity": false
+        },
+        "sal": {
+          "type": "number",
+          "identity": false
+        },
+        "comm": {
+          "type": "number",
+          "identity": false
+        },
+        "deptno": {
+          "type": "number",
+          "identity": false
+        }
+      },
+      "eba_demo_dg_customers": {
+        "customer_id": {
+          "type": "number",
+          "identity": true
+        },
+        "full_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "email_address": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "eba_demo_dg_products": {
+        "product_id": {
+          "type": "number",
+          "identity": true
+        },
+        "product_name": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "unit_price": {
+          "type": "number",
+          "identity": false
+        },
+        "image_mime_type": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "image_filename": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "image_charset": {
+          "type": "varchar2",
+          "identity": false
+        },
+        "image_last_updated": {
+          "type": "date",
+          "identity": false
+        }
+      },
+      "eba_demo_dg_orders": {
+        "order_id": {
+          "type": "number",
+          "identity": true
+        },
+        "order_datetime": {
+          "type": "timestamp",
+          "identity": false
+        },
+        "customer_id": {
+          "type": "number",
+          "identity": false
+        },
+        "order_status": {
+          "type": "varchar2",
+          "identity": false
+        }
+      },
+      "eba_demo_dg_order_items": {
+        "order_id": {
+          "type": "number",
+          "identity": false
+        },
+        "line_item_id": {
+          "type": "number",
+          "identity": false
+        },
+        "product_id": {
+          "type": "number",
+          "identity": false
+        },
+        "unit_price": {
+          "type": "number",
+          "identity": false
+        },
+        "quantity": {
+          "type": "number",
+          "identity": false
+        }
+      }
+    },
+    "scalar_columns": [
+      [
+        "eba_demo_dg_dept",
+        "dname"
+      ],
+      [
+        "eba_demo_dg_dept",
+        "loc"
+      ],
+      [
+        "eba_demo_dg_emp",
+        "ename"
+      ],
+      [
+        "eba_demo_dg_emp",
+        "job"
+      ],
+      [
+        "eba_demo_dg_emp",
+        "hiredate"
+      ],
+      [
+        "eba_demo_dg_emp",
+        "sal"
+      ],
+      [
+        "eba_demo_dg_emp",
+        "comm"
+      ],
+      [
+        "eba_demo_dg_customers",
+        "full_name"
+      ],
+      [
+        "eba_demo_dg_customers",
+        "email_address"
+      ],
+      [
+        "eba_demo_dg_products",
+        "product_name"
+      ],
+      [
+        "eba_demo_dg_products",
+        "unit_price"
+      ],
+      [
+        "eba_demo_dg_products",
+        "image_mime_type"
+      ],
+      [
+        "eba_demo_dg_products",
+        "image_filename"
+      ],
+      [
+        "eba_demo_dg_products",
+        "image_charset"
+      ],
+      [
+        "eba_demo_dg_products",
+        "image_last_updated"
+      ],
+      [
+        "eba_demo_dg_orders",
+        "order_datetime"
+      ],
+      [
+        "eba_demo_dg_orders",
+        "order_status"
+      ],
+      [
+        "eba_demo_dg_order_items",
+        "line_item_id"
+      ],
+      [
+        "eba_demo_dg_order_items",
+        "unit_price"
+      ],
+      [
+        "eba_demo_dg_order_items",
+        "quantity"
+      ]
+    ],
+    "foreign_keys": [
+      [
+        "eba_demo_dg_emp",
+        [
+          "deptno"
+        ],
+        "eba_demo_dg_dept"
+      ],
+      [
+        "eba_demo_dg_emp",
+        [
+          "mgr"
+        ],
+        "eba_demo_dg_emp"
+      ],
+      [
+        "eba_demo_dg_order_items",
+        [
+          "order_id"
+        ],
+        "eba_demo_dg_orders"
+      ],
+      [
+        "eba_demo_dg_order_items",
+        [
+          "product_id"
+        ],
+        "eba_demo_dg_products"
+      ],
+      [
+        "eba_demo_dg_orders",
+        [
+          "customer_id"
+        ],
+        "eba_demo_dg_customers"
+      ]
+    ]
+  },
+  "source_gui": {
+    "counts": {
+      "Screens": 4,
+      "Bound entities": 0,
+      "Buttons": 1,
+      "Action types": 1,
+      "Navigation": 0,
+      "Forms": 1,
+      "Labels": 1
+    },
+    "pages": [
+      {
+        "file": "page_00000.sql",
+        "id": "0",
+        "name": "Global Page",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_00001.sql",
+        "id": "1",
+        "name": "Home",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      },
+      {
+        "file": "page_09999.sql",
+        "id": "9999",
+        "name": "Login Page",
+        "buttons": 1,
+        "forms": 1,
+        "navigation": 0
+      },
+      {
+        "file": "page_10010.sql",
+        "id": "10010",
+        "name": "About",
+        "buttons": 0,
+        "forms": 0,
+        "navigation": 0
+      }
+    ],
+    "bound_entities": [],
+    "action_types": [
+      "Save"
+    ]
+  },
+  "extracted_data": {
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "classes": {
+      "EbaDemoDgOrders": [
+        "order_datetime",
+        "order_status"
+      ],
+      "EbaDemoDgProducts": [
+        "image_charset",
+        "image_filename",
+        "image_last_updated",
+        "image_mime_type",
+        "product_name",
+        "unit_price"
+      ],
+      "EbaDemoDgOrderItems": [
+        "line_item_id",
+        "quantity",
+        "unit_price"
+      ],
+      "EbaDemoDgCustomers": [
+        "email_address",
+        "full_name"
+      ],
+      "EbaDemoDgDept": [
+        "dname",
+        "loc"
+      ],
+      "EbaDemoDgEmp": [
+        "comm",
+        "ename",
+        "hiredate",
+        "job",
+        "sal"
+      ]
+    },
+    "raw_classes": {
+      "EbaDemoDgOrders": [
+        "order_datetime",
+        "order_id",
+        "order_status"
+      ],
+      "EbaDemoDgProducts": [
+        "image_charset",
+        "image_filename",
+        "image_last_updated",
+        "image_mime_type",
+        "product_id",
+        "product_name",
+        "unit_price"
+      ],
+      "EbaDemoDgOrderItems": [
+        "line_item_id",
+        "quantity",
+        "unit_price"
+      ],
+      "EbaDemoDgCustomers": [
+        "customer_id",
+        "email_address",
+        "full_name"
+      ],
+      "EbaDemoDgDept": [
+        "deptno",
+        "dname",
+        "loc"
+      ],
+      "EbaDemoDgEmp": [
+        "comm",
+        "empno",
+        "ename",
+        "hiredate",
+        "job",
+        "sal"
+      ]
+    },
+    "excluded_attributes": {
+      "EbaDemoDgOrders": [
+        {
+          "name": "order_id",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgProducts": [
+        {
+          "name": "product_id",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgCustomers": [
+        {
+          "name": "customer_id",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgDept": [
+        {
+          "name": "deptno",
+          "reason": "platform_identity"
+        }
+      ],
+      "EbaDemoDgEmp": [
+        {
+          "name": "empno",
+          "reason": "platform_identity"
+        }
+      ]
+    }
+  },
+  "extracted_gui": {
+    "counts": {
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0
+    },
+    "widget_types": {},
+    "bound_entities": [],
+    "action_types": [],
+    "screens": [
+      {
+        "name": "About",
+        "widgets": []
+      }
+    ]
+  },
+  "source_files": {
+    "data/emp-dept.sql": "e408f570cedf84de735d06befc5e8bf308d2eb6834bfe060ff6623e94d62dccf",
+    "data/order-items.sql": "4d16e4102fe915ea0037eee2a8578aa4adcfb71cec544e22c019c384553dbf19",
+    "screens/page_00000.sql": "1624f106cd74c676c3dec73d5d8c9b4625d0c87b9fd7fe4f20a84d576ce59f20",
+    "screens/page_00001.sql": "285054e32add7160ed1f7e6826c7c84fce3685b1aa51d513e38a1d3dd6c1637a",
+    "screens/page_09999.sql": "a77c4241fcbbdd55baaf5a276524f1e48573a3801cda47c066a9c8f27e334d2d",
+    "screens/page_10010.sql": "0ead4292c5bd60a524d2a740037cc9fb5a3e30e4c3b699c501ffca83eb01294c",
+    "screens/page_groups.sql": "48546ed66f5fee00724672c7c72f25cbd8305c40aca4734d3280ad6677cacfe1"
+  },
+  "attribute_differences": {}
+}

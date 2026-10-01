@@ -1,0 +1,20 @@
+{
+  "Disable_Enable": {
+    "row": 0,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Disable_Enable_2": {
+    "row": 10,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Reset_4": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

@@ -1,0 +1,595 @@
+{
+  "data": {
+    "counts": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "classes": {
+      "EbaDemoCsEmp": [
+        "comm",
+        "deptno",
+        "empno",
+        "ename",
+        "hiredate",
+        "job",
+        "mgr",
+        "sal"
+      ]
+    },
+    "raw_classes": {
+      "EbaDemoCsEmp": [
+        "comm",
+        "deptno",
+        "empno",
+        "ename",
+        "hiredate",
+        "job",
+        "mgr",
+        "sal"
+      ]
+    },
+    "excluded_attributes": {}
+  },
+  "gui": {
+    "counts": {
+      "Screens": 12,
+      "Bound entities": 0,
+      "Buttons": 26,
+      "Action types": 3,
+      "Navigation": 0,
+      "Forms": 6,
+      "Labels": 26
+    },
+    "widget_types": {
+      "Form": 6,
+      "Button": 20
+    },
+    "bound_entities": [],
+    "action_types": [
+      "Cancel",
+      "Delete",
+      "Save"
+    ],
+    "screens": [
+      {
+        "name": "Add_Edit_Collection_Member_Form",
+        "widgets": [
+          {
+            "name": "Add_Edit_Collection_Member_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Add Member",
+            "title": "Add/Edit Collection Member",
+            "fields": [
+              {
+                "name": "P7_COMM",
+                "type": "Number",
+                "label": "Commission",
+                "required": false
+              },
+              {
+                "name": "P7_DEPTNO",
+                "type": "Dropdown",
+                "label": "Dept&nbsp;No",
+                "required": false
+              },
+              {
+                "name": "P7_EMPNO",
+                "type": "Number",
+                "label": "Emp&nbsp;No",
+                "required": false
+              },
+              {
+                "name": "P7_ENAME",
+                "type": "Text",
+                "label": "Employee&nbsp;Name",
+                "required": false
+              },
+              {
+                "name": "P7_HIREDATE",
+                "type": "Date",
+                "label": "Hire&nbsp;Date",
+                "required": false
+              },
+              {
+                "name": "P7_JOB",
+                "type": "Dropdown",
+                "label": "Job",
+                "required": false
+              },
+              {
+                "name": "P7_MGR",
+                "type": "Dropdown",
+                "label": "Manager",
+                "required": false
+              },
+              {
+                "name": "P7_SAL",
+                "type": "Number",
+                "label": "Salary",
+                "required": false
+              },
+              {
+                "name": "P7_SEQ",
+                "type": "Hidden",
+                "label": "",
+                "required": false
+              },
+              {
+                "name": "P7_STATUS",
+                "type": "Text",
+                "label": "Status",
+                "required": false
+              },
+              {
+                "name": "P7_XMLTYPE",
+                "type": "TextArea",
+                "label": "XMLType",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Delete_Member",
+            "kind": "Button",
+            "label": "Delete Member",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Update_Member",
+            "kind": "Button",
+            "label": "Update Member",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Administration",
+        "widgets": []
+      },
+      {
+        "name": "Application_Theme_Style_Form",
+        "widgets": [
+          {
+            "name": "Application_Theme_Style_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Apply Changes",
+            "title": "Application Theme Style",
+            "fields": [
+              {
+                "name": "P5_DESKTOP_THEME_STYLE_ID",
+                "type": "Dropdown",
+                "label": "Desktop Theme Style",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Create_Collection_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Create_Collection_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Create Collection",
+            "title": "Create Collection",
+            "fields": [
+              {
+                "name": "P2_NAME",
+                "type": "Text",
+                "label": "Collection Name",
+                "required": true
+              }
+            ]
+          },
+          {
+            "name": "Create_Replace",
+            "kind": "Button",
+            "label": "Create/Replace Collection",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Data_Synchronization",
+        "widgets": [
+          {
+            "name": "Add_Member",
+            "kind": "Button",
+            "label": "Add Member",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Apply_Collection",
+            "kind": "Button",
+            "label": "Apply Collection",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Populate",
+            "kind": "Button",
+            "label": "Populate Collection from EBA_DEMO_CS_EMP ",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Help",
+        "widgets": []
+      },
+      {
+        "name": "Login_Page_Form",
+        "widgets": [
+          {
+            "name": "Login_Page_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Sign In",
+            "title": "Login Page",
+            "fields": [
+              {
+                "name": "P101_PASSWORD",
+                "type": "Password",
+                "label": "Password",
+                "required": true
+              },
+              {
+                "name": "P101_USERNAME",
+                "type": "Text",
+                "label": "Username",
+                "required": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Modify_Collection_Form",
+        "widgets": [
+          {
+            "name": "Add_Member_Add_Another",
+            "kind": "Button",
+            "label": "Add Member & Add Another",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Delete_Collection",
+            "kind": "Button",
+            "label": "Delete Collection",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Modify_Collection_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Add Member",
+            "title": "Modify Collection",
+            "fields": [
+              {
+                "name": "P3_ATTR1",
+                "type": "Text",
+                "label": "Character Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P3_ATTR2",
+                "type": "Text",
+                "label": "Character Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P3_ATTR3",
+                "type": "Text",
+                "label": "Character Attribute 3",
+                "required": false
+              },
+              {
+                "name": "P3_ATTR4",
+                "type": "Text",
+                "label": "Character Attribute 4",
+                "required": false
+              },
+              {
+                "name": "P3_ATTR5",
+                "type": "Text",
+                "label": "Character Attribute 5",
+                "required": false
+              },
+              {
+                "name": "P3_DATE_ATTR1",
+                "type": "Date",
+                "label": "Date Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P3_DATE_ATTR2",
+                "type": "Date",
+                "label": "Date Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P3_DATE_ATTR3",
+                "type": "Date",
+                "label": "Date Attribute 3",
+                "required": false
+              },
+              {
+                "name": "P3_NAME",
+                "type": "Text",
+                "label": "Collection Name",
+                "required": false
+              },
+              {
+                "name": "P3_NUM_ATTR1",
+                "type": "Number",
+                "label": "Numeric Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P3_NUM_ATTR2",
+                "type": "Number",
+                "label": "Numeric Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P3_NUM_ATTR3",
+                "type": "Number",
+                "label": "Numeric Attribute 3",
+                "required": false
+              }
+            ]
+          },
+          {
+            "name": "Resequence",
+            "kind": "Button",
+            "label": "Resequence",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Truncate_Collection",
+            "kind": "Button",
+            "label": "Truncate Collection",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          }
+        ]
+      },
+      {
+        "name": "Modify_Collection_Member_Form",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Delete_Member",
+            "kind": "Button",
+            "label": "Delete Member",
+            "binding": null,
+            "sources": [],
+            "action_type": "Delete"
+          },
+          {
+            "name": "Modify_Collection_Member_fields_1",
+            "kind": "Form",
+            "label": null,
+            "binding": null,
+            "sources": [],
+            "action_type": null,
+            "submit_label": "Update Member",
+            "title": "Modify Collection Member",
+            "fields": [
+              {
+                "name": "P4_ATTR1",
+                "type": "Text",
+                "label": "Character Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P4_ATTR2",
+                "type": "Text",
+                "label": "Character Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P4_ATTR3",
+                "type": "Text",
+                "label": "Character Attribute 3",
+                "required": false
+              },
+              {
+                "name": "P4_ATTR4",
+                "type": "Text",
+                "label": "Character Attribute 4",
+                "required": false
+              },
+              {
+                "name": "P4_ATTR5",
+                "type": "Text",
+                "label": "Character Attribute 5",
+                "required": false
+              },
+              {
+                "name": "P4_DATE_ATTR1",
+                "type": "Date",
+                "label": "Date Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P4_DATE_ATTR2",
+                "type": "Date",
+                "label": "Date Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P4_DATE_ATTR3",
+                "type": "Date",
+                "label": "Date Attribute 3",
+                "required": false
+              },
+              {
+                "name": "P4_NAME",
+                "type": "Text",
+                "label": "Name",
+                "required": false
+              },
+              {
+                "name": "P4_NUM_ATTR1",
+                "type": "Number",
+                "label": "Numeric Attribute 1",
+                "required": false
+              },
+              {
+                "name": "P4_NUM_ATTR2",
+                "type": "Number",
+                "label": "Numeric Attribute 2",
+                "required": false
+              },
+              {
+                "name": "P4_NUM_ATTR3",
+                "type": "Number",
+                "label": "Numeric Attribute 3",
+                "required": false
+              },
+              {
+                "name": "P4_SEQ",
+                "type": "Text",
+                "label": "Sequence",
+                "required": false
+              },
+              {
+                "name": "P4_XMLTYPE",
+                "type": "TextArea",
+                "label": "XMLType",
+                "required": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Remove_Collections",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Remove_Collections",
+            "kind": "Button",
+            "label": "Remove Collections",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Reset_Data",
+        "widgets": [
+          {
+            "name": "Cancel",
+            "kind": "Button",
+            "label": "Cancel",
+            "binding": null,
+            "sources": [],
+            "action_type": "Cancel"
+          },
+          {
+            "name": "Reset_Data",
+            "kind": "Button",
+            "label": "Reset Data",
+            "binding": null,
+            "sources": [],
+            "action_type": "Save"
+          }
+        ]
+      },
+      {
+        "name": "Sample_Collections___API_Examples",
+        "widgets": []
+      }
+    ]
+  }
+}

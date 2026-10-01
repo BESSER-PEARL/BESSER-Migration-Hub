@@ -1,0 +1,13 @@
+Parsing 1 CSV file(s) in: DATA
+  Class 'Products': ['category', 'created_at', 'description', 'id', 'name', 'price']
+  Building 0 association(s) from FK columns...
+  Total: 1 class(es), 0 association(s)
+Parsing RSX export: GUI
+  Screen 'createModal' | elements=3
+  Screen 'setupGuideModal' | elements=2
+  Screen 'editModal' | elements=3
+  Screen 'example3_Main' (root) | elements=5
+  Total: 4 screen(s) extracted from RSX
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example3\data_model.py
+BUML model saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example3\gui_model.py
+GUI model code saved to C:\Users\Aaron\Documents\GitHub\BESSER-Migration-Hub\evaluation_replication\parser_evaluation\retool\example3\gui_model.py

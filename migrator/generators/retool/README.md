@@ -113,7 +113,7 @@ it does not export a supplied GUI model.
 From the repository root:
 
 ```powershell
-python examples/retool/generate.py --example 3 --output output/retool_example3
+python -m migrator.converters.retool_example --example 3 --output output/retool_example3
 python -m pytest tests/test_retool_generators.py tests/test_retool_parsers.py -q
 ```
 

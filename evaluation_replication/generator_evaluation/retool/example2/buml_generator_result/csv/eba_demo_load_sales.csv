@@ -1,0 +1,2 @@
+id,country,created,item_type,last_updated,order_date,order_id,order_priority,region,sales_channel,ship_date,total_cost,total_profit,total_revenue,unit_cost,unit_price,units_sold
+1,sample_country,2024-01-01,sample_item_type,2024-01-01,2024-01-01,0,sample_order_priority,sample_region,sample_sales_channel,2024-01-01,0,0,0,0,0,0

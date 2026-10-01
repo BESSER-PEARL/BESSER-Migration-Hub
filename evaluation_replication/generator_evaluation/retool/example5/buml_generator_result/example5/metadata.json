@@ -1,0 +1,89 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "b151fc97-c1f4-5d4b-a893-073ced28d560",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Add_Remove_Class__Error__List",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Add_Remove_Class__Error__List": {
+          "array": []
+        },
+        "Add_Remove_Class__Focus__List": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Application_Theme_Style_Form": {
+          "array": []
+        },
+        "Delete_and_Refresh_List": {
+          "array": []
+        },
+        "Disable_Enable_List": {
+          "array": []
+        },
+        "Edit_Form": {
+          "array": []
+        },
+        "Edit_Form_p13": {
+          "array": []
+        },
+        "Edit_Form_p15": {
+          "array": []
+        },
+        "Edit_Form_p22": {
+          "array": []
+        },
+        "Edit_Form_p5": {
+          "array": []
+        },
+        "Edit_Form_p7": {
+          "array": []
+        },
+        "Edit_Form_p9": {
+          "array": []
+        },
+        "Execute_PL_SQL_Code_List": {
+          "array": []
+        },
+        "Filter_and_Refresh_List": {
+          "array": []
+        },
+        "Hide_Show_List": {
+          "array": []
+        },
+        "Refresh_List": {
+          "array": []
+        },
+        "Set_Values__PL_SQL__List": {
+          "array": []
+        },
+        "Set_Values__SQL__List": {
+          "array": []
+        },
+        "Shuttle_Refresh_List": {
+          "array": []
+        },
+        "Stripe_Report_List": {
+          "array": []
+        },
+        "Timer_List": {
+          "array": []
+        },
+        "Administration_p26": {
+          "array": []
+        },
+        "Debounce_and_Throttle": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Reset_10": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Shuttle_Refresh": {
+    "row": 2,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  },
+  "Shuttle_Refresh_2": {
+    "row": 12,
+    "col": 0,
+    "height": 10,
+    "width": 12
+  }
+}

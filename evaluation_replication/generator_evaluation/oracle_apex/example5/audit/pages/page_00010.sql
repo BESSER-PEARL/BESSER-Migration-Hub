@@ -1,0 +1,203 @@
+prompt --application/pages/page_00010
+begin
+wwv_flow_imp.component_begin (
+ p_version_yyyy_mm_dd=>'2024.11.30'
+,p_release=>'24.2.6'
+,p_default_workspace_id=>nvl(wwv_flow_application_install.get_workspace_id,0)
+,p_default_application_id=>8005
+,p_default_id_offset=>49461010066525635
+,p_default_owner=>USER
+);
+
+wwv_flow_imp_page.create_page(
+ p_id=>10
+,p_name=>'Edit_Form'
+,p_step_title=>'Edit_Form'
+,p_page_mode=>'NORMAL'
+,p_autocomplete_on_off=>'OFF'
+,p_page_template_options=>'#DEFAULT#'
+,p_protection_level=>'C'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1137000)
+,p_plug_name=>'Edit_Form'
+,p_plug_display_sequence=>10
+,p_region_template_options=>'#DEFAULT#'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1138000)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_imp.id(1137000)
+,p_button_name=>'CANCEL'
+,p_button_image_alt=>'Cancel'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'DEFINED_BY_DA'
+);
+wwv_flow_imp_page.create_page_plug(
+ p_id=>wwv_flow_imp.id(1139000)
+,p_plug_name=>'Edit'
+,p_plug_display_sequence=>30
+,p_region_template_options=>'#DEFAULT#'
+,p_plug_source_type=>'NATIVE_FORM'
+,p_query_type=>'TABLE'
+,p_query_table=>'EBADEMODAEMP'
+,p_include_rowid_column=>false
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1140000)
+,p_name=>'P10_COMM'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Commission'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'COMM'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1141000)
+,p_name=>'P10_DEPTNO'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Department'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1142000)
+,p_name=>'P10_EMPNO'
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Employee Number'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>true
+,p_source=>'EMPNO'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1143000)
+,p_name=>'P10_ENAME'
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Name'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'ENAME'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1144000)
+,p_name=>'P10_HIREDATE'
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Hire date'
+,p_display_as=>'NATIVE_DATE_PICKER_APEX'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'HIREDATE'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1145000)
+,p_name=>'P10_JOB'
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Job'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'JOB'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1146000)
+,p_name=>'P10_MGR'
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Manager'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1147000)
+,p_name=>'P10_ROWID'
+,p_item_sequence=>80
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>''
+,p_display_as=>'NATIVE_HIDDEN'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1148000)
+,p_name=>'P10_SAL'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_prompt=>'Salary'
+,p_display_as=>'NATIVE_NUMBER_FIELD'
+,p_field_template=>1610598484065263269
+,p_item_template_options=>'#DEFAULT#'
+,p_is_required=>false
+,p_source=>'SAL'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_button(
+ p_id=>wwv_flow_imp.id(1149000)
+,p_button_sequence=>1000
+,p_button_plug_id=>wwv_flow_imp.id(1139000)
+,p_button_name=>'FORM_2_SUBMIT'
+,p_button_image_alt=>'Apply Changes'
+,p_button_template_id=>4073839297780169708
+,p_button_template_options=>'#DEFAULT#'
+,p_button_position=>'BOTTOM'
+,p_button_action=>'SUBMIT'
+);
+wwv_flow_imp_page.create_page_item(
+ p_id=>wwv_flow_imp.id(1150000)
+,p_name=>'P10_FORM_2_ID'
+,p_item_sequence=>1
+,p_item_plug_id=>wwv_flow_imp.id(1139000)
+,p_display_as=>'NATIVE_HIDDEN'
+,p_source=>'ID'
+,p_source_type=>'DB_COLUMN'
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(1151000)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_HEADER'
+,p_process_type=>'NATIVE_FORM_FETCH'
+,p_process_name=>'Fetch Edit_fields_1'
+,p_form_region_id=>wwv_flow_imp.id(1139000)
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2('primary_key_column','ID','primary_key_item','P10_FORM_2_ID','table_name','EBADEMODAEMP','supported_operations','I:U:D')).to_clob
+);
+wwv_flow_imp_page.create_page_process(
+ p_id=>wwv_flow_imp.id(1152000)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_FORM_PROCESS'
+,p_process_name=>'Process Edit_fields_1'
+,p_form_region_id=>wwv_flow_imp.id(1139000)
+,p_attributes=>wwv_flow_t_plugin_attributes(wwv_flow_t_varchar2('primary_key_column','ID','primary_key_item','P10_FORM_2_ID','table_name','EBADEMODAEMP','supported_operations','I:U:D')).to_clob
+,p_process_when=>'FORM_2_SUBMIT'
+,p_process_when_type=>'REQUEST_IN_CONDITION'
+);
+wwv_flow_imp.component_end;
+end;
+/
+
+

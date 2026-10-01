@@ -1,0 +1,103 @@
+{
+  "model": "example1",
+  "sample_data": true,
+  "tables": [
+    {
+      "name": "eba_demo_cs_emp",
+      "entity": "EbaDemoCsEmp",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "comm",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "deptno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "empno",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ename",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "hiredate",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "job",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "mgr",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sal",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    }
+  ]
+}

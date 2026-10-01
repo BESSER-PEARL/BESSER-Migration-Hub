@@ -1,0 +1,260 @@
+{
+  "data": {
+    "tables": {
+      "u_eba_demo_dg_order_items": {
+        "quantity": {
+          "kind": "IntegerColumn"
+        },
+        "unit_price": {
+          "kind": "IntegerColumn"
+        },
+        "line_item_id": {
+          "kind": "IntegerColumn"
+        },
+        "ebademodgproducts": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_dg_products"
+        },
+        "ebademodgorders": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_dg_orders"
+        }
+      },
+      "u_eba_demo_dg_dept": {
+        "dname": {
+          "kind": "StringColumn"
+        },
+        "loc": {
+          "kind": "StringColumn"
+        }
+      },
+      "u_eba_demo_dg_orders": {
+        "order_status": {
+          "kind": "StringColumn"
+        },
+        "order_datetime": {
+          "kind": "DateTimeColumn"
+        },
+        "ebademodgcustomers": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_dg_customers"
+        }
+      },
+      "u_eba_demo_dg_products": {
+        "product_name": {
+          "kind": "StringColumn"
+        },
+        "unit_price": {
+          "kind": "IntegerColumn"
+        },
+        "image_mime_type": {
+          "kind": "StringColumn"
+        },
+        "image_last_updated": {
+          "kind": "DateColumn"
+        },
+        "image_charset": {
+          "kind": "StringColumn"
+        },
+        "image_filename": {
+          "kind": "StringColumn"
+        }
+      },
+      "u_eba_demo_dg_customers": {
+        "full_name": {
+          "kind": "StringColumn"
+        },
+        "email_address": {
+          "kind": "StringColumn"
+        }
+      },
+      "u_eba_demo_dg_emp": {
+        "comm": {
+          "kind": "IntegerColumn"
+        },
+        "job": {
+          "kind": "StringColumn"
+        },
+        "hiredate": {
+          "kind": "DateColumn"
+        },
+        "ename": {
+          "kind": "StringColumn"
+        },
+        "sal": {
+          "kind": "IntegerColumn"
+        },
+        "ebademodgdept": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_dg_dept"
+        },
+        "ebademodgemp_mgr": {
+          "kind": "ReferenceColumn",
+          "reference_table": "u_eba_demo_dg_emp"
+        }
+      }
+    },
+    "related_lists": [
+      "u_eba_demo_dg_emp.ebademodgdept",
+      "u_eba_demo_dg_emp.ebademodgemp_mgr",
+      "u_eba_demo_dg_order_items.ebademodgorders",
+      "u_eba_demo_dg_order_items.ebademodgproducts",
+      "u_eba_demo_dg_orders.ebademodgcustomers"
+    ],
+    "duplicate_declarations": [],
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    },
+    "matched_attributes": [
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "product_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "unit_price",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "image_mime_type",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "image_last_updated",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "image_charset",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_products",
+        "column": "image_filename",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_emp",
+        "column": "comm",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_emp",
+        "column": "job",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_emp",
+        "column": "hiredate",
+        "kind": "DateColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_emp",
+        "column": "ename",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_emp",
+        "column": "sal",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_orders",
+        "column": "order_status",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_orders",
+        "column": "order_datetime",
+        "kind": "DateTimeColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_dept",
+        "column": "dname",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_dept",
+        "column": "loc",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_order_items",
+        "column": "quantity",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_order_items",
+        "column": "unit_price",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_order_items",
+        "column": "line_item_id",
+        "kind": "IntegerColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_customers",
+        "column": "full_name",
+        "kind": "StringColumn"
+      },
+      {
+        "table": "u_eba_demo_dg_customers",
+        "column": "email_address",
+        "kind": "StringColumn"
+      }
+    ],
+    "relationships": [
+      {
+        "association": "EbaDemoDgEmp_EbaDemoDgDept",
+        "child": "u_eba_demo_dg_emp",
+        "column": "ebademodgdept",
+        "parent": "u_eba_demo_dg_dept",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoDgEmp_EbaDemoDgEmp",
+        "child": "u_eba_demo_dg_emp",
+        "column": "ebademodgemp_mgr",
+        "parent": "u_eba_demo_dg_emp",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoDgOrderItems_EbaDemoDgProducts",
+        "child": "u_eba_demo_dg_order_items",
+        "column": "ebademodgproducts",
+        "parent": "u_eba_demo_dg_products",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoDgOrders_EbaDemoDgCustomers",
+        "child": "u_eba_demo_dg_orders",
+        "column": "ebademodgcustomers",
+        "parent": "u_eba_demo_dg_customers",
+        "reference_present": true,
+        "related_list_present": true
+      },
+      {
+        "association": "EbaDemoDgOrderItems_EbaDemoDgOrders",
+        "child": "u_eba_demo_dg_order_items",
+        "column": "ebademodgorders",
+        "parent": "u_eba_demo_dg_orders",
+        "reference_present": true,
+        "related_list_present": true
+      }
+    ],
+    "generated_file": "C:\\Users\\Aaron\\Documents\\GitHub\\BESSER-Migration-Hub\\evaluation_replication\\generator_evaluation\\servicenow\\example3\\buml_generator_result\\tables.now.ts",
+    "counting_rule": "Input scalar columns; association ends represented by reference columns and related lists. This does not verify cardinality bounds or live platform execution."
+  }
+}

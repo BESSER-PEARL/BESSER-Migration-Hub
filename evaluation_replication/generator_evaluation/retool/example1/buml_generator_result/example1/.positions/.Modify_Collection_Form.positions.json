@@ -1,0 +1,164 @@
+{
+  "Add_Member_Add_Another": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Cancel_2": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Delete_Collection": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Modify_Collection_fields_1": {
+    "row": 6,
+    "col": 0,
+    "height": 28,
+    "width": 12
+  },
+  "Modify_Collection_fields_1_title": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_ATTR1": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_ATTR2": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_ATTR3": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_ATTR4": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_ATTR5": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_DATE_ATTR1": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_DATE_ATTR2": {
+    "row": 14,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_DATE_ATTR3": {
+    "row": 16,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_NAME": {
+    "row": 18,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_NUM_ATTR1": {
+    "row": 20,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_NUM_ATTR2": {
+    "row": 22,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "P3_NUM_ATTR3": {
+    "row": 24,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Modify_Collection_fields_1_submit": {
+    "row": 26,
+    "col": 0,
+    "height": 2,
+    "width": 12,
+    "container": "Modify_Collection_fields_1",
+    "rowGroup": "body",
+    "subcontainer": ""
+  },
+  "Resequence": {
+    "row": 34,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Truncate_Collection": {
+    "row": 36,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

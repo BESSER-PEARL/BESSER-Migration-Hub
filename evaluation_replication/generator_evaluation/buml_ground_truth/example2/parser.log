@@ -1,0 +1,29 @@
+Merging 2 DDL file(s):
+  + create-tables.sql
+  + eba-demo-data-load.sql
+Parsing Oracle APEX DDL: tmp8a7nspps.sql
+  Class 'EbaDemoLoadDept': ['deptno', 'dname', 'loc']
+  Class 'EbaDemoLoadEmp': ['comm', 'created', 'empno', 'ename', 'hiredate', 'job', 'last_updated', 'sal']
+  Class 'EbaDemoLoadSales': ['country', 'created', 'id', 'item_type', 'last_updated', 'order_date', 'order_id', 'order_priority', 'region', 'sales_channel', 'ship_date', 'total_cost', 'total_profit', 'total_revenue', 'unit_cost', 'unit_price', 'units_sold']
+  Total: 3 classes, 2 associations
+Parsing 19 APEX page files in: screens
+  Skipped: page_00001.sql
+  Screen 'Help' | main=True | elements=0
+  Screen 'Application_Theme_Style_Form' | main=True | elements=2
+  Screen 'Reset_Data' | main=True | elements=2
+  Screen 'Administration' | main=True | elements=0
+  Screen 'Data_Loading' | main=True | elements=0
+  Screen 'CSV_Load_Form' | main=True | elements=5
+  Screen 'Transform_and_Lookup_Form' | main=True | elements=2
+  Screen 'Multiple_File_Types_Load_Form' | main=True | elements=2
+  Screen 'Background_Load_Form' | main=True | elements=2
+  Screen 'Eba_demo_load_sales_List' | main=True | elements=1
+  Screen 'Data_Load_Source' | main=True | elements=2
+  Screen 'Data_Validation' | main=True | elements=3
+  Screen 'Data_Load_Results' | main=True | elements=2
+  Screen 'Manual_Data_Loading' | main=True | elements=0
+  Screen 'PL_SQL_Parser_Form' | main=True | elements=1
+  Screen 'Load_Data_using_PL_SQL_API_Form' | main=True | elements=1
+  Skipped: page_00101.sql
+  Skipped: page_groups.sql
+  Total: 16 screens extracted

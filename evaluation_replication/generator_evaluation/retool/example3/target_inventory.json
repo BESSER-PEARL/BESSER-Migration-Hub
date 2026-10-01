@@ -1,0 +1,177 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "eba_demo_dg_customers",
+        "columns": [
+          "id",
+          "email_address",
+          "full_name"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_customers.csv"
+      },
+      {
+        "table": "eba_demo_dg_dept",
+        "columns": [
+          "id",
+          "dname",
+          "loc"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_dept.csv"
+      },
+      {
+        "table": "eba_demo_dg_emp",
+        "columns": [
+          "id",
+          "comm",
+          "ename",
+          "hiredate",
+          "job",
+          "sal",
+          "ebademodgdept_id",
+          "ebademodgemp_mgr_id"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_emp.csv"
+      },
+      {
+        "table": "eba_demo_dg_order_items",
+        "columns": [
+          "id",
+          "line_item_id",
+          "quantity",
+          "unit_price",
+          "ebademodgorders_id",
+          "ebademodgproducts_id"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_order_items.csv"
+      },
+      {
+        "table": "eba_demo_dg_orders",
+        "columns": [
+          "id",
+          "order_datetime",
+          "order_status",
+          "ebademodgcustomers_id"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_orders.csv"
+      },
+      {
+        "table": "eba_demo_dg_products",
+        "columns": [
+          "id",
+          "image_charset",
+          "image_filename",
+          "image_last_updated",
+          "image_mime_type",
+          "product_name",
+          "unit_price"
+        ],
+        "rows": 1,
+        "file": "eba_demo_dg_products.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 6,
+      "Attributes": 20,
+      "Associations": 5,
+      "Multiplicities": 10,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 1,
+      "Bound entities": 0,
+      "Buttons": 0,
+      "Action types": 0,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 0,
+      "DataLists": 0,
+      "DataSources": 0,
+      "Input fields": 0
+    },
+    "tag_counts": {
+      "App": 1,
+      "Frame": 1,
+      "GlobalFunctions": 1,
+      "Screen": 1
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App >",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions >",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "About",
+          "title": "About"
+        },
+        "raw": "<Screen id=\"About\" title=\"About\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/About.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/About.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "About",
+          "title": "About"
+        },
+        "raw": "<Screen id=\"About\" title=\"About\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/About.rsx"
+      }
+    ],
+    "navigation_evidence": [],
+    "bound_tables": [],
+    "sql_primary_tables": {},
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/About.rsx"
+    ],
+    "events": 0,
+    "unresolved_expression_references": [],
+    "caption_inferred_action_type_count": 0
+  },
+  "captions": [],
+  "warnings": []
+}

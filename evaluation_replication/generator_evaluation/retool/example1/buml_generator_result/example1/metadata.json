@@ -1,0 +1,41 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "535bc891-35a3-51d6-a95e-7f801e6dc2fa",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Application_Theme_Style_Form",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Application_Theme_Style_Form": {
+          "array": []
+        },
+        "Data_Synchronization": {
+          "array": []
+        },
+        "Login_Page_Form": {
+          "array": []
+        },
+        "Modify_Collection_Form": {
+          "array": []
+        },
+        "Remove_Collections": {
+          "array": []
+        },
+        "Reset_Data": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        },
+        "Sample_Collections___API_Examples": {
+          "array": []
+        }
+      }
+    }
+  }
+}

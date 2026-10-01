@@ -23,8 +23,8 @@ from migrator.parsers.retool._rsx_source import load_rsx_source
 from migrator.parsers.retool.retool_csv_parser import retool_csv_to_buml
 from migrator.parsers.retool.retool_rsx_parser import retool_rsx_to_gui
 
-EXAMPLES = Path(__file__).resolve().parents[1] / 'examples' / 'retool'
-BASE_EXAMPLES = EXAMPLES / 'base_examples'
+EXAMPLES = Path(__file__).resolve().parents[1] / 'evaluation_replication' / 'examples' / 'retool'
+BASE_EXAMPLES = EXAMPLES
 
 
 def example(number):
@@ -264,7 +264,7 @@ def test_legacy_json_generation_remains_available(tmp_path):
 
 @pytest.mark.parametrize('number', [1, 2, 3, 4])
 def test_example_script_exports_original_records(number, tmp_path):
-    result = subprocess.run([sys.executable, str(EXAMPLES / 'generate.py'), '--example', str(number),
+    result = subprocess.run([sys.executable, '-m', 'migrator.converters.retool_example', '--example', str(number),
                              '--output', str(tmp_path)], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert (tmp_path / f'example{number}.zip').exists()

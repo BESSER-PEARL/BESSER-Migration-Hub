@@ -1,0 +1,39 @@
+{
+  "scenario": "example3",
+  "platform": "ReTool",
+  "reference": {
+    "Entities": 6,
+    "Attributes": 20,
+    "Associations": 5,
+    "Multiplicities": 10,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Screens": 1,
+    "Bound entities": 0,
+    "Buttons": 0,
+    "Action types": 0,
+    "Navigation": 0,
+    "Forms": 0,
+    "Labels": 0
+  },
+  "generated": {
+    "Entities": 6,
+    "Attributes": 20,
+    "Associations": 5,
+    "Multiplicities": 10,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 1,
+    "Bound entities": 0,
+    "Buttons": 0,
+    "Action types": 0,
+    "Navigation": 0,
+    "Forms": 0,
+    "Labels": 0,
+    "DataLists": 0,
+    "DataSources": 0,
+    "Input fields": 0
+  },
+  "reference_sha256": "1dfb34df44f685352362edb5fe977dd6cfa2a0e861e0794bcb5463d9d12386d1"
+}

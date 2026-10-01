@@ -1,0 +1,373 @@
+{
+  "model": "example3",
+  "sample_data": true,
+  "tables": [
+    {
+      "name": "eba_demo_dg_customers",
+      "entity": "EbaDemoDgCustomers",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "email_address",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "full_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_dg_dept",
+      "entity": "EbaDemoDgDept",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "dname",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "loc",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_dg_emp",
+      "entity": "EbaDemoDgEmp",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "comm",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ename",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "hiredate",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "job",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "sal",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademodgdept_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_dg_dept",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademodgemp_mgr_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_dg_emp",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_dg_order_items",
+      "entity": "EbaDemoDgOrderItems",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "line_item_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "unit_price",
+          "type": "int",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademodgorders_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_dg_orders",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademodgproducts_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_dg_products",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_dg_orders",
+      "entity": "EbaDemoDgOrders",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "order_datetime",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "order_status",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademodgcustomers_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_dg_customers",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_dg_products",
+      "entity": "EbaDemoDgProducts",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "image_charset",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "image_filename",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "image_last_updated",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "image_mime_type",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "product_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "unit_price",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    }
+  ]
+}
