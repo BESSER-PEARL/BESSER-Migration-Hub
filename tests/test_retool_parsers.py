@@ -12,7 +12,7 @@ from migrator.parsers.retool._rsx_source import load_rsx_source
 from migrator.parsers.retool.retool_csv_parser import retool_csv_to_buml
 from migrator.parsers.retool.retool_rsx_parser import retool_rsx_to_gui
 
-EXAMPLES = Path(__file__).resolve().parents[1] / 'examples' / 'retool'
+EXAMPLES = Path(__file__).resolve().parents[1] / 'examples' / 'retool' / 'base_examples'
 
 
 def test_named_empty_pages_extended_inputs_and_direct_navigation(tmp_path):

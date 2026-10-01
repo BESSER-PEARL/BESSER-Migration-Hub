@@ -1,0 +1,601 @@
+{
+  "counts": {
+    "Entities": 3,
+    "Attributes": 26,
+    "Associations": 0,
+    "Multiplicities": 0,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 33,
+    "Bound entities": 0,
+    "Buttons": 27,
+    "Action types": 4,
+    "Navigation": 0,
+    "Forms": 0,
+    "Labels": 27,
+    "DataLists": 1,
+    "DataSources": 1,
+    "Input fields": 0
+  },
+  "classes": [
+    {
+      "name": "EbaDemoCalMysessions",
+      "attributes": [
+        {
+          "name": "end_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "row_version_number",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "session_type",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "speaker",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "EbaDemoCalProjects",
+      "attributes": [
+        {
+          "name": "assigned_to",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "budget",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "cost",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "project",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "row_version_number",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "task_name",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "EbaDemoCalSessions",
+      "attributes": [
+        {
+          "name": "end_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "row_version_number",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "session_type",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "speaker",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [],
+  "screens": [
+    {
+      "module": "SampleCalendar",
+      "name": "&P14_PROJECT.",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Administration",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Administration_page_00015",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Application_Theme_Style",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Calendar_Client_Events",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Calendar_Styling",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Calendar_with_Report",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Calendars_and_Dynamic_Actions",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Calendars_and_Javascript",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Copy_Events_by_Click",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Create_Calendar_Events",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Custom_Calendar_Initialization",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Custom_Drag_&_Drop_Handlers",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Custom_Navigation",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Delete_Events_by_Click",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Edit_Calendar_Entry_Form",
+      "main": false
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Edit_Session_Form",
+      "main": false
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Faceted_Search:_Projects",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "FullCalendar_API_initialization",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Help",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Monthly_Calendar:_Projects",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Project_Detail_Form",
+      "main": false
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Query_Calendar_Status",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Report_List_page_00013",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Schedule_Builder",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Standard_Calendars",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Time_Line",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Week_Calendar:_Conference",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Week_Calendar:_Conference_page_00091",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Week_Calendar_with_Icons",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Weekly_Calendar:_Drag_&_Drop",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Weekly_Calendar:_Edit_Sessions",
+      "main": true
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Weekly_Calendar:_Time_format",
+      "main": true
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "&P14_PROJECT.",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Administration",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Administration",
+      "name": "Reset_Data",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset_Data",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Administration",
+      "name": "View_Report",
+      "kind": "Button",
+      "events": [],
+      "label": "View_Report",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Application_Theme_Style",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Application_Theme_Style",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Calendar_Client_Events",
+      "name": "Save_In_Database",
+      "kind": "Button",
+      "events": [],
+      "label": "Save_In_Database",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Calendar_Client_Events",
+      "name": "Show_In_Calendar",
+      "kind": "Button",
+      "events": [],
+      "label": "Show_In_Calendar",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Custom_Navigation",
+      "name": "Next",
+      "kind": "Button",
+      "events": [],
+      "label": "Next",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Custom_Navigation",
+      "name": "Prev",
+      "kind": "Button",
+      "events": [],
+      "label": "Prev",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Custom_Navigation",
+      "name": "Today",
+      "kind": "Button",
+      "events": [],
+      "label": "Today",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Calendar_Entry_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Calendar_Entry_Form",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Calendar_Entry_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Session_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Session_Form",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Session_Form",
+      "name": "Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Edit_Session_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Project_Detail_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Project_Detail_Form",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Project_Detail_Form",
+      "name": "Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Project_Detail_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Report_List_page_00013",
+      "name": "Report_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "Report",
+          "fields": []
+        }
+      ]
+    },
+    {
+      "screen": "Report_List_page_00013",
+      "name": "Reset_Report",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset_Report",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Schedule_Builder",
+      "name": "Clear",
+      "kind": "Button",
+      "events": [],
+      "label": "Clear",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Schedule_Builder",
+      "name": "Save_In_Database",
+      "kind": "Button",
+      "events": [],
+      "label": "Save_In_Database",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Schedule_Builder",
+      "name": "Show_In_Calendar",
+      "kind": "Button",
+      "events": [],
+      "label": "Show_In_Calendar",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Time_Line",
+      "name": "Reset_Report",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset_Report",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    }
+  ],
+  "bound_entities": [],
+  "action_types": [
+    "Add",
+    "Cancel",
+    "Delete",
+    "Save"
+  ],
+  "native_events": 0
+}

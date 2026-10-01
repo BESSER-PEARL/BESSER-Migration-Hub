@@ -1,0 +1,104 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "60a099e2-35df-5555-8bf6-96663381d3b3",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "_P14_PROJECT_",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "_P14_PROJECT_": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Application_Theme_Style": {
+          "array": []
+        },
+        "Calendar_Client_Events": {
+          "array": []
+        },
+        "Custom_Navigation": {
+          "array": []
+        },
+        "Report_List_page_00013": {
+          "array": []
+        },
+        "Schedule_Builder": {
+          "array": []
+        },
+        "Time_Line": {
+          "array": []
+        },
+        "Administration_page_00015": {
+          "array": []
+        },
+        "Calendar_Styling": {
+          "array": []
+        },
+        "Calendar_with_Report": {
+          "array": []
+        },
+        "Calendars_and_Dynamic_Actions": {
+          "array": []
+        },
+        "Calendars_and_Javascript": {
+          "array": []
+        },
+        "Copy_Events_by_Click": {
+          "array": []
+        },
+        "Create_Calendar_Events": {
+          "array": []
+        },
+        "Custom_Calendar_Initialization": {
+          "array": []
+        },
+        "Custom_Drag___Drop_Handlers": {
+          "array": []
+        },
+        "Delete_Events_by_Click": {
+          "array": []
+        },
+        "Faceted_Search__Projects": {
+          "array": []
+        },
+        "FullCalendar_API_initialization": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        },
+        "Monthly_Calendar__Projects": {
+          "array": []
+        },
+        "Query_Calendar_Status": {
+          "array": []
+        },
+        "Standard_Calendars": {
+          "array": []
+        },
+        "Week_Calendar__Conference": {
+          "array": []
+        },
+        "Week_Calendar__Conference_page_00091": {
+          "array": []
+        },
+        "Week_Calendar_with_Icons": {
+          "array": []
+        },
+        "Weekly_Calendar__Drag___Drop": {
+          "array": []
+        },
+        "Weekly_Calendar__Edit_Sessions": {
+          "array": []
+        },
+        "Weekly_Calendar__Time_format": {
+          "array": []
+        }
+      }
+    }
+  }
+}

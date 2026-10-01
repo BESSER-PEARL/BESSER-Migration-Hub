@@ -1,0 +1,30 @@
+{
+  "builder_repairs": [
+    "next(s for s in onlinebooksearchresultstable_list.list_sources if s.name == 'onlineBookSearchResults').field_names = ['score', 'title', 'author_name', 'edition_count', 'first_publish_year', 'isbn', 'cover_i', 'ia', 'subject', 'edition_key']",
+    "booksinventorytable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "next(s for s in booksinventorytable_list.list_sources if s.name == 'books').field_names = ['title', 'quantity_in_stock', 'book_id', 'isbn', 'author', 'category', 'price', 'cover_image', 'bookshelf', 'created_at', 'last_updated_at']",
+    "form5.title = '#### {{booksInventoryTable.selectedRow.data.title}}'",
+    "form5.submit_label = 'Save'",
+    "form5.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "discountcodestable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('DiscountCodes'))",
+    "next(s for s in discountcodestable_list.list_sources if s.name == 'discount_codes').field_names = ['discount_code', 'discount_percent', 'id']",
+    "form3.title = '#### Form title'",
+    "form3.submit_label = 'Submit'",
+    "form3.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('DiscountCodes'))",
+    "table2_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "next(s for s in table2_list.list_sources if s.name == 'books').field_names = ['author', 'bookshelf', 'category', 'cover_image', 'id', 'isbn', 'price', 'quantity_in_stock', 'title']",
+    "table3_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "next(s for s in table3_list.list_sources if s.name == 'books').field_names = ['author', 'bookshelf', 'category', 'cover_image', 'id', 'isbn', 'price', 'quantity_in_stock', 'title']",
+    "orderstable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "next(s for s in orderstable_list.list_sources if s.name == 'books').field_names = ['order_id', 'book_id', 'isbn', 'title', 'price', 'category', 'author', 'cover_image', 'bookshelf', 'quantity_in_stock', 'created_at', 'last_updated_at', 'total_amount', 'discount_code_id', 'discount_code', 'discount_percent', 'order_date', 'expiration_date', 'is_active']",
+    "popularbookstable_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))",
+    "next(s for s in popularbookstable_list.list_sources if s.name == 'books').field_names = ['title', 'author', 'total_sales', 'discount_code', 'discount_percent', 'total_books_sold']",
+    "table1_list.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Orders'))",
+    "next(s for s in table1_list.list_sources if s.name == 'orders').field_names = ['id', 'total_amount']",
+    "form4.title = '#### {{onlineBookSearchResultsTable.selectedRow.data.title}} by {{onlineBookSearchResultsTable.selectedRow.data.author_name}}'",
+    "form4.submit_label = 'Submit'",
+    "form4.data_binding = DataBinding(domain_concept=domain_model.get_class_by_name('Books'))"
+  ],
+  "inventory_equal_after_python_reload": true,
+  "generator_reference": "project.py reloaded and inventory checked"
+}

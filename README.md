@@ -53,10 +53,12 @@ BESSER-Migration-Hub/
 │   │
 │   └── converters/                 # Migration pipeline scripts
 │
-├── examples/
-│   ├── mendix_to_oracle_apex/      # Library, Shopping, Hospital case studies
-│   ├── mendix_to_powerapps/
-│   └── powerapps_to_oracle_apex/
+├── examples/                        # One folder per source platform:
+│   │                                #   base_examples/, buml_parser_result/,
+│   │                                #   buml_generator_result/<target>/
+│   ├── mendix/                     # Library, Shopping, Hospital case studies
+│   ├── powerapps/
+│   └── retool/
 │
 └── figs/                           # Framework diagrams and figures
 ```
@@ -117,11 +119,12 @@ The `examples/` directory contains ready-to-run case studies:
 
 | Example | Description |
 |---|---|
-| [`examples/mendix_to_oracle_apex/library`](examples/mendix_to_oracle_apex/library) | Library management system — Mendix → Oracle APEX |
-| [`examples/mendix_to_oracle_apex/shopping`](examples/mendix_to_oracle_apex/shopping) | E-commerce application — Mendix → Oracle APEX |
-| [`examples/mendix_to_oracle_apex/hospital`](examples/mendix_to_oracle_apex/hospital) | Hospital management system — Mendix → Oracle APEX |
-| [`examples/mendix_to_powerapps`](examples/mendix_to_powerapps) | Mendix → Microsoft Power Apps |
-| [`examples/powerapps_to_oracle_apex`](examples/powerapps_to_oracle_apex) | Power Apps → Oracle APEX |
+| [`examples/mendix/base_examples/library`](examples/mendix/base_examples/library) | Library management system — Mendix → Oracle APEX |
+| [`examples/mendix/base_examples/shopping`](examples/mendix/base_examples/shopping) | E-commerce application — Mendix → Oracle APEX |
+| [`examples/mendix/base_examples/hospital`](examples/mendix/base_examples/hospital) | Hospital management system — Mendix → Oracle APEX |
+| [`examples/mendix/base_examples/library_catalog`](examples/mendix/base_examples/library_catalog) | Mendix → Microsoft Power Apps |
+| [`examples/powerapps/base_examples/library`](examples/powerapps/base_examples/library) | Power Apps → Oracle APEX |
+| [`examples/retool/base_examples`](examples/retool/base_examples) | Retool parser/generator evaluation (5 examples) |
 
 Each example folder contains a `README.md` with the data model diagram, case study characteristics, and the generated output artifacts.
 

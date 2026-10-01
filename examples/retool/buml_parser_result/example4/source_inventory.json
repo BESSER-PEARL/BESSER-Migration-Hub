@@ -1,0 +1,627 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "category_sales",
+        "columns": [
+          "category",
+          "revenue",
+          "orders"
+        ],
+        "rows": 5,
+        "file": "category_sales.csv"
+      },
+      {
+        "table": "monthly_sales",
+        "columns": [
+          "month_number",
+          "month",
+          "revenue"
+        ],
+        "rows": 12,
+        "file": "monthly_sales.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 2,
+      "Attributes": 6,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 2,
+      "Bound entities": 2,
+      "Buttons": 1,
+      "Action types": 1,
+      "Navigation": 1,
+      "Forms": 0,
+      "Labels": 1,
+      "DataLists": 1,
+      "DataSources": 1,
+      "Input fields": 0
+    },
+    "tag_counts": {
+      "App": 1,
+      "Body": 1,
+      "Button": 1,
+      "Column": 4,
+      "Event": 2,
+      "Frame": 1,
+      "GlobalFunctions": 1,
+      "Header": 1,
+      "ModalFrame": 1,
+      "PlotlyChart": 2,
+      "SqlQueryUnified": 3,
+      "Statistic": 3,
+      "Table": 1,
+      "Text": 6,
+      "ToolbarButton": 2
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App>",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions>",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "fetchSalesData",
+          "isMultiplayerEdited": "false",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": ""
+        },
+        "raw": "<SqlQueryUnified\n    id=\"fetchSalesData\"\n    isMultiplayerEdited={false}\n    query={include(\"./lib/fetchSalesData.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    warningCodes={[]}\n  />",
+        "line": 2,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "fetchCategoryData",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": ""
+        },
+        "raw": "<SqlQueryUnified\n    id=\"fetchCategoryData\"\n    query={include(\"./lib/fetchCategoryData.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    warningCodes={[]}\n  />",
+        "line": 11,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "query1",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "showUpdateSetValueDynamicallyToggle": "false",
+          "updateSetValueDynamically": "true"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"query1\"\n    notificationDuration={4.5}\n    query={include(\"./lib/query1.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    showUpdateSetValueDynamicallyToggle={false}\n    updateSetValueDynamically={true}\n    warningCodes={[]}\n  />",
+        "line": 19,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideTitle",
+          "marginType": "normal",
+          "value": "## Setup Guide",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"setupGuideTitle\"\n      marginType=\"normal\"\n      value=\"## Setup Guide\"\n      verticalAlign=\"center\"\n    />",
+        "line": 9,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 16,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideText",
+          "marginType": "normal",
+          "value": "{{ 'Welcome! This app demonstrates **PlotlyChart** with Statistic KPIs and a data table.\\n\\nTo connect your real data source:\\n\\n1. Open the **fetchSalesData** and **fetchCategoryData** queries in the bottom panel and update the API URL — or replace them with a database query\\n2. Select each **PlotlyChart** component and update the **Data** and **Layout** JSON to map your fields\\n3. Update the **Statistic** component values to reference your query data\\n4. Remove the mock data fallback from the **salesTable** data property\\n5. Delete this Setup Guide modal and the Setup Guide button\\n\\nCharts use Plotly.js — see plotly.com/javascript for layout and trace options.' }}"
+        },
+        "raw": "<Text\n      id=\"setupGuideText\"\n      marginType=\"normal\"\n      value=\"{{ 'Welcome! This app demonstrates **PlotlyChart** with Statistic KPIs and a data table.\\n\\nTo connect your real data source:\\n\\n1. Open the **fetchSalesData** and **fetchCategoryData** queries in the bottom panel and update the API URL — or replace them with a database query\\n2. Select each **PlotlyChart** component and update the **Data** and **Layout** JSON to map your fields\\n3. Update the **Statistic** component values to reference your query data\\n4. Remove the mock data fallback from the **salesTable** data property\\n5. Delete this Setup Guide modal and the Setup Guide button\\n\\nCharts use Plotly.js — see plotly.com/javascript for layout and trace options.' }}\"\n    />",
+        "line": 17,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "isHiddenOnDesktop": "false",
+          "isHiddenOnMobile": "false",
+          "padding": "8px 12px",
+          "paddingType": "normal",
+          "sticky": "false",
+          "type": "main"
+        },
+        "raw": "<Frame\n    id=\"$main\"\n    isHiddenOnDesktop={false}\n    isHiddenOnMobile={false}\n    padding=\"8px 12px\"\n    paddingType=\"normal\"\n    sticky={false}\n    type=\"main\"\n  >",
+        "line": 4,
+        "parents": [
+          "App"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "pageTitle",
+          "marginType": "normal",
+          "value": "### Sales Dashboard",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"pageTitle\"\n      marginType=\"normal\"\n      value=\"### Sales Dashboard\"\n      verticalAlign=\"center\"\n    />",
+        "line": 13,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "setupGuideBtn",
+          "marginType": "normal",
+          "text": "Setup Guide"
+        },
+        "raw": "<Button id=\"setupGuideBtn\" marginType=\"normal\" text=\"Setup Guide\">",
+        "line": 19,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fa1b2c3d",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fa1b2c3d\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 20,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Statistic",
+        "attributes": {
+          "id": "statRevenue",
+          "label": "Total Revenue",
+          "marginType": "normal",
+          "prefix": "$",
+          "value": "{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.revenue, 0).toLocaleString() : '124,500' }}"
+        },
+        "raw": "<Statistic\n      id=\"statRevenue\"\n      label=\"Total Revenue\"\n      marginType=\"normal\"\n      prefix=\"$\"\n      value=\"{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.revenue, 0).toLocaleString() : '124,500' }}\"\n    />",
+        "line": 31,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Statistic",
+        "attributes": {
+          "id": "statOrders",
+          "label": "Total Orders",
+          "marginType": "normal",
+          "value": "{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.orders, 0).toLocaleString() : '1,847' }}"
+        },
+        "raw": "<Statistic\n      id=\"statOrders\"\n      label=\"Total Orders\"\n      marginType=\"normal\"\n      value=\"{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.orders, 0).toLocaleString() : '1,847' }}\"\n    />",
+        "line": 38,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Statistic",
+        "attributes": {
+          "id": "statConversion",
+          "label": "Avg Conversion",
+          "marginType": "normal",
+          "suffix": "%",
+          "value": "{{ Array.isArray(fetchSalesData.data) ? (fetchSalesData.data.reduce((sum, r) => sum + r.conversion, 0) / fetchSalesData.data.length).toFixed(1) : '3.2' }}"
+        },
+        "raw": "<Statistic\n      id=\"statConversion\"\n      label=\"Avg Conversion\"\n      marginType=\"normal\"\n      suffix=\"%\"\n      value=\"{{ Array.isArray(fetchSalesData.data) ? (fetchSalesData.data.reduce((sum, r) => sum + r.conversion, 0) / fetchSalesData.data.length).toFixed(1) : '3.2' }}\"\n    />",
+        "line": 44,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "revenueChartTitle",
+          "marginType": "normal",
+          "value": "#### Monthly Revenue",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"revenueChartTitle\"\n      marginType=\"normal\"\n      value=\"#### Monthly Revenue\"\n      verticalAlign=\"center\"\n    />",
+        "line": 51,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "revenueChart",
+          "chartType": "line",
+          "datasourceDataType": "array",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{fetchSalesData.data}}",
+          "isJsonTemplateDirty": "true",
+          "isLayoutJsonDirty": "true",
+          "xAxis": "{{formatDataAsObject(fetchSalesData.data)['month']}}",
+          "xAxisDropdown": "month"
+        },
+        "raw": "<PlotlyChart\n      id=\"revenueChart\"\n      chartType=\"line\"\n      data={include(\"./lib/revenueChart.data.json\", \"string\")}\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"month\" },\n                {\n                  datasource:\n                    \"{{formatDataAsObject(fetchSalesData.data)['month']}}\",\n                },\n                { chartType: \"line\" },\n                { aggregationType: \"sum\" },\n                { color: \"#033663\" },\n                { colors: { ordered: [] } },\n                { visible: false },\n                { hovertemplate: \"%{x} — %{fullData.name}: %{y}\" },\n              ],\n            },\n          },\n          {\n            1: {\n              ordered: [\n                { label: \"revenue\" },\n                {\n                  datasource:\n                    \"{{formatDataAsObject(fetchSalesData.data)['revenue']}}\",\n                },\n                { chartType: \"line\" },\n                { aggregationType: \"sum\" },\n                { color: \"#247BC7\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                { hovertemplate: \"%{x} — Revenue: $%{y:,.0f}\" },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"array\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{fetchSalesData.data}}\"\n      isJsonTemplateDirty={true}\n      isLayoutJsonDirty={true}\n      layout={include(\"./lib/revenueChart.layout.json\", \"string\")}\n      xAxis=\"{{formatDataAsObject(fetchSalesData.data)['month']}}\"\n      xAxisDropdown=\"month\"\n    />",
+        "line": 57,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "categoryChartTitle",
+          "marginType": "normal",
+          "value": "#### Revenue by Category",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"categoryChartTitle\"\n      marginType=\"normal\"\n      value=\"#### Revenue by Category\"\n      verticalAlign=\"center\"\n    />",
+        "line": 108,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "categoryChart",
+          "datasourceDataType": "array",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{fetchCategoryData.data}}",
+          "isJsonTemplateDirty": "true",
+          "isLayoutJsonDirty": "true",
+          "xAxis": "{{formatDataAsObject(fetchCategoryData.data)['category']}}",
+          "xAxisDropdown": "category"
+        },
+        "raw": "<PlotlyChart\n      id=\"categoryChart\"\n      data={include(\"./lib/categoryChart.data.json\", \"string\")}\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"category\" },\n                {\n                  datasource:\n                    \"{{formatDataAsObject(fetchCategoryData.data)['category']}}\",\n                },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#033663\" },\n                { colors: { ordered: [] } },\n                { visible: false },\n                { hovertemplate: \"%{x} — %{fullData.name}: %{y}\" },\n              ],\n            },\n          },\n          {\n            1: {\n              ordered: [\n                { label: \"revenue\" },\n                {\n                  datasource:\n                    \"{{formatDataAsObject(fetchCategoryData.data)['revenue']}}\",\n                },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#247BC7\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                { hovertemplate: \"%{x} — Revenue: $%{y:,.0f}\" },\n              ],\n            },\n          },\n          {\n            2: {\n              ordered: [\n                { label: \"orders\" },\n                {\n                  datasource:\n                    \"{{formatDataAsObject(fetchCategoryData.data)['orders']}}\",\n                },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#55A1E3\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                { hovertemplate: \"%{x} — Orders: %{y}\" },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"array\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{fetchCategoryData.data}}\"\n      isJsonTemplateDirty={true}\n      isLayoutJsonDirty={true}\n      layout={include(\"./lib/categoryChart.layout.json\", \"string\")}\n      xAxis=\"{{formatDataAsObject(fetchCategoryData.data)['category']}}\"\n      xAxisDropdown=\"category\"\n    />",
+        "line": 114,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "dataTableTitle",
+          "marginType": "normal",
+          "value": "#### Raw Data",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"dataTableTitle\"\n      marginType=\"normal\"\n      value=\"#### Raw Data\"\n      verticalAlign=\"center\"\n    />",
+        "line": 181,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "salesTable",
+          "cellSelection": "none",
+          "data": "{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data : [{ month: 'Jan', revenue: 8500, orders: 120, conversion: 2.8 }, { month: 'Feb', revenue: 9200, orders: 135, conversion: 3.1 }, { month: 'Mar', revenue: 11800, orders: 167, conversion: 3.5 }] }}",
+          "primaryKeyColumnId": "c1a1a",
+          "showBorder": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Table\n      id=\"salesTable\"\n      cellSelection=\"none\"\n      data=\"{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data : [{ month: 'Jan', revenue: 8500, orders: 120, conversion: 2.8 }, { month: 'Feb', revenue: 9200, orders: 135, conversion: 3.1 }, { month: 'Mar', revenue: 11800, orders: 167, conversion: 3.5 }] }}\"\n      defaultSelectedRow={{ mode: \"index\", indexType: \"display\", index: 0 }}\n      primaryKeyColumnId=\"c1a1a\"\n      showBorder={true}\n      showFooter={true}\n      showHeader={true}\n      templatePageSize={12}\n    >",
+        "line": 187,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c1a1a",
+          "alignment": "left",
+          "format": "string",
+          "key": "month",
+          "label": "Month",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c1a1a\"\n        alignment=\"left\"\n        format=\"string\"\n        key=\"month\"\n        label=\"Month\"\n        position=\"center\"\n        size={100}\n      />",
+        "line": 198,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c2b2b",
+          "alignment": "right",
+          "format": "currency",
+          "key": "revenue",
+          "label": "Revenue",
+          "position": "center",
+          "summaryAggregationMode": "sum"
+        },
+        "raw": "<Column\n        id=\"c2b2b\"\n        alignment=\"right\"\n        format=\"currency\"\n        formatOptions={{\n          currency: \"USD\",\n          currencySign: \"standard\",\n          notation: \"standard\",\n          showSeparators: true,\n          currencyDisplay: \"symbol\",\n        }}\n        key=\"revenue\"\n        label=\"Revenue\"\n        position=\"center\"\n        size={140}\n        summaryAggregationMode=\"sum\"\n      />",
+        "line": 207,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c3c3c",
+          "alignment": "right",
+          "format": "decimal",
+          "key": "orders",
+          "label": "Orders",
+          "position": "center",
+          "summaryAggregationMode": "sum"
+        },
+        "raw": "<Column\n        id=\"c3c3c\"\n        alignment=\"right\"\n        format=\"decimal\"\n        formatOptions={{ showSeparators: true, notation: \"standard\" }}\n        key=\"orders\"\n        label=\"Orders\"\n        position=\"center\"\n        size={100}\n        summaryAggregationMode=\"sum\"\n      />",
+        "line": 224,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c4d4d",
+          "alignment": "right",
+          "format": "decimal",
+          "key": "conversion",
+          "label": "Conversion %",
+          "position": "center",
+          "summaryAggregationMode": "avg"
+        },
+        "raw": "<Column\n        id=\"c4d4d\"\n        alignment=\"right\"\n        format=\"decimal\"\n        formatOptions={{ showSeparators: true, notation: \"standard\" }}\n        key=\"conversion\"\n        label=\"Conversion %\"\n        position=\"center\"\n        size={120}\n        summaryAggregationMode=\"avg\"\n      />",
+        "line": 235,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "ToolbarButton",
+        "attributes": {
+          "id": "1a",
+          "icon": "bold/interface-text-formatting-filter-2",
+          "label": "Filter",
+          "type": "filter"
+        },
+        "raw": "<ToolbarButton\n        id=\"1a\"\n        icon=\"bold/interface-text-formatting-filter-2\"\n        label=\"Filter\"\n        type=\"filter\"\n      />",
+        "line": 246,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "ToolbarButton",
+        "attributes": {
+          "id": "3c",
+          "icon": "bold/interface-download-button-2",
+          "label": "Download",
+          "type": "custom"
+        },
+        "raw": "<ToolbarButton\n        id=\"3c\"\n        icon=\"bold/interface-download-button-2\"\n        label=\"Download\"\n        type=\"custom\"\n      >",
+        "line": 252,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a1b2c3d4",
+          "event": "clickToolbar",
+          "method": "exportData",
+          "pluginId": "salesTable",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"a1b2c3d4\"\n          event=\"clickToolbar\"\n          method=\"exportData\"\n          pluginId=\"salesTable\"\n          type=\"widget\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 258,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "ToolbarButton"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      }
+    ],
+    "navigation_evidence": [
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fa1b2c3d",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fa1b2c3d\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 20,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "bound_tables": [
+      "category_sales",
+      "monthly_sales"
+    ],
+    "sql_primary_tables": {
+      "fetchCategoryData": "category_sales",
+      "fetchSalesData": "monthly_sales",
+      "query1": "category_sales"
+    },
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/setupGuideModal.rsx"
+    ],
+    "events": 2,
+    "unresolved_expression_references": []
+  },
+  "sha256": {
+    "DATA/category_sales.csv": "dcee112d5947afa138c231fa6c5cacc09495e668a1f5792568cb6d5b20112417",
+    "DATA/monthly_sales.csv": "31f73c12fd5cb3ec79354b1583106aff33ef125eb4b5bfeb77c1db1f1dd1f650",
+    "GUI/.positions.json": "c485de89aa25532b6cdcac811965119a4312b28e14a32a82541a85466b07d2ce",
+    "GUI/functions.rsx": "fabc551aefb7adf6c4aba1454f00462da9752ac98b1804dd1333fb9615fa3615",
+    "GUI/lib/categoryChart.data.json": "8e16c7b58f00c6431f6f5a28680966804cf1bcc3dbbc0fa8bae871576e54a220",
+    "GUI/lib/categoryChart.layout.json": "a64426c458e8a20c24d49046eeae8d9d87c44fc49c9a2c86ff34e4924b832808",
+    "GUI/lib/fetchCategoryData.sql": "3494a5bd949b9010196cd9dbff9ba323c1fb0f0e1e3a13f08649145a78577df0",
+    "GUI/lib/fetchSalesData.sql": "8d13293a861daebf15fd65b237edfa49fc170bf942aedb578d4ac76f703c1e1a",
+    "GUI/lib/query1.sql": "3494a5bd949b9010196cd9dbff9ba323c1fb0f0e1e3a13f08649145a78577df0",
+    "GUI/lib/revenueChart.data.json": "ca20ce360d8ef19c44dd1455ed4dec1c3663b28fae46111b0d135cbc0caf4222",
+    "GUI/lib/revenueChart.layout.json": "ac8174b9eb68e08766837b401a1a8cd0c986aef696e8fbf7265b168afcccec8a",
+    "GUI/main.rsx": "1b87e9563dd697000e70d7a7f067ced8d0ab779828ad0bbab41cbe38e69da904",
+    "GUI/metadata.json": "0f8aa10b74fe4e853e25ad513bdd77a87dd39aa13261576a0b99f8aa50d019bc",
+    "GUI/src/setupGuideModal.rsx": "4cbebffcdfe8cb72caa620be54cd3eba2041bc11d068df91496d7700cab0edd3"
+  }
+}

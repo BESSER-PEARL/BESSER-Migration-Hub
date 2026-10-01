@@ -1,0 +1,312 @@
+{
+  "counts": {
+    "Entities": 1,
+    "Attributes": 6,
+    "Associations": 0,
+    "Multiplicities": 0,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 4,
+    "Bound entities": 1,
+    "Buttons": 7,
+    "Action types": 5,
+    "Navigation": 1,
+    "Forms": 2,
+    "Labels": 7,
+    "DataLists": 1,
+    "DataSources": 1,
+    "Input fields": 6
+  },
+  "classes": [
+    {
+      "name": "Products",
+      "attributes": [
+        {
+          "name": "category",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "created_at",
+          "type": "datetime",
+          "id": false
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "price",
+          "type": "float",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [],
+  "screens": [
+    {
+      "module": "example3",
+      "name": "createModal",
+      "main": false
+    },
+    {
+      "module": "example3",
+      "name": "editModal",
+      "main": false
+    },
+    {
+      "module": "example3",
+      "name": "example3_Main",
+      "main": true
+    },
+    {
+      "module": "example3",
+      "name": "setupGuideModal",
+      "main": false
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "createModal",
+      "name": "CreateProductForm",
+      "kind": "Form",
+      "events": [],
+      "title": "#### New product",
+      "submit_label": "Create",
+      "fields": [
+        "category",
+        "description",
+        "name"
+      ],
+      "field_details": [
+        {
+          "name": "category",
+          "type": "Dropdown",
+          "label": "Category",
+          "default": null,
+          "required": true,
+          "options": [
+            {
+              "label": "Electronics",
+              "value": "Electronics"
+            },
+            {
+              "label": "Clothing",
+              "value": "Clothing"
+            },
+            {
+              "label": "Books",
+              "value": "Books"
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "type": "TextArea",
+          "label": "Description",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "name",
+          "type": "Text",
+          "label": "Name",
+          "default": null,
+          "required": true,
+          "options": []
+        }
+      ],
+      "binding": "Products"
+    },
+    {
+      "screen": "createModal",
+      "name": "createClearBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "Clear",
+      "action_type": "RunMethod",
+      "synthetic_label": false
+    },
+    {
+      "screen": "createModal",
+      "name": "createFormTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### New product"
+    },
+    {
+      "screen": "editModal",
+      "name": "EditProductForm",
+      "kind": "Form",
+      "events": [],
+      "title": null,
+      "submit_label": "Save",
+      "fields": [
+        "category",
+        "description",
+        "name"
+      ],
+      "field_details": [
+        {
+          "name": "category",
+          "type": "Dropdown",
+          "label": "Category",
+          "default": null,
+          "required": true,
+          "options": [
+            {
+              "label": "Electronics",
+              "value": "Electronics"
+            },
+            {
+              "label": "Clothing",
+              "value": "Clothing"
+            },
+            {
+              "label": "Books",
+              "value": "Books"
+            }
+          ]
+        },
+        {
+          "name": "description",
+          "type": "TextArea",
+          "label": "Description",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "name",
+          "type": "Text",
+          "label": "Name",
+          "default": null,
+          "required": true,
+          "options": []
+        }
+      ],
+      "binding": "Products"
+    },
+    {
+      "screen": "editModal",
+      "name": "editCancelBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "editModal",
+      "name": "editTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Edit product"
+    },
+    {
+      "screen": "example3_Main",
+      "name": "a01a1",
+      "kind": "Button",
+      "events": [],
+      "label": "Edit",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example3_Main",
+      "name": "a02b2",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example3_Main",
+      "name": "pageTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "### Products"
+    },
+    {
+      "screen": "example3_Main",
+      "name": "productsTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "products",
+          "fields": [
+            "id",
+            "name",
+            "description",
+            "category",
+            "price",
+            "created_at"
+          ]
+        }
+      ],
+      "binding": "Products"
+    },
+    {
+      "screen": "example3_Main",
+      "name": "setupGuideBtn",
+      "kind": "Button",
+      "events": [
+        {
+          "name": "setupGuideBtn_click_0",
+          "type": "OnClick",
+          "actions": [
+            {
+              "name": "setupGuideBtn_open_0",
+              "kind": "Transition",
+              "target": "setupGuideModal"
+            }
+          ]
+        }
+      ],
+      "label": "Setup Guide",
+      "action_type": "Navigate",
+      "synthetic_label": false
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideText",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}"
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "## 🚀 Setup Guide"
+    }
+  ],
+  "bound_entities": [
+    "Products"
+  ],
+  "action_types": [
+    "Cancel",
+    "Delete",
+    "Navigate",
+    "RunMethod",
+    "Save"
+  ],
+  "native_events": 1
+}

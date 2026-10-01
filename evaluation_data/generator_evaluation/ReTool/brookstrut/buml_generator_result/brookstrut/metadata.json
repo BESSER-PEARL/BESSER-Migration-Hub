@@ -1,0 +1,89 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "40cce99f-8f44-57cf-a6ca-a49ce9ce0914",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "_100_Transactions_Generated",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "_100_Transactions_Generated": {
+          "array": []
+        },
+        "About": {
+          "array": []
+        },
+        "Activity_Calendar": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Generate_Transactions": {
+          "array": []
+        },
+        "Load_Data": {
+          "array": []
+        },
+        "Remove_Transaction_History": {
+          "array": []
+        },
+        "Reports": {
+          "array": []
+        },
+        "Reset_Sample_Data": {
+          "array": []
+        },
+        "Sales": {
+          "array": []
+        },
+        "Sales_History_Calendar": {
+          "array": []
+        },
+        "Sales_History_Cards": {
+          "array": []
+        },
+        "Sales_History_Classic": {
+          "array": []
+        },
+        "Sales_History_Classic_page_00050": {
+          "array": []
+        },
+        "Sales_History_Content_Row": {
+          "array": []
+        },
+        "Sales_History_Content_Row_with_Menu": {
+          "array": []
+        },
+        "Sales_History_Interactive_Grid": {
+          "array": []
+        },
+        "Sales_History_Smart_Search_w_Menu_Actions": {
+          "array": []
+        },
+        "Sales_by_Product": {
+          "array": []
+        },
+        "Sales_by_Store_by_Day": {
+          "array": []
+        },
+        "Store": {
+          "array": []
+        },
+        "Store_page_00007": {
+          "array": []
+        },
+        "Stores_Report_Content_Row": {
+          "array": []
+        },
+        "Table_Counts": {
+          "array": []
+        },
+        "Transaction": {
+          "array": []
+        }
+      }
+    }
+  }
+}

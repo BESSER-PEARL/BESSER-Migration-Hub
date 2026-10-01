@@ -1,0 +1,26 @@
+{
+  "Add": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Cancel_13": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Delete_8": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Save_11": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

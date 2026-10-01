@@ -1,0 +1,463 @@
+{
+  "counts": {
+    "Entities": 1,
+    "Attributes": 8,
+    "Associations": 0,
+    "Multiplicities": 0,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 5,
+    "Bound entities": 1,
+    "Buttons": 9,
+    "Action types": 5,
+    "Navigation": 1,
+    "Forms": 1,
+    "Labels": 7,
+    "DataLists": 1,
+    "DataSources": 1,
+    "Input fields": 12
+  },
+  "classes": [
+    {
+      "name": "TeamMembers",
+      "attributes": [
+        {
+          "name": "department",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        },
+        {
+          "name": "joined_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "notes",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "role",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "status",
+          "type": "str",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [],
+  "screens": [
+    {
+      "module": "example5",
+      "name": "activity",
+      "main": true
+    },
+    {
+      "module": "example5",
+      "name": "confirmBulkUpdate",
+      "main": false
+    },
+    {
+      "module": "example5",
+      "name": "details",
+      "main": true
+    },
+    {
+      "module": "example5",
+      "name": "example5_Main",
+      "main": true
+    },
+    {
+      "module": "example5",
+      "name": "setupGuideModal",
+      "main": false
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "activity",
+      "name": "activityPlaceholder",
+      "kind": "Text",
+      "events": [],
+      "content": "Activity log for **{{ membersTable.selectedRow.name }}** will appear here.\\n\\nThis view demonstrates the tabbed detail pane pattern with dynamic width — the Activity tab expands the panel to 550px to accommodate richer content."
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkCancelBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkCloseBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "bulkCloseBtn",
+      "action_type": "Cancel",
+      "synthetic_label": true
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkConfirmBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "Confirm update ({{ bulkUpdateData.value.length }})",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkFieldSummary",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ '**Fields that will be updated:** status, role\\n\\n_Only editable columns from the table will be included in the update._' }}"
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkMemberTags",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "bulkMemberTags",
+        "type": "Tags",
+        "label": "",
+        "default": "{{ bulkUpdateData.value.map(r => r.name) }}",
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Bulk Update Confirmation"
+    },
+    {
+      "screen": "confirmBulkUpdate",
+      "name": "bulkWarning",
+      "kind": "Text",
+      "events": [],
+      "content": "You are about to update **{{ bulkUpdateData.value.length }}** team member(s). Please review the affected members below before confirming."
+    },
+    {
+      "screen": "details",
+      "name": "DetailForm",
+      "kind": "Form",
+      "events": [],
+      "title": null,
+      "submit_label": "Save changes",
+      "fields": [
+        "department",
+        "email",
+        "joined_date",
+        "name",
+        "notes",
+        "role",
+        "status"
+      ],
+      "field_details": [
+        {
+          "name": "department",
+          "type": "Dropdown",
+          "label": "Department",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "email",
+          "type": "Text",
+          "label": "Email",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "joined_date",
+          "type": "Date",
+          "label": "Joined",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "name",
+          "type": "Text",
+          "label": "Name",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "notes",
+          "type": "TextArea",
+          "label": "Notes",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "role",
+          "type": "Dropdown",
+          "label": "Role",
+          "default": null,
+          "required": false,
+          "options": [
+            {
+              "label": "Engineer",
+              "value": "Engineer"
+            },
+            {
+              "label": "Designer",
+              "value": "Designer"
+            },
+            {
+              "label": "Manager",
+              "value": "Manager"
+            },
+            {
+              "label": "Analyst",
+              "value": "Analyst"
+            },
+            {
+              "label": "Lead",
+              "value": "Lead"
+            }
+          ]
+        },
+        {
+          "name": "status",
+          "type": "Dropdown",
+          "label": "Status",
+          "default": null,
+          "required": false,
+          "options": [
+            {
+              "label": "Active",
+              "value": "active"
+            },
+            {
+              "label": "On Leave",
+              "value": "on_leave"
+            },
+            {
+              "label": "Offboarded",
+              "value": "offboarded"
+            }
+          ]
+        }
+      ],
+      "binding": "TeamMembers"
+    },
+    {
+      "screen": "example5_Main",
+      "name": "a01a1",
+      "kind": "Button",
+      "events": [],
+      "label": "Edit",
+      "action_type": "Navigate",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example5_Main",
+      "name": "a02b2",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example5_Main",
+      "name": "dateRangeFilter",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "dateRangeFilter",
+        "type": "DateRange",
+        "label": "Joined",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "example5_Main",
+      "name": "departmentFilter",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "departmentFilter",
+        "type": "Dropdown",
+        "label": "Department",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "example5_Main",
+      "name": "detailCloseBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "detailCloseBtn",
+      "action_type": "Cancel",
+      "synthetic_label": true
+    },
+    {
+      "screen": "example5_Main",
+      "name": "detailTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### {{ membersTable.selectedRow.name }}"
+    },
+    {
+      "screen": "example5_Main",
+      "name": "membersTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "team_members",
+          "fields": [
+            "id",
+            "name",
+            "email",
+            "department",
+            "status",
+            "joined_date",
+            "role"
+          ]
+        }
+      ],
+      "binding": "TeamMembers"
+    },
+    {
+      "screen": "example5_Main",
+      "name": "pageTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "### Team Members"
+    },
+    {
+      "screen": "example5_Main",
+      "name": "resetBtn",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "RunMethod",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example5_Main",
+      "name": "searchInput",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "searchInput",
+        "type": "Text",
+        "label": "",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "example5_Main",
+      "name": "setupGuideBtn",
+      "kind": "Button",
+      "events": [
+        {
+          "name": "setupGuideBtn_click_0",
+          "type": "OnClick",
+          "actions": [
+            {
+              "name": "setupGuideBtn_open_0",
+              "kind": "Transition",
+              "target": "setupGuideModal"
+            }
+          ]
+        }
+      ],
+      "label": "Setup Guide",
+      "action_type": "Navigate",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example5_Main",
+      "name": "statusFilter",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "statusFilter",
+        "type": "Dropdown",
+        "label": "Status",
+        "default": null,
+        "required": false,
+        "options": [
+          {
+            "label": "Active",
+            "value": "active"
+          },
+          {
+            "label": "On Leave",
+            "value": "on_leave"
+          },
+          {
+            "label": "Offboarded",
+            "value": "offboarded"
+          }
+        ]
+      }
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideText",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}"
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "## 🚀 Setup Guide"
+    }
+  ],
+  "bound_entities": [
+    "TeamMembers"
+  ],
+  "action_types": [
+    "Cancel",
+    "Delete",
+    "Navigate",
+    "RunMethod",
+    "Save"
+  ],
+  "native_events": 1
+}

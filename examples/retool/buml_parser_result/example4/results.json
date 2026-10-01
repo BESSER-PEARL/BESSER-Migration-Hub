@@ -1,0 +1,118 @@
+{
+  "example": "example4",
+  "run": "current",
+  "parser": {
+    "Entities": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Attributes": {
+      "reference": 6,
+      "output": 6,
+      "percent": 100.0
+    },
+    "Associations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Multiplicities": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Generalizations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Enumerations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Modules": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Screens": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Bound entities": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Buttons": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Action types": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Navigation": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Forms": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Labels": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "DataLists": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "DataSources": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Input fields": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    }
+  },
+  "source_events": 2,
+  "pivot_events": 1,
+  "row_counts": {
+    "source": {
+      "category_sales": 5,
+      "monthly_sales": 12
+    }
+  },
+  "source_tag_counts": {
+    "App": 1,
+    "Body": 1,
+    "Button": 1,
+    "Column": 4,
+    "Event": 2,
+    "Frame": 1,
+    "GlobalFunctions": 1,
+    "Header": 1,
+    "ModalFrame": 1,
+    "PlotlyChart": 2,
+    "SqlQueryUnified": 3,
+    "Statistic": 3,
+    "Table": 1,
+    "Text": 6,
+    "ToolbarButton": 2
+  },
+  "serialization_passed": true,
+  "frozen_baseline_reference": false
+}

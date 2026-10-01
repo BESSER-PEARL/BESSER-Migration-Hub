@@ -11,7 +11,11 @@ against, so RQ1 and RQ2 are intentionally kept apart as separate scripts.
 
 The source auditor deliberately does not call the migration parser.
 Run from the repository: python examples/retool/evaluate.py
-Only the counts table is retained; pipeline artifacts use a temporary directory.
+Base examples live under examples/retool/base_examples/exampleN/{data,gui}/.
+The aggregate table is saved to evaluation/results.md; each example's own
+parsed BUML pivot (project.py, pivot.pkl, inventory.json) is kept on disk
+under examples/retool/buml_parser_result/exampleN/ for manual inspection/
+comparison, not discarded in a temp dir.
 """
 import argparse
 import ast
@@ -29,7 +33,6 @@ import re
 import runpy
 import subprocess
 import sys
-import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
@@ -473,12 +476,12 @@ def table(metrics):
                      [f"| {k} | {v['reference'] if v['reference'] is not None else 'unknown'} | {v['output'] if v['output'] is not None else 'unknown'} | {str(v['percent']) + '%' if v['percent'] is not None else 'N/A'} |" for k, v in metrics.items()])
 
 
-def run_example(number, run, from_snapshots=False, output_root=None):
+def run_example(number, run, from_snapshots=False):
     name = f'example{number}'
-    root = EXAMPLES / name
+    root = EXAMPLES / 'base_examples' / name
     data_dir = next(p for p in root.iterdir() if p.name.lower() == 'data')
     gui_dir = next(p for p in root.iterdir() if p.name.lower() == 'gui')
-    out = Path(output_root) / name if output_root else root / 'evaluation' / run
+    out = EXAMPLES / 'buml_parser_result' / name
     out.mkdir(parents=True, exist_ok=True)
     data, rows = csv_inventory(data_dir)
     source = audit_gui(gui_dir, {t['table'] for t in data['tables']})
@@ -488,15 +491,15 @@ def run_example(number, run, from_snapshots=False, output_root=None):
     log = io.StringIO()
     with contextlib.redirect_stdout(log):
         if from_snapshots:
-            domain, gui = pickle.loads((out / 'retool_to_buml' / 'pivot.pkl').read_bytes())
+            domain, gui = pickle.loads((out / 'pivot.pkl').read_bytes())
             print('Recomputed audit from frozen baseline pivot; parser not rerun.')
         else:
             domain = retool_csv_to_buml(str(data_dir), module_name=name, rsx_dir=str(gui_dir))
             gui = retool_rsx_to_gui(str(gui_dir), module_name=name, domain_model=domain)
         pivot = pivot_inventory(domain, gui)
-        serialize(domain, gui, out / 'retool_to_buml')
+        serialize(domain, gui, out)
     (out / ('audit_refresh.log' if from_snapshots else 'pipeline.log')).write_text(log.getvalue(), encoding='utf-8')
-    dump(out / 'retool_to_buml' / 'inventory.json', pivot)
+    dump(out / 'inventory.json', pivot)
     parser_reference = data['counts'] | source['counts']
     result = {'example': name, 'run': run, 'parser': ratios(parser_reference, pivot['counts'], DATA_KEYS + GUI_KEYS),
               'source_events': source['events'], 'pivot_events': pivot['native_events'],
@@ -512,7 +515,7 @@ def run_example(number, run, from_snapshots=False, output_root=None):
     report += '## Retool → BUML (RQ1)\n\n' + table(result['parser']) + '\n\n'
     report += f"Source/pivot event declarations: **{source['events']} / {pivot['native_events']}**. Button classifications are naming heuristics; they do not establish executable CRUD behavior.\n\n"
     report += f"Records present in source CSV (not instances recovered from BUML): `{result['row_counts']['source']}`.\n\n"
-    report += '## Artifacts\n\n- `source_inventory.json`: file hashes, independent tag/header counts and source evidence.\n- `retool_to_buml/project.py`: executable combined model, with documented serializer repairs.\n- `retool_to_buml/pivot.pkl`: exact locally produced reference model (load only trusted local snapshots).\n- `retool_to_buml/inventory.json`: classes, relationships, screens, widgets, bindings.\n- `pipeline.log`, `results.json`: diagnostics and machine-readable results.\n\n'
+    report += '## Artifacts\n\n- `source_inventory.json`: file hashes, independent tag/header counts and source evidence.\n- `project.py`: executable combined model, with documented serializer repairs.\n- `pivot.pkl`: exact locally produced reference model (load only trusted local snapshots).\n- `inventory.json`: classes, relationships, screens, widgets, bindings.\n- `pipeline.log`, `results.json`: diagnostics and machine-readable results.\n\n'
     (out / 'README.md').write_text(report, encoding='utf-8')
     return result
 
@@ -521,8 +524,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, default=EXAMPLES / 'evaluation' / 'results.md')
     args = parser.parse_args()
-    with tempfile.TemporaryDirectory(prefix='retool-evaluation-') as workdir:
-        results = [run_example(number, 'current', output_root=workdir) for number in range(1, 6)]
+    # Each example writes to buml_parser_result/exampleN/ (not a temp dir), so
+    # the parsed BUML pivot (project.py, pivot.pkl, inventory.json) is kept
+    # on disk for manual comparison.
+    results = [run_example(number, 'current') for number in range(1, 6)]
     lines = ['# Retool parser element counts (RQ1 only)', '',
              'Base = original Retool CSV/GUI exports; BUML = parsed pivot (output of the '
              'migration parser). Counts use the current parser. This file does not measure '
@@ -563,8 +568,9 @@ def main():
               'is a generator question, not measured here - see `generator_results.md`.',
               '- This follows the parser measurement in paper section 6. It measures export structure, not '
               'live Retool execution or layout equivalence.', '',
-              'Regenerate: `python examples/retool/evaluate.py`. Only this table is saved; intermediate '
-              'models and exports are temporary.', '']
+              'Regenerate: `python examples/retool/evaluate.py`. This table is saved here; each '
+              'example\'s own parsed BUML pivot is kept under '
+              '`buml_parser_result/exampleN/` for manual comparison.', '']
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text('\n'.join(lines), encoding='utf-8')
     print(f'Saved counts for five examples to {args.output}')

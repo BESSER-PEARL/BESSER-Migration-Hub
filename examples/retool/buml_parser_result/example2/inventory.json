@@ -1,0 +1,219 @@
+{
+  "counts": {
+    "Entities": 1,
+    "Attributes": 9,
+    "Associations": 0,
+    "Multiplicities": 0,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 4,
+    "Bound entities": 1,
+    "Buttons": 1,
+    "Action types": 0,
+    "Navigation": 0,
+    "Forms": 1,
+    "Labels": 1,
+    "DataLists": 1,
+    "DataSources": 1,
+    "Input fields": 6
+  },
+  "classes": [
+    {
+      "name": "Inventory",
+      "attributes": [
+        {
+          "name": "description",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        },
+        {
+          "name": "image_url",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "latitude",
+          "type": "float",
+          "id": false
+        },
+        {
+          "name": "location",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "longitude",
+          "type": "float",
+          "id": false
+        },
+        {
+          "name": "quantity",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "replenish",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "sku",
+          "type": "str",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [],
+  "screens": [
+    {
+      "module": "example2",
+      "name": "addInventory",
+      "main": true
+    },
+    {
+      "module": "example2",
+      "name": "inventory",
+      "main": true
+    },
+    {
+      "module": "example2",
+      "name": "inventory_local",
+      "main": true
+    },
+    {
+      "module": "example2",
+      "name": "inventory_vendor",
+      "main": true
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "addInventory",
+      "name": "containerTitle1",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Add inventory"
+    },
+    {
+      "screen": "addInventory",
+      "name": "form1",
+      "kind": "Form",
+      "events": [],
+      "title": "#### Inventory item",
+      "submit_label": "Submit",
+      "fields": [
+        "description",
+        "image_url",
+        "location",
+        "quantity",
+        "replenish",
+        "sku"
+      ],
+      "field_details": [
+        {
+          "name": "description",
+          "type": "TextArea",
+          "label": "Description",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "image_url",
+          "type": "Text",
+          "label": "Image URL",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "location",
+          "type": "Dropdown",
+          "label": "Location",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "quantity",
+          "type": "Number",
+          "label": "Quantity",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "replenish",
+          "type": "Number",
+          "label": "Replenish",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "sku",
+          "type": "TextArea",
+          "label": "SKU",
+          "default": null,
+          "required": true,
+          "options": []
+        }
+      ],
+      "binding": "Inventory"
+    },
+    {
+      "screen": "addInventory",
+      "name": "formTitle1",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Inventory item"
+    },
+    {
+      "screen": "inventory_local",
+      "name": "inventoryTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "inventory",
+          "fields": [
+            "id",
+            "sku",
+            "description",
+            "quantity",
+            "replenish",
+            "location",
+            "latitude",
+            "longitude",
+            "image_url"
+          ]
+        }
+      ],
+      "binding": "Inventory"
+    },
+    {
+      "screen": "inventory_vendor",
+      "name": "localInventoryChart",
+      "kind": "BarChart",
+      "events": []
+    },
+    {
+      "screen": "inventory_vendor",
+      "name": "vendorInventoryChart",
+      "kind": "BarChart",
+      "events": []
+    }
+  ],
+  "bound_entities": [
+    "Inventory"
+  ],
+  "action_types": [],
+  "native_events": 0
+}

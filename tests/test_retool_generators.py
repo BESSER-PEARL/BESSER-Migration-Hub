@@ -24,10 +24,11 @@ from migrator.parsers.retool.retool_csv_parser import retool_csv_to_buml
 from migrator.parsers.retool.retool_rsx_parser import retool_rsx_to_gui
 
 EXAMPLES = Path(__file__).resolve().parents[1] / 'examples' / 'retool'
+BASE_EXAMPLES = EXAMPLES / 'base_examples'
 
 
 def example(number):
-    root = EXAMPLES / f'example{number}'
+    root = BASE_EXAMPLES / f'example{number}'
     data = next(p for p in root.iterdir() if p.name.lower() == 'data')
     source = next(p for p in root.iterdir() if p.name.lower() == 'gui')
     domain = retool_csv_to_buml(str(data), rsx_dir=str(source))
@@ -267,7 +268,7 @@ def test_example_script_exports_original_records(number, tmp_path):
                              '--output', str(tmp_path)], capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert (tmp_path / f'example{number}.zip').exists()
-    data = next(p for p in (EXAMPLES / f'example{number}').iterdir() if p.name.lower() == 'data')
+    data = next(p for p in (BASE_EXAMPLES / f'example{number}').iterdir() if p.name.lower() == 'data')
     for original in data.glob('*.csv'):
         with original.open(encoding='utf-8-sig', newline='') as fh:
             expected = list(csv.DictReader(fh))

@@ -1,0 +1,13 @@
+Parsing 1 CSV file(s) in: DATA
+  Class 'Inventory': ['description', 'id', 'image_url', 'latitude', 'location', 'longitude', 'quantity', 'replenish', 'sku']
+  Building 0 association(s) from FK columns...
+  Total: 1 class(es), 0 association(s)
+Parsing RSX export: GUI
+  Screen 'addInventory' | elements=3
+  Screen 'inventory_vendor' | elements=2
+  Screen 'inventory_local' | elements=1
+  Screen 'inventory' | elements=0
+  Total: 4 screen(s) extracted from RSX
+BUML model saved to C:\Users\conrardy\Desktop\git\BESSER-Migration-Hub\examples\retool\buml_parser_result\example2\domain_model.py
+BUML model saved to C:\Users\conrardy\Desktop\git\BESSER-Migration-Hub\examples\retool\buml_parser_result\example2\gui_model.py
+GUI model code saved to C:\Users\conrardy\Desktop\git\BESSER-Migration-Hub\examples\retool\buml_parser_result\example2\gui_model.py

@@ -1,0 +1,44 @@
+{
+  "Add_Comment": {
+    "row": 0,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Cancel_2": {
+    "row": 2,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Create": {
+    "row": 4,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Delete": {
+    "row": 6,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Get_Next_Rowid": {
+    "row": 8,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Get_Previous_Rowid": {
+    "row": 10,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  },
+  "Save_2": {
+    "row": 12,
+    "col": 0,
+    "height": 2,
+    "width": 12
+  }
+}

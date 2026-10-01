@@ -1,2 +1,0 @@
-id,comm,empno,ename,flex1,flex2,flex3,flex4,hiredate,job,notes,onleave,rating,sal,ebademoigemp_mgr_id,ebademoigdept_id
-1,sample_comm,sample_empno,sample_ename,sample_flex1,sample_flex2,sample_flex3,sample_flex4,2024-01-01,sample_job,sample_notes,sample_onleave,sample_rating,sample_sal,0,0

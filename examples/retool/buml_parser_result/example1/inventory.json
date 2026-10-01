@@ -1,0 +1,968 @@
+{
+  "counts": {
+    "Entities": 3,
+    "Attributes": 14,
+    "Associations": 2,
+    "Multiplicities": 4,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 10,
+    "Bound entities": 3,
+    "Buttons": 11,
+    "Action types": 4,
+    "Navigation": 0,
+    "Forms": 3,
+    "Labels": 11,
+    "DataLists": 8,
+    "DataSources": 8,
+    "Input fields": 32
+  },
+  "classes": [
+    {
+      "name": "Books",
+      "attributes": [
+        {
+          "name": "author",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "bookshelf",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "category",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "cover_image",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        },
+        {
+          "name": "isbn",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "price",
+          "type": "float",
+          "id": false
+        },
+        {
+          "name": "quantity_in_stock",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "title",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "DiscountCodes",
+      "attributes": [
+        {
+          "name": "discount_code",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "discount_percent",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "int",
+          "id": true
+        },
+        {
+          "name": "total_amount",
+          "type": "float",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "name": "Orders_Books",
+      "ends": [
+        {
+          "name": "book",
+          "type": "Books",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        },
+        {
+          "name": "orders",
+          "type": "Orders",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        }
+      ]
+    },
+    {
+      "name": "Orders_DiscountCodes",
+      "ends": [
+        {
+          "name": "discount_code",
+          "type": "DiscountCodes",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        },
+        {
+          "name": "orders",
+          "type": "Orders",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        }
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "module": "example1",
+      "name": "Books",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Books_Add_Books",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Books_Search_Store_Inventory",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Discount_Codes",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Inventory_Report",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Orders",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "Sales_Reports",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "checkoutModal",
+      "main": false
+    },
+    {
+      "module": "example1",
+      "name": "example1_Main",
+      "main": true
+    },
+    {
+      "module": "example1",
+      "name": "modal1",
+      "main": false
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "Books_Add_Books",
+      "name": "button9",
+      "kind": "Button",
+      "events": [],
+      "label": "Search Internet",
+      "action_type": "RunMethod",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Books_Add_Books",
+      "name": "onlineBookSearchResultsTable_Add_to_Inventory",
+      "kind": "Button",
+      "events": [],
+      "label": "Add to Inventory",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Books_Add_Books",
+      "name": "onlineBookSearchResultsTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "onlineBookSearchResults",
+          "fields": [
+            "score",
+            "title",
+            "author_name",
+            "edition_count",
+            "first_publish_year",
+            "isbn",
+            "cover_i",
+            "ia",
+            "subject",
+            "edition_key"
+          ]
+        }
+      ]
+    },
+    {
+      "screen": "Books_Add_Books",
+      "name": "searchBookOnlineTextInput",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "searchBookOnlineTextInput",
+        "type": "Text",
+        "label": "Search by title, author, category, ISBN",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "booksInventoryTable_Checkout",
+      "kind": "Button",
+      "events": [],
+      "label": "Checkout",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "booksInventoryTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "books",
+          "fields": [
+            "title",
+            "quantity_in_stock",
+            "book_id",
+            "isbn",
+            "author",
+            "category",
+            "price",
+            "cover_image",
+            "bookshelf",
+            "created_at",
+            "last_updated_at"
+          ]
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "button10",
+      "kind": "Button",
+      "events": [],
+      "label": "Refresh Table ({{booksInventoryTable.data.title.length}} Records)",
+      "action_type": "RunMethod",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "button8",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete Book",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "containerTitle1",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Store Inventory"
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "form5",
+      "kind": "Form",
+      "events": [],
+      "title": "#### {{booksInventoryTable.selectedRow.data.title}}",
+      "submit_label": "Save",
+      "fields": [
+        "author",
+        "book_id",
+        "bookshelf",
+        "category",
+        "cover_image",
+        "isbn",
+        "price",
+        "quantity_in_stock",
+        "title"
+      ],
+      "field_details": [
+        {
+          "name": "author",
+          "type": "Text",
+          "label": "Author",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "book_id",
+          "type": "Text",
+          "label": "Book ID",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "bookshelf",
+          "type": "Text",
+          "label": "Bookshelf",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "category",
+          "type": "Dropdown",
+          "label": "Category",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "cover_image",
+          "type": "Text",
+          "label": "Cover image",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "isbn",
+          "type": "Text",
+          "label": "Isbn",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "price",
+          "type": "Number",
+          "label": "Price",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "quantity_in_stock",
+          "type": "Number",
+          "label": "Quantity in stock",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "title",
+          "type": "Text",
+          "label": "Title",
+          "default": null,
+          "required": true,
+          "options": []
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "formTitle6",
+      "kind": "Text",
+      "events": [],
+      "content": "#### {{booksInventoryTable.selectedRow.data.title}}"
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "image3",
+      "kind": "Image",
+      "events": []
+    },
+    {
+      "screen": "Books_Search_Store_Inventory",
+      "name": "searchInventoryTextInput",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "searchInventoryTextInput",
+        "type": "Text",
+        "label": "Search by title, author, category, ISBN",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "Discount_Codes",
+      "name": "discountCodesTable_Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Discount_Codes",
+      "name": "discountCodesTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "discount_codes",
+          "fields": [
+            "discount_code",
+            "discount_percent",
+            "id"
+          ]
+        }
+      ],
+      "binding": "DiscountCodes"
+    },
+    {
+      "screen": "Discount_Codes",
+      "name": "form3",
+      "kind": "Form",
+      "events": [],
+      "title": "#### Form title",
+      "submit_label": "Submit",
+      "fields": [
+        "discount_code",
+        "discount_percent",
+        "expiration_date",
+        "is_active"
+      ],
+      "field_details": [
+        {
+          "name": "discount_code",
+          "type": "Text",
+          "label": "Discount code",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "discount_percent",
+          "type": "Number",
+          "label": "Discount percent",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "expiration_date",
+          "type": "Date",
+          "label": "Expiration date",
+          "default": "{{ new Date() }}",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "is_active",
+          "type": "Checkbox",
+          "label": "Is active",
+          "default": null,
+          "required": false,
+          "options": []
+        }
+      ],
+      "binding": "DiscountCodes"
+    },
+    {
+      "screen": "Discount_Codes",
+      "name": "formTitle4",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Form title"
+    },
+    {
+      "screen": "Inventory_Report",
+      "name": "table2_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "books",
+          "fields": [
+            "author",
+            "bookshelf",
+            "category",
+            "cover_image",
+            "id",
+            "isbn",
+            "price",
+            "quantity_in_stock",
+            "title"
+          ]
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Inventory_Report",
+      "name": "table3_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "books",
+          "fields": [
+            "author",
+            "bookshelf",
+            "category",
+            "cover_image",
+            "id",
+            "isbn",
+            "price",
+            "quantity_in_stock",
+            "title"
+          ]
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Inventory_Report",
+      "name": "text7",
+      "kind": "Text",
+      "events": [],
+      "content": "## In Stock"
+    },
+    {
+      "screen": "Inventory_Report",
+      "name": "text8",
+      "kind": "Text",
+      "events": [],
+      "content": "## Out Of Stock"
+    },
+    {
+      "screen": "Orders",
+      "name": "ordersTable_Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Orders",
+      "name": "ordersTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "books",
+          "fields": [
+            "order_id",
+            "book_id",
+            "isbn",
+            "title",
+            "price",
+            "category",
+            "author",
+            "cover_image",
+            "bookshelf",
+            "quantity_in_stock",
+            "created_at",
+            "last_updated_at",
+            "total_amount",
+            "discount_code_id",
+            "discount_code",
+            "discount_percent",
+            "order_date",
+            "expiration_date",
+            "is_active"
+          ]
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "PopularBooksTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "books",
+          "fields": [
+            "title",
+            "author",
+            "total_sales",
+            "discount_code",
+            "discount_percent",
+            "total_books_sold"
+          ]
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "chart1",
+      "kind": "BarChart",
+      "events": [],
+      "binding": "Orders"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "chart2",
+      "kind": "PieChart",
+      "events": [],
+      "binding": "Books"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "chart3",
+      "kind": "BarChart",
+      "events": [],
+      "binding": "Orders"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "chart4",
+      "kind": "BarChart",
+      "events": [],
+      "binding": "Books"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "reportDateRange",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "reportDateRange",
+        "type": "Dropdown",
+        "label": "Data Date Range",
+        "default": "24 hours",
+        "required": false,
+        "options": [
+          {
+            "label": "24 hours",
+            "value": "24 hours"
+          },
+          {
+            "label": "7 days",
+            "value": "7 days"
+          },
+          {
+            "label": "30 days",
+            "value": "30 days"
+          }
+        ]
+      }
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "table1_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "orders",
+          "fields": [
+            "id",
+            "total_amount"
+          ]
+        }
+      ],
+      "binding": "Orders"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "text4",
+      "kind": "Text",
+      "events": [],
+      "content": "## Overview Sales Report"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "text5",
+      "kind": "Text",
+      "events": [],
+      "content": "## Top Selling Books"
+    },
+    {
+      "screen": "Sales_Reports",
+      "name": "text6",
+      "kind": "Text",
+      "events": [],
+      "content": "## Discount Code Report"
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "button11",
+      "kind": "Button",
+      "events": [],
+      "label": "Checkout",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "image4",
+      "kind": "Image",
+      "events": []
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "select10",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "select10",
+        "type": "Dropdown",
+        "label": "Discount Code",
+        "default": null,
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "text2",
+      "kind": "Text",
+      "events": [],
+      "content": "#### {{booksInventoryTable.selectedRow.data.title}}"
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "text3",
+      "kind": "Text",
+      "events": [],
+      "content": "###### by {{booksInventoryTable.selectedRow.data.author}}"
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "textInput30",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "textInput30",
+        "type": "Text",
+        "label": "Price",
+        "default": "{{booksInventoryTable.selectedRow.data.price}}",
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "textInput31",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "textInput31",
+        "type": "Text",
+        "label": "Discount Percent",
+        "default": "{{getDiscountPercent.data.discount_percent['0']*100}}",
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "textInput32",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "textInput32",
+        "type": "Text",
+        "label": "Total",
+        "default": "{{calculateCheckoutTotal.value}}",
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "checkoutModal",
+      "name": "textInput33",
+      "kind": "InputField",
+      "events": [],
+      "field_details": {
+        "name": "textInput33",
+        "type": "Text",
+        "label": "Discount Code ID",
+        "default": "{{getDiscountPercent.data.discount_code_id['0']}}",
+        "required": false,
+        "options": []
+      }
+    },
+    {
+      "screen": "example1_Main",
+      "name": "text1",
+      "kind": "Text",
+      "events": [],
+      "content": "## New York's Best Small Bookstore"
+    },
+    {
+      "screen": "modal1",
+      "name": "form4",
+      "kind": "Form",
+      "events": [],
+      "title": "#### {{onlineBookSearchResultsTable.selectedRow.data.title}} by {{onlineBookSearchResultsTable.selectedRow.data.author_name}}",
+      "submit_label": "Submit",
+      "fields": [
+        "author",
+        "book_id",
+        "bookshelf",
+        "category",
+        "cover_image",
+        "created_at",
+        "isbn",
+        "last_updated_at",
+        "price",
+        "quantity_in_stock",
+        "title"
+      ],
+      "field_details": [
+        {
+          "name": "author",
+          "type": "Text",
+          "label": "Author",
+          "default": "{{onlineBookSearchResultsTable.selectedRow.data.author_name['0']}}",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "book_id",
+          "type": "Text",
+          "label": "Book ID",
+          "default": "{{formatDataAsArray(getBooksDataForModal.data).length + 1}} ",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "bookshelf",
+          "type": "Text",
+          "label": "Bookshelf",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "category",
+          "type": "Dropdown",
+          "label": "Category",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "cover_image",
+          "type": "Text",
+          "label": "Cover image",
+          "default": "https://covers.openlibrary.org/b/id/{{onlineBookSearchResultsTable.selectedRow.data.cover_i}}.jpg",
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "created_at",
+          "type": "DateTime",
+          "label": "Created at",
+          "default": "{{ new Date() }}",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "isbn",
+          "type": "Dropdown",
+          "label": "ISBN",
+          "default": null,
+          "required": false,
+          "options": []
+        },
+        {
+          "name": "last_updated_at",
+          "type": "DateTime",
+          "label": "Last updated at",
+          "default": "{{ new Date() }}",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "price",
+          "type": "Number",
+          "label": "Price",
+          "default": "",
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "quantity_in_stock",
+          "type": "Number",
+          "label": "Quantity in stock",
+          "default": null,
+          "required": true,
+          "options": []
+        },
+        {
+          "name": "title",
+          "type": "Text",
+          "label": "Title",
+          "default": "{{onlineBookSearchResultsTable.selectedRow.data.title}}",
+          "required": true,
+          "options": []
+        }
+      ],
+      "binding": "Books"
+    },
+    {
+      "screen": "modal1",
+      "name": "formTitle5",
+      "kind": "Text",
+      "events": [],
+      "content": "#### {{onlineBookSearchResultsTable.selectedRow.data.title}} by {{onlineBookSearchResultsTable.selectedRow.data.author_name}}"
+    },
+    {
+      "screen": "modal1",
+      "name": "image2",
+      "kind": "Image",
+      "events": []
+    }
+  ],
+  "bound_entities": [
+    "Books",
+    "DiscountCodes",
+    "Orders"
+  ],
+  "action_types": [
+    "Add",
+    "Delete",
+    "RunMethod",
+    "Save"
+  ],
+  "native_events": 0
+}

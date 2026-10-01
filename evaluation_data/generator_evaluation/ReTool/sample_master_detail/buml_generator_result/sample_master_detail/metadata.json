@@ -1,0 +1,53 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "ed551c49-86f2-50ba-a679-1cbf871b807c",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Application_Theme_Style",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Application_Theme_Style": {
+          "array": []
+        },
+        "Eba_demo_md_projects_Form_page_00049": {
+          "array": []
+        },
+        "Login_Page": {
+          "array": []
+        },
+        "Manage_Sample_Data": {
+          "array": []
+        },
+        "Preferences": {
+          "array": []
+        },
+        "Report_and_Marquee_Marquee": {
+          "array": []
+        },
+        "Report_and_Marquee_Report": {
+          "array": []
+        },
+        "Side_by_Side": {
+          "array": []
+        },
+        "Stacked": {
+          "array": []
+        },
+        "Stacked_with_Sub_Detail": {
+          "array": []
+        },
+        "Task_Details": {
+          "array": []
+        },
+        "Activity_Calendar": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        }
+      }
+    }
+  }
+}

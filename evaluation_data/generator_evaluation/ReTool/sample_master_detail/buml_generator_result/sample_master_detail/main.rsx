@@ -1,0 +1,32 @@
+<App >
+<Include src="./functions.rsx" />
+<Include src="./src/Application_Theme_Style.rsx" />
+<Include src="./src/Eba_demo_md_projects_Form_page_00049.rsx" />
+<Include src="./src/Login_Page.rsx" />
+<Include src="./src/Manage_Sample_Data.rsx" />
+<Include src="./src/Preferences.rsx" />
+<Include src="./src/Report_and_Marquee_Marquee.rsx" />
+<Include src="./src/Report_and_Marquee_Report.rsx" />
+<Include src="./src/Side_by_Side.rsx" />
+<Include src="./src/Stacked.rsx" />
+<Include src="./src/Stacked_with_Sub_Detail.rsx" />
+<Include src="./src/Task_Details.rsx" />
+<Include src="./src/Activity_Calendar.rsx" />
+<Include src="./src/Administration.rsx" />
+<Include src="./src/Eba_demo_md_comments_Form.rsx" />
+<Include src="./src/Eba_demo_md_comments_Form_page_00019.rsx" />
+<Include src="./src/Eba_demo_md_milestones_Form.rsx" />
+<Include src="./src/Eba_demo_md_milestones_Form_page_00016.rsx" />
+<Include src="./src/Eba_demo_md_projects_Form.rsx" />
+<Include src="./src/Eba_demo_md_projects_Form_page_00010.rsx" />
+<Include src="./src/Eba_demo_md_task_links_Form.rsx" />
+<Include src="./src/Eba_demo_md_task_todos_Form.rsx" />
+<Include src="./src/Eba_demo_md_tasks_Form.rsx" />
+<Include src="./src/Eba_demo_md_tasks_Form_page_00018.rsx" />
+<Include src="./src/Feedback_Form.rsx" />
+<Include src="./src/Links_Form.rsx" />
+<Include src="./src/ToDos_Form.rsx" />
+<Include src="./src/Comments_Form.rsx" />
+<Include src="./src/Milestones_Form.rsx" />
+<Include src="./src/Tasks_Form.rsx" />
+</App>

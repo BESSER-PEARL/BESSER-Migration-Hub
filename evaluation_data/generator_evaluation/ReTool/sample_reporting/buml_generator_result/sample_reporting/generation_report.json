@@ -1,0 +1,36 @@
+{
+  "app": "sample_reporting",
+  "screens": [
+    "Application_Theme_Style",
+    "Classic_Report",
+    "Drill_Down_IG",
+    "Faceted_Search",
+    "Filtering",
+    "Interactive_Grid",
+    "Manage_Sample_Data",
+    "Non_Tabular_Templates",
+    "Soundex",
+    "Administration",
+    "Analytic_Function_Examples",
+    "Cards",
+    "Connect_By",
+    "Group_By_Clause",
+    "Help",
+    "Linking_to_Interactive_Grids",
+    "Pivot_Syntax",
+    "SQL_Examples",
+    "String_Functions",
+    "Use_Cases",
+    "Maintain_Project_Form"
+  ],
+  "resource_id": "2a86a318-80a0-4803-95d8-409396e41af2",
+  "warnings": [
+    "Button 'Cancel' has no executable action binding.",
+    "Button 'Save' has no executable action binding.",
+    "Button 'Reset_Report' has no executable action binding.",
+    "Button 'Reset' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Button 'Create' has no executable action binding.",
+    "Button 'Delete' has no executable action binding."
+  ]
+}

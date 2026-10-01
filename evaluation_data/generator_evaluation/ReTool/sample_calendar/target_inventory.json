@@ -1,0 +1,1723 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "eba_demo_cal_mysessions",
+        "columns": [
+          "id",
+          "end_date",
+          "row_version_number",
+          "session_type",
+          "speaker",
+          "start_date",
+          "status",
+          "title"
+        ],
+        "rows": 1,
+        "file": "eba_demo_cal_mysessions.csv"
+      },
+      {
+        "table": "eba_demo_cal_projects",
+        "columns": [
+          "id",
+          "assigned_to",
+          "budget",
+          "cost",
+          "end_date",
+          "project",
+          "row_version_number",
+          "start_date",
+          "status",
+          "task_name"
+        ],
+        "rows": 1,
+        "file": "eba_demo_cal_projects.csv"
+      },
+      {
+        "table": "eba_demo_cal_sessions",
+        "columns": [
+          "id",
+          "end_date",
+          "row_version_number",
+          "session_type",
+          "speaker",
+          "start_date",
+          "status",
+          "title"
+        ],
+        "rows": 1,
+        "file": "eba_demo_cal_sessions.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 3,
+      "Attributes": 26,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 33,
+      "Bound entities": 0,
+      "Buttons": 27,
+      "Action types": 5,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 14,
+      "DataLists": 1,
+      "DataSources": 1,
+      "Input fields": 0
+    },
+    "tag_counts": {
+      "App": 1,
+      "Body": 3,
+      "Button": 27,
+      "Frame": 30,
+      "GlobalFunctions": 1,
+      "ModalFrame": 3,
+      "Screen": 30,
+      "Table": 1
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App >",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions >",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "_P14_PROJECT_",
+          "title": "&P14_PROJECT."
+        },
+        "raw": "<Screen id=\"_P14_PROJECT_\" title=\"&amp;P14_PROJECT.\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/_P14_PROJECT_.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/_P14_PROJECT_.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/_P14_PROJECT_.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_2",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_2\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Data",
+          "text": "Reset_Data"
+        },
+        "raw": "<Button id=\"Reset_Data\" text=\"Reset_Data\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "View_Report",
+          "text": "View_Report"
+        },
+        "raw": "<Button id=\"View_Report\" text=\"View_Report\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style",
+          "title": "Application_Theme_Style"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style\" title=\"Application_Theme_Style\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_3",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_3\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save\" text=\"Save\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_Client_Events",
+          "title": "Calendar_Client_Events"
+        },
+        "raw": "<Screen id=\"Calendar_Client_Events\" title=\"Calendar_Client_Events\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_Client_Events.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Calendar_Client_Events.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_In_Database",
+          "text": "Save_In_Database"
+        },
+        "raw": "<Button id=\"Save_In_Database\" text=\"Save_In_Database\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Calendar_Client_Events.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Show_In_Calendar",
+          "text": "Show_In_Calendar"
+        },
+        "raw": "<Button id=\"Show_In_Calendar\" text=\"Show_In_Calendar\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Calendar_Client_Events.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Navigation",
+          "title": "Custom_Navigation"
+        },
+        "raw": "<Screen id=\"Custom_Navigation\" title=\"Custom_Navigation\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Next",
+          "text": "Next"
+        },
+        "raw": "<Button id=\"Next\" text=\"Next\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Prev",
+          "text": "Prev"
+        },
+        "raw": "<Button id=\"Prev\" text=\"Prev\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Today",
+          "text": "Today"
+        },
+        "raw": "<Button id=\"Today\" text=\"Today\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Report_List_page_00013",
+          "title": "Report_List_page_00013"
+        },
+        "raw": "<Screen id=\"Report_List_page_00013\" title=\"Report_List_page_00013\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Report_List_page_00013.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Report_List_page_00013.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "Report",
+          "showHeader": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Table id=\"Report\" showHeader={true} showFooter={true} data={[]}>",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Report_List_page_00013.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report\" text=\"Reset_Report\" />",
+        "line": 6,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Report_List_page_00013.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Schedule_Builder",
+          "title": "Schedule_Builder"
+        },
+        "raw": "<Screen id=\"Schedule_Builder\" title=\"Schedule_Builder\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Clear",
+          "text": "Clear"
+        },
+        "raw": "<Button id=\"Clear\" text=\"Clear\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_In_Database_2",
+          "text": "Save_In_Database"
+        },
+        "raw": "<Button id=\"Save_In_Database_2\" text=\"Save_In_Database\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Show_In_Calendar_2",
+          "text": "Show_In_Calendar"
+        },
+        "raw": "<Button id=\"Show_In_Calendar_2\" text=\"Show_In_Calendar\" />",
+        "line": 5,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Time_Line",
+          "title": "Time_Line"
+        },
+        "raw": "<Screen id=\"Time_Line\" title=\"Time_Line\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Time_Line.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Time_Line.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report_2",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report_2\" text=\"Reset_Report\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Time_Line.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration_page_00015",
+          "title": "Administration_page_00015"
+        },
+        "raw": "<Screen id=\"Administration_page_00015\" title=\"Administration_page_00015\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration_page_00015.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Administration_page_00015.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_Styling",
+          "title": "Calendar_Styling"
+        },
+        "raw": "<Screen id=\"Calendar_Styling\" title=\"Calendar_Styling\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_Styling.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Calendar_Styling.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_with_Report",
+          "title": "Calendar_with_Report"
+        },
+        "raw": "<Screen id=\"Calendar_with_Report\" title=\"Calendar_with_Report\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_with_Report.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Calendar_with_Report.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendars_and_Dynamic_Actions",
+          "title": "Calendars_and_Dynamic_Actions"
+        },
+        "raw": "<Screen id=\"Calendars_and_Dynamic_Actions\" title=\"Calendars_and_Dynamic_Actions\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendars_and_Dynamic_Actions.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Calendars_and_Dynamic_Actions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendars_and_Javascript",
+          "title": "Calendars_and_Javascript"
+        },
+        "raw": "<Screen id=\"Calendars_and_Javascript\" title=\"Calendars_and_Javascript\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendars_and_Javascript.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Calendars_and_Javascript.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Copy_Events_by_Click",
+          "title": "Copy_Events_by_Click"
+        },
+        "raw": "<Screen id=\"Copy_Events_by_Click\" title=\"Copy_Events_by_Click\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Copy_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Copy_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Create_Calendar_Events",
+          "title": "Create_Calendar_Events"
+        },
+        "raw": "<Screen id=\"Create_Calendar_Events\" title=\"Create_Calendar_Events\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Create_Calendar_Events.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Create_Calendar_Events.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Calendar_Initialization",
+          "title": "Custom_Calendar_Initialization"
+        },
+        "raw": "<Screen id=\"Custom_Calendar_Initialization\" title=\"Custom_Calendar_Initialization\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Calendar_Initialization.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Custom_Calendar_Initialization.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Drag___Drop_Handlers",
+          "title": "Custom_Drag_&_Drop_Handlers"
+        },
+        "raw": "<Screen id=\"Custom_Drag___Drop_Handlers\" title=\"Custom_Drag_&amp;_Drop_Handlers\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Drag___Drop_Handlers.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Custom_Drag___Drop_Handlers.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Delete_Events_by_Click",
+          "title": "Delete_Events_by_Click"
+        },
+        "raw": "<Screen id=\"Delete_Events_by_Click\" title=\"Delete_Events_by_Click\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Delete_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Delete_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Faceted_Search__Projects",
+          "title": "Faceted_Search:_Projects"
+        },
+        "raw": "<Screen id=\"Faceted_Search__Projects\" title=\"Faceted_Search:_Projects\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Faceted_Search__Projects.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Faceted_Search__Projects.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "FullCalendar_API_initialization",
+          "title": "FullCalendar_API_initialization"
+        },
+        "raw": "<Screen id=\"FullCalendar_API_initialization\" title=\"FullCalendar_API_initialization\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/FullCalendar_API_initialization.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/FullCalendar_API_initialization.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={20}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Monthly_Calendar__Projects",
+          "title": "Monthly_Calendar:_Projects"
+        },
+        "raw": "<Screen id=\"Monthly_Calendar__Projects\" title=\"Monthly_Calendar:_Projects\" _order={21}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Monthly_Calendar__Projects.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Monthly_Calendar__Projects.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Query_Calendar_Status",
+          "title": "Query_Calendar_Status"
+        },
+        "raw": "<Screen id=\"Query_Calendar_Status\" title=\"Query_Calendar_Status\" _order={22}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Query_Calendar_Status.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Query_Calendar_Status.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Standard_Calendars",
+          "title": "Standard_Calendars"
+        },
+        "raw": "<Screen id=\"Standard_Calendars\" title=\"Standard_Calendars\" _order={23}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Standard_Calendars.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Standard_Calendars.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar__Conference",
+          "title": "Week_Calendar:_Conference"
+        },
+        "raw": "<Screen id=\"Week_Calendar__Conference\" title=\"Week_Calendar:_Conference\" _order={24}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar__Conference.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Week_Calendar__Conference.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar__Conference_page_00091",
+          "title": "Week_Calendar:_Conference_page_00091"
+        },
+        "raw": "<Screen id=\"Week_Calendar__Conference_page_00091\" title=\"Week_Calendar:_Conference_page_00091\" _order={25}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar__Conference_page_00091.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Week_Calendar__Conference_page_00091.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar_with_Icons",
+          "title": "Week_Calendar_with_Icons"
+        },
+        "raw": "<Screen id=\"Week_Calendar_with_Icons\" title=\"Week_Calendar_with_Icons\" _order={26}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar_with_Icons.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Week_Calendar_with_Icons.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Drag___Drop",
+          "title": "Weekly_Calendar:_Drag_&_Drop"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Drag___Drop\" title=\"Weekly_Calendar:_Drag_&amp;_Drop\" _order={27}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Drag___Drop.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Weekly_Calendar__Drag___Drop.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Edit_Sessions",
+          "title": "Weekly_Calendar:_Edit_Sessions"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Edit_Sessions\" title=\"Weekly_Calendar:_Edit_Sessions\" _order={28}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Edit_Sessions.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Weekly_Calendar__Edit_Sessions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Time_format",
+          "title": "Weekly_Calendar:_Time_format"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Time_format\" title=\"Weekly_Calendar:_Time_format\" _order={29}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Time_format.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Weekly_Calendar__Time_format.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Edit_Calendar_Entry_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Edit_Calendar_Entry_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 2,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_4",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_4\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Create",
+          "text": "Create"
+        },
+        "raw": "<Button id=\"Create\" text=\"Create\" />",
+        "line": 4,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_2",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save_2\" text=\"Save\" />",
+        "line": 5,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Edit_Session_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Edit_Session_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 2,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_5",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_5\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Create_2",
+          "text": "Create"
+        },
+        "raw": "<Button id=\"Create_2\" text=\"Create\" />",
+        "line": 4,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Delete",
+          "text": "Delete"
+        },
+        "raw": "<Button id=\"Delete\" text=\"Delete\" />",
+        "line": 5,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_3",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save_3\" text=\"Save\" />",
+        "line": 6,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Project_Detail_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Project_Detail_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Project_Detail_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 2,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/Project_Detail_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_6",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_6\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Project_Detail_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Create_3",
+          "text": "Create"
+        },
+        "raw": "<Button id=\"Create_3\" text=\"Create\" />",
+        "line": 4,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Project_Detail_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Delete_2",
+          "text": "Delete"
+        },
+        "raw": "<Button id=\"Delete_2\" text=\"Delete\" />",
+        "line": 5,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Project_Detail_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_4",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save_4\" text=\"Save\" />",
+        "line": 6,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Project_Detail_Form.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "_P14_PROJECT_",
+          "title": "&P14_PROJECT."
+        },
+        "raw": "<Screen id=\"_P14_PROJECT_\" title=\"&amp;P14_PROJECT.\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/_P14_PROJECT_.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style",
+          "title": "Application_Theme_Style"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style\" title=\"Application_Theme_Style\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_Client_Events",
+          "title": "Calendar_Client_Events"
+        },
+        "raw": "<Screen id=\"Calendar_Client_Events\" title=\"Calendar_Client_Events\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_Client_Events.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Navigation",
+          "title": "Custom_Navigation"
+        },
+        "raw": "<Screen id=\"Custom_Navigation\" title=\"Custom_Navigation\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Navigation.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Report_List_page_00013",
+          "title": "Report_List_page_00013"
+        },
+        "raw": "<Screen id=\"Report_List_page_00013\" title=\"Report_List_page_00013\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Report_List_page_00013.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Schedule_Builder",
+          "title": "Schedule_Builder"
+        },
+        "raw": "<Screen id=\"Schedule_Builder\" title=\"Schedule_Builder\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Schedule_Builder.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Time_Line",
+          "title": "Time_Line"
+        },
+        "raw": "<Screen id=\"Time_Line\" title=\"Time_Line\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Time_Line.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration_page_00015",
+          "title": "Administration_page_00015"
+        },
+        "raw": "<Screen id=\"Administration_page_00015\" title=\"Administration_page_00015\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration_page_00015.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_Styling",
+          "title": "Calendar_Styling"
+        },
+        "raw": "<Screen id=\"Calendar_Styling\" title=\"Calendar_Styling\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_Styling.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendar_with_Report",
+          "title": "Calendar_with_Report"
+        },
+        "raw": "<Screen id=\"Calendar_with_Report\" title=\"Calendar_with_Report\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendar_with_Report.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendars_and_Dynamic_Actions",
+          "title": "Calendars_and_Dynamic_Actions"
+        },
+        "raw": "<Screen id=\"Calendars_and_Dynamic_Actions\" title=\"Calendars_and_Dynamic_Actions\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendars_and_Dynamic_Actions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Calendars_and_Javascript",
+          "title": "Calendars_and_Javascript"
+        },
+        "raw": "<Screen id=\"Calendars_and_Javascript\" title=\"Calendars_and_Javascript\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Calendars_and_Javascript.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Copy_Events_by_Click",
+          "title": "Copy_Events_by_Click"
+        },
+        "raw": "<Screen id=\"Copy_Events_by_Click\" title=\"Copy_Events_by_Click\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Copy_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Create_Calendar_Events",
+          "title": "Create_Calendar_Events"
+        },
+        "raw": "<Screen id=\"Create_Calendar_Events\" title=\"Create_Calendar_Events\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Create_Calendar_Events.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Calendar_Initialization",
+          "title": "Custom_Calendar_Initialization"
+        },
+        "raw": "<Screen id=\"Custom_Calendar_Initialization\" title=\"Custom_Calendar_Initialization\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Calendar_Initialization.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Custom_Drag___Drop_Handlers",
+          "title": "Custom_Drag_&_Drop_Handlers"
+        },
+        "raw": "<Screen id=\"Custom_Drag___Drop_Handlers\" title=\"Custom_Drag_&amp;_Drop_Handlers\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Custom_Drag___Drop_Handlers.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Delete_Events_by_Click",
+          "title": "Delete_Events_by_Click"
+        },
+        "raw": "<Screen id=\"Delete_Events_by_Click\" title=\"Delete_Events_by_Click\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Delete_Events_by_Click.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Faceted_Search__Projects",
+          "title": "Faceted_Search:_Projects"
+        },
+        "raw": "<Screen id=\"Faceted_Search__Projects\" title=\"Faceted_Search:_Projects\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Faceted_Search__Projects.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "FullCalendar_API_initialization",
+          "title": "FullCalendar_API_initialization"
+        },
+        "raw": "<Screen id=\"FullCalendar_API_initialization\" title=\"FullCalendar_API_initialization\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/FullCalendar_API_initialization.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={20}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Monthly_Calendar__Projects",
+          "title": "Monthly_Calendar:_Projects"
+        },
+        "raw": "<Screen id=\"Monthly_Calendar__Projects\" title=\"Monthly_Calendar:_Projects\" _order={21}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Monthly_Calendar__Projects.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Query_Calendar_Status",
+          "title": "Query_Calendar_Status"
+        },
+        "raw": "<Screen id=\"Query_Calendar_Status\" title=\"Query_Calendar_Status\" _order={22}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Query_Calendar_Status.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Standard_Calendars",
+          "title": "Standard_Calendars"
+        },
+        "raw": "<Screen id=\"Standard_Calendars\" title=\"Standard_Calendars\" _order={23}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Standard_Calendars.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar__Conference",
+          "title": "Week_Calendar:_Conference"
+        },
+        "raw": "<Screen id=\"Week_Calendar__Conference\" title=\"Week_Calendar:_Conference\" _order={24}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar__Conference.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar__Conference_page_00091",
+          "title": "Week_Calendar:_Conference_page_00091"
+        },
+        "raw": "<Screen id=\"Week_Calendar__Conference_page_00091\" title=\"Week_Calendar:_Conference_page_00091\" _order={25}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar__Conference_page_00091.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Week_Calendar_with_Icons",
+          "title": "Week_Calendar_with_Icons"
+        },
+        "raw": "<Screen id=\"Week_Calendar_with_Icons\" title=\"Week_Calendar_with_Icons\" _order={26}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Week_Calendar_with_Icons.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Drag___Drop",
+          "title": "Weekly_Calendar:_Drag_&_Drop"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Drag___Drop\" title=\"Weekly_Calendar:_Drag_&amp;_Drop\" _order={27}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Drag___Drop.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Edit_Sessions",
+          "title": "Weekly_Calendar:_Edit_Sessions"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Edit_Sessions\" title=\"Weekly_Calendar:_Edit_Sessions\" _order={28}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Edit_Sessions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Weekly_Calendar__Time_format",
+          "title": "Weekly_Calendar:_Time_format"
+        },
+        "raw": "<Screen id=\"Weekly_Calendar__Time_format\" title=\"Weekly_Calendar:_Time_format\" _order={29}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Weekly_Calendar__Time_format.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Edit_Calendar_Entry_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Edit_Calendar_Entry_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Calendar_Entry_Form.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Edit_Session_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Edit_Session_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Edit_Session_Form.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Project_Detail_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Project_Detail_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Project_Detail_Form.rsx"
+      }
+    ],
+    "navigation_evidence": [],
+    "bound_tables": [],
+    "sql_primary_tables": {},
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/_P14_PROJECT_.rsx",
+      "src/Administration.rsx",
+      "src/Application_Theme_Style.rsx",
+      "src/Calendar_Client_Events.rsx",
+      "src/Custom_Navigation.rsx",
+      "src/Report_List_page_00013.rsx",
+      "src/Schedule_Builder.rsx",
+      "src/Time_Line.rsx",
+      "src/Administration_page_00015.rsx",
+      "src/Calendar_Styling.rsx",
+      "src/Calendar_with_Report.rsx",
+      "src/Calendars_and_Dynamic_Actions.rsx",
+      "src/Calendars_and_Javascript.rsx",
+      "src/Copy_Events_by_Click.rsx",
+      "src/Create_Calendar_Events.rsx",
+      "src/Custom_Calendar_Initialization.rsx",
+      "src/Custom_Drag___Drop_Handlers.rsx",
+      "src/Delete_Events_by_Click.rsx",
+      "src/Faceted_Search__Projects.rsx",
+      "src/FullCalendar_API_initialization.rsx",
+      "src/Help.rsx",
+      "src/Monthly_Calendar__Projects.rsx",
+      "src/Query_Calendar_Status.rsx",
+      "src/Standard_Calendars.rsx",
+      "src/Week_Calendar__Conference.rsx",
+      "src/Week_Calendar__Conference_page_00091.rsx",
+      "src/Week_Calendar_with_Icons.rsx",
+      "src/Weekly_Calendar__Drag___Drop.rsx",
+      "src/Weekly_Calendar__Edit_Sessions.rsx",
+      "src/Weekly_Calendar__Time_format.rsx",
+      "src/Edit_Calendar_Entry_Form.rsx",
+      "src/Edit_Session_Form.rsx",
+      "src/Project_Detail_Form.rsx"
+    ],
+    "events": 0,
+    "unresolved_expression_references": []
+  }
+}

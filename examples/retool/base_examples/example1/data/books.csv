@@ -1,0 +1,21 @@
+id,isbn,title,author,category,price,cover_image,bookshelf,quantity_in_stock
+1,9780140569322,The Very Hungry Caterpillar,Eric Carle,Children,12.99,https://covers.openlibrary.org/b/isbn/9780140569322-L.jpg,Shelf A,25
+2,9780545480581,"Goodnight, Goodnight, Construction Site",Sherri Duskey Rinker,Children,9.99,https://covers.openlibrary.org/b/isbn/9780545480581-L.jpg,Shelf B,30
+3,9781782955030,Where the Wild Things Are,Maurice Sendak,Children,10.99,https://covers.openlibrary.org/b/isbn/9781782955030-L.jpg,Shelf C,20
+4,9780553508383,Pat the Bunny,Dorothy Kunhardt,Children,6.99,https://covers.openlibrary.org/b/isbn/9780553508383-L.jpg,Shelf D,15
+5,9780553508383,"Brown Bear, Brown Bear, What Do You See?",Bill Martin Jr.,Children,8.99,https://covers.openlibrary.org/b/isbn/9780553508383-L.jpg,Shelf A,10
+6,9781442433557,Strega Nona,Tomie dePaola,Children,15.99,https://covers.openlibrary.org/b/isbn/9781442433557-L.jpg,Shelf B,5
+7,9780008201517,The Cat in the Hat,Dr. Seuss,Children,9.99,https://covers.openlibrary.org/b/isbn/9780008201517-L.jpg,Shelf C,10
+8,9780008201470,Green Eggs and Ham,Dr. Seuss,Children,7.99,https://covers.openlibrary.org/b/isbn/9780008201470-L.jpg,Children,8
+9,9780060284510,The Giving Tree,Shel Silverstein,Children,16.99,https://covers.openlibrary.org/b/isbn/9780060284510-L.jpg,Shelf D,3
+10,9780008201494,One Fish Two Fish Red Fish Blue Fish,Dr. Seuss,Children,9.99,https://covers.openlibrary.org/b/isbn/9780008201494-L.jpg,Shelf A,12
+11,9780140501735,Corduroy,Don Freeman,Children,10.99,https://covers.openlibrary.org/b/isbn/9780140501735-L.jpg,Shelf B,18
+12,9780064440042,Little Bear,Else Holmelund Minarik,Children,4.99,https://covers.openlibrary.org/b/isbn/9780064440042-L.jpg,Shelf C,22
+13,9780593096000,The Little Engine That Could,Watty Piper,Children,7.99,https://covers.openlibrary.org/b/isbn/9780593096000-L.jpg,Shelf D,11
+14,9780395259399,Mike Mulligan and His Steam Shovel,Virginia Lee Burton,Children,12.99,https://covers.openlibrary.org/b/isbn/9780395259399-L.jpg,Shelf A,17
+15,9780060229351,Harold and the Purple Crayon,Crockett Johnson,Children,7.99,https://covers.openlibrary.org/b/isbn/9780060229351-L.jpg,Shelf B,9
+16,9780553538724,"Oh, the Places You'll Go!",Dr. Seuss,Children,18.99,https://covers.openlibrary.org/b/isbn/9780553538724-L.jpg,Shelf C,6
+17,9780394800295,Hop on Pop,Dr. Seuss,Children,6.99,https://covers.openlibrary.org/b/isbn/9780394800295-L.jpg,Shelf D,13
+18,9780201091472,Caps for Sale,Esphyr Slobodkina,Children,7.99,https://covers.openlibrary.org/b/isbn/9780201091472-L.jpg,Shelf A,14
+19,9780007355556,The Cat in the Hat Comes Back,Dr. Seuss,Children,8.99,https://covers.openlibrary.org/b/isbn/9780007355556-L.jpg,Shelf B,7
+20,9780763674489,Guess How Much I Love You,Sam McBratney,Children,8.99,https://covers.openlibrary.org/b/isbn/9780763674489-L.jpg,Shelf C,20

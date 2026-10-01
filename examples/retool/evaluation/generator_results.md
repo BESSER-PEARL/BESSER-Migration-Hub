@@ -92,11 +92,11 @@ Oracle BUML = independently-authored ground-truth model (`evaluation_data/BUML_g
 
 Dropped-screen notes (oracle authoring bug, not a generator defect - see `load_oracle` in `evaluate_generator.py`):
 
-- brookstrut: 17 dropped - Event_Log_List (DataList), Sales_by_Store_by_Week_List (DataList), Product_Availability_List (DataList), Transaction_Summary_by_Hour_List (DataList), Transaction_Summary_by_Minute_List (DataList), Sales_History_Generation_Log_List (DataList), Recent_Sales_List (DataList), Region_Stores_List (DataList), Generate_Transaction (Button), Sales_by_Product_and_Store_by_Week_List (DataList), Transaction_Log_List (DataList), Store_Regions_List (DataList), Sales_History_Interactive_Report_List (DataList), Configuration_Options_List (DataList), Page_Views_List (DataList), Products_List (DataList), Top_Users_List (DataList)
+- brookstrut: 17 dropped - Product_Availability_List (DataList), Transaction_Summary_by_Minute_List (DataList), Sales_History_Generation_Log_List (DataList), Recent_Sales_List (DataList), Sales_by_Product_and_Store_by_Week_List (DataList), Transaction_Log_List (DataList), Sales_by_Store_by_Week_List (DataList), Transaction_Summary_by_Hour_List (DataList), Store_Regions_List (DataList), Region_Stores_List (DataList), Configuration_Options_List (DataList), Sales_History_Interactive_Report_List (DataList), Page_Views_List (DataList), Products_List (DataList), Generate_Transaction (Button), Top_Users_List (DataList), Event_Log_List (DataList)
 - sample_calendar: 2 dropped - Report_List (DataList), Date_Reporting_List (DataList)
 - sample_interactive_grids: none
-- sample_master_detail: 3 dropped - Page_Views_List (DataList), Top_Users_List (DataList), Drill_Down_List (DataList)
-- sample_reporting: 18 dropped - RATIO_TO_REPORT_List (DataList), ROW_NUMBER_List (DataList), Linking_to_Interactive_Reports_List (DataList), CASE_Statement_List (DataList), Drill_Down_IR_List (DataList), Inline_Views_List (DataList), Top_N_Queries_List (DataList), Format_Masks_List (DataList), Report_from_Collection_List (DataList), LISTAGG_List (DataList), RANK_and_DENSE_RANK_List (DataList), Interactive_Report_List (DataList), Bind_Variables_List (DataList), Pipelined_Functions_List (DataList), Highlighting_List (DataList), Custom_Buttons_List (DataList), LEAD_and_LAG_List (DataList), Regular_Expressions_List (DataList)
+- sample_master_detail: 3 dropped - Top_Users_List (DataList), Drill_Down_List (DataList), Page_Views_List (DataList)
+- sample_reporting: 18 dropped - RANK_and_DENSE_RANK_List (DataList), Format_Masks_List (DataList), ROW_NUMBER_List (DataList), Bind_Variables_List (DataList), Top_N_Queries_List (DataList), Regular_Expressions_List (DataList), Report_from_Collection_List (DataList), CASE_Statement_List (DataList), Linking_to_Interactive_Reports_List (DataList), LEAD_and_LAG_List (DataList), LISTAGG_List (DataList), RATIO_TO_REPORT_List (DataList), Inline_Views_List (DataList), Custom_Buttons_List (DataList), Interactive_Report_List (DataList), Highlighting_List (DataList), Drill_Down_IR_List (DataList), Pipelined_Functions_List (DataList)
 
 Counting notes:
 
@@ -108,4 +108,4 @@ Counting notes:
 - Counting rules otherwise (implicit FK associations, synthetic primary keys, Form submit buttons, ID-derived captions) are identical to `evaluate.py` - the same `pivot_inventory`/`csv_inventory`/`audit_gui` functions are reused, not reimplemented, so the two reports are comparable.
 - See `evaluate.py`'s module docstring for why RQ1 (parser) and RQ2 (generator) are measured in separate scripts rather than chained together.
 
-Regenerate: `python examples/retool/evaluate_generator.py`. Only this table is saved; intermediate models and exports are temporary.
+Regenerate: `python examples/retool/evaluate_generator.py`. This table is saved here; each scenario's generated output is kept under `evaluation_data/generator_evaluation/ReTool/<scenario>/buml_generator_result/` for manual comparison.

@@ -1,0 +1,888 @@
+{
+  "model": "SampleMasterDetail",
+  "sample_data": true,
+  "tables": [
+    {
+      "name": "eba_demo_md_comments",
+      "entity": "EbaDemoMdComments",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "comment_text",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdprojects_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_projects",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_milestones",
+      "entity": "EbaDemoMdMilestones",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "due_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdprojects_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_projects",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_projects",
+      "entity": "EbaDemoMdProjects",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "completed_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdstatus_id",
+          "type": "int",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_status",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdteammembers_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_team_members",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_status",
+      "entity": "EbaDemoMdStatus",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": true,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "cd",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "display_order",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_task_links",
+      "entity": "EbaDemoMdTaskLinks",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "application_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "application_page",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "link_type",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "url",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdprojects_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_projects",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdtasks_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_tasks",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_task_todos",
+      "entity": "EbaDemoMdTaskTodos",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "is_complete_yn",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdprojects_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_projects",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdtasks_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_tasks",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdteammembers_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_team_members",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_tasks",
+      "entity": "EbaDemoMdTasks",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "description",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "end_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "is_complete_yn",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "start_date",
+          "type": "date",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "ebademomdmilestones_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_milestones",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdprojects_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_projects",
+            "column": "id"
+          }
+        },
+        {
+          "name": "ebademomdteammembers_id",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": {
+            "table": "eba_demo_md_team_members",
+            "column": "id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "eba_demo_md_team_members",
+      "entity": "EbaDemoMdTeamMembers",
+      "junction": false,
+      "columns": [
+        {
+          "name": "id",
+          "type": "str",
+          "primary_key": true,
+          "nullable": false,
+          "synthetic": false,
+          "unique": true,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "created_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "email",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "full_name",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "profile",
+          "type": "str",
+          "primary_key": false,
+          "nullable": true,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated",
+          "type": "datetime",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "updated_by",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        },
+        {
+          "name": "username",
+          "type": "str",
+          "primary_key": false,
+          "nullable": false,
+          "synthetic": false,
+          "unique": false,
+          "enum_values": null,
+          "references": null
+        }
+      ]
+    }
+  ]
+}

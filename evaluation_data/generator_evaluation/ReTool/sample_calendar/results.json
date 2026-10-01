@@ -1,0 +1,118 @@
+{
+  "scenario": "sample_calendar",
+  "generator": {
+    "Entities": {
+      "reference": 3,
+      "output": 3,
+      "percent": 100.0
+    },
+    "Attributes": {
+      "reference": 26,
+      "output": 26,
+      "percent": 100.0
+    },
+    "Associations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Multiplicities": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Generalizations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Enumerations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Modules": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Screens": {
+      "reference": 33,
+      "output": 33,
+      "percent": 100.0
+    },
+    "Bound entities": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Buttons": {
+      "reference": 27,
+      "output": 27,
+      "percent": 100.0
+    },
+    "Action types": {
+      "reference": 4,
+      "output": 5,
+      "percent": 125.0
+    },
+    "Navigation": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Forms": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Labels": {
+      "reference": 27,
+      "output": 27,
+      "percent": 100.0
+    },
+    "DataLists": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "DataSources": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Input fields": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    }
+  },
+  "dropped_screens": [
+    {
+      "module": "SampleCalendar",
+      "name": "Report_List",
+      "kind": "DataList"
+    },
+    {
+      "module": "SampleCalendar",
+      "name": "Date_Reporting_List",
+      "kind": "DataList"
+    }
+  ],
+  "warnings": [
+    "Button 'Cancel' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Button 'View_Report' has no executable action binding.",
+    "Button 'Save' has no executable action binding.",
+    "Button 'Save_In_Database' has no executable action binding.",
+    "Button 'Show_In_Calendar' has no executable action binding.",
+    "Button 'Next' has no executable action binding.",
+    "Button 'Prev' has no executable action binding.",
+    "Button 'Today' has no executable action binding.",
+    "Table 'Report_List' has no domain class; data binding needs manual wiring.",
+    "Button 'Reset_Report' has no executable action binding.",
+    "Button 'Clear' has no executable action binding.",
+    "Button 'Create' has no executable action binding.",
+    "Button 'Delete' has no executable action binding."
+  ]
+}

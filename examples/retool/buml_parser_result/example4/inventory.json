@@ -1,0 +1,202 @@
+{
+  "counts": {
+    "Entities": 2,
+    "Attributes": 6,
+    "Associations": 0,
+    "Multiplicities": 0,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 2,
+    "Bound entities": 2,
+    "Buttons": 1,
+    "Action types": 1,
+    "Navigation": 1,
+    "Forms": 0,
+    "Labels": 1,
+    "DataLists": 1,
+    "DataSources": 1,
+    "Input fields": 0
+  },
+  "classes": [
+    {
+      "name": "CategorySales",
+      "attributes": [
+        {
+          "name": "category",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "orders",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "revenue",
+          "type": "int",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "MonthlySales",
+      "attributes": [
+        {
+          "name": "month",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "month_number",
+          "type": "int",
+          "id": false
+        },
+        {
+          "name": "revenue",
+          "type": "int",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [],
+  "screens": [
+    {
+      "module": "example4",
+      "name": "example4_Main",
+      "main": true
+    },
+    {
+      "module": "example4",
+      "name": "setupGuideModal",
+      "main": false
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "example4_Main",
+      "name": "categoryChart",
+      "kind": "BarChart",
+      "events": [],
+      "binding": "CategorySales"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "categoryChartTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Revenue by Category"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "dataTableTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Raw Data"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "pageTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "### Sales Dashboard"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "revenueChart",
+      "kind": "LineChart",
+      "events": [],
+      "binding": "MonthlySales"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "revenueChartTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "#### Monthly Revenue"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "salesTable_List",
+      "kind": "DataList",
+      "events": [],
+      "sources": [
+        {
+          "name": "monthly_sales",
+          "fields": [
+            "month",
+            "revenue",
+            "orders",
+            "conversion"
+          ]
+        }
+      ],
+      "binding": "MonthlySales"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "setupGuideBtn",
+      "kind": "Button",
+      "events": [
+        {
+          "name": "setupGuideBtn_click_0",
+          "type": "OnClick",
+          "actions": [
+            {
+              "name": "setupGuideBtn_open_0",
+              "kind": "Transition",
+              "target": "setupGuideModal"
+            }
+          ]
+        }
+      ],
+      "label": "Setup Guide",
+      "action_type": "Navigate",
+      "synthetic_label": false
+    },
+    {
+      "screen": "example4_Main",
+      "name": "statConversion",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ Array.isArray(fetchSalesData.data) ? (fetchSalesData.data.reduce((sum, r) => sum + r.conversion, 0) / fetchSalesData.data.length).toFixed(1) : '3.2' }}%"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "statOrders",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.orders, 0).toLocaleString() : '1,847' }}"
+    },
+    {
+      "screen": "example4_Main",
+      "name": "statRevenue",
+      "kind": "Text",
+      "events": [],
+      "content": "${{ Array.isArray(fetchSalesData.data) ? fetchSalesData.data.reduce((sum, r) => sum + r.revenue, 0).toLocaleString() : '124,500' }}"
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideText",
+      "kind": "Text",
+      "events": [],
+      "content": "{{ 'Welcome! This app demonstrates **PlotlyChart** with Statistic KPIs and a data table.\\n\\nTo connect your real data source:\\n\\n1. Open the **fetchSalesData** and **fetchCategoryData** queries in the bottom panel and update the API URL — or replace them with a database query\\n2. Select each **PlotlyChart** component and update the **Data** and **Layout** JSON to map your fields\\n3. Update the **Statistic** component values to reference your query data\\n4. Remove the mock data fallback from the **salesTable** data property\\n5. Delete this Setup Guide modal and the Setup Guide button\\n\\nCharts use Plotly.js — see plotly.com/javascript for layout and trace options.' }}"
+    },
+    {
+      "screen": "setupGuideModal",
+      "name": "setupGuideTitle",
+      "kind": "Text",
+      "events": [],
+      "content": "## Setup Guide"
+    }
+  ],
+  "bound_entities": [
+    "CategorySales",
+    "MonthlySales"
+  ],
+  "action_types": [
+    "Navigate"
+  ],
+  "native_events": 1
+}

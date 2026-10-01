@@ -1,0 +1,3304 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "books",
+        "columns": [
+          "id",
+          "isbn",
+          "title",
+          "author",
+          "category",
+          "price",
+          "cover_image",
+          "bookshelf",
+          "quantity_in_stock"
+        ],
+        "rows": 20,
+        "file": "books.csv"
+      },
+      {
+        "table": "discount_codes",
+        "columns": [
+          "id",
+          "discount_code",
+          "discount_percent"
+        ],
+        "rows": 5,
+        "file": "discount_codes.csv"
+      },
+      {
+        "table": "orders",
+        "columns": [
+          "id",
+          "book_id",
+          "total_amount",
+          "discount_code_id"
+        ],
+        "rows": 10,
+        "file": "orders.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 3,
+      "Attributes": 14,
+      "Associations": 2,
+      "Multiplicities": 4,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 10,
+      "Bound entities": 3,
+      "Buttons": 11,
+      "Action types": 4,
+      "Navigation": 1,
+      "Forms": 3,
+      "Labels": 11,
+      "DataLists": 8,
+      "DataSources": 8,
+      "Input fields": 32
+    },
+    "tag_counts": {
+      "App": 1,
+      "AppStyles": 1,
+      "Body": 3,
+      "Button": 7,
+      "Checkbox": 1,
+      "Container": 3,
+      "Date": 1,
+      "DateTime": 2,
+      "Divider": 3,
+      "Event": 19,
+      "Folder": 5,
+      "Footer": 3,
+      "Form": 3,
+      "Frame": 2,
+      "Function": 2,
+      "GlobalFunctions": 1,
+      "Header": 6,
+      "Icon": 2,
+      "Image": 3,
+      "JavascriptQuery": 4,
+      "KeyValueMap": 1,
+      "Modal": 2,
+      "Navigation": 1,
+      "NumberInput": 5,
+      "Option": 12,
+      "PlotlyChart": 4,
+      "RESTQuery": 2,
+      "Select": 5,
+      "SqlQueryUnified": 22,
+      "TableLegacy": 8,
+      "Tabs": 2,
+      "Text": 12,
+      "TextInput": 18,
+      "View": 8
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App>",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions>",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Folder",
+        "attributes": {
+          "id": "books"
+        },
+        "raw": "<Folder id=\"books\">",
+        "line": 2,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "updateBook",
+          "actionType": "UPDATE_BY",
+          "changesetIsObject": "true",
+          "changesetObject": "{{form5.data}}",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "books",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"updateBook\"\n      actionType=\"UPDATE_BY\"\n      changeset={'[{\"key\":\"publisher\",\"value\":\"{{form1.data.publisher}}\"}]'}\n      changesetIsObject={true}\n      changesetObject=\"{{form5.data}}\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={\n        '[{\"key\":\"isbn\",\"value\":\"{{booksInventoryTable.selectedRow.data.isbn}}\",\"operation\":\"=\"}]'\n      }\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"books\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 3,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getBooksFromStock",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getBooksFromStock\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 24,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getBooksFromStock",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getBooksFromStock\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getBooksFromStock.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      resourceTypeOverride=\"\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 34,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "deleteBook",
+          "actionType": "DELETE_BY",
+          "confirmationMessage": "## Are you sure you want to delete the book {{booksInventoryTable.selectedRow.data.title}}?",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "requireConfirmation": "true",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "books",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"deleteBook\"\n      actionType=\"DELETE_BY\"\n      confirmationMessage=\"## Are you sure you want to delete the book {{booksInventoryTable.selectedRow.data.title}}?\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={\n        '[{\"key\":\"book_id\",\"value\":\"{{booksInventoryTable.selectedRow.data.book_id}}\",\"operation\":\"=\"}]'\n      }\n      requireConfirmation={true}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"books\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 48,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getBooksFromStock",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getBooksFromStock\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 68,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "RESTQuery",
+        "attributes": {
+          "id": "searchBookByBookName",
+          "enableTransformer": "true",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "query": "https://openlibrary.org/search.json?q={{searchBookOnlineTextInput.value}}&fields=title,author_name,isbn,cover_i,edition_count,edition_key,first_publish_year,score,subject,ia",
+          "resourceName": "REST-WithoutResource",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "transformer": ""
+        },
+        "raw": "<RESTQuery\n      id=\"searchBookByBookName\"\n      enableTransformer={true}\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query=\"https://openlibrary.org/search.json?q={{searchBookOnlineTextInput.value}}&fields=title,author_name,isbn,cover_i,edition_count,edition_key,first_publish_year,score,subject,ia\"\n      resourceName=\"REST-WithoutResource\"\n      resourceTypeOverride=\"\"\n      runWhenModelUpdates={false}\n      transformer=\"\"\n    />",
+        "line": 78,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Function",
+        "attributes": {
+          "id": "transformerSearchBooksByBookName"
+        },
+        "raw": "<Function\n      id=\"transformerSearchBooksByBookName\"\n      funcBody={include(\"./lib/transformerSearchBooksByBookName.js\", \"string\")}\n    />",
+        "line": 90,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getBooksDataForModal",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getBooksDataForModal\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getBooksDataForModal.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      resourceTypeOverride=\"\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 94,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "openAddBookModal",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceName": "JavascriptQuery",
+          "showSuccessToaster": "false",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<JavascriptQuery\n      id=\"openAddBookModal\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/openAddBookModal.js\", \"string\")}\n      resourceName=\"JavascriptQuery\"\n      showSuccessToaster={false}\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    />",
+        "line": 108,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "addBookFromModal",
+          "actionType": "INSERT",
+          "changesetIsObject": "true",
+          "changesetObject": "{{form4.data}}",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "books",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"addBookFromModal\"\n      actionType=\"INSERT\"\n      changeset={\n        '[{\"key\":\"title\",\"value\":\"Testing Book\"},{\"key\":\"publisher\",\"value\":\"Harper Collins\"},{\"key\":\"author\",\"value\":\"Test Author\"},{\"key\":\"category\",\"value\":\"Python\"},{\"key\":\"isbn\",\"value\":\"123\"},{\"key\":\"publication_date\",\"value\":\"Mar 19, 2023\"},{\"key\":\"ratings\",\"value\":\"4.0\"},{\"key\":\"price\",\"value\":\"12\"},{\"key\":\"quantity\",\"value\":\"10\"}]'\n      }\n      changesetIsObject={true}\n      changesetObject=\"{{form4.data}}\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"books\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 120,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getBooksFromStock",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getBooksFromStock\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 140,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "closeAddBookModal",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceName": "JavascriptQuery",
+          "showSuccessToaster": "false",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<JavascriptQuery\n      id=\"closeAddBookModal\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/closeAddBookModal.js\", \"string\")}\n      resourceName=\"JavascriptQuery\"\n      showSuccessToaster={false}\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    />",
+        "line": 150,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "RESTQuery",
+        "attributes": {
+          "id": "INACTIVE_getBookDetailsFromOpenLibrary",
+          "enableCaching": "true",
+          "enableTransformer": "true",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "query": "http://openlibrary.org/api/books?format=json&bibkeys=ISBN:{{booksInventoryTable.selectedRow.data.isbn}}&jscmd=data&type=/type/edition|/type/work",
+          "resourceName": "REST-WithoutResource",
+          "resourceTypeOverride": "",
+          "transformer": "return Object.entries(data)[0][1];"
+        },
+        "raw": "<RESTQuery\n      id=\"INACTIVE_getBookDetailsFromOpenLibrary\"\n      cacheKeyTtl={300}\n      enableCaching={true}\n      enableTransformer={true}\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query=\"http://openlibrary.org/api/books?format=json&bibkeys=ISBN:{{booksInventoryTable.selectedRow.data.isbn}}&jscmd=data&type=/type/edition|/type/work\"\n      resourceName=\"REST-WithoutResource\"\n      resourceTypeOverride=\"\"\n      transformer=\"return Object.entries(data)[0][1];\"\n    />",
+        "line": 162,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "openCheckoutModal",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceName": "JavascriptQuery",
+          "showSuccessToaster": "false",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<JavascriptQuery\n      id=\"openCheckoutModal\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/openCheckoutModal.js\", \"string\")}\n      resourceName=\"JavascriptQuery\"\n      showSuccessToaster={false}\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    />",
+        "line": 175,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "closeCheckoutModal",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceName": "JavascriptQuery",
+          "showSuccessToaster": "false",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<JavascriptQuery\n      id=\"closeCheckoutModal\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/closeCheckoutModal.js\", \"string\")}\n      resourceName=\"JavascriptQuery\"\n      showSuccessToaster={false}\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    />",
+        "line": 187,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Folder",
+        "attributes": {
+          "id": "discountCodes"
+        },
+        "raw": "<Folder id=\"discountCodes\">",
+        "line": 200,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "deleteDiscountCode",
+          "actionType": "DELETE_BY",
+          "confirmationMessage": "### Are you sure you want to delete the discount code {{discountCodesTable.selectedRow.data.discount_code}}?",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "requireConfirmation": "true",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "discount_codes",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"deleteDiscountCode\"\n      actionType=\"DELETE_BY\"\n      confirmationMessage=\"### Are you sure you want to delete the discount code {{discountCodesTable.selectedRow.data.discount_code}}?\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={\n        '[{\"key\":\"discount_code_id\",\"value\":\"{{discountCodesTable.selectedRow.data.discount_code_id}}\",\"operation\":\"=\"}]'\n      }\n      requireConfirmation={true}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"discount_codes\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 201,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getDiscountCodes",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getDiscountCodes\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 221,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "addDiscountCode",
+          "actionType": "INSERT",
+          "changeset": "[]",
+          "changesetIsObject": "true",
+          "changesetObject": "{{form3.data}}",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "discount_codes",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"addDiscountCode\"\n      actionType=\"INSERT\"\n      changeset=\"[]\"\n      changesetIsObject={true}\n      changesetObject=\"{{form3.data}}\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"discount_codes\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 231,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getDiscountCodes",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getDiscountCodes\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 249,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getDiscountCodes",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getDiscountCodes\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getDiscountCodes.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 259,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "updateDiscountCodes",
+          "actionType": "BULK_UPDATE_BY_KEY",
+          "bulkUpdatePrimaryKey": "discount_code_id",
+          "changesetIsObject": "true",
+          "changesetObject": "{{discountCodesTable.recordUpdates}}",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "records": "{{discountCodesTable.recordUpdates}}",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "discount_codes",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"updateDiscountCodes\"\n      actionType=\"BULK_UPDATE_BY_KEY\"\n      bulkUpdatePrimaryKey=\"discount_code_id\"\n      changesetIsObject={true}\n      changesetObject=\"{{discountCodesTable.recordUpdates}}\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={'[{\"key\":\"\",\"value\":\"\",\"operation\":\"=\"}]'}\n      records=\"{{discountCodesTable.recordUpdates}}\"\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"discount_codes\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    />",
+        "line": 272,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getDiscountPercent",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getDiscountPercent\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getDiscountPercent.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 292,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Folder",
+        "attributes": {
+          "id": "sale"
+        },
+        "raw": "<Folder id=\"sale\">",
+        "line": 306,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "createNewOrder",
+          "actionType": "INSERT",
+          "confirmationMessage": "### Are you sure you want to buy the book - {{booksInventoryTable.selectedRow.data.title}} for ${{textInput32.value}}?",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "requireConfirmation": "true",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "orders",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"createNewOrder\"\n      actionType=\"INSERT\"\n      changeset={\n        '[{\"key\":\"total_amount\",\"value\":\"{{textInput32.value}}\"},{\"key\":\"book_id\",\"value\":\"{{booksInventoryTable.selectedRow.data.book_id}}\"},{\"key\":\"discount_code_id\",\"value\":\"{{textInput33.value}}\"}]'\n      }\n      confirmationMessage=\"### Are you sure you want to buy the book - {{booksInventoryTable.selectedRow.data.title}} for ${{textInput32.value}}?\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      requireConfirmation={true}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"orders\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 307,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "updateInventoryAfterSale",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"updateInventoryAfterSale\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 327,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "closeCheckoutModal",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"closeCheckoutModal\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 336,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "deleteOrder",
+          "actionType": "DELETE_BY",
+          "confirmationMessage": "## Are you sure you want to delete the order {{ordersTable.selectedRow.data.order_id}}?",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "requireConfirmation": "true",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "orders",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"deleteOrder\"\n      actionType=\"DELETE_BY\"\n      confirmationMessage=\"## Are you sure you want to delete the order {{ordersTable.selectedRow.data.order_id}}?\"\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={\n        '[{\"key\":\"order_id\",\"value\":\"{{ordersTable.selectedRow.data.order_id}}\",\"operation\":\"=\"}]'\n      }\n      requireConfirmation={true}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"orders\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 346,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getOrdersJoin",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getOrdersJoin\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 366,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "updateInventoryAfterSale",
+          "actionType": "UPDATE_BY",
+          "editorMode": "gui",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "tableName": "books",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"updateInventoryAfterSale\"\n      actionType=\"UPDATE_BY\"\n      changeset={\n        '[{\"key\":\"quantity_in_stock\",\"value\":\"{{booksInventoryTable.selectedRow.data.quantity_in_stock - 1}}\"}]'\n      }\n      editorMode=\"gui\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      filterBy={\n        '[{\"key\":\"book_id\",\"value\":\"{{booksInventoryTable.selectedRow.data.book_id}}\",\"operation\":\"=\"}]'\n      }\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      runWhenModelUpdates={false}\n      tableName=\"books\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n    >",
+        "line": 376,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "getBooksFromStock",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"success\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getBooksFromStock\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 397,
+        "parents": [
+          "GlobalFunctions",
+          "Folder",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Function",
+        "attributes": {
+          "id": "calculateCheckoutTotal"
+        },
+        "raw": "<Function\n      id=\"calculateCheckoutTotal\"\n      funcBody={include(\"./lib/calculateCheckoutTotal.js\", \"string\")}\n    />",
+        "line": 407,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Folder",
+        "attributes": {
+          "id": "Orders"
+        },
+        "raw": "<Folder id=\"Orders\">",
+        "line": 412,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getOrdersJoin",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "runWhenPageLoads": "true",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getOrdersJoin\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getOrdersJoin.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      resourceTypeOverride=\"\"\n      runWhenModelUpdates={false}\n      runWhenPageLoads={true}\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 413,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Folder",
+        "attributes": {
+          "id": "Reports"
+        },
+        "raw": "<Folder id=\"Reports\">",
+        "line": 430,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getSalesData",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getSalesData\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getSalesData.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 431,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getMostPopularBook",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getMostPopularBook\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getMostPopularBook.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 444,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getMostPopularCategory",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getMostPopularCategory\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getMostPopularCategory.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 457,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getSalesOverTime",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getSalesOverTime\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getSalesOverTime.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 470,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getDiscountReport",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getDiscountReport\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getDiscountReport.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 483,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getInStock",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getInStock\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getInStock.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 496,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getOutOfStock",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "transformer": "// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data"
+        },
+        "raw": "<SqlQueryUnified\n      id=\"getOutOfStock\"\n      errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n      query={include(\"./lib/getOutOfStock.sql\", \"string\")}\n      resourceDisplayName=\"retool_db\"\n      resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n      transformer=\"// type your code here\n// example: return formatDataAsArray(data).filter(row => row.quantity > 20)\nreturn data\"\n      warningCodes={[]}\n    />",
+        "line": 509,
+        "parents": [
+          "GlobalFunctions",
+          "Folder"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "getOrders",
+          "errorTransformer": "// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "runWhenModelUpdates": "false",
+          "runWhenPageLoads": "true",
+          "transformer": "let orders = {{formatDataAsArray(getOrders.data)}}\nlet books = {{formatDataAsArray(getBooksFromStock.data)}}\nlet discount_codes = {{formatDataAsArray(getDiscountCodes.data)}}\n    \norders.forEach(order => {\n  let foundBook;\n  let foundCode;\n\n  books.forEach(book => {\n    if (book.hasOwnProperty('book_id') && book.book_id === order.book_id) {\n      foundBook = book;\n      order.title = foundBook.title;\n    }\n  });\n  \n  discount_codes.forEach(discount_code => {\n    if (discount_code.hasOwnProperty('discount_code_id') && discount_code.discount_code_id === order.discount_code_id) {\n      foundCode = discount_code;\n      order.discount_percent = foundCode.discount_percent;\n    }\n  });\n  \n});\n\nreturn(orders)"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"getOrders\"\n    errorTransformer=\"// The variable 'data' allows you to reference the request's data in the transformer. \n// example: return data.find(element => element.isError)\nreturn data.error\"\n    query={include(\"./lib/getOrders.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    runWhenModelUpdates={false}\n    runWhenPageLoads={true}\n    transformer=\"let orders = {{formatDataAsArray(getOrders.data)}}\nlet books = {{formatDataAsArray(getBooksFromStock.data)}}\nlet discount_codes = {{formatDataAsArray(getDiscountCodes.data)}}\n    \norders.forEach(order => {\n  let foundBook;\n  let foundCode;\n\n  books.forEach(book => {\n    if (book.hasOwnProperty('book_id') && book.book_id === order.book_id) {\n      foundBook = book;\n      order.title = foundBook.title;\n    }\n  });\n  \n  discount_codes.forEach(discount_code => {\n    if (discount_code.hasOwnProperty('discount_code_id') && discount_code.discount_code_id === order.discount_code_id) {\n      foundCode = discount_code;\n      order.discount_percent = foundCode.discount_percent;\n    }\n  });\n  \n});\n\nreturn(orders)\"\n    warningCodes={[]}\n  />",
+        "line": 523,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "AppStyles",
+        "attributes": {
+          "id": "$appStyles",
+          "css": ""
+        },
+        "raw": "<AppStyles id=\"$appStyles\" css=\"\" />",
+        "line": 3,
+        "parents": [
+          "App"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$header",
+          "isHiddenOnDesktop": "false",
+          "isHiddenOnMobile": "true",
+          "sticky": "true",
+          "type": "header"
+        },
+        "raw": "<Frame\n  id=\"$header\"\n  isHiddenOnDesktop={false}\n  isHiddenOnMobile={true}\n  sticky={true}\n  type=\"header\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "header.rsx"
+      },
+      {
+        "tag": "Navigation",
+        "attributes": {
+          "id": "navigation1",
+          "itemMode": "static",
+          "src": "https://retool-edge.com/83d4d9a1f1ecd17d111e6b4a014043cd.svg"
+        },
+        "raw": "<Navigation\n    id=\"navigation1\"\n    itemMode=\"static\"\n    src=\"https://retool-edge.com/83d4d9a1f1ecd17d111e6b4a014043cd.svg\"\n  >",
+        "line": 8,
+        "parents": [
+          "Frame"
+        ],
+        "file": "header.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "59e71",
+          "itemType": "app",
+          "label": "Manage Inventory"
+        },
+        "raw": "<Option id=\"59e71\" itemType=\"app\" label=\"Manage Inventory\" />",
+        "line": 13,
+        "parents": [
+          "Frame",
+          "Navigation"
+        ],
+        "file": "header.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "afef0",
+          "itemType": "app",
+          "key": "97320",
+          "label": "Orders & Discounts"
+        },
+        "raw": "<Option id=\"afef0\" itemType=\"app\" key=\"97320\" label=\"Orders & Discounts\" />",
+        "line": 14,
+        "parents": [
+          "Frame",
+          "Navigation"
+        ],
+        "file": "header.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "02419",
+          "itemType": "app",
+          "label": "Reports"
+        },
+        "raw": "<Option id=\"02419\" itemType=\"app\" label=\"Reports\" />",
+        "line": 15,
+        "parents": [
+          "Frame",
+          "Navigation"
+        ],
+        "file": "header.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "isHiddenOnDesktop": "false",
+          "isHiddenOnMobile": "false",
+          "sticky": "false",
+          "type": "main"
+        },
+        "raw": "<Frame\n    id=\"$main\"\n    isHiddenOnDesktop={false}\n    isHiddenOnMobile={false}\n    sticky={false}\n    type=\"main\"\n  >",
+        "line": 5,
+        "parents": [
+          "App"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text1",
+          "horizontalAlign": "center",
+          "value": "## New York's Best Small Bookstore",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text1\"\n      _disclosedFields={{ array: [] }}\n      horizontalAlign=\"center\"\n      value=\"## New York's Best Small Bookstore\"\n      verticalAlign=\"center\"\n    />",
+        "line": 12,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Container",
+        "attributes": {
+          "id": "tabbedContainer1",
+          "currentViewKey": "{{ self.viewKeys[0] }}",
+          "hoistFetching": "true",
+          "showBody": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Container\n  id=\"tabbedContainer1\"\n  currentViewKey=\"{{ self.viewKeys[0] }}\"\n  hoistFetching={true}\n  showBody={true}\n  showHeader={true}\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Tabs",
+        "attributes": {
+          "id": "tab1",
+          "itemMode": "static",
+          "navigateContainer": "true",
+          "targetContainerId": "tabbedContainer1",
+          "value": "{{ self.values[0] }}"
+        },
+        "raw": "<Tabs\n      id=\"tab1\"\n      itemMode=\"static\"\n      navigateContainer={true}\n      targetContainerId=\"tabbedContainer1\"\n      value=\"{{ self.values[0] }}\"\n    >",
+        "line": 9,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "2ced4",
+          "value": "Tab 1"
+        },
+        "raw": "<Option id=\"2ced4\" value=\"Tab 1\" />",
+        "line": 16,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "ae17b",
+          "value": "Tab 2"
+        },
+        "raw": "<Option id=\"ae17b\" value=\"Tab 2\" />",
+        "line": 17,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "5fa07",
+          "value": "Tab 3"
+        },
+        "raw": "<Option id=\"5fa07\" value=\"Tab 3\" />",
+        "line": 18,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "a7fea",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Books"
+        },
+        "raw": "<View\n    id=\"a7fea\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Books\"\n  >",
+        "line": 21,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Container",
+        "attributes": {
+          "id": "tabbedContainer2",
+          "currentViewKey": "{{ self.viewKeys[0] }}",
+          "hoistFetching": "true",
+          "showBody": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Container\n  id=\"tabbedContainer2\"\n  currentViewKey=\"{{ self.viewKeys[0] }}\"\n  hoistFetching={true}\n  showBody={true}\n  showHeader={true}\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Tabs",
+        "attributes": {
+          "id": "tabs1",
+          "itemMode": "static",
+          "navigateContainer": "true",
+          "targetContainerId": "tabbedContainer2",
+          "value": "{{ self.values[0] }}"
+        },
+        "raw": "<Tabs\n      id=\"tabs1\"\n      itemMode=\"static\"\n      navigateContainer={true}\n      targetContainerId=\"tabbedContainer2\"\n      value=\"{{ self.values[0] }}\"\n    >",
+        "line": 9,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "4f6f9",
+          "value": "Tab 1"
+        },
+        "raw": "<Option id=\"4f6f9\" value=\"Tab 1\" />",
+        "line": 16,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "b435d",
+          "value": "Tab 2"
+        },
+        "raw": "<Option id=\"b435d\" value=\"Tab 2\" />",
+        "line": 17,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "52d1f",
+          "value": "Tab 3"
+        },
+        "raw": "<Option id=\"52d1f\" value=\"Tab 3\" />",
+        "line": 18,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "7d34a",
+          "viewKey": "Search Store Inventory"
+        },
+        "raw": "<View id=\"7d34a\" viewKey=\"Search Store Inventory\">",
+        "line": 21,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "searchInventoryTextInput",
+          "label": "Search by title, author, category, ISBN",
+          "placeholder": "Search by title, author, category, ISBN"
+        },
+        "raw": "<TextInput\n      id=\"searchInventoryTextInput\"\n      _disclosedFields={{ array: [] }}\n      label=\"Search by title, author, category, ISBN\"\n      placeholder=\"Search by title, author, category, ISBN\"\n    />",
+        "line": 22,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Container",
+        "attributes": {
+          "id": "container1",
+          "hoistFetching": "true",
+          "showBody": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Container\n  id=\"container1\"\n  hoistFetching={true}\n  showBody={true}\n  showHeader={true}\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 7,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "containerTitle1",
+          "value": "#### Store Inventory",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"containerTitle1\"\n      _disclosedFields={{ array: [] }}\n      value=\"#### Store Inventory\"\n      verticalAlign=\"center\"\n    />",
+        "line": 8,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "a6e1b",
+          "viewKey": "View 1"
+        },
+        "raw": "<View id=\"a6e1b\" viewKey=\"View 1\">",
+        "line": 15,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "booksInventoryTable",
+          "_compatibilityMode": "false",
+          "data": "{{ formatDataAsArray(getBooksFromStock.data) }}",
+          "defaultSortByColumn": "last_updated_at",
+          "defaultSortDescending": "true",
+          "doubleClickToEdit": "true",
+          "hidden": "",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"booksInventoryTable\"\n      _columns={[\n        \"title\",\n        \"quantity_in_stock\",\n        \"book_id\",\n        \"isbn\",\n        \"author\",\n        \"category\",\n        \"price\",\n        \"cover_image\",\n        \"bookshelf\",\n        \"created_at\",\n        \"last_updated_at\",\n      ]}\n      _columnSummaryTypes={{\n        ordered: [\n          { price: \"sum\" },\n          { ratings: \"average\" },\n          { publication_date: \"\" },\n          { category: \"\" },\n          { publisher: \"\" },\n          { book_id: \"\" },\n        ],\n      }}\n      _columnSummaryValues={{\n        ordered: [\n          { price: \"\" },\n          { ratings: \"\" },\n          { publication_date: \"\" },\n          { category: \"\" },\n          { publisher: \"\" },\n          { book_id: \"\" },\n        ],\n      }}\n      _columnVisibility={{\n        ordered: [\n          { bookshelf: false },\n          { publication_date: false },\n          { image_url: false },\n          { author: true },\n          { cover_image: false },\n          { ratings: false },\n          { isbn: true },\n          { publisher: false },\n          { description: false },\n        ],\n      }}\n      _compatibilityMode={false}\n      actionButtons={[\n        {\n          ordered: [\n            { actionButtonText: \"Checkout\" },\n            { actionButtonType: \"runQuery\" },\n            { actionButtonQuery: \"openCheckoutModal\" },\n            { actionButtonInternalUrlPath: \"\" },\n            { actionButtonInternalUrlQuery: \"\" },\n            { actionButtonUrl: \"\" },\n            { actionButtonNewWindow: false },\n            { actionButtonDisabled: \"\" },\n          ],\n        },\n      ]}\n      columnAlignment={{\n        ordered: [\n          { price: \"right\" },\n          { ratings: \"left\" },\n          { publication_date: \"left\" },\n          { category: \"left\" },\n          { publisher: \"left\" },\n          { book_id: \"left\" },\n        ],\n      }}\n      columnFormats={{\n        ordered: [\n          { price: \"CurrencyDataCell\" },\n          { ratings: \"RatingDataCell\" },\n          { publication_date: \"DateDataCell\" },\n          { category: \"SingleTagDataCell\" },\n          { publisher: \"SingleTagDataCell\" },\n          { book_id: \"TextDataCell\" },\n        ],\n      }}\n      columnMappers={{ ordered: [{ category: \"\" }, { publisher: \"\" }] }}\n      columnTypeProperties={{\n        ordered: [\n          {\n            price: {\n              ordered: [\n                { showSeparators: true },\n                { currency: \"USD\" },\n                { padDecimal: true },\n              ],\n            },\n          },\n          { ratings: { ordered: [] } },\n          { publication_date: { ordered: [{ dateFormat: \"MMM d, yyyy\" }] } },\n          {\n            category: {\n              ordered: [\n                { optionData: \"{{ currentColumn }}\" },\n                { colorMode: \"auto\" },\n                { allowCustomValue: true },\n                { optionLabels: { array: [] } },\n                { optionColors: { array: [] } },\n                { optionValues: { array: [] } },\n              ],\n            },\n          },\n          {\n            publisher: {\n              ordered: [\n                { optionData: \"{{ currentColumn }}\" },\n                { colorMode: \"auto\" },\n                { allowCustomValue: true },\n                { optionLabels: { array: [] } },\n                { optionColors: { array: [] } },\n                { optionValues: { array: [] } },\n              ],\n            },\n          },\n          { book_id: { ordered: [] } },\n        ],\n      }}\n      columnWidths={[\n        { object: { id: \"title\", value: 202 } },\n        { object: { id: \"ratings\", value: 172 } },\n        { object: { id: \"publication_date\", value: 138 } },\n        { object: { id: \"publisher\", value: 185 } },\n        { object: { id: \"author\", value: 132 } },\n        { object: { id: \"__retool__action_list\", value: 124 } },\n        { object: { id: \"isbn\", value: 148 } },\n        { object: { id: \"category\", value: 154 } },\n        { object: { id: \"last_updated_at\", value: 178 } },\n      ]}\n      data=\"{{ formatDataAsArray(getBooksFromStock.data) }}\"\n      defaultSortByColumn=\"last_updated_at\"\n      defaultSortDescending={true}\n      doubleClickToEdit={true}\n      hidden=\"\"\n      showBoxShadow={false}\n    />",
+        "line": 16,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "form5",
+          "hidden": "",
+          "hoistFetching": "true",
+          "initialData": "{{booksInventoryTable.selectedRow.data}}",
+          "requireValidation": "true",
+          "resetAfterSubmit": "true",
+          "scroll": "true",
+          "showBody": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Form\n      id=\"form5\"\n      hidden=\"\"\n      hoistFetching={true}\n      initialData=\"{{booksInventoryTable.selectedRow.data}}\"\n      requireValidation={true}\n      resetAfterSubmit={true}\n      scroll={true}\n      showBody={true}\n      showFooter={true}\n      showHeader={true}\n    >",
+        "line": 158,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 170,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "formTitle6",
+          "value": "#### {{booksInventoryTable.selectedRow.data.title}}",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n          id=\"formTitle6\"\n          _disclosedFields={{ array: [] }}\n          value=\"#### {{booksInventoryTable.selectedRow.data.title}}\"\n          verticalAlign=\"center\"\n        />",
+        "line": 171,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Header"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 178,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "numberInput11",
+          "currency": "USD",
+          "formDataKey": "quantity_in_stock",
+          "label": "Quantity in stock",
+          "labelWidth": "50",
+          "placeholder": "Enter value",
+          "required": "true",
+          "showSeparators": "true",
+          "showStepper": "true"
+        },
+        "raw": "<NumberInput\n          id=\"numberInput11\"\n          _disclosedFields={{ array: [] }}\n          currency=\"USD\"\n          formDataKey=\"quantity_in_stock\"\n          inputValue={0}\n          label=\"Quantity in stock\"\n          labelWidth=\"50\"\n          placeholder=\"Enter value\"\n          required={true}\n          showSeparators={true}\n          showStepper={true}\n          value={0}\n        />",
+        "line": 179,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Image",
+        "attributes": {
+          "id": "image3",
+          "horizontalAlign": "center",
+          "src": "{{booksInventoryTable.selectedRow.data.cover_image}}"
+        },
+        "raw": "<Image\n          id=\"image3\"\n          _disclosedFields={{ array: [] }}\n          horizontalAlign=\"center\"\n          src=\"{{booksInventoryTable.selectedRow.data.cover_image}}\"\n        />",
+        "line": 193,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput29",
+          "formDataKey": "bookshelf",
+          "label": "Bookshelf",
+          "labelWidth": "50",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput29\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"bookshelf\"\n          label=\"Bookshelf\"\n          labelWidth=\"50\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 199,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "numberInput10",
+          "currency": "USD",
+          "format": "currency",
+          "formDataKey": "price",
+          "label": "Price",
+          "labelWidth": "50",
+          "placeholder": "Enter value",
+          "required": "true",
+          "showSeparators": "true",
+          "showStepper": "true"
+        },
+        "raw": "<NumberInput\n          id=\"numberInput10\"\n          _disclosedFields={{ array: [] }}\n          currency=\"USD\"\n          format=\"currency\"\n          formDataKey=\"price\"\n          inputValue={0}\n          label=\"Price\"\n          labelWidth=\"50\"\n          placeholder=\"Enter value\"\n          required={true}\n          showSeparators={true}\n          showStepper={true}\n          value={0}\n        />",
+        "line": 208,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput24",
+          "formDataKey": "book_id",
+          "label": "Book ID",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput24\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"book_id\"\n          label=\"Book ID\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 223,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput25",
+          "formDataKey": "title",
+          "label": "Title",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput25\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"title\"\n          label=\"Title\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 231,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput26",
+          "formDataKey": "author",
+          "label": "Author",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput26\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"author\"\n          label=\"Author\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 239,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput27",
+          "formDataKey": "isbn",
+          "label": "Isbn",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput27\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"isbn\"\n          label=\"Isbn\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 247,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "select9",
+          "data": "{{ getBooksFromStock.data }}",
+          "emptyMessage": "No options",
+          "formDataKey": "category",
+          "imageByIndex": "{{ item.cover_image }}",
+          "label": "Category",
+          "labels": "{{ item.category }}",
+          "placeholder": "Select an option",
+          "required": "true",
+          "showSelectionIndicator": "true",
+          "values": "  {{ item.category }}"
+        },
+        "raw": "<Select\n          id=\"select9\"\n          data=\"{{ getBooksFromStock.data }}\"\n          emptyMessage=\"No options\"\n          formDataKey=\"category\"\n          imageByIndex=\"{{ item.cover_image }}\"\n          label=\"Category\"\n          labels=\"{{ item.category }}\"\n          overlayMaxHeight={375}\n          placeholder=\"Select an option\"\n          required={true}\n          showSelectionIndicator={true}\n          values=\"  {{ item.category }}\"\n        />",
+        "line": 255,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput28",
+          "formDataKey": "cover_image",
+          "label": "Cover image",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput28\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"cover_image\"\n          label=\"Cover image\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 269,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 278,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "button8",
+          "text": "Delete Book"
+        },
+        "raw": "<Button\n          id=\"button8\"\n          _disclosedFields={{ array: [] }}\n          style={{ ordered: [{ background: \"danger\" }] }}\n          text=\"Delete Book\"\n        >",
+        "line": 279,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "deleteBook",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n            event=\"click\"\n            method=\"trigger\"\n            params={{ ordered: [] }}\n            pluginId=\"deleteBook\"\n            type=\"datasource\"\n            waitMs=\"0\"\n            waitType=\"debounce\"\n          />",
+        "line": 285,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "formButton6",
+          "submit": "true",
+          "submitTargetId": "form5",
+          "text": "Save"
+        },
+        "raw": "<Button\n          id=\"formButton6\"\n          _disclosedFields={{ array: [] }}\n          submit={true}\n          submitTargetId=\"form5\"\n          text=\"Save\"\n        />",
+        "line": 295,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "updateBook",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"submit\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"updateBook\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 303,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "button10",
+          "text": "Refresh Table ({{booksInventoryTable.data.title.length}} Records)"
+        },
+        "raw": "<Button\n      id=\"button10\"\n      _disclosedFields={{ array: [] }}\n      text=\"Refresh Table ({{booksInventoryTable.data.title.length}} Records)\"\n    >",
+        "line": 313,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "getBooksFromStock",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"click\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"getBooksFromStock\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 318,
+        "parents": [
+          "Container",
+          "View",
+          "Button"
+        ],
+        "file": "src/container1.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "checkoutModal",
+          "buttonText": "Open Modal",
+          "hidden": "true"
+        },
+        "raw": "<Modal id=\"checkoutModal\" buttonText=\"Open Modal\" hidden=\"true\">",
+        "line": 1,
+        "parents": [],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text2",
+          "value": "#### {{booksInventoryTable.selectedRow.data.title}}",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n    id=\"text2\"\n    _disclosedFields={{ array: [] }}\n    value=\"#### {{booksInventoryTable.selectedRow.data.title}}\"\n    verticalAlign=\"center\"\n  />",
+        "line": 2,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Image",
+        "attributes": {
+          "id": "image4",
+          "horizontalAlign": "center",
+          "src": "{{booksInventoryTable.selectedRow.data.cover_image}}"
+        },
+        "raw": "<Image\n    id=\"image4\"\n    _disclosedFields={{ array: [] }}\n    horizontalAlign=\"center\"\n    src=\"{{booksInventoryTable.selectedRow.data.cover_image}}\"\n  />",
+        "line": 8,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text3",
+          "value": "###### by {{booksInventoryTable.selectedRow.data.author}}",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n    id=\"text3\"\n    _disclosedFields={{ array: [] }}\n    value=\"###### by {{booksInventoryTable.selectedRow.data.author}}\"\n    verticalAlign=\"center\"\n  />",
+        "line": 14,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput30",
+          "label": "Price",
+          "placeholder": "Enter value",
+          "value": "{{booksInventoryTable.selectedRow.data.price}}"
+        },
+        "raw": "<TextInput\n    id=\"textInput30\"\n    _disclosedFields={{ array: [] }}\n    label=\"Price\"\n    placeholder=\"Enter value\"\n    value=\"{{booksInventoryTable.selectedRow.data.price}}\"\n  />",
+        "line": 20,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "select10",
+          "data": "{{ getDiscountCodes.data }}",
+          "emptyMessage": "No options",
+          "label": "Discount Code",
+          "placeholder": "Select an option",
+          "showSelectionIndicator": "true",
+          "values": "{{ item.discount_code }}"
+        },
+        "raw": "<Select\n    id=\"select10\"\n    data=\"{{ getDiscountCodes.data }}\"\n    emptyMessage=\"No options\"\n    label=\"Discount Code\"\n    overlayMaxHeight={375}\n    placeholder=\"Select an option\"\n    showSelectionIndicator={true}\n    values=\"{{ item.discount_code }}\"\n  />",
+        "line": 27,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput31",
+          "label": "Discount Percent",
+          "placeholder": "Enter value",
+          "value": "{{getDiscountPercent.data.discount_percent['0']*100}}"
+        },
+        "raw": "<TextInput\n    id=\"textInput31\"\n    _disclosedFields={{ array: [] }}\n    label=\"Discount Percent\"\n    placeholder=\"Enter value\"\n    value=\"{{getDiscountPercent.data.discount_percent['0']*100}}\"\n  />",
+        "line": 37,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput33",
+          "label": "Discount Code ID",
+          "placeholder": "Enter value",
+          "value": "{{getDiscountPercent.data.discount_code_id['0']}}"
+        },
+        "raw": "<TextInput\n    id=\"textInput33\"\n    _disclosedFields={{ array: [] }}\n    label=\"Discount Code ID\"\n    placeholder=\"Enter value\"\n    value=\"{{getDiscountPercent.data.discount_code_id['0']}}\"\n  />",
+        "line": 44,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput32",
+          "label": "Total",
+          "placeholder": "Enter value",
+          "value": "{{calculateCheckoutTotal.value}}"
+        },
+        "raw": "<TextInput\n    id=\"textInput32\"\n    _disclosedFields={{ array: [] }}\n    label=\"Total\"\n    placeholder=\"Enter value\"\n    value=\"{{calculateCheckoutTotal.value}}\"\n  />",
+        "line": 51,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "button11",
+          "text": "Checkout"
+        },
+        "raw": "<Button\n    id=\"button11\"\n    _disclosedFields={{ array: [] }}\n    style={{ ordered: [{ background: \"success\" }] }}\n    text=\"Checkout\"\n  >",
+        "line": 58,
+        "parents": [
+          "Modal"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "createNewOrder",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      event=\"click\"\n      method=\"trigger\"\n      params={{ ordered: [] }}\n      pluginId=\"createNewOrder\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 64,
+        "parents": [
+          "Modal",
+          "Button"
+        ],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "505e6",
+          "viewKey": "Add Books"
+        },
+        "raw": "<View id=\"505e6\" viewKey=\"Add Books\">",
+        "line": 30,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "searchBookOnlineTextInput",
+          "label": "Search by title, author, category, ISBN",
+          "placeholder": "Search inventory"
+        },
+        "raw": "<TextInput\n      id=\"searchBookOnlineTextInput\"\n      _disclosedFields={{ array: [] }}\n      label=\"Search by title, author, category, ISBN\"\n      placeholder=\"Search inventory\"\n    >",
+        "line": 31,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "change",
+          "method": "trigger",
+          "pluginId": "returnKeyTextInput",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"change\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"returnKeyTextInput\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 37,
+        "parents": [
+          "Container",
+          "View",
+          "TextInput"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "button9",
+          "text": "Search Internet"
+        },
+        "raw": "<Button\n      id=\"button9\"\n      _disclosedFields={{ array: [] }}\n      text=\"Search Internet\"\n    >",
+        "line": 47,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "searchBookByBookName",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"click\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"searchBookByBookName\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 52,
+        "parents": [
+          "Container",
+          "View",
+          "Button"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "modal1",
+          "buttonText": "Add book to Inventory",
+          "hidden": "true",
+          "modalHeightType": "auto"
+        },
+        "raw": "<Modal\n      id=\"modal1\"\n      buttonText=\"Add book to Inventory\"\n      hidden=\"true\"\n      modalHeightType=\"auto\"\n    >",
+        "line": 62,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "form4",
+          "hoistFetching": "true",
+          "initialData": "",
+          "requireValidation": "true",
+          "scroll": "true",
+          "showBody": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Form\n        id=\"form4\"\n        hoistFetching={true}\n        initialData=\"\"\n        requireValidation={true}\n        scroll={true}\n        showBody={true}\n        showFooter={true}\n        showHeader={true}\n      >",
+        "line": 68,
+        "parents": [
+          "Container",
+          "View",
+          "Modal"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 78,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "formTitle5",
+          "value": "#### {{onlineBookSearchResultsTable.selectedRow.data.title}} by {{onlineBookSearchResultsTable.selectedRow.data.author_name}}",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n            id=\"formTitle5\"\n            _disclosedFields={{ array: [] }}\n            value=\"#### {{onlineBookSearchResultsTable.selectedRow.data.title}} by {{onlineBookSearchResultsTable.selectedRow.data.author_name}}\"\n            verticalAlign=\"center\"\n          />",
+        "line": 79,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Header"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 86,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Image",
+        "attributes": {
+          "id": "image2",
+          "horizontalAlign": "center",
+          "src": "https://covers.openlibrary.org/b/id/{{onlineBookSearchResultsTable.selectedRow.data.cover_i}}.jpg"
+        },
+        "raw": "<Image\n            id=\"image2\"\n            _disclosedFields={{ array: [] }}\n            horizontalAlign=\"center\"\n            src=\"https://covers.openlibrary.org/b/id/{{onlineBookSearchResultsTable.selectedRow.data.cover_i}}.jpg\"\n          />",
+        "line": 87,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "numberInput8",
+          "currency": "USD",
+          "format": "currency",
+          "formDataKey": "price",
+          "label": "Price",
+          "placeholder": "Enter value",
+          "required": "true",
+          "showSeparators": "true",
+          "showStepper": "true",
+          "value": ""
+        },
+        "raw": "<NumberInput\n            id=\"numberInput8\"\n            _disclosedFields={{ array: [] }}\n            currency=\"USD\"\n            format=\"currency\"\n            formDataKey=\"price\"\n            inputValue={0}\n            label=\"Price\"\n            placeholder=\"Enter value\"\n            required={true}\n            showSeparators={true}\n            showStepper={true}\n            value=\"\"\n          />",
+        "line": 93,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "select8",
+          "data": "{{onlineBookSearchResultsTable.selectedRow.data.isbn}}",
+          "emptyMessage": "No options",
+          "formDataKey": "isbn",
+          "label": "ISBN",
+          "placeholder": "Choose an ISBN",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n            id=\"select8\"\n            data=\"{{onlineBookSearchResultsTable.selectedRow.data.isbn}}\"\n            emptyMessage=\"No options\"\n            formDataKey=\"isbn\"\n            label=\"ISBN\"\n            overlayMaxHeight={375}\n            placeholder=\"Choose an ISBN\"\n            showSelectionIndicator={true}\n          />",
+        "line": 107,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "numberInput9",
+          "currency": "USD",
+          "formDataKey": "quantity_in_stock",
+          "label": "Quantity in stock",
+          "placeholder": "Enter value",
+          "required": "true",
+          "showSeparators": "true",
+          "showStepper": "true"
+        },
+        "raw": "<NumberInput\n            id=\"numberInput9\"\n            _disclosedFields={{ array: [] }}\n            currency=\"USD\"\n            formDataKey=\"quantity_in_stock\"\n            inputValue={0}\n            label=\"Quantity in stock\"\n            placeholder=\"Enter value\"\n            required={true}\n            showSeparators={true}\n            showStepper={true}\n            value={0}\n          />",
+        "line": 117,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "select7",
+          "data": "{{ getBooksDataForModal.data }}",
+          "emptyMessage": "No options",
+          "formDataKey": "category",
+          "imageByIndex": "{{ item.cover_image }}",
+          "label": "Category",
+          "labels": "{{ item.category }}",
+          "placeholder": "Select a Category",
+          "required": "true",
+          "showSelectionIndicator": "true",
+          "values": "{{ item.category }}"
+        },
+        "raw": "<Select\n            id=\"select7\"\n            data=\"{{ getBooksDataForModal.data }}\"\n            emptyMessage=\"No options\"\n            formDataKey=\"category\"\n            imageByIndex=\"{{ item.cover_image }}\"\n            label=\"Category\"\n            labels=\"{{ item.category }}\"\n            overlayMaxHeight={375}\n            placeholder=\"Select a Category\"\n            required={true}\n            showSelectionIndicator={true}\n            values=\"{{ item.category }}\"\n          />",
+        "line": 130,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput23",
+          "formDataKey": "bookshelf",
+          "label": "Bookshelf",
+          "placeholder": "Bookshelf Name"
+        },
+        "raw": "<TextInput\n            id=\"textInput23\"\n            _disclosedFields={{ array: [] }}\n            formDataKey=\"bookshelf\"\n            label=\"Bookshelf\"\n            placeholder=\"Bookshelf Name\"\n          />",
+        "line": 144,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput18",
+          "formDataKey": "book_id",
+          "label": "Book ID",
+          "placeholder": "Enter value",
+          "required": "true",
+          "value": "{{formatDataAsArray(getBooksDataForModal.data).length + 1}} "
+        },
+        "raw": "<TextInput\n            id=\"textInput18\"\n            _disclosedFields={{ array: [] }}\n            formDataKey=\"book_id\"\n            label=\"Book ID\"\n            placeholder=\"Enter value\"\n            required={true}\n            value=\"{{formatDataAsArray(getBooksDataForModal.data).length + 1}} \"\n          />",
+        "line": 151,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput19",
+          "formDataKey": "title",
+          "label": "Title",
+          "placeholder": "Enter value",
+          "required": "true",
+          "value": "{{onlineBookSearchResultsTable.selectedRow.data.title}}"
+        },
+        "raw": "<TextInput\n            id=\"textInput19\"\n            _disclosedFields={{ array: [] }}\n            formDataKey=\"title\"\n            label=\"Title\"\n            placeholder=\"Enter value\"\n            required={true}\n            value=\"{{onlineBookSearchResultsTable.selectedRow.data.title}}\"\n          />",
+        "line": 160,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput20",
+          "formDataKey": "author",
+          "label": "Author",
+          "placeholder": "Enter value",
+          "required": "true",
+          "value": "{{onlineBookSearchResultsTable.selectedRow.data.author_name['0']}}"
+        },
+        "raw": "<TextInput\n            id=\"textInput20\"\n            _disclosedFields={{ array: [] }}\n            formDataKey=\"author\"\n            label=\"Author\"\n            placeholder=\"Enter value\"\n            required={true}\n            value=\"{{onlineBookSearchResultsTable.selectedRow.data.author_name['0']}}\"\n          />",
+        "line": 169,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput22",
+          "formDataKey": "cover_image",
+          "label": "Cover image",
+          "placeholder": "Enter value",
+          "value": "https://covers.openlibrary.org/b/id/{{onlineBookSearchResultsTable.selectedRow.data.cover_i}}.jpg"
+        },
+        "raw": "<TextInput\n            id=\"textInput22\"\n            _disclosedFields={{ array: [] }}\n            formDataKey=\"cover_image\"\n            label=\"Cover image\"\n            placeholder=\"Enter value\"\n            value=\"https://covers.openlibrary.org/b/id/{{onlineBookSearchResultsTable.selectedRow.data.cover_i}}.jpg\"\n          />",
+        "line": 178,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "DateTime",
+        "attributes": {
+          "id": "dateTime1",
+          "dateFormat": "MMM d, yyyy",
+          "datePlaceholder": "{{ self.dateFormat.toUpperCase() }}",
+          "formDataKey": "created_at",
+          "iconBefore": "bold/interface-calendar",
+          "label": "Created at",
+          "required": "true",
+          "value": "{{ new Date() }}"
+        },
+        "raw": "<DateTime\n            id=\"dateTime1\"\n            _disclosedFields={{ array: [] }}\n            dateFormat=\"MMM d, yyyy\"\n            datePlaceholder=\"{{ self.dateFormat.toUpperCase() }}\"\n            formDataKey=\"created_at\"\n            iconBefore=\"bold/interface-calendar\"\n            label=\"Created at\"\n            minuteStep={15}\n            required={true}\n            value=\"{{ new Date() }}\"\n          />",
+        "line": 186,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "DateTime",
+        "attributes": {
+          "id": "dateTime2",
+          "dateFormat": "MMM d, yyyy",
+          "datePlaceholder": "{{ self.dateFormat.toUpperCase() }}",
+          "formDataKey": "last_updated_at",
+          "iconBefore": "bold/interface-calendar",
+          "label": "Last updated at",
+          "required": "true",
+          "value": "{{ new Date() }}"
+        },
+        "raw": "<DateTime\n            id=\"dateTime2\"\n            _disclosedFields={{ array: [] }}\n            dateFormat=\"MMM d, yyyy\"\n            datePlaceholder=\"{{ self.dateFormat.toUpperCase() }}\"\n            formDataKey=\"last_updated_at\"\n            iconBefore=\"bold/interface-calendar\"\n            label=\"Last updated at\"\n            minuteStep={15}\n            required={true}\n            value=\"{{ new Date() }}\"\n          />",
+        "line": 198,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 211,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "formButton5",
+          "submit": "true",
+          "submitTargetId": "form4",
+          "text": "Submit"
+        },
+        "raw": "<Button\n            id=\"formButton5\"\n            _disclosedFields={{ array: [] }}\n            submit={true}\n            submitTargetId=\"form4\"\n            text=\"Submit\"\n          />",
+        "line": 212,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "addBookFromModal",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          event=\"submit\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"addBookFromModal\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 220,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "closeAddBookModal",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          event=\"submit\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"closeAddBookModal\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 229,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "setCurrentView",
+          "pluginId": "tabbedContainer1",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          event=\"submit\"\n          method=\"setCurrentView\"\n          params={{ ordered: [{ viewKey: '\"Store Inventory\"' }] }}\n          pluginId=\"tabbedContainer1\"\n          type=\"widget\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 238,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "onlineBookSearchResultsTable",
+          "_compatibilityMode": "false",
+          "data": "{{transformerSearchBooksByBookName.value}}",
+          "defaultSortByColumn": "score",
+          "defaultSortDescending": "true",
+          "doubleClickToEdit": "true",
+          "hidden": "{{searchBookOnlineTextInput.value === ''}} ",
+          "maintainSpaceWhenHidden": "false",
+          "rowColor": "{{i === 0 ? 'green':''}}",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"onlineBookSearchResultsTable\"\n      _columns={[\n        \"score\",\n        \"title\",\n        \"author_name\",\n        \"edition_count\",\n        \"first_publish_year\",\n        \"isbn\",\n        \"cover_i\",\n        \"ia\",\n        \"subject\",\n        \"edition_key\",\n      ]}\n      _columnSummaryTypes={{ ordered: [{ category: \"\" }, { price: \"sum\" }] }}\n      _columnSummaryValues={{ ordered: [{ category: \"\" }, { price: \"\" }] }}\n      _columnVisibility={{\n        ordered: [\n          { cover_image: false },\n          { created_at: false },\n          { last_updated_at: false },\n          { edition_key: false },\n        ],\n      }}\n      _compatibilityMode={false}\n      actionButtons={[\n        {\n          ordered: [\n            { actionButtonText: \"Add to Inventory\" },\n            { actionButtonType: \"runQuery\" },\n            { actionButtonQuery: \"openModal\" },\n            { actionButtonInternalUrlPath: \"\" },\n            { actionButtonInternalUrlQuery: \"\" },\n            { actionButtonUrl: \"\" },\n            { actionButtonNewWindow: false },\n            { actionButtonDisabled: \"\" },\n          ],\n        },\n      ]}\n      columnAlignment={{ ordered: [{ category: \"left\" }, { price: \"right\" }] }}\n      columnEditable={{\n        ordered: [\n          { title: false },\n          { title_suggest: false },\n          { isbn: true },\n          { first_published: false },\n        ],\n      }}\n      columnFormats={{\n        ordered: [\n          { category: \"SingleTagDataCell\" },\n          { price: \"CurrencyDataCell\" },\n        ],\n      }}\n      columnMappers={{\n        ordered: [\n          { category: \"\" },\n          { author_name: \"{{self['0']}}\" },\n          { ia: \"{{self['0']}}\" },\n        ],\n      }}\n      columnTypeProperties={{\n        ordered: [\n          {\n            category: {\n              ordered: [\n                { optionData: \"{{ currentColumn }}\" },\n                { colorMode: \"auto\" },\n                { allowCustomValue: true },\n                { optionLabels: { array: [] } },\n                { optionColors: { array: [] } },\n                { optionValues: { array: [] } },\n              ],\n            },\n          },\n          {\n            price: {\n              ordered: [\n                { showSeparators: true },\n                { currency: \"USD\" },\n                { padDecimal: true },\n              ],\n            },\n          },\n        ],\n      }}\n      columnWidths={[\n        { object: { id: \"title\", value: 284.4296875 } },\n        { object: { id: \"title_suggest\", value: 183 } },\n        { object: { id: \"key\", value: 171 } },\n        { object: { id: \"seed\", value: 176 } },\n        { object: { id: \"author_name\", value: 173 } },\n        { object: { id: \"publisher_facet\", value: 148 } },\n        { object: { id: \"isbn\", value: 285 } },\n        { object: { id: \"cover_i\", value: 132 } },\n        { object: { id: \"edition_count\", value: 211 } },\n        { object: { id: \"__retool__action_list\", value: 165 } },\n      ]}\n      data=\"{{transformerSearchBooksByBookName.value}}\"\n      defaultSortByColumn=\"score\"\n      defaultSortDescending={true}\n      doubleClickToEdit={true}\n      hidden=\"{{searchBookOnlineTextInput.value === ''}} \"\n      maintainSpaceWhenHidden={false}\n      rowColor=\"{{i === 0 ? 'green':''}}\"\n      showBoxShadow={false}\n    />",
+        "line": 249,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "ec41b",
+          "viewKey": "Discount Codes"
+        },
+        "raw": "<View id=\"ec41b\" viewKey=\"Discount Codes\">",
+        "line": 30,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "discountCodesTable",
+          "_compatibilityMode": "false",
+          "data": "{{getDiscountCodes.data}}",
+          "doubleClickToEdit": "true",
+          "showAddRowButton": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"discountCodesTable\"\n      _columnVisibility={{\n        ordered: [{ created_at: true }, { last_updated_at: true }],\n      }}\n      _compatibilityMode={false}\n      actionButtons={[\n        {\n          ordered: [\n            { actionButtonText: \"Delete\" },\n            { actionButtonType: \"runQuery\" },\n            { actionButtonQuery: \"deleteDiscountCode\" },\n            { actionButtonInternalUrlPath: \"\" },\n            { actionButtonInternalUrlQuery: \"\" },\n            { actionButtonUrl: \"\" },\n            { actionButtonNewWindow: false },\n            { actionButtonDisabled: \"\" },\n          ],\n        },\n      ]}\n      columnEditable={{\n        ordered: [\n          { discount_code_id: false },\n          { discount_code: true },\n          { discount_percent: true },\n          { expiration_date: true },\n          { is_active: true },\n          { created_at: false },\n          { last_updated_at: false },\n        ],\n      }}\n      data=\"{{getDiscountCodes.data}}\"\n      doubleClickToEdit={true}\n      events={[\n        {\n          ordered: [\n            { event: \"saveChanges\" },\n            { type: \"datasource\" },\n            { method: \"trigger\" },\n            { pluginId: \"updateDiscountCodes\" },\n            { targetId: null },\n            { params: { ordered: [] } },\n            { waitType: \"debounce\" },\n            { waitMs: \"0\" },\n          ],\n        },\n      ]}\n      showAddRowButton={true}\n      showBoxShadow={false}\n    />",
+        "line": 31,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "form3",
+          "hoistFetching": "true",
+          "initialData": "",
+          "requireValidation": "true",
+          "resetAfterSubmit": "true",
+          "scroll": "true",
+          "showBody": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Form\n      id=\"form3\"\n      hoistFetching={true}\n      initialData=\"\"\n      requireValidation={true}\n      resetAfterSubmit={true}\n      scroll={true}\n      showBody={true}\n      showFooter={true}\n      showHeader={true}\n    >",
+        "line": 81,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 92,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "formTitle4",
+          "value": "#### Form title",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n          id=\"formTitle4\"\n          _disclosedFields={{ array: [] }}\n          value=\"#### Form title\"\n          verticalAlign=\"center\"\n        />",
+        "line": 93,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Header"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 100,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "textInput16",
+          "formDataKey": "discount_code",
+          "label": "Discount code",
+          "placeholder": "Enter value",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"textInput16\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"discount_code\"\n          label=\"Discount code\"\n          placeholder=\"Enter value\"\n          required={true}\n        />",
+        "line": 101,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "NumberInput",
+        "attributes": {
+          "id": "numberInput7",
+          "currency": "USD",
+          "formDataKey": "discount_percent",
+          "label": "Discount percent",
+          "placeholder": "Enter value",
+          "required": "true",
+          "showSeparators": "true",
+          "showStepper": "true"
+        },
+        "raw": "<NumberInput\n          id=\"numberInput7\"\n          _disclosedFields={{ array: [] }}\n          currency=\"USD\"\n          formDataKey=\"discount_percent\"\n          inputValue={0}\n          label=\"Discount percent\"\n          placeholder=\"Enter value\"\n          required={true}\n          showSeparators={true}\n          showStepper={true}\n          value={0}\n        />",
+        "line": 109,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "date1",
+          "dateFormat": "MMM d, yyyy",
+          "datePlaceholder": "{{ self.dateFormat.toUpperCase() }}",
+          "formDataKey": "expiration_date",
+          "iconBefore": "bold/interface-calendar",
+          "label": "Expiration date",
+          "required": "true",
+          "value": "{{ new Date() }}"
+        },
+        "raw": "<Date\n          id=\"date1\"\n          _disclosedFields={{ array: [] }}\n          dateFormat=\"MMM d, yyyy\"\n          datePlaceholder=\"{{ self.dateFormat.toUpperCase() }}\"\n          formDataKey=\"expiration_date\"\n          iconBefore=\"bold/interface-calendar\"\n          label=\"Expiration date\"\n          required={true}\n          value=\"{{ new Date() }}\"\n        />",
+        "line": 122,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Checkbox",
+        "attributes": {
+          "id": "checkbox1",
+          "formDataKey": "is_active",
+          "label": "Is active"
+        },
+        "raw": "<Checkbox\n          id=\"checkbox1\"\n          _disclosedFields={{ array: [] }}\n          formDataKey=\"is_active\"\n          label=\"Is active\"\n        />",
+        "line": 133,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 140,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "formButton4",
+          "submit": "true",
+          "submitTargetId": "form3",
+          "text": "Submit"
+        },
+        "raw": "<Button\n          id=\"formButton4\"\n          _disclosedFields={{ array: [] }}\n          submit={true}\n          submitTargetId=\"form3\"\n          text=\"Submit\"\n        />",
+        "line": 141,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "addDiscountCode",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        event=\"submit\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"addDiscountCode\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 149,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "1cf04",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Orders"
+        },
+        "raw": "<View\n    id=\"1cf04\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Orders\"\n  >",
+        "line": 160,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "ordersTable",
+          "_compatibilityMode": "false",
+          "data": "{{getOrdersJoin.data}}",
+          "defaultSortByColumn": "order_id",
+          "defaultSortDescending": "true",
+          "doubleClickToEdit": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"ordersTable\"\n      _columns={[\n        \"order_id\",\n        \"book_id\",\n        \"isbn\",\n        \"title\",\n        \"price\",\n        \"category\",\n        \"author\",\n        \"cover_image\",\n        \"bookshelf\",\n        \"quantity_in_stock\",\n        \"created_at\",\n        \"last_updated_at\",\n        \"total_amount\",\n        \"discount_code_id\",\n        \"discount_code\",\n        \"discount_percent\",\n        \"order_date\",\n        \"expiration_date\",\n        \"is_active\",\n      ]}\n      _columnSummaryTypes={{\n        ordered: [\n          { total_amount: \"sum\" },\n          { price: \"sum\" },\n          { created_at: \"\" },\n        ],\n      }}\n      _columnSummaryValues={{\n        ordered: [{ total_amount: \"\" }, { price: \"\" }, { created_at: \"\" }],\n      }}\n      _columnVisibility={{\n        ordered: [\n          { last_updated_at: false },\n          { bookshelf: false },\n          { created_at: true },\n          { author: false },\n          { discount_code_id: false },\n          { quantity_in_stock: false },\n          { cover_image: false },\n          { is_active: false },\n          { expiration_date: false },\n          { order_date: false },\n        ],\n      }}\n      _compatibilityMode={false}\n      actionButtons={[\n        {\n          ordered: [\n            { actionButtonText: \"Delete\" },\n            { actionButtonType: \"runQuery\" },\n            { actionButtonQuery: \"deleteOrder\" },\n            { actionButtonInternalUrlPath: \"\" },\n            { actionButtonInternalUrlQuery: \"\" },\n            { actionButtonUrl: \"\" },\n            { actionButtonNewWindow: false },\n            { actionButtonDisabled: \"\" },\n          ],\n        },\n      ]}\n      columnAlignment={{\n        ordered: [\n          { total_amount: \"right\" },\n          { price: \"right\" },\n          { created_at: \"left\" },\n        ],\n      }}\n      columnFormats={{\n        ordered: [\n          { total_amount: \"CurrencyDataCell\" },\n          { price: \"CurrencyDataCell\" },\n          { created_at: \"DateTimeDataCell\" },\n        ],\n      }}\n      columnTypeProperties={{\n        ordered: [\n          {\n            total_amount: {\n              ordered: [\n                { showSeparators: true },\n                { currency: \"USD\" },\n                { padDecimal: true },\n              ],\n            },\n          },\n          {\n            price: {\n              ordered: [\n                { showSeparators: true },\n                { currency: \"USD\" },\n                { padDecimal: true },\n              ],\n            },\n          },\n          {\n            created_at: {\n              ordered: [\n                { manageTimeZone: true },\n                { dateFormat: \"MMM d, yyyy\" },\n                { valueTimeZone: \"00:00\" },\n                { displayTimeZone: \"local\" },\n              ],\n            },\n          },\n        ],\n      }}\n      columnWidths={[\n        { object: { id: \"isbn\", value: 154.89236450195312 } },\n        { object: { id: \"created_at\", value: 170.55382537841797 } },\n        { object: { id: \"title\", value: 240.00000762939453 } },\n        { object: { id: \"discount_code\", value: 141 } },\n      ]}\n      data=\"{{getOrdersJoin.data}}\"\n      defaultSortByColumn=\"order_id\"\n      defaultSortDescending={true}\n      doubleClickToEdit={true}\n      events={[\n        {\n          ordered: [\n            { event: \"saveChanges\" },\n            { type: \"datasource\" },\n            { method: \"trigger\" },\n            { pluginId: \"createNewOrder\" },\n            { targetId: null },\n            { params: { ordered: [] } },\n            { waitType: \"debounce\" },\n            { waitMs: \"0\" },\n          ],\n        },\n      ]}\n      showBoxShadow={false}\n    />",
+        "line": 167,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "5eac9",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Inventory Report"
+        },
+        "raw": "<View\n    id=\"5eac9\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Inventory Report\"\n  >",
+        "line": 302,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Icon",
+        "attributes": {
+          "id": "icon1",
+          "horizontalAlign": "center",
+          "icon": "bold/interface-content-book-1"
+        },
+        "raw": "<Icon\n      id=\"icon1\"\n      _disclosedFields={{ array: [] }}\n      horizontalAlign=\"center\"\n      icon=\"bold/interface-content-book-1\"\n      style={{ ordered: [{ color: \"success\" }] }}\n    />",
+        "line": 309,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text7",
+          "value": "## In Stock",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text7\"\n      _disclosedFields={{ array: [] }}\n      value=\"## In Stock\"\n      verticalAlign=\"center\"\n    />",
+        "line": 316,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "table2",
+          "_compatibilityMode": "false",
+          "data": "{{ getInStock.data }}",
+          "doubleClickToEdit": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"table2\"\n      _columnSummaryTypes={{\n        ordered: [{ isbn: \"\" }, { quantity_in_stock: \"sum\" }],\n      }}\n      _columnSummaryValues={{\n        ordered: [{ isbn: \"\" }, { quantity_in_stock: \"\" }],\n      }}\n      _compatibilityMode={false}\n      columnAlignment={{\n        ordered: [{ isbn: \"left\" }, { quantity_in_stock: \"right\" }],\n      }}\n      columnFormats={{\n        ordered: [\n          { isbn: \"TextDataCell\" },\n          { quantity_in_stock: \"NumberDataCell\" },\n        ],\n      }}\n      columnTypeProperties={{\n        ordered: [\n          { isbn: { ordered: [] } },\n          {\n            quantity_in_stock: {\n              ordered: [{ showSeparators: true }, { padDecimal: true }],\n            },\n          },\n        ],\n      }}\n      data=\"{{ getInStock.data }}\"\n      doubleClickToEdit={true}\n      showBoxShadow={false}\n    />",
+        "line": 322,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Divider",
+        "attributes": {
+          "id": "divider3",
+          "textSize": "default"
+        },
+        "raw": "<Divider\n      id=\"divider3\"\n      _disclosedFields={{ array: [] }}\n      textSize=\"default\"\n    />",
+        "line": 354,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text8",
+          "value": "## Out Of Stock",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text8\"\n      _disclosedFields={{ array: [] }}\n      value=\"## Out Of Stock\"\n      verticalAlign=\"center\"\n    />",
+        "line": 359,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Icon",
+        "attributes": {
+          "id": "icon2",
+          "horizontalAlign": "center",
+          "icon": "bold/interface-alert-warning-triangle-alternate"
+        },
+        "raw": "<Icon\n      id=\"icon2\"\n      _disclosedFields={{ array: [] }}\n      horizontalAlign=\"center\"\n      icon=\"bold/interface-alert-warning-triangle-alternate\"\n      style={{ ordered: [{ color: \"danger\" }] }}\n    />",
+        "line": 365,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "table3",
+          "_compatibilityMode": "false",
+          "data": "{{ getOutOfStock.data }}",
+          "doubleClickToEdit": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"table3\"\n      _columnSummaryTypes={{ ordered: [{ isbn: \"\" }] }}\n      _columnSummaryValues={{ ordered: [{ isbn: \"\" }] }}\n      _compatibilityMode={false}\n      columnAlignment={{ ordered: [{ isbn: \"left\" }] }}\n      columnFormats={{ ordered: [{ isbn: \"TextDataCell\" }] }}\n      columnTypeProperties={{ ordered: [{ isbn: { ordered: [] } }] }}\n      data=\"{{ getOutOfStock.data }}\"\n      doubleClickToEdit={true}\n      showBoxShadow={false}\n    />",
+        "line": 372,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "bb625",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Sales Reports"
+        },
+        "raw": "<View\n    id=\"bb625\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Sales Reports\"\n  >",
+        "line": 385,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text4",
+          "value": "## Overview Sales Report",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text4\"\n      _disclosedFields={{ array: [] }}\n      value=\"## Overview Sales Report\"\n      verticalAlign=\"center\"\n    />",
+        "line": 392,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "reportDateRange",
+          "emptyMessage": "No options",
+          "itemMode": "static",
+          "label": "Data Date Range",
+          "placeholder": "Select an option",
+          "showSelectionIndicator": "true",
+          "value": "24 hours"
+        },
+        "raw": "<Select\n      id=\"reportDateRange\"\n      emptyMessage=\"No options\"\n      itemMode=\"static\"\n      label=\"Data Date Range\"\n      overlayMaxHeight={375}\n      placeholder=\"Select an option\"\n      showSelectionIndicator={true}\n      value=\"24 hours\"\n    >",
+        "line": 398,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "2a1db",
+          "value": "24 hours"
+        },
+        "raw": "<Option id=\"2a1db\" value=\"24 hours\" />",
+        "line": 408,
+        "parents": [
+          "Container",
+          "View",
+          "Select"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "d0f6d",
+          "value": "7 days"
+        },
+        "raw": "<Option id=\"d0f6d\" value=\"7 days\" />",
+        "line": 409,
+        "parents": [
+          "Container",
+          "View",
+          "Select"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "fc276",
+          "value": "30 days"
+        },
+        "raw": "<Option id=\"fc276\" value=\"30 days\" />",
+        "line": 410,
+        "parents": [
+          "Container",
+          "View",
+          "Select"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "KeyValueMap",
+        "attributes": {
+          "id": "SalesReport",
+          "data": "{{getSalesData.data}}",
+          "keyTitle": "Stat"
+        },
+        "raw": "<KeyValueMap\n      id=\"SalesReport\"\n      data=\"{{getSalesData.data}}\"\n      keyTitle=\"Stat\"\n      prevRowFormats={{\n        ordered: [\n          { discount_utilization_rate: \"percent\" },\n          { average_sale_price: \"usd_dollars\" },\n          { total_revenue: \"usd_dollars\" },\n        ],\n      }}\n      prevRowMappers={{\n        ordered: [\n          { total_books_sold: \"{{getSalesData.data.total_books_sold}}\" },\n          { total_revenue: \"{{getSalesData.data.total_revenue}}\" },\n          { average_sale_price: \"{{getSalesData.data.average_sale_price}}\" },\n          {\n            discount_utilization_rate:\n              \"{{getSalesData.data.discount_utilization_rate}}\",\n          },\n        ],\n      }}\n      rowFormats={{\n        ordered: [\n          { discount_utilization_rate: \"percent\" },\n          { average_sale_price: \"usd_dollars\" },\n          { total_revenue: \"usd_dollars\" },\n        ],\n      }}\n      rowHeaderNames={{\n        ordered: [\n          { total_books_sold: \"Total Books Sold\" },\n          { total_revenue: \"Total Revenue\" },\n          { average_sale_price: \"Average Sale Price\" },\n          { discount_utilization_rate: \"Discount Utilization Rate\" },\n        ],\n      }}\n      rowMappers={{\n        ordered: [\n          { total_books_sold: \"{{getSalesData.data.total_books_sold}}\" },\n          { total_revenue: \"{{getSalesData.data.total_revenue}}\" },\n          { average_sale_price: \"{{getSalesData.data.average_sale_price}}\" },\n          {\n            discount_utilization_rate:\n              \"{{getSalesData.data.discount_utilization_rate}}\",\n          },\n        ],\n      }}\n      rows={[\n        \"a\",\n        \"b\",\n        \"c\",\n        \"total_books_sold\",\n        \"total_revenue\",\n        \"average_sale_price\",\n        \"error\",\n        \"message\",\n        \"position\",\n        \"queryExecutionMetadata\",\n        \"source\",\n        \"discount_utilization_rate\",\n        \"average_order_value\",\n      ]}\n      rowVisibility={{\n        ordered: [\n          { a: true },\n          { total_revenue: true },\n          { b: true },\n          { c: true },\n          { total_books_sold: true },\n          { message: true },\n          { error: true },\n          { position: true },\n          { average_sale_price: true },\n          { discount_utilization_rate: true },\n          { source: true },\n          { average_order_value: true },\n          { queryExecutionMetadata: true },\n        ],\n      }}\n    />",
+        "line": 412,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "chart1",
+          "datasourceDataType": "object",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{getSalesOverTime.data}}",
+          "isDataTemplateDirty": "true",
+          "skipDatasourceUpdate": "true",
+          "title": "# of Orders & Sales (USD) in the last {{reportDateRange.value}}",
+          "xAxis": "{{getSalesOverTime.data.order_day}}",
+          "xAxisDropdown": "order_day",
+          "yAxisTitle": "USD"
+        },
+        "raw": "<PlotlyChart\n      id=\"chart1\"\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"total_orders\" },\n                { datasource: \"{{getSalesOverTime.data['total_orders']}}\" },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#033663\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n          {\n            1: {\n              ordered: [\n                { label: \"total_sales\" },\n                { datasource: \"{{getSalesOverTime.data['total_sales']}}\" },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#247BC7\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"object\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{getSalesOverTime.data}}\"\n      isDataTemplateDirty={true}\n      skipDatasourceUpdate={true}\n      title=\"# of Orders & Sales (USD) in the last {{reportDateRange.value}}\"\n      xAxis=\"{{getSalesOverTime.data.order_day}}\"\n      xAxisDropdown=\"order_day\"\n      yAxisTitle=\"USD\"\n    />",
+        "line": 493,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Divider",
+        "attributes": {
+          "id": "divider1",
+          "textSize": "default"
+        },
+        "raw": "<Divider\n      id=\"divider1\"\n      _disclosedFields={{ array: [] }}\n      textSize=\"default\"\n    />",
+        "line": 543,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text5",
+          "value": "## Top Selling Books",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text5\"\n      _disclosedFields={{ array: [] }}\n      value=\"## Top Selling Books\"\n      verticalAlign=\"center\"\n    />",
+        "line": 548,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "chart2",
+          "chartType": "pie",
+          "datasourceDataType": "object",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{getMostPopularBook.data}}",
+          "isDataTemplateDirty": "true",
+          "legendAlignment": "right",
+          "skipDatasourceUpdate": "true",
+          "title": "Top Selling Books by Quantity",
+          "xAxis": "{{getMostPopularBook.data['title']}}",
+          "xAxisDropdown": "title"
+        },
+        "raw": "<PlotlyChart\n      id=\"chart2\"\n      chartType=\"pie\"\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"total_sales\" },\n                { datasource: \"{{getMostPopularBook.data['total_sales']}}\" },\n                { chartType: \"pie\" },\n                { aggregationType: \"sum\" },\n                { color: null },\n                {\n                  colors: {\n                    ordered: [\n                      { 11: \"#AED6BD\" },\n                      { 12: \"#E3D7FF\" },\n                      { 13: \"#BCAAE7\" },\n                      { 0: \"#033663\" },\n                      { 1: \"#247BC7\" },\n                      { 2: \"#55A1E3\" },\n                      { 3: \"#DAECFC\" },\n                      { 4: \"#EECA86\" },\n                      { 5: \"#E9AB11\" },\n                      { 6: \"#D47E2F\" },\n                      { 7: \"#C15627\" },\n                      { 8: \"#224930\" },\n                      { 9: \"#238146\" },\n                      { 10: \"#55A874\" },\n                    ],\n                  },\n                },\n                { visible: false },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n          {\n            1: {\n              ordered: [\n                { label: \"discount_percent\" },\n                {\n                  datasource: \"{{getMostPopularBook.data['discount_percent']}}\",\n                },\n                { chartType: \"pie\" },\n                { aggregationType: \"sum\" },\n                { color: null },\n                {\n                  colors: {\n                    ordered: [\n                      { 11: \"#AED6BD\" },\n                      { 12: \"#E3D7FF\" },\n                      { 13: \"#BCAAE7\" },\n                      { 0: \"#033663\" },\n                      { 1: \"#247BC7\" },\n                      { 2: \"#55A1E3\" },\n                      { 3: \"#DAECFC\" },\n                      { 4: \"#EECA86\" },\n                      { 5: \"#E9AB11\" },\n                      { 6: \"#D47E2F\" },\n                      { 7: \"#C15627\" },\n                      { 8: \"#224930\" },\n                      { 9: \"#238146\" },\n                      { 10: \"#55A874\" },\n                    ],\n                  },\n                },\n                { visible: false },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n          {\n            2: {\n              ordered: [\n                { label: \"total_books_sold\" },\n                {\n                  datasource: \"{{getMostPopularBook.data['total_books_sold']}}\",\n                },\n                { chartType: \"pie\" },\n                { aggregationType: \"sum\" },\n                { color: null },\n                {\n                  colors: {\n                    ordered: [\n                      { 11: \"#AED6BD\" },\n                      { 12: \"#E3D7FF\" },\n                      { 13: \"#BCAAE7\" },\n                      { 0: \"#033663\" },\n                      { 1: \"#247BC7\" },\n                      { 2: \"#55A1E3\" },\n                      { 3: \"#DAECFC\" },\n                      { 4: \"#EECA86\" },\n                      { 5: \"#E9AB11\" },\n                      { 6: \"#D47E2F\" },\n                      { 7: \"#C15627\" },\n                      { 8: \"#224930\" },\n                      { 9: \"#238146\" },\n                      { 10: \"#55A874\" },\n                    ],\n                  },\n                },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"object\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{getMostPopularBook.data}}\"\n      isDataTemplateDirty={true}\n      legendAlignment=\"right\"\n      skipDatasourceUpdate={true}\n      title=\"Top Selling Books by Quantity\"\n      xAxis=\"{{getMostPopularBook.data['title']}}\"\n      xAxisDropdown=\"title\"\n    />",
+        "line": 554,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "chart4",
+          "datasourceDataType": "object",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{getMostPopularCategory.data}}",
+          "isDataTemplateDirty": "true",
+          "legendAlignment": "right",
+          "shouldShowLegend": "false",
+          "skipDatasourceUpdate": "true",
+          "title": "Most Popular Book Sales by Category",
+          "xAxis": "{{getMostPopularCategory.data.category}}",
+          "xAxisDropdown": "category"
+        },
+        "raw": "<PlotlyChart\n      id=\"chart4\"\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"total_books_sold\" },\n                {\n                  datasource:\n                    \"{{getMostPopularCategory.data['total_books_sold']}}\",\n                },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#033663\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"object\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{getMostPopularCategory.data}}\"\n      isDataTemplateDirty={true}\n      legendAlignment=\"right\"\n      shouldShowLegend={false}\n      skipDatasourceUpdate={true}\n      title=\"Most Popular Book Sales by Category\"\n      xAxis=\"{{getMostPopularCategory.data.category}}\"\n      xAxisDropdown=\"category\"\n    />",
+        "line": 683,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "PopularBooksTable",
+          "_compatibilityMode": "false",
+          "data": "{{getMostPopularBook.data}}",
+          "defaultSortByColumn": "total_books_sold",
+          "defaultSortDescending": "true",
+          "doubleClickToEdit": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"PopularBooksTable\"\n      _columns={[\n        \"title\",\n        \"author\",\n        \"total_sales\",\n        \"discount_code\",\n        \"discount_percent\",\n        \"total_books_sold\",\n      ]}\n      _columnSummaryTypes={{\n        ordered: [{ total_sales: \"sum\" }, { discount_percent: \"average\" }],\n      }}\n      _columnSummaryValues={{\n        ordered: [{ total_sales: \"\" }, { discount_percent: \"\" }],\n      }}\n      _compatibilityMode={false}\n      columnAlignment={{\n        ordered: [{ total_sales: \"right\" }, { discount_percent: \"right\" }],\n      }}\n      columnFormats={{\n        ordered: [\n          { total_sales: \"CurrencyDataCell\" },\n          { discount_percent: \"PercentDataCell\" },\n        ],\n      }}\n      columnTypeProperties={{\n        ordered: [\n          {\n            total_sales: {\n              ordered: [\n                { showSeparators: true },\n                { currency: \"USD\" },\n                { padDecimal: true },\n              ],\n            },\n          },\n          {\n            discount_percent: {\n              ordered: [{ showSeparators: true }, { padDecimal: true }],\n            },\n          },\n        ],\n      }}\n      columnWidths={[{ object: { id: \"title\", value: 300 } }]}\n      data=\"{{getMostPopularBook.data}}\"\n      defaultSortByColumn=\"total_books_sold\"\n      defaultSortDescending={true}\n      doubleClickToEdit={true}\n      showBoxShadow={false}\n    />",
+        "line": 720,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Divider",
+        "attributes": {
+          "id": "divider2",
+          "textSize": "default"
+        },
+        "raw": "<Divider\n      id=\"divider2\"\n      _disclosedFields={{ array: [] }}\n      textSize=\"default\"\n    />",
+        "line": 771,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "text6",
+          "value": "## Discount Code Report",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"text6\"\n      _disclosedFields={{ array: [] }}\n      value=\"## Discount Code Report\"\n      verticalAlign=\"center\"\n    />",
+        "line": 776,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "TableLegacy",
+        "attributes": {
+          "id": "table1",
+          "_compatibilityMode": "false",
+          "data": "{{ getDiscountReport.data }}",
+          "doubleClickToEdit": "true",
+          "showBoxShadow": "false"
+        },
+        "raw": "<TableLegacy\n      id=\"table1\"\n      _compatibilityMode={false}\n      data=\"{{ getDiscountReport.data }}\"\n      doubleClickToEdit={true}\n      showBoxShadow={false}\n    />",
+        "line": 782,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "PlotlyChart",
+        "attributes": {
+          "id": "chart3",
+          "datasourceDataType": "object",
+          "datasourceInputMode": "javascript",
+          "datasourceJS": "{{getDiscountReport.data}}",
+          "isDataTemplateDirty": "true",
+          "skipDatasourceUpdate": "true",
+          "xAxis": "{{getDiscountReport.data.discount_code}}",
+          "xAxisDropdown": "discount_code"
+        },
+        "raw": "<PlotlyChart\n      id=\"chart3\"\n      dataseries={{\n        ordered: [\n          {\n            0: {\n              ordered: [\n                { label: \"times_used\" },\n                { datasource: \"{{getDiscountReport.data['times_used']}}\" },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#033663\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n          {\n            1: {\n              ordered: [\n                { label: \"total_revenue\" },\n                { datasource: \"{{getDiscountReport.data['total_revenue']}}\" },\n                { chartType: \"bar\" },\n                { aggregationType: \"sum\" },\n                { color: \"#247BC7\" },\n                { colors: { ordered: [] } },\n                { visible: true },\n                {\n                  hovertemplate:\n                    \"<b>%{x}</b><br>%{fullData.name}: %{y}<extra></extra>\",\n                },\n              ],\n            },\n          },\n        ],\n      }}\n      datasourceDataType=\"object\"\n      datasourceInputMode=\"javascript\"\n      datasourceJS=\"{{getDiscountReport.data}}\"\n      isDataTemplateDirty={true}\n      skipDatasourceUpdate={true}\n      xAxis=\"{{getDiscountReport.data.discount_code}}\"\n      xAxisDropdown=\"discount_code\"\n    />",
+        "line": 789,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "a7fea",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Books"
+        },
+        "raw": "<View\n    id=\"a7fea\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Books\"\n  >",
+        "line": 21,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "7d34a",
+          "viewKey": "Search Store Inventory"
+        },
+        "raw": "<View id=\"7d34a\" viewKey=\"Search Store Inventory\">",
+        "line": 21,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "checkoutModal",
+          "buttonText": "Open Modal",
+          "hidden": "true"
+        },
+        "raw": "<Modal id=\"checkoutModal\" buttonText=\"Open Modal\" hidden=\"true\">",
+        "line": 1,
+        "parents": [],
+        "file": "src/checkoutModal.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "505e6",
+          "viewKey": "Add Books"
+        },
+        "raw": "<View id=\"505e6\" viewKey=\"Add Books\">",
+        "line": 30,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "Modal",
+        "attributes": {
+          "id": "modal1",
+          "buttonText": "Add book to Inventory",
+          "hidden": "true",
+          "modalHeightType": "auto"
+        },
+        "raw": "<Modal\n      id=\"modal1\"\n      buttonText=\"Add book to Inventory\"\n      hidden=\"true\"\n      modalHeightType=\"auto\"\n    >",
+        "line": 62,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "ec41b",
+          "viewKey": "Discount Codes"
+        },
+        "raw": "<View id=\"ec41b\" viewKey=\"Discount Codes\">",
+        "line": 30,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "1cf04",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Orders"
+        },
+        "raw": "<View\n    id=\"1cf04\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Orders\"\n  >",
+        "line": 160,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "5eac9",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Inventory Report"
+        },
+        "raw": "<View\n    id=\"5eac9\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Inventory Report\"\n  >",
+        "line": 302,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "bb625",
+          "disabled": "false",
+          "hidden": "false",
+          "iconPosition": "left",
+          "viewKey": "Sales Reports"
+        },
+        "raw": "<View\n    id=\"bb625\"\n    disabled={false}\n    hidden={false}\n    iconPosition=\"left\"\n    viewKey=\"Sales Reports\"\n  >",
+        "line": 385,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/tabbedContainer1.rsx"
+      }
+    ],
+    "navigation_evidence": [
+      {
+        "tag": "Event",
+        "attributes": {
+          "event": "submit",
+          "method": "setCurrentView",
+          "pluginId": "tabbedContainer1",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          event=\"submit\"\n          method=\"setCurrentView\"\n          params={{ ordered: [{ viewKey: '\"Store Inventory\"' }] }}\n          pluginId=\"tabbedContainer1\"\n          type=\"widget\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 238,
+        "parents": [
+          "Container",
+          "View",
+          "Modal",
+          "Form"
+        ],
+        "file": "src/tabbedContainer2.rsx"
+      }
+    ],
+    "bound_tables": [
+      "books",
+      "discount_codes",
+      "orders"
+    ],
+    "sql_primary_tables": {
+      "getBooksDataForModal": "books",
+      "getBooksFromStock": "books",
+      "getDiscountCodes": "discount_codes",
+      "getDiscountPercent": "discount_codes",
+      "getDiscountReport": "orders",
+      "getInStock": "books",
+      "getMostPopularBook": "books",
+      "getMostPopularCategory": "books",
+      "getOrders": "orders",
+      "getOrdersJoin": "books",
+      "getOutOfStock": "books",
+      "getSalesData": "orders",
+      "getSalesOverTime": "orders"
+    },
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "header.rsx",
+      "src/tabbedContainer1.rsx",
+      "src/tabbedContainer2.rsx",
+      "src/container1.rsx",
+      "src/checkoutModal.rsx"
+    ],
+    "events": 19,
+    "unresolved_expression_references": []
+  },
+  "sha256": {
+    "data/books.csv": "28d8a4f0799c77122ac65bdbe9252a358041cb7ab3e0c42462097176f0f2e845",
+    "data/discount_codes.csv": "b595f91deb104ad59d22436cc53c3d8d42a8dfdafd951ed802f753955ea8b5fc",
+    "data/orders.csv": "934815cbbbd8cd130550513aba2f0b7be66d626356025409b4e2b73ff5dd7b29",
+    "gui/.positions.json": "fd7f5b103d8f2b2bccc8ccd436390628b538457e974efdf1fa4676dfc958a744",
+    "gui/functions.rsx": "54cfd97596ce451272182a75f85a69eb2f260334ab4f438126531044e86207c3",
+    "gui/header.rsx": "4986c5dee9476cd721520969dd1bd458968411237797b8be5312c617d22f9c67",
+    "gui/lib/calculateCheckoutTotal.js": "80d8ad2a4be3c83356e383b5bf11c7c2ec7be194723851352bd6cbef141000cc",
+    "gui/lib/closeAddBookModal.js": "83b31e6bf7b994627055a59564ec780a738e05a5422d2076f382fa40d74c57cf",
+    "gui/lib/closeCheckoutModal.js": "497cdc777c1569d2730547269ffd7391ada467e47a1c7ca2b0a50f16dc9ce063",
+    "gui/lib/getBooksDataForModal.sql": "733aa09e064d0a8b12bd234a1a1097d4da9b7a5df336cafafa4cfb5655b518f9",
+    "gui/lib/getBooksFromStock.sql": "c901f1cdcd89ea8e18de675e7642e6310c26e2b9a2d024e913ca847acc5bffbf",
+    "gui/lib/getDiscountCodes.sql": "0454a03c487ba475902758602ac26ffafb9643f2e21f08a8d21d2fbc298fcfef",
+    "gui/lib/getDiscountPercent.sql": "fd85ac1dcd402bf82015250929735a3e5060dc3c60c1fabd6b6300e8240897b0",
+    "gui/lib/getDiscountReport.sql": "1bc0ad10f4f5908bc2f0f1a5c827df575ef3e86faafc416df2715a94f69a9cd8",
+    "gui/lib/getInStock.sql": "5a8af11f8cacf758cfb17eeb62438a04b2144943f952b35110b0649a90823f0b",
+    "gui/lib/getMostPopularBook.sql": "d8f49f04b47119f921ce31240900f0f934c91002c99e2300f81869bd8e930365",
+    "gui/lib/getMostPopularCategory.sql": "a1f605f3551a253aff9f06ec73df36760e91f2c15d430a4d25f913c8bf73182a",
+    "gui/lib/getOrders.sql": "6c659d79bf35f7c73a2308f267f1d9bb757d05b07c02b649bff307138ae58a25",
+    "gui/lib/getOrdersJoin.sql": "58f0e17e2476fe15ba4d28b10faceab1dde1cf5f5a81ba2ebcf404def6495197",
+    "gui/lib/getOutOfStock.sql": "c04ad84b7ea2f79bc9a372e911497b95bfce64abdbb4f0bcdf54ed9a8659aed3",
+    "gui/lib/getSalesData.sql": "0841f71c07e5ce7d87146f35a4dafc77fe0e99773f96e467ebc903582cd3137f",
+    "gui/lib/getSalesOverTime.sql": "eb791eeed43a044bfc9f6561925acbf1f14af2bf4e720e10c0064971ef8801e8",
+    "gui/lib/openAddBookModal.js": "8fea76e969ef6c3f144f2aa52e0da59f520b3a7c90d7027a768313dc606faf5e",
+    "gui/lib/openCheckoutModal.js": "d9668b561fd9a89252e2992edcfd3fcded688863c47638a1d3908305a50742aa",
+    "gui/lib/transformerSearchBooksByBookName.js": "c64e5089a9dfc545a66e3b518b302a8628e9ab158677bff5539ee51707dc967c",
+    "gui/main.rsx": "d637e2c5d440998110f9814b79d55f88001d40b191f00d567c44ea1835f7db01",
+    "gui/metadata.json": "f19ee7d9445618d5d44d6bac26467314aea75779e823578d0328ccac1a8be7c0",
+    "gui/src/checkoutModal.rsx": "2dcc14491a514d5365d62d9b4e9bd09484339cbc088b72bfb36c7a66fc77c3f1",
+    "gui/src/container1.rsx": "a23b48e8c078398544cf5d2a87daeee0a17563c21660751bb02f22052dc2d971",
+    "gui/src/tabbedContainer1.rsx": "5d1a432d80e3786199f2e337e0447b70f535f85b6309131d47720c1cbfe165f2",
+    "gui/src/tabbedContainer2.rsx": "9c4757a7f4e0deaea6d08501be4c1c8f87742703a0c670bae543a5906410774f"
+  }
+}

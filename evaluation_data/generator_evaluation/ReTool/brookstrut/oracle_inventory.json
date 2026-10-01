@@ -1,0 +1,950 @@
+{
+  "counts": {
+    "Entities": 5,
+    "Attributes": 31,
+    "Associations": 5,
+    "Multiplicities": 10,
+    "Generalizations": 0,
+    "Enumerations": 0,
+    "Modules": 1,
+    "Screens": 29,
+    "Bound entities": 0,
+    "Buttons": 57,
+    "Action types": 4,
+    "Navigation": 0,
+    "Forms": 0,
+    "Labels": 57,
+    "DataLists": 0,
+    "DataSources": 0,
+    "Input fields": 0
+  },
+  "classes": [
+    {
+      "name": "OowDemoItems",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "item_desc",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "item_name",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "item_type",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "msrp",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "OowDemoRegions",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "is_default_yn",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "region_color",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "region_lat",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "region_lng",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "region_name",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "region_zoom",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "OowDemoSalesHistory",
+      "attributes": [
+        {
+          "name": "date_of_sale",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "item_price",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "quantity",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "transaction_id",
+          "type": "str",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "OowDemoStoreProducts",
+      "attributes": [
+        {
+          "name": "discount_pct",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "item_price",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "sale_end_date",
+          "type": "date",
+          "id": false
+        },
+        {
+          "name": "sale_start_date",
+          "type": "date",
+          "id": false
+        }
+      ]
+    },
+    {
+      "name": "OowDemoStores",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_address",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_city",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_lat",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_lng",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_name",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_state",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_type",
+          "type": "str",
+          "id": false
+        },
+        {
+          "name": "store_zip",
+          "type": "str",
+          "id": false
+        }
+      ]
+    }
+  ],
+  "associations": [
+    {
+      "name": "OowDemoSalesHistory_OowDemoStoreProducts",
+      "ends": [
+        {
+          "name": "oowdemosaleshistory",
+          "type": "OowDemoSalesHistory",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        },
+        {
+          "name": "oowdemostoreproducts",
+          "type": "OowDemoStoreProducts",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        }
+      ]
+    },
+    {
+      "name": "OowDemoSalesHistory_OowDemoStores",
+      "ends": [
+        {
+          "name": "oowdemosaleshistory",
+          "type": "OowDemoSalesHistory",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        },
+        {
+          "name": "oowdemostores",
+          "type": "OowDemoStores",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        }
+      ]
+    },
+    {
+      "name": "OowDemoStoreProducts_OowDemoItems",
+      "ends": [
+        {
+          "name": "oowdemoitems",
+          "type": "OowDemoItems",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        },
+        {
+          "name": "oowdemostoreproducts",
+          "type": "OowDemoStoreProducts",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        }
+      ]
+    },
+    {
+      "name": "OowDemoStoreProducts_OowDemoStores",
+      "ends": [
+        {
+          "name": "oowdemostoreproducts",
+          "type": "OowDemoStoreProducts",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        },
+        {
+          "name": "oowdemostores",
+          "type": "OowDemoStores",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        }
+      ]
+    },
+    {
+      "name": "OowDemoStores_OowDemoRegions",
+      "ends": [
+        {
+          "name": "oowdemoregions",
+          "type": "OowDemoRegions",
+          "multiplicity": "Multiplicity(0, 1, is_derived=False)"
+        },
+        {
+          "name": "oowdemostores",
+          "type": "OowDemoStores",
+          "multiplicity": "Multiplicity(0, 9999, is_derived=False)"
+        }
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "module": "Brookstrut",
+      "name": "100_Transactions_Generated",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "About",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Activity_Calendar",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Administration",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Generate_Transactions",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Load_Data",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Product_Form",
+      "main": false
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Region_Form",
+      "main": false
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Remove_Transaction_History",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Reports",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Reset_Sample_Data",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Calendar",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Cards",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Classic",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Classic_page_00050",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Content_Row",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Content_Row_with_Menu",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Interactive_Grid",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_History_Smart_Search_w_Menu_Actions",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_by_Product",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Sales_by_Store_by_Day",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Store",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Store_page_00007",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Stores_Report_Content_Row",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Table_Counts",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Theme_Style_Selection_Form",
+      "main": false
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Transaction",
+      "main": true
+    },
+    {
+      "module": "Brookstrut",
+      "name": "Transaction_Detail_Form",
+      "main": false
+    }
+  ],
+  "widgets": [
+    {
+      "screen": "100_Transactions_Generated",
+      "name": "Refresh_Page",
+      "kind": "Button",
+      "events": [],
+      "label": "Refresh_Page",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "100_Transactions_Generated",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "About",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Activity_Calendar",
+      "name": "Refresh",
+      "kind": "Button",
+      "events": [],
+      "label": "Refresh",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Activity_Calendar",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Administration",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Generate_Transactions",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Load_Data",
+      "name": "Reload",
+      "kind": "Button",
+      "events": [],
+      "label": "Reload",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Load_Data",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Product_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Product_Form",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Product_Form",
+      "name": "Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Product_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Region_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Region_Form",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Region_Form",
+      "name": "Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Region_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Remove_Transaction_History",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Remove_Transaction_History",
+      "name": "Remove_Transactions",
+      "kind": "Button",
+      "events": [],
+      "label": "Remove_Transactions",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Remove_Transaction_History",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Reports",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Reset_Sample_Data",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales",
+      "name": "Generate_Transaction",
+      "kind": "Button",
+      "events": [],
+      "label": "Generate_Transaction",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales",
+      "name": "Refresh",
+      "kind": "Button",
+      "events": [],
+      "label": "Refresh",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Calendar",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Calendar",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Cards",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Cards",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Classic",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Classic",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Classic_page_00050",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Classic_page_00050",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Content_Row",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Content_Row",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Content_Row_with_Menu",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Content_Row_with_Menu",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Interactive_Grid",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Interactive_Grid",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Smart_Search_w_Menu_Actions",
+      "name": "Reset",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_History_Smart_Search_w_Menu_Actions",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_by_Product",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Sales_by_Store_by_Day",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store",
+      "name": "Edit_Store",
+      "kind": "Button",
+      "events": [],
+      "label": "Edit_Store",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store_page_00007",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store_page_00007",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store_page_00007",
+      "name": "Delete",
+      "kind": "Button",
+      "events": [],
+      "label": "Delete",
+      "action_type": "Delete",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Store_page_00007",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Stores_Report_Content_Row",
+      "name": "Create",
+      "kind": "Button",
+      "events": [],
+      "label": "Create",
+      "action_type": "Add",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Stores_Report_Content_Row",
+      "name": "Reset_Report",
+      "kind": "Button",
+      "events": [],
+      "label": "Reset_Report",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Stores_Report_Content_Row",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Table_Counts",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Theme_Style_Selection_Form",
+      "name": "Cancel",
+      "kind": "Button",
+      "events": [],
+      "label": "Cancel",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Theme_Style_Selection_Form",
+      "name": "Save",
+      "kind": "Button",
+      "events": [],
+      "label": "Save",
+      "action_type": "Save",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Transaction",
+      "name": "Refresh_Page",
+      "kind": "Button",
+      "events": [],
+      "label": "Refresh_Page",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    },
+    {
+      "screen": "Transaction",
+      "name": "Up",
+      "kind": "Button",
+      "events": [],
+      "label": "Up",
+      "action_type": "Cancel",
+      "synthetic_label": false
+    }
+  ],
+  "bound_entities": [],
+  "action_types": [
+    "Add",
+    "Cancel",
+    "Delete",
+    "Save"
+  ],
+  "native_events": 0
+}

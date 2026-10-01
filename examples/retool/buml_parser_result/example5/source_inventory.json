@@ -1,0 +1,2204 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "team_members",
+        "columns": [
+          "id",
+          "name",
+          "email",
+          "department",
+          "status",
+          "role",
+          "joined_date",
+          "notes"
+        ],
+        "rows": 3,
+        "file": "team_members.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 1,
+      "Attributes": 8,
+      "Associations": 0,
+      "Multiplicities": 0,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 5,
+      "Bound entities": 1,
+      "Buttons": 9,
+      "Action types": 5,
+      "Navigation": 6,
+      "Forms": 1,
+      "Labels": 7,
+      "DataLists": 1,
+      "DataSources": 1,
+      "Input fields": 12
+    },
+    "tag_counts": {
+      "Action": 2,
+      "App": 1,
+      "Body": 3,
+      "Button": 7,
+      "Column": 7,
+      "Container": 1,
+      "Date": 1,
+      "DateRange": 1,
+      "Event": 29,
+      "Footer": 2,
+      "Form": 1,
+      "Frame": 1,
+      "GlobalFunctions": 1,
+      "Header": 3,
+      "JavascriptQuery": 2,
+      "ModalFrame": 2,
+      "Option": 13,
+      "Select": 5,
+      "SplitPaneFrame": 1,
+      "SqlQueryUnified": 6,
+      "State": 2,
+      "Table": 1,
+      "Tabs": 1,
+      "Tags": 1,
+      "Text": 8,
+      "TextArea": 1,
+      "TextInput": 3,
+      "ToolbarButton": 3,
+      "View": 2
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App>",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions>",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "State",
+        "attributes": {
+          "id": "isBulkUpdate",
+          "value": "{{ false }}"
+        },
+        "raw": "<State id=\"isBulkUpdate\" value=\"{{ false }}\" />",
+        "line": 2,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "State",
+        "attributes": {
+          "id": "bulkUpdateData",
+          "value": "{{ [] }}"
+        },
+        "raw": "<State id=\"bulkUpdateData\" value=\"{{ [] }}\" />",
+        "line": 3,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "selectMembers",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": ""
+        },
+        "raw": "<SqlQueryUnified\n    id=\"selectMembers\"\n    query={include(\"./lib/selectMembers.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    warningCodes={[]}\n  />",
+        "line": 4,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "selectDepartments",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": ""
+        },
+        "raw": "<SqlQueryUnified\n    id=\"selectDepartments\"\n    query={include(\"./lib/selectDepartments.sql\", \"string\")}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    warningCodes={[]}\n  />",
+        "line": 12,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "updateMember",
+          "actionType": "UPDATE_BY",
+          "changesetIsObject": "true",
+          "changesetObject": "{{ { ...DetailForm.data } }}",
+          "editorMode": "gui",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "team_members"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"updateMember\"\n    actionType=\"UPDATE_BY\"\n    changesetIsObject={true}\n    changesetObject=\"{{ { ...DetailForm.data } }}\"\n    editorMode=\"gui\"\n    filterBy={\n      '[{\"key\":\"id\",\"value\":\"{{ membersTable.selectedRow.id }}\",\"operation\":\"=\"}]'\n    }\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"team_members\"\n  >",
+        "line": 20,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "aa11bb22",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectMembers",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"aa11bb22\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{}}\n      pluginId=\"selectMembers\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 35,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "cc33dd44",
+          "event": "success",
+          "method": "selectRow",
+          "pluginId": "membersTable",
+          "type": "widget",
+          "waitMs": "100",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"cc33dd44\"\n      event=\"success\"\n      method=\"selectRow\"\n      params={{ map: { 0: \"key\" } }}\n      pluginId=\"membersTable\"\n      type=\"widget\"\n      waitMs=\"100\"\n      waitType=\"debounce\"\n    />",
+        "line": 45,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "bulkUpdateMembers",
+          "actionType": "BULK_UPDATE_BY_KEY",
+          "bulkUpdatePrimaryKey": "id",
+          "editorMode": "gui",
+          "records": "{{ bulkUpdateData.value }}",
+          "resourceName": "REPLACE_WITH_RESOURCE_UUID",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "public.team_members"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"bulkUpdateMembers\"\n    actionType=\"BULK_UPDATE_BY_KEY\"\n    bulkUpdatePrimaryKey=\"id\"\n    editorMode=\"gui\"\n    records=\"{{ bulkUpdateData.value }}\"\n    resourceName=\"REPLACE_WITH_RESOURCE_UUID\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"public.team_members\"\n  >",
+        "line": 56,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "ee55ff66",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectMembers",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"ee55ff66\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{ ordered: [] }}\n      pluginId=\"selectMembers\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 67,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "11223344",
+          "event": "success",
+          "method": "setValue",
+          "pluginId": "isBulkUpdate",
+          "type": "state",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"11223344\"\n      event=\"success\"\n      method=\"setValue\"\n      params={{ ordered: [{ 0: \"value\" }] }}\n      pluginId=\"isBulkUpdate\"\n      type=\"state\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 77,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "55667788",
+          "event": "success",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"55667788\"\n      event=\"success\"\n      method=\"hide\"\n      params={{}}\n      pluginId=\"confirmBulkUpdate\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 87,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "deleteMember",
+          "actionType": "DELETE_BY",
+          "confirmationMessage": "Are you sure you want to remove **{{ membersTable.selectedRow.name }}** from the team?",
+          "editorMode": "gui",
+          "requireConfirmation": "true",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "team_members"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"deleteMember\"\n    actionType=\"DELETE_BY\"\n    confirmationMessage=\"Are you sure you want to remove **{{ membersTable.selectedRow.name }}** from the team?\"\n    editorMode=\"gui\"\n    filterBy={\n      '[{\"key\":\"id\",\"value\":\"{{ membersTable.selectedRow.id }}\",\"operation\":\"=\"}]'\n    }\n    requireConfirmation={true}\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"team_members\"\n  >",
+        "line": 98,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "99aabb00",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectMembers",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"99aabb00\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{}}\n      pluginId=\"selectMembers\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 113,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "ccddee11",
+          "event": "success",
+          "method": "clearSelection",
+          "pluginId": "membersTable",
+          "type": "widget",
+          "waitMs": "100",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"ccddee11\"\n      event=\"success\"\n      method=\"clearSelection\"\n      params={{}}\n      pluginId=\"membersTable\"\n      type=\"widget\"\n      waitMs=\"100\"\n      waitType=\"debounce\"\n    />",
+        "line": 123,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "SqlQueryUnified",
+        "attributes": {
+          "id": "saveTableChanges",
+          "actionType": "BULK_UPSERT_BY_KEY",
+          "bulkUpdatePrimaryKey": "id",
+          "editorMode": "gui",
+          "records": "{{ membersTable.changesetArray }}",
+          "resourceDisplayName": "retool_db",
+          "resourceName": "34065358-ee82-4b8f-974f-0b7b918d3034",
+          "resourceTypeOverride": "",
+          "runWhenModelUpdates": "false",
+          "tableName": "team_members"
+        },
+        "raw": "<SqlQueryUnified\n    id=\"saveTableChanges\"\n    actionType=\"BULK_UPSERT_BY_KEY\"\n    bulkUpdatePrimaryKey=\"id\"\n    editorMode=\"gui\"\n    records=\"{{ membersTable.changesetArray }}\"\n    resourceDisplayName=\"retool_db\"\n    resourceName=\"34065358-ee82-4b8f-974f-0b7b918d3034\"\n    resourceTypeOverride=\"\"\n    runWhenModelUpdates={false}\n    tableName=\"team_members\"\n  >",
+        "line": 134,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "22334455",
+          "event": "success",
+          "method": "trigger",
+          "pluginId": "selectMembers",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"22334455\"\n      event=\"success\"\n      method=\"trigger\"\n      params={{}}\n      pluginId=\"selectMembers\"\n      type=\"datasource\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 146,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "applyFilters"
+        },
+        "raw": "<JavascriptQuery\n    id=\"applyFilters\"\n    query={include(\"./lib/applyFilters.js\", \"string\")}\n  />",
+        "line": 157,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "JavascriptQuery",
+        "attributes": {
+          "id": "setBulkUpdateData"
+        },
+        "raw": "<JavascriptQuery\n    id=\"setBulkUpdateData\"\n    query={include(\"./lib/setBulkUpdateData.js\", \"string\")}\n  />",
+        "line": 161,
+        "parents": [
+          "GlobalFunctions"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "confirmBulkUpdate",
+          "hidden": "true",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"confirmBulkUpdate\"\n  hidden={true}\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "bulkTitle",
+          "marginType": "normal",
+          "value": "#### Bulk Update Confirmation",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"bulkTitle\"\n      marginType=\"normal\"\n      value=\"#### Bulk Update Confirmation\"\n      verticalAlign=\"center\"\n    />",
+        "line": 9,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "bulkCloseBtn",
+          "iconBefore": "bold/interface-delete-1",
+          "marginType": "normal",
+          "styleVariant": "outline"
+        },
+        "raw": "<Button\n      id=\"bulkCloseBtn\"\n      iconBefore=\"bold/interface-delete-1\"\n      marginType=\"normal\"\n      styleVariant=\"outline\"\n    >",
+        "line": 15,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "b1c2d3e4",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"b1c2d3e4\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"confirmBulkUpdate\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 21,
+        "parents": [
+          "ModalFrame",
+          "Header",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "f5a6b7c8",
+          "event": "click",
+          "method": "setValue",
+          "pluginId": "isBulkUpdate",
+          "type": "state",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"f5a6b7c8\"\n        event=\"click\"\n        method=\"setValue\"\n        params={{ ordered: [{ 0: \"value\" }] }}\n        pluginId=\"isBulkUpdate\"\n        type=\"state\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 31,
+        "parents": [
+          "ModalFrame",
+          "Header",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 43,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "bulkWarning",
+          "marginType": "normal",
+          "value": "You are about to update **{{ bulkUpdateData.value.length }}** team member(s). Please review the affected members below before confirming."
+        },
+        "raw": "<Text\n      id=\"bulkWarning\"\n      marginType=\"normal\"\n      value=\"You are about to update **{{ bulkUpdateData.value.length }}** team member(s). Please review the affected members below before confirming.\"\n    />",
+        "line": 44,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Tags",
+        "attributes": {
+          "id": "bulkMemberTags",
+          "marginType": "normal",
+          "value": "{{ bulkUpdateData.value.map(r => r.name) }}"
+        },
+        "raw": "<Tags\n      id=\"bulkMemberTags\"\n      marginType=\"normal\"\n      value=\"{{ bulkUpdateData.value.map(r => r.name) }}\"\n    />",
+        "line": 49,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "bulkFieldSummary",
+          "marginType": "normal",
+          "value": "{{ '**Fields that will be updated:** status, role\\n\\n_Only editable columns from the table will be included in the update._' }}"
+        },
+        "raw": "<Text\n      id=\"bulkFieldSummary\"\n      marginType=\"normal\"\n      value=\"{{ '**Fields that will be updated:** status, role\\n\\n_Only editable columns from the table will be included in the update._' }}\"\n    />",
+        "line": 54,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 60,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "bulkCancelBtn",
+          "marginType": "normal",
+          "styleVariant": "outline",
+          "text": "Cancel"
+        },
+        "raw": "<Button\n      id=\"bulkCancelBtn\"\n      marginType=\"normal\"\n      styleVariant=\"outline\"\n      text=\"Cancel\"\n    >",
+        "line": 61,
+        "parents": [
+          "ModalFrame",
+          "Footer"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "d9e0f1a2",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"d9e0f1a2\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"confirmBulkUpdate\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 67,
+        "parents": [
+          "ModalFrame",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "b3c4d5e6",
+          "event": "click",
+          "method": "setValue",
+          "pluginId": "isBulkUpdate",
+          "type": "state",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"b3c4d5e6\"\n        event=\"click\"\n        method=\"setValue\"\n        params={{ ordered: [{ 0: \"value\" }] }}\n        pluginId=\"isBulkUpdate\"\n        type=\"state\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 77,
+        "parents": [
+          "ModalFrame",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "bulkConfirmBtn",
+          "disabled": "{{ bulkUpdateData.value.length > 50 || bulkUpdateData.value.length === 0 }}",
+          "marginType": "normal",
+          "text": "Confirm update ({{ bulkUpdateData.value.length }})"
+        },
+        "raw": "<Button\n      id=\"bulkConfirmBtn\"\n      disabled=\"{{ bulkUpdateData.value.length > 50 || bulkUpdateData.value.length === 0 }}\"\n      marginType=\"normal\"\n      text=\"Confirm update ({{ bulkUpdateData.value.length }})\"\n    >",
+        "line": 88,
+        "parents": [
+          "ModalFrame",
+          "Footer"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "f7a8b9c0",
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "bulkUpdateMembers",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"f7a8b9c0\"\n        event=\"click\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"bulkUpdateMembers\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 94,
+        "parents": [
+          "ModalFrame",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "SplitPaneFrame",
+        "attributes": {
+          "id": "detailPane",
+          "_resizeHandleEnabled": "true",
+          "enableFullBleed": "true",
+          "hidden": "{{ !membersTable.selectedRow.id }}",
+          "position": "right",
+          "width": "{{ { details: '400px', activity: '550px' }?.[detailTabs.value] ?? '400px' }}"
+        },
+        "raw": "<SplitPaneFrame\n  id=\"detailPane\"\n  _resizeHandleEnabled={true}\n  enableFullBleed={true}\n  hidden=\"{{ !membersTable.selectedRow.id }}\"\n  position=\"right\"\n  width=\"{{ { details: '400px', activity: '550px' }?.[detailTabs.value] ?? '400px' }}\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/detailPane.rsx"
+      },
+      {
+        "tag": "Container",
+        "attributes": {
+          "id": "detailContainer",
+          "footerPadding": "4px 12px",
+          "headerPadding": "4px 12px",
+          "heightType": "fixed",
+          "padding": "12px",
+          "showBody": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Container\n  id=\"detailContainer\"\n  footerPadding=\"4px 12px\"\n  headerPadding=\"4px 12px\"\n  heightType=\"fixed\"\n  padding=\"12px\"\n  showBody={true}\n  showHeader={true}\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 10,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "detailTitle",
+          "value": "#### {{ membersTable.selectedRow.name }}",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"detailTitle\"\n      value=\"#### {{ membersTable.selectedRow.name }}\"\n      verticalAlign=\"center\"\n    />",
+        "line": 11,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Tabs",
+        "attributes": {
+          "id": "detailTabs",
+          "itemMode": "static",
+          "navigateContainer": "true",
+          "targetContainerId": "detailContainer",
+          "value": "{{ self.values[0] }}"
+        },
+        "raw": "<Tabs\n      id=\"detailTabs\"\n      itemMode=\"static\"\n      navigateContainer={true}\n      targetContainerId=\"detailContainer\"\n      value=\"{{ self.values[0] }}\"\n    >",
+        "line": 16,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "t1a1a",
+          "label": "Details",
+          "value": "details"
+        },
+        "raw": "<Option id=\"t1a1a\" label=\"Details\" value=\"details\" />",
+        "line": 23,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "t2b2b",
+          "label": "Activity",
+          "value": "activity"
+        },
+        "raw": "<Option id=\"t2b2b\" label=\"Activity\" value=\"activity\" />",
+        "line": 24,
+        "parents": [
+          "Container",
+          "Header",
+          "Tabs"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "detailCloseBtn",
+          "horizontalAlign": "right",
+          "iconBefore": "bold/interface-delete-1",
+          "styleVariant": "outline"
+        },
+        "raw": "<Button\n      id=\"detailCloseBtn\"\n      horizontalAlign=\"right\"\n      iconBefore=\"bold/interface-delete-1\"\n      styleVariant=\"outline\"\n    >",
+        "line": 26,
+        "parents": [
+          "Container",
+          "Header"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "f1a2b3c4",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "detailPane",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"f1a2b3c4\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"detailPane\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 32,
+        "parents": [
+          "Container",
+          "Header",
+          "Button"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "detailsView",
+          "label": "Details",
+          "viewKey": "details"
+        },
+        "raw": "<View id=\"detailsView\" label=\"Details\" viewKey=\"details\">",
+        "line": 44,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Form",
+        "attributes": {
+          "id": "DetailForm",
+          "disableSubmit": "{{ updateMember.isFetching }}",
+          "initialData": "{{ membersTable.selectedSourceRow }}",
+          "loading": "{{ updateMember.isFetching }}",
+          "padding": "12px",
+          "requireValidation": "true",
+          "showBody": "true",
+          "showFooter": "true"
+        },
+        "raw": "<Form\n      id=\"DetailForm\"\n      disableSubmit=\"{{ updateMember.isFetching }}\"\n      initialData=\"{{ membersTable.selectedSourceRow }}\"\n      loading=\"{{ updateMember.isFetching }}\"\n      padding=\"12px\"\n      requireValidation={true}\n      showBody={true}\n      showFooter={true}\n    >",
+        "line": 45,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 55,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "detailName",
+          "formDataKey": "name",
+          "label": "Name",
+          "labelPosition": "top",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"detailName\"\n          formDataKey=\"name\"\n          label=\"Name\"\n          labelPosition=\"top\"\n          required={true}\n        />",
+        "line": 56,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "detailEmail",
+          "formDataKey": "email",
+          "label": "Email",
+          "labelPosition": "top",
+          "required": "true"
+        },
+        "raw": "<TextInput\n          id=\"detailEmail\"\n          formDataKey=\"email\"\n          label=\"Email\"\n          labelPosition=\"top\"\n          required={true}\n        />",
+        "line": 63,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "detailDepartment",
+          "data": "{{ Array.isArray(selectDepartments.data) ? selectDepartments.data : [{ label: 'Engineering', value: 'Engineering' }, { label: 'Marketing', value: 'Marketing' }, { label: 'Sales', value: 'Sales' }] }}",
+          "formDataKey": "department",
+          "itemMode": "mapped",
+          "label": "Department",
+          "labelPosition": "top",
+          "labels": "{{ item.label }}",
+          "showSelectionIndicator": "true",
+          "values": "{{ item.value }}"
+        },
+        "raw": "<Select\n          id=\"detailDepartment\"\n          data=\"{{ Array.isArray(selectDepartments.data) ? selectDepartments.data : [{ label: 'Engineering', value: 'Engineering' }, { label: 'Marketing', value: 'Marketing' }, { label: 'Sales', value: 'Sales' }] }}\"\n          formDataKey=\"department\"\n          itemMode=\"mapped\"\n          label=\"Department\"\n          labelPosition=\"top\"\n          labels=\"{{ item.label }}\"\n          showSelectionIndicator={true}\n          values=\"{{ item.value }}\"\n        />",
+        "line": 70,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "detailRole",
+          "formDataKey": "role",
+          "itemMode": "static",
+          "label": "Role",
+          "labelPosition": "top",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n          id=\"detailRole\"\n          formDataKey=\"role\"\n          itemMode=\"static\"\n          label=\"Role\"\n          labelPosition=\"top\"\n          showSelectionIndicator={true}\n        >",
+        "line": 81,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "r1a1a",
+          "label": "Engineer",
+          "value": "Engineer"
+        },
+        "raw": "<Option id=\"r1a1a\" label=\"Engineer\" value=\"Engineer\" />",
+        "line": 89,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "r2b2b",
+          "label": "Designer",
+          "value": "Designer"
+        },
+        "raw": "<Option id=\"r2b2b\" label=\"Designer\" value=\"Designer\" />",
+        "line": 90,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "r3c3c",
+          "label": "Manager",
+          "value": "Manager"
+        },
+        "raw": "<Option id=\"r3c3c\" label=\"Manager\" value=\"Manager\" />",
+        "line": 91,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "r4d4d",
+          "label": "Analyst",
+          "value": "Analyst"
+        },
+        "raw": "<Option id=\"r4d4d\" label=\"Analyst\" value=\"Analyst\" />",
+        "line": 92,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "r5e5e",
+          "label": "Lead",
+          "value": "Lead"
+        },
+        "raw": "<Option id=\"r5e5e\" label=\"Lead\" value=\"Lead\" />",
+        "line": 93,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "detailStatus",
+          "formDataKey": "status",
+          "itemMode": "static",
+          "label": "Status",
+          "labelPosition": "top",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n          id=\"detailStatus\"\n          formDataKey=\"status\"\n          itemMode=\"static\"\n          label=\"Status\"\n          labelPosition=\"top\"\n          showSelectionIndicator={true}\n        >",
+        "line": 95,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "ds1a1",
+          "label": "Active",
+          "value": "active"
+        },
+        "raw": "<Option id=\"ds1a1\" label=\"Active\" value=\"active\" />",
+        "line": 103,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "ds2b2",
+          "label": "On Leave",
+          "value": "on_leave"
+        },
+        "raw": "<Option id=\"ds2b2\" label=\"On Leave\" value=\"on_leave\" />",
+        "line": 104,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "ds3c3",
+          "label": "Offboarded",
+          "value": "offboarded"
+        },
+        "raw": "<Option id=\"ds3c3\" label=\"Offboarded\" value=\"offboarded\" />",
+        "line": 105,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body",
+          "Select"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Date",
+        "attributes": {
+          "id": "detailJoinedDate",
+          "formDataKey": "joined_date",
+          "label": "Joined",
+          "labelPosition": "top"
+        },
+        "raw": "<Date\n          id=\"detailJoinedDate\"\n          formDataKey=\"joined_date\"\n          label=\"Joined\"\n          labelPosition=\"top\"\n        />",
+        "line": 107,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "TextArea",
+        "attributes": {
+          "id": "detailNotes",
+          "autoResize": "true",
+          "formDataKey": "notes",
+          "label": "Notes",
+          "labelPosition": "top"
+        },
+        "raw": "<TextArea\n          id=\"detailNotes\"\n          autoResize={true}\n          formDataKey=\"notes\"\n          label=\"Notes\"\n          labelPosition=\"top\"\n          minLines={3}\n        />",
+        "line": 113,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Body"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Footer",
+        "attributes": {},
+        "raw": "<Footer>",
+        "line": 122,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "detailSaveBtn",
+          "submit": "true",
+          "submitTargetId": "DetailForm",
+          "text": "Save changes"
+        },
+        "raw": "<Button\n          id=\"detailSaveBtn\"\n          submit={true}\n          submitTargetId=\"DetailForm\"\n          text=\"Save changes\"\n        />",
+        "line": 123,
+        "parents": [
+          "Container",
+          "View",
+          "Form",
+          "Footer"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "d5e6f7a8",
+          "event": "submit",
+          "method": "trigger",
+          "pluginId": "updateMember",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"d5e6f7a8\"\n        event=\"submit\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"updateMember\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 130,
+        "parents": [
+          "Container",
+          "View",
+          "Form"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "activityView",
+          "label": "Activity",
+          "viewKey": "activity"
+        },
+        "raw": "<View id=\"activityView\" label=\"Activity\" viewKey=\"activity\">",
+        "line": 142,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "activityPlaceholder",
+          "value": "Activity log for **{{ membersTable.selectedRow.name }}** will appear here.\\n\\nThis view demonstrates the tabbed detail pane pattern with dynamic width — the Activity tab expands the panel to 550px to accommodate richer content."
+        },
+        "raw": "<Text\n      id=\"activityPlaceholder\"\n      value=\"Activity log for **{{ membersTable.selectedRow.name }}** will appear here.\\n\\nThis view demonstrates the tabbed detail pane pattern with dynamic width — the Activity tab expands the panel to 550px to accommodate richer content.\"\n    />",
+        "line": 143,
+        "parents": [
+          "Container",
+          "View"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Header",
+        "attributes": {},
+        "raw": "<Header>",
+        "line": 8,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideTitle",
+          "marginType": "normal",
+          "value": "## 🚀 Setup Guide",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"setupGuideTitle\"\n      marginType=\"normal\"\n      value=\"## 🚀 Setup Guide\"\n      verticalAlign=\"center\"\n    />",
+        "line": 9,
+        "parents": [
+          "ModalFrame",
+          "Header"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body>",
+        "line": 16,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "setupGuideText",
+          "marginType": "normal",
+          "value": "{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}"
+        },
+        "raw": "<Text\n      id=\"setupGuideText\"\n      marginType=\"normal\"\n      value=\"{{ 'Welcome! This app is loaded with **sample data** so you can click around and explore right away.\\n\\nWhen you are ready to wire up your real database, follow these steps:\\n\\n1. 🔌 **Connect your database** — Go to *Resources* in Retool and add your DB\\n2. 🔄 **Update queries** — Open each query in the bottom panel and switch the Resource\\n3. 📝 **Update table/column names** — Edit the SQL in each query to match your schema\\n4. 🧹 **Remove mock data** — In each Table/Select, remove the mock array fallback from the data attribute\\n5. 🗑️ **Delete this modal** — Remove this Setup Guide and the setupGuideBtn button\\n\\n✅ You are all set — happy building!' }}\"\n    />",
+        "line": 17,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/setupGuideModal.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "isHiddenOnDesktop": "false",
+          "isHiddenOnMobile": "false",
+          "padding": "8px 12px",
+          "paddingType": "normal",
+          "sticky": "false",
+          "type": "main"
+        },
+        "raw": "<Frame\n    id=\"$main\"\n    isHiddenOnDesktop={false}\n    isHiddenOnMobile={false}\n    padding=\"8px 12px\"\n    paddingType=\"normal\"\n    sticky={false}\n    type=\"main\"\n  >",
+        "line": 6,
+        "parents": [
+          "App"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Text",
+        "attributes": {
+          "id": "pageTitle",
+          "marginType": "normal",
+          "value": "### Team Members",
+          "verticalAlign": "center"
+        },
+        "raw": "<Text\n      id=\"pageTitle\"\n      marginType=\"normal\"\n      value=\"### Team Members\"\n      verticalAlign=\"center\"\n    />",
+        "line": 15,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "setupGuideBtn",
+          "marginType": "normal",
+          "text": "Setup Guide"
+        },
+        "raw": "<Button id=\"setupGuideBtn\" marginType=\"normal\" text=\"Setup Guide\">",
+        "line": 21,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fd4e5f6a",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fd4e5f6a\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 22,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "TextInput",
+        "attributes": {
+          "id": "searchInput",
+          "iconBefore": "bold/interface-search",
+          "label": "",
+          "marginType": "normal",
+          "placeholder": "Search by name or email...",
+          "showClear": "true"
+        },
+        "raw": "<TextInput\n      id=\"searchInput\"\n      iconBefore=\"bold/interface-search\"\n      label=\"\"\n      marginType=\"normal\"\n      placeholder=\"Search by name or email...\"\n      showClear={true}\n    >",
+        "line": 33,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a1b2c3d4",
+          "event": "change",
+          "method": "trigger",
+          "pluginId": "applyFilters",
+          "type": "datasource",
+          "waitMs": "300",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"a1b2c3d4\"\n        event=\"change\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"applyFilters\"\n        type=\"datasource\"\n        waitMs=\"300\"\n        waitType=\"debounce\"\n      />",
+        "line": 41,
+        "parents": [
+          "App",
+          "Frame",
+          "TextInput"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "departmentFilter",
+          "data": "{{ Array.isArray(selectDepartments.data) ? selectDepartments.data : [{ label: 'Engineering', value: 'Engineering' }, { label: 'Marketing', value: 'Marketing' }, { label: 'Sales', value: 'Sales' }] }}",
+          "emptyMessage": "All departments",
+          "itemMode": "mapped",
+          "label": "Department",
+          "labelPosition": "top",
+          "labels": "{{ item.label }}",
+          "marginType": "normal",
+          "placeholder": "All departments",
+          "showClear": "true",
+          "showSelectionIndicator": "true",
+          "values": "{{ item.value }}"
+        },
+        "raw": "<Select\n      id=\"departmentFilter\"\n      data=\"{{ Array.isArray(selectDepartments.data) ? selectDepartments.data : [{ label: 'Engineering', value: 'Engineering' }, { label: 'Marketing', value: 'Marketing' }, { label: 'Sales', value: 'Sales' }] }}\"\n      emptyMessage=\"All departments\"\n      itemMode=\"mapped\"\n      label=\"Department\"\n      labelPosition=\"top\"\n      labels=\"{{ item.label }}\"\n      marginType=\"normal\"\n      placeholder=\"All departments\"\n      showClear={true}\n      showSelectionIndicator={true}\n      values=\"{{ item.value }}\"\n    >",
+        "line": 52,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "e5f6a7b8",
+          "event": "change",
+          "method": "trigger",
+          "pluginId": "applyFilters",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"e5f6a7b8\"\n        event=\"change\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"applyFilters\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 66,
+        "parents": [
+          "App",
+          "Frame",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Select",
+        "attributes": {
+          "id": "statusFilter",
+          "emptyMessage": "All statuses",
+          "itemMode": "static",
+          "label": "Status",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "placeholder": "All statuses",
+          "showClear": "true",
+          "showSelectionIndicator": "true"
+        },
+        "raw": "<Select\n      id=\"statusFilter\"\n      emptyMessage=\"All statuses\"\n      itemMode=\"static\"\n      label=\"Status\"\n      labelPosition=\"top\"\n      marginType=\"normal\"\n      placeholder=\"All statuses\"\n      showClear={true}\n      showSelectionIndicator={true}\n    >",
+        "line": 77,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "s1a1a",
+          "label": "Active",
+          "value": "active"
+        },
+        "raw": "<Option id=\"s1a1a\" label=\"Active\" value=\"active\" />",
+        "line": 88,
+        "parents": [
+          "App",
+          "Frame",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "s2b2b",
+          "label": "On Leave",
+          "value": "on_leave"
+        },
+        "raw": "<Option id=\"s2b2b\" label=\"On Leave\" value=\"on_leave\" />",
+        "line": 89,
+        "parents": [
+          "App",
+          "Frame",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Option",
+        "attributes": {
+          "id": "s3c3c",
+          "label": "Offboarded",
+          "value": "offboarded"
+        },
+        "raw": "<Option id=\"s3c3c\" label=\"Offboarded\" value=\"offboarded\" />",
+        "line": 90,
+        "parents": [
+          "App",
+          "Frame",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "c9d0e1f2",
+          "event": "change",
+          "method": "trigger",
+          "pluginId": "applyFilters",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"c9d0e1f2\"\n        event=\"change\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"applyFilters\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 91,
+        "parents": [
+          "App",
+          "Frame",
+          "Select"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "DateRange",
+        "attributes": {
+          "id": "dateRangeFilter",
+          "label": "Joined",
+          "labelPosition": "top",
+          "marginType": "normal",
+          "showClear": "true"
+        },
+        "raw": "<DateRange\n      id=\"dateRangeFilter\"\n      label=\"Joined\"\n      labelPosition=\"top\"\n      marginType=\"normal\"\n      showClear={true}\n    >",
+        "line": 102,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a3b4c5d6",
+          "event": "change",
+          "method": "trigger",
+          "pluginId": "applyFilters",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"a3b4c5d6\"\n        event=\"change\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"applyFilters\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 109,
+        "parents": [
+          "App",
+          "Frame",
+          "DateRange"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "resetBtn",
+          "marginType": "normal",
+          "styleVariant": "outline",
+          "text": "Reset"
+        },
+        "raw": "<Button\n      id=\"resetBtn\"\n      marginType=\"normal\"\n      styleVariant=\"outline\"\n      text=\"Reset\"\n    >",
+        "line": 120,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "e7f8a9b0",
+          "event": "click",
+          "method": "clearValue",
+          "pluginId": "searchInput",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"e7f8a9b0\"\n        event=\"click\"\n        method=\"clearValue\"\n        params={{}}\n        pluginId=\"searchInput\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 126,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "c1d2e3f4",
+          "event": "click",
+          "method": "clearValue",
+          "pluginId": "departmentFilter",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"c1d2e3f4\"\n        event=\"click\"\n        method=\"clearValue\"\n        params={{}}\n        pluginId=\"departmentFilter\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 136,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a5b6c7d8",
+          "event": "click",
+          "method": "clearValue",
+          "pluginId": "statusFilter",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"a5b6c7d8\"\n        event=\"click\"\n        method=\"clearValue\"\n        params={{}}\n        pluginId=\"statusFilter\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 146,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "e9f0a1b2",
+          "event": "click",
+          "method": "clearValue",
+          "pluginId": "dateRangeFilter",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"e9f0a1b2\"\n        event=\"click\"\n        method=\"clearValue\"\n        params={{}}\n        pluginId=\"dateRangeFilter\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 156,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "c3d4e5f6",
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "applyFilters",
+          "type": "datasource",
+          "waitMs": "100",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"c3d4e5f6\"\n        event=\"click\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"applyFilters\"\n        type=\"datasource\"\n        waitMs=\"100\"\n        waitType=\"debounce\"\n      />",
+        "line": 166,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Table",
+        "attributes": {
+          "id": "membersTable",
+          "cellSelection": "none",
+          "clearChangesetOnSave": "true",
+          "data": "{{ Array.isArray(selectMembers.data) ? selectMembers.data : [{ id: 1, name: 'Alice Johnson', email: 'alice@example.com', department: 'Engineering', status: 'active', joined_date: '2023-06-15', role: 'Senior Engineer' }, { id: 2, name: 'Bob Smith', email: 'bob@example.com', department: 'Marketing', status: 'active', joined_date: '2023-09-01', role: 'Marketing Lead' }, { id: 3, name: 'Carol Davis', email: 'carol@example.com', department: 'Engineering', status: 'on_leave', joined_date: '2024-01-10', role: 'Junior Engineer' }] }}",
+          "enableSaveActions": "true",
+          "heightType": "auto",
+          "primaryKeyColumnId": "c01a1",
+          "rowHeight": "medium",
+          "searchMode": "caseInsensitive",
+          "showBorder": "true",
+          "showFooter": "true",
+          "showHeader": "true"
+        },
+        "raw": "<Table\n      id=\"membersTable\"\n      cellSelection=\"none\"\n      changesetArray={[]}\n      clearChangesetOnSave={true}\n      data=\"{{ Array.isArray(selectMembers.data) ? selectMembers.data : [{ id: 1, name: 'Alice Johnson', email: 'alice@example.com', department: 'Engineering', status: 'active', joined_date: '2023-06-15', role: 'Senior Engineer' }, { id: 2, name: 'Bob Smith', email: 'bob@example.com', department: 'Marketing', status: 'active', joined_date: '2023-09-01', role: 'Marketing Lead' }, { id: 3, name: 'Carol Davis', email: 'carol@example.com', department: 'Engineering', status: 'on_leave', joined_date: '2024-01-10', role: 'Junior Engineer' }] }}\"\n      defaultSelectedRow={{ mode: \"index\", indexType: \"display\", index: 0 }}\n      enableSaveActions={true}\n      heightType=\"auto\"\n      primaryKeyColumnId=\"c01a1\"\n      rowHeight=\"medium\"\n      searchMode=\"caseInsensitive\"\n      showBorder={true}\n      showFooter={true}\n      showHeader={true}\n      templatePageSize={20}\n    >",
+        "line": 177,
+        "parents": [
+          "App",
+          "Frame"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c01a1",
+          "alignment": "left",
+          "editable": "false",
+          "format": "string",
+          "key": "id",
+          "label": "ID",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c01a1\"\n        alignment=\"left\"\n        editable={false}\n        format=\"string\"\n        key=\"id\"\n        label=\"ID\"\n        position=\"center\"\n        size={60}\n      />",
+        "line": 194,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c02b2",
+          "alignment": "left",
+          "format": "string",
+          "key": "name",
+          "label": "Name",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c02b2\"\n        alignment=\"left\"\n        format=\"string\"\n        key=\"name\"\n        label=\"Name\"\n        position=\"center\"\n        size={180}\n      />",
+        "line": 204,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c03c3",
+          "alignment": "left",
+          "format": "string",
+          "key": "email",
+          "label": "Email",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c03c3\"\n        alignment=\"left\"\n        format=\"string\"\n        key=\"email\"\n        label=\"Email\"\n        position=\"center\"\n        size={220}\n      />",
+        "line": 213,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c04d4",
+          "alignment": "left",
+          "format": "tag",
+          "key": "department",
+          "label": "Department",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c04d4\"\n        alignment=\"left\"\n        format=\"tag\"\n        formatOptions={{ automaticColors: true }}\n        key=\"department\"\n        label=\"Department\"\n        position=\"center\"\n        size={130}\n      />",
+        "line": 222,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c05e5",
+          "alignment": "left",
+          "editable": "true",
+          "format": "tag",
+          "key": "status",
+          "label": "Status",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c05e5\"\n        alignment=\"left\"\n        editable={true}\n        format=\"tag\"\n        formatOptions={{ automaticColors: true }}\n        key=\"status\"\n        label=\"Status\"\n        position=\"center\"\n        size={100}\n      />",
+        "line": 232,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c06f6",
+          "alignment": "left",
+          "format": "date",
+          "key": "joined_date",
+          "label": "Joined",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c06f6\"\n        alignment=\"left\"\n        format=\"date\"\n        key=\"joined_date\"\n        label=\"Joined\"\n        position=\"center\"\n        size={120}\n      />",
+        "line": 243,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Column",
+        "attributes": {
+          "id": "c07a7",
+          "alignment": "left",
+          "editable": "true",
+          "format": "string",
+          "key": "role",
+          "label": "Role",
+          "position": "center"
+        },
+        "raw": "<Column\n        id=\"c07a7\"\n        alignment=\"left\"\n        editable={true}\n        format=\"string\"\n        key=\"role\"\n        label=\"Role\"\n        position=\"center\"\n        size={150}\n      />",
+        "line": 252,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Action",
+        "attributes": {
+          "id": "a01a1",
+          "icon": "bold/interface-edit-pencil",
+          "label": "Edit"
+        },
+        "raw": "<Action id=\"a01a1\" icon=\"bold/interface-edit-pencil\" label=\"Edit\">",
+        "line": 262,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a7b8c9d0",
+          "event": "clickAction",
+          "method": "show",
+          "pluginId": "detailPane",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"a7b8c9d0\"\n          event=\"clickAction\"\n          method=\"show\"\n          params={{}}\n          pluginId=\"detailPane\"\n          type=\"widget\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 263,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "Action"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Action",
+        "attributes": {
+          "id": "a02b2",
+          "icon": "bold/interface-delete-bin-5-alternate",
+          "label": "Delete"
+        },
+        "raw": "<Action\n        id=\"a02b2\"\n        icon=\"bold/interface-delete-bin-5-alternate\"\n        label=\"Delete\"\n      >",
+        "line": 274,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "e1f2a3b4",
+          "event": "clickAction",
+          "method": "trigger",
+          "pluginId": "deleteMember",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"e1f2a3b4\"\n          event=\"clickAction\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"deleteMember\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 279,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "Action"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "ToolbarButton",
+        "attributes": {
+          "id": "tb01",
+          "icon": "bold/interface-text-formatting-filter-2",
+          "label": "Filter",
+          "type": "filter"
+        },
+        "raw": "<ToolbarButton\n        id=\"tb01\"\n        icon=\"bold/interface-text-formatting-filter-2\"\n        label=\"Filter\"\n        type=\"filter\"\n      />",
+        "line": 290,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "ToolbarButton",
+        "attributes": {
+          "id": "tb02",
+          "icon": "bold/interface-download-button-2",
+          "label": "Download",
+          "type": "download"
+        },
+        "raw": "<ToolbarButton\n        id=\"tb02\"\n        icon=\"bold/interface-download-button-2\"\n        label=\"Download\"\n        type=\"download\"\n      />",
+        "line": 296,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "ToolbarButton",
+        "attributes": {
+          "id": "tb03",
+          "icon": "bold/interface-arrows-synchronize",
+          "label": "Bulk Update",
+          "type": "custom"
+        },
+        "raw": "<ToolbarButton\n        id=\"tb03\"\n        icon=\"bold/interface-arrows-synchronize\"\n        label=\"Bulk Update\"\n        type=\"custom\"\n      >",
+        "line": 302,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "c5d6e7f8",
+          "event": "click",
+          "method": "trigger",
+          "pluginId": "setBulkUpdateData",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"c5d6e7f8\"\n          event=\"click\"\n          method=\"trigger\"\n          params={{ ordered: [] }}\n          pluginId=\"setBulkUpdateData\"\n          type=\"datasource\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 308,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "ToolbarButton"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a9b0c1d2",
+          "event": "save",
+          "method": "trigger",
+          "pluginId": "saveTableChanges",
+          "type": "datasource",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"a9b0c1d2\"\n        event=\"save\"\n        method=\"trigger\"\n        params={{ ordered: [] }}\n        pluginId=\"saveTableChanges\"\n        type=\"datasource\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 319,
+        "parents": [
+          "App",
+          "Frame",
+          "Table"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "confirmBulkUpdate",
+          "hidden": "true",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"confirmBulkUpdate\"\n  hidden={true}\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "detailsView",
+          "label": "Details",
+          "viewKey": "details"
+        },
+        "raw": "<View id=\"detailsView\" label=\"Details\" viewKey=\"details\">",
+        "line": 44,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "View",
+        "attributes": {
+          "id": "activityView",
+          "label": "Activity",
+          "viewKey": "activity"
+        },
+        "raw": "<View id=\"activityView\" label=\"Activity\" viewKey=\"activity\">",
+        "line": 142,
+        "parents": [
+          "Container"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "setupGuideModal",
+          "hideOnEscape": "true",
+          "overlayInteraction": "close",
+          "showOverlay": "true",
+          "size": "medium"
+        },
+        "raw": "<ModalFrame\n  id=\"setupGuideModal\"\n  hideOnEscape={true}\n  overlayInteraction=\"close\"\n  showOverlay={true}\n  size=\"medium\"\n>",
+        "line": 1,
+        "parents": [],
+        "file": "src/setupGuideModal.rsx"
+      }
+    ],
+    "navigation_evidence": [
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "55667788",
+          "event": "success",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n      id=\"55667788\"\n      event=\"success\"\n      method=\"hide\"\n      params={{}}\n      pluginId=\"confirmBulkUpdate\"\n      type=\"widget\"\n      waitMs=\"0\"\n      waitType=\"debounce\"\n    />",
+        "line": 87,
+        "parents": [
+          "GlobalFunctions",
+          "SqlQueryUnified"
+        ],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "b1c2d3e4",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"b1c2d3e4\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"confirmBulkUpdate\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 21,
+        "parents": [
+          "ModalFrame",
+          "Header",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "d9e0f1a2",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "confirmBulkUpdate",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"d9e0f1a2\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"confirmBulkUpdate\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 67,
+        "parents": [
+          "ModalFrame",
+          "Footer",
+          "Button"
+        ],
+        "file": "src/confirmBulkUpdate.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "f1a2b3c4",
+          "event": "click",
+          "method": "hide",
+          "pluginId": "detailPane",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"f1a2b3c4\"\n        event=\"click\"\n        method=\"hide\"\n        params={{}}\n        pluginId=\"detailPane\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 32,
+        "parents": [
+          "Container",
+          "Header",
+          "Button"
+        ],
+        "file": "src/detailContainer.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "fd4e5f6a",
+          "event": "click",
+          "method": "show",
+          "pluginId": "setupGuideModal",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n        id=\"fd4e5f6a\"\n        event=\"click\"\n        method=\"show\"\n        params={{}}\n        pluginId=\"setupGuideModal\"\n        type=\"widget\"\n        waitMs=\"0\"\n        waitType=\"debounce\"\n      />",
+        "line": 22,
+        "parents": [
+          "App",
+          "Frame",
+          "Button"
+        ],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "Event",
+        "attributes": {
+          "id": "a7b8c9d0",
+          "event": "clickAction",
+          "method": "show",
+          "pluginId": "detailPane",
+          "type": "widget",
+          "waitMs": "0",
+          "waitType": "debounce"
+        },
+        "raw": "<Event\n          id=\"a7b8c9d0\"\n          event=\"clickAction\"\n          method=\"show\"\n          params={{}}\n          pluginId=\"detailPane\"\n          type=\"widget\"\n          waitMs=\"0\"\n          waitType=\"debounce\"\n        />",
+        "line": 263,
+        "parents": [
+          "App",
+          "Frame",
+          "Table",
+          "Action"
+        ],
+        "file": "main.rsx"
+      }
+    ],
+    "bound_tables": [
+      "team_members"
+    ],
+    "sql_primary_tables": {
+      "selectDepartments": "team_members",
+      "selectMembers": "team_members"
+    },
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/confirmBulkUpdate.rsx",
+      "src/detailPane.rsx",
+      "src/detailContainer.rsx",
+      "src/setupGuideModal.rsx"
+    ],
+    "events": 29,
+    "unresolved_expression_references": []
+  },
+  "sha256": {
+    "Data/team_members.csv": "ef5a4d9d93bbf476e797c2c3231599323bd8246ea1461eb3a500fe2a6ab29dbd",
+    "gui/.positions.json": "739119c4a60ce084e8e83aad95300577c3ff78051389e4c24fe29a62626e1413",
+    "gui/functions.rsx": "946b4b4fc33e4144ac13ae9c69461707b2da08e0b7e0e0ef1b66bb6429dfd0d8",
+    "gui/lib/applyFilters.js": "74d864ffc81186adb9c918c39d0dfda0592ac88bdf61b2c8f911d1abe26fe3e6",
+    "gui/lib/selectDepartments.sql": "773ece28e121476799358dc7bc5e9554af6258132fbc40ecaa8febc6d31c7407",
+    "gui/lib/selectMembers.sql": "4bb40c9630f919d31dc9b847e2cd14ac990565cc6805147f4f57875ed9627435",
+    "gui/lib/setBulkUpdateData.js": "3de09198f7b4da3e1eaad366c02be3c8261e85f90a70b60d9c4f398e2c531ff8",
+    "gui/main.rsx": "7a1534d4e0046ea660c13c833603e41aaf010d208570915afc73dd490036ae1e",
+    "gui/metadata.json": "7210a0b8d365f7b2a82990ac82ae80e2820a4e1790a2159d4843aea889d58f3a",
+    "gui/src/confirmBulkUpdate.rsx": "cecbf3001095050bffabee7aa5a7ac4a279d02f1d0e8d09ebacb56b2475eb80b",
+    "gui/src/detailContainer.rsx": "3fc03c7bf105c8a7edd46e6e917c2e4edbfa69eb0709c289cb668322cbe2fd84",
+    "gui/src/detailPane.rsx": "a2004c576f055b84cd46de7d21d69c0c96b76949f2b9d00c03187e063012d45d",
+    "gui/src/setupGuideModal.rsx": "108fafeb20a8888072b0ae5b076a6f66548a26bf7258fc3b55737fd7e3533156"
+  }
+}

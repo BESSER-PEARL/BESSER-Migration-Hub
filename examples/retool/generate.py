@@ -20,7 +20,7 @@ def main():
     parser.add_argument('--resource-id', help='Retool DB resource UUID; defaults to a placeholder')
     args = parser.parse_args()
     name = f'example{args.example}'
-    root = Path(__file__).resolve().parent / name
+    root = Path(__file__).resolve().parent / 'base_examples' / name
     data_dir = next(path for path in root.iterdir() if path.name.lower() == 'data')
     gui_dir = next(path for path in root.iterdir() if path.name.lower() == 'gui')
     domain = retool_csv_to_buml(str(data_dir), module_name=name, rsx_dir=str(gui_dir))

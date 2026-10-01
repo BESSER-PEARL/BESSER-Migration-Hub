@@ -7,7 +7,15 @@ a parser bug would otherwise become the "ground truth" the generator is
 graded against). No parser code runs anywhere in this script.
 
 Run from the repository: python examples/retool/evaluate_generator.py
-Only the counts table is retained; pipeline artifacts use a temporary directory.
+The aggregate table is saved to evaluation/generator_results.md. Each
+scenario's full generated output (oracle_inventory.json, buml_generator_result/
+with csv/, the RSX app folder and zip, target_inventory.json) is kept on disk
+under evaluation_data/generator_evaluation/ReTool/<scenario>/ - not under
+examples/retool/, since these oracle scenarios have no retool-specific base
+example of their own (no retool parser ever runs here); the oracle BUML model
+being graded lives in evaluation_data/BUML_ground_truth/<scenario>/, right
+alongside it, matching evaluation_data/generator_evaluation/{APEX,ServiceNow}
+which already use this same oracle set for their own target platforms.
 """
 import json
 import runpy
@@ -69,18 +77,18 @@ def run_scenario(scenario, output_root):
     oracle = pivot_inventory(domain, gui)
     dump(out / 'oracle_inventory.json', oracle)
     generator = RetoolGenerator(domain, gui_model=gui, app_name=scenario,
-                                output_dir=str(out / 'buml_to_retool'), include_sample_data=True)
+                                output_dir=str(out / 'buml_generator_result'), include_sample_data=True)
     paths, archive = generator.generate()
-    schema_manifest = json.loads((out / 'buml_to_retool' / 'csv' / 'schema.json').read_text())
+    schema_manifest = json.loads((out / 'buml_generator_result' / 'csv' / 'schema.json').read_text())
     synthetic_columns = {t['name']: {c['name'] for c in t['columns'] if c['synthetic']} for t in schema_manifest['tables']}
     # Oracle association-end role names (e.g. "oowdemostores") don't always
     # resemble the referenced table's name, so csv_inventory's naming
     # heuristic alone misses some restored FK columns; schema.json's
     # `references` field is ground truth from the generator itself.
     known_fk_columns = {t['name']: {c['name'] for c in t['columns'] if c['references']} for t in schema_manifest['tables']}
-    target_data, _ = csv_inventory(out / 'buml_to_retool' / 'csv', synthetic_columns=synthetic_columns,
+    target_data, _ = csv_inventory(out / 'buml_generator_result' / 'csv', synthetic_columns=synthetic_columns,
                                    known_fk_columns=known_fk_columns)
-    target_gui = audit_gui(out / 'buml_to_retool' / scenario, {t['table'] for t in target_data['tables']})
+    target_gui = audit_gui(out / 'buml_generator_result' / scenario, {t['table'] for t in target_data['tables']})
     target_counts = target_data['counts'] | target_gui['counts']
     # CSV/RSX export has no native generalization/enum declarations. Action
     # types is NOT forced to 0 here: audit_gui now reconstructs it
@@ -122,8 +130,16 @@ def run_scenario(scenario, output_root):
 
 
 def main():
-    with tempfile.TemporaryDirectory(prefix='retool-generator-evaluation-') as workdir:
-        results = [run_scenario(scenario, workdir) for scenario in SCENARIOS]
+    # Persisted, not a temp dir, and not under examples/retool/: these
+    # scenarios have no retool-specific base example, so their output lives
+    # alongside the oracle BUML model it was generated from, consistent with
+    # how evaluation_data/generator_evaluation/{APEX,ServiceNow} are laid out
+    # for the same oracle set. <scenario>/oracle_inventory.json and
+    # buml_generator_result/ (csv/, RSX app folder, zip) are kept on disk for
+    # manual comparison against evaluation_data/BUML_ground_truth/<scenario>/.
+    output_root = ROOT / 'evaluation_data' / 'generator_evaluation' / 'ReTool'
+    output_root.mkdir(parents=True, exist_ok=True)
+    results = [run_scenario(scenario, output_root) for scenario in SCENARIOS]
     lines = ['# Retool generator element counts (RQ2 only, oracle BUML ground truth)', '',
              'Oracle BUML = independently-authored ground-truth model '
              '(`evaluation_data/BUML_ground_truth`), never produced by any parser run; '
@@ -195,8 +211,10 @@ def main():
               'reimplemented, so the two reports are comparable.',
               '- See `evaluate.py`\'s module docstring for why RQ1 (parser) and RQ2 (generator) '
               'are measured in separate scripts rather than chained together.', '',
-              'Regenerate: `python examples/retool/evaluate_generator.py`. Only this table is '
-              'saved; intermediate models and exports are temporary.', '']
+              'Regenerate: `python examples/retool/evaluate_generator.py`. This table is saved '
+              'here; each scenario\'s generated output is kept under '
+              '`evaluation_data/generator_evaluation/ReTool/<scenario>/buml_generator_result/` '
+              'for manual comparison.', '']
     output = Path(__file__).resolve().parent / 'evaluation' / 'generator_results.md'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text('\n'.join(lines), encoding='utf-8')

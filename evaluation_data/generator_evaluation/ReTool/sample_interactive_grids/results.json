@@ -1,0 +1,102 @@
+{
+  "scenario": "sample_interactive_grids",
+  "generator": {
+    "Entities": {
+      "reference": 3,
+      "output": 3,
+      "percent": 100.0
+    },
+    "Attributes": {
+      "reference": 29,
+      "output": 29,
+      "percent": 100.0
+    },
+    "Associations": {
+      "reference": 2,
+      "output": 2,
+      "percent": 100.0
+    },
+    "Multiplicities": {
+      "reference": 4,
+      "output": 4,
+      "percent": 100.0
+    },
+    "Generalizations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Enumerations": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Modules": {
+      "reference": 1,
+      "output": 1,
+      "percent": 100.0
+    },
+    "Screens": {
+      "reference": 47,
+      "output": 47,
+      "percent": 100.0
+    },
+    "Bound entities": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Buttons": {
+      "reference": 95,
+      "output": 95,
+      "percent": 100.0
+    },
+    "Action types": {
+      "reference": 4,
+      "output": 5,
+      "percent": 125.0
+    },
+    "Navigation": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Forms": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Labels": {
+      "reference": 95,
+      "output": 95,
+      "percent": 100.0
+    },
+    "DataLists": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "DataSources": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    },
+    "Input fields": {
+      "reference": 0,
+      "output": 0,
+      "percent": null
+    }
+  },
+  "dropped_screens": [],
+  "warnings": [
+    "Button 'Next' has no executable action binding.",
+    "Button 'Prev' has no executable action binding.",
+    "Button 'Cancel' has no executable action binding.",
+    "Button 'Save' has no executable action binding.",
+    "Button 'Submit' has no executable action binding.",
+    "Button 'Reset_Data' has no executable action binding.",
+    "Button 'Create_Text_Index' has no executable action binding.",
+    "Button 'Create' has no executable action binding.",
+    "Button 'Delete' has no executable action binding."
+  ]
+}

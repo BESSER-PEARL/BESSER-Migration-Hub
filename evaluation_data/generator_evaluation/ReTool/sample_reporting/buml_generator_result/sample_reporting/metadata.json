@@ -1,0 +1,74 @@
+{
+  "toolscriptVersion": "1.0.0",
+  "version": "43.0.9",
+  "pageUuid": "eadca473-dbba-524b-bc50-f9341769ceaf",
+  "appTemplate": {
+    "appMaxWidth": "100%",
+    "rootScreen": "Application_Theme_Style",
+    "version": "4.67.0",
+    "pageCodeFolders": {
+      "object": {
+        "Application_Theme_Style": {
+          "array": []
+        },
+        "Classic_Report": {
+          "array": []
+        },
+        "Drill_Down_IG": {
+          "array": []
+        },
+        "Faceted_Search": {
+          "array": []
+        },
+        "Filtering": {
+          "array": []
+        },
+        "Interactive_Grid": {
+          "array": []
+        },
+        "Manage_Sample_Data": {
+          "array": []
+        },
+        "Non_Tabular_Templates": {
+          "array": []
+        },
+        "Soundex": {
+          "array": []
+        },
+        "Administration": {
+          "array": []
+        },
+        "Analytic_Function_Examples": {
+          "array": []
+        },
+        "Cards": {
+          "array": []
+        },
+        "Connect_By": {
+          "array": []
+        },
+        "Group_By_Clause": {
+          "array": []
+        },
+        "Help": {
+          "array": []
+        },
+        "Linking_to_Interactive_Grids": {
+          "array": []
+        },
+        "Pivot_Syntax": {
+          "array": []
+        },
+        "SQL_Examples": {
+          "array": []
+        },
+        "String_Functions": {
+          "array": []
+        },
+        "Use_Cases": {
+          "array": []
+        }
+      }
+    }
+  }
+}

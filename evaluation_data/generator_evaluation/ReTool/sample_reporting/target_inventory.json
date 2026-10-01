@@ -1,0 +1,1079 @@
+{
+  "data": {
+    "tables": [
+      {
+        "table": "eba_demo_ir_dept",
+        "columns": [
+          "id",
+          "deptno",
+          "dname",
+          "loc"
+        ],
+        "rows": 1,
+        "file": "eba_demo_ir_dept.csv"
+      },
+      {
+        "table": "eba_demo_ir_emp",
+        "columns": [
+          "id",
+          "comm",
+          "deptno",
+          "empno",
+          "ename",
+          "hiredate",
+          "job",
+          "sal",
+          "ebademoiremp_mgr_id"
+        ],
+        "rows": 1,
+        "file": "eba_demo_ir_emp.csv"
+      }
+    ],
+    "counts": {
+      "Entities": 2,
+      "Attributes": 10,
+      "Associations": 1,
+      "Multiplicities": 2,
+      "Generalizations": 0,
+      "Enumerations": 0
+    }
+  },
+  "gui": {
+    "counts": {
+      "Modules": 1,
+      "Screens": 21,
+      "Bound entities": 0,
+      "Buttons": 15,
+      "Action types": 5,
+      "Navigation": 0,
+      "Forms": 0,
+      "Labels": 8,
+      "DataLists": 0,
+      "DataSources": 0,
+      "Input fields": 0
+    },
+    "tag_counts": {
+      "App": 1,
+      "Body": 1,
+      "Button": 15,
+      "Frame": 20,
+      "GlobalFunctions": 1,
+      "ModalFrame": 1,
+      "Screen": 20
+    },
+    "elements": [
+      {
+        "tag": "App",
+        "attributes": {},
+        "raw": "<App >",
+        "line": 1,
+        "parents": [],
+        "file": "main.rsx"
+      },
+      {
+        "tag": "GlobalFunctions",
+        "attributes": {},
+        "raw": "<GlobalFunctions >",
+        "line": 1,
+        "parents": [],
+        "file": "functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style",
+          "title": "Application_Theme_Style"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style\" title=\"Application_Theme_Style\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save\" text=\"Save\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Classic_Report",
+          "title": "Classic_Report"
+        },
+        "raw": "<Screen id=\"Classic_Report\" title=\"Classic_Report\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Classic_Report.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Classic_Report.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report\" text=\"Reset_Report\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Classic_Report.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Drill_Down_IG",
+          "title": "Drill_Down_IG"
+        },
+        "raw": "<Screen id=\"Drill_Down_IG\" title=\"Drill_Down_IG\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Drill_Down_IG.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Drill_Down_IG.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report_2",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report_2\" text=\"Reset_Report\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Drill_Down_IG.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Faceted_Search",
+          "title": "Faceted_Search"
+        },
+        "raw": "<Screen id=\"Faceted_Search\" title=\"Faceted_Search\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Faceted_Search.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Faceted_Search.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Faceted_Search.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Filtering",
+          "title": "Filtering"
+        },
+        "raw": "<Screen id=\"Filtering\" title=\"Filtering\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Filtering.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Filtering.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report_3",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report_3\" text=\"Reset_Report\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Filtering.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Interactive_Grid",
+          "title": "Interactive_Grid"
+        },
+        "raw": "<Screen id=\"Interactive_Grid\" title=\"Interactive_Grid\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Interactive_Grid.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Interactive_Grid.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Data",
+          "text": "Reset_Data"
+        },
+        "raw": "<Button id=\"Reset_Data\" text=\"Reset_Data\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Interactive_Grid.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Manage_Sample_Data",
+          "title": "Manage_Sample_Data"
+        },
+        "raw": "<Screen id=\"Manage_Sample_Data\" title=\"Manage_Sample_Data\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Manage_Sample_Data.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Manage_Sample_Data.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_2",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_2\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Manage_Sample_Data.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Data_2",
+          "text": "Reset_Data"
+        },
+        "raw": "<Button id=\"Reset_Data_2\" text=\"Reset_Data\" />",
+        "line": 4,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Manage_Sample_Data.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Non_Tabular_Templates",
+          "title": "Non_Tabular_Templates"
+        },
+        "raw": "<Screen id=\"Non_Tabular_Templates\" title=\"Non_Tabular_Templates\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Non_Tabular_Templates.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Non_Tabular_Templates.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_Report_4",
+          "text": "Reset_Report"
+        },
+        "raw": "<Button id=\"Reset_Report_4\" text=\"Reset_Report\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Non_Tabular_Templates.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Soundex",
+          "title": "Soundex"
+        },
+        "raw": "<Screen id=\"Soundex\" title=\"Soundex\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Soundex.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Soundex.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Reset_2",
+          "text": "Reset"
+        },
+        "raw": "<Button id=\"Reset_2\" text=\"Reset\" />",
+        "line": 3,
+        "parents": [
+          "Screen",
+          "Frame"
+        ],
+        "file": "src/Soundex.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Analytic_Function_Examples",
+          "title": "Analytic_Function_Examples"
+        },
+        "raw": "<Screen id=\"Analytic_Function_Examples\" title=\"Analytic_Function_Examples\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Analytic_Function_Examples.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Analytic_Function_Examples.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Cards",
+          "title": "Cards"
+        },
+        "raw": "<Screen id=\"Cards\" title=\"Cards\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Cards.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Cards.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Connect_By",
+          "title": "Connect_By"
+        },
+        "raw": "<Screen id=\"Connect_By\" title=\"Connect_By\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Connect_By.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Connect_By.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Group_By_Clause",
+          "title": "Group_By_Clause"
+        },
+        "raw": "<Screen id=\"Group_By_Clause\" title=\"Group_By_Clause\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Group_By_Clause.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Group_By_Clause.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Linking_to_Interactive_Grids",
+          "title": "Linking_to_Interactive_Grids"
+        },
+        "raw": "<Screen id=\"Linking_to_Interactive_Grids\" title=\"Linking_to_Interactive_Grids\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Linking_to_Interactive_Grids.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Linking_to_Interactive_Grids.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Pivot_Syntax",
+          "title": "Pivot_Syntax"
+        },
+        "raw": "<Screen id=\"Pivot_Syntax\" title=\"Pivot_Syntax\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Pivot_Syntax.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Pivot_Syntax.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "SQL_Examples",
+          "title": "SQL_Examples"
+        },
+        "raw": "<Screen id=\"SQL_Examples\" title=\"SQL_Examples\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/SQL_Examples.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/SQL_Examples.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "String_Functions",
+          "title": "String_Functions"
+        },
+        "raw": "<Screen id=\"String_Functions\" title=\"String_Functions\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/String_Functions.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/String_Functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Use_Cases",
+          "title": "Use_Cases"
+        },
+        "raw": "<Screen id=\"Use_Cases\" title=\"Use_Cases\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Use_Cases.rsx"
+      },
+      {
+        "tag": "Frame",
+        "attributes": {
+          "id": "$main",
+          "type": "main",
+          "padding": "8px 12px"
+        },
+        "raw": "<Frame id=\"$main\" type=\"main\" padding=\"8px 12px\">",
+        "line": 2,
+        "parents": [
+          "Screen"
+        ],
+        "file": "src/Use_Cases.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Maintain_Project_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Maintain_Project_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Maintain_Project_Form.rsx"
+      },
+      {
+        "tag": "Body",
+        "attributes": {},
+        "raw": "<Body >",
+        "line": 2,
+        "parents": [
+          "ModalFrame"
+        ],
+        "file": "src/Maintain_Project_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Cancel_3",
+          "text": "Cancel"
+        },
+        "raw": "<Button id=\"Cancel_3\" text=\"Cancel\" />",
+        "line": 3,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Maintain_Project_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Create",
+          "text": "Create"
+        },
+        "raw": "<Button id=\"Create\" text=\"Create\" />",
+        "line": 4,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Maintain_Project_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Delete",
+          "text": "Delete"
+        },
+        "raw": "<Button id=\"Delete\" text=\"Delete\" />",
+        "line": 5,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Maintain_Project_Form.rsx"
+      },
+      {
+        "tag": "Button",
+        "attributes": {
+          "id": "Save_2",
+          "text": "Save"
+        },
+        "raw": "<Button id=\"Save_2\" text=\"Save\" />",
+        "line": 6,
+        "parents": [
+          "ModalFrame",
+          "Body"
+        ],
+        "file": "src/Maintain_Project_Form.rsx"
+      }
+    ],
+    "screen_evidence": [
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Application_Theme_Style",
+          "title": "Application_Theme_Style"
+        },
+        "raw": "<Screen id=\"Application_Theme_Style\" title=\"Application_Theme_Style\" _order={0}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Application_Theme_Style.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Classic_Report",
+          "title": "Classic_Report"
+        },
+        "raw": "<Screen id=\"Classic_Report\" title=\"Classic_Report\" _order={1}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Classic_Report.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Drill_Down_IG",
+          "title": "Drill_Down_IG"
+        },
+        "raw": "<Screen id=\"Drill_Down_IG\" title=\"Drill_Down_IG\" _order={2}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Drill_Down_IG.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Faceted_Search",
+          "title": "Faceted_Search"
+        },
+        "raw": "<Screen id=\"Faceted_Search\" title=\"Faceted_Search\" _order={3}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Faceted_Search.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Filtering",
+          "title": "Filtering"
+        },
+        "raw": "<Screen id=\"Filtering\" title=\"Filtering\" _order={4}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Filtering.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Interactive_Grid",
+          "title": "Interactive_Grid"
+        },
+        "raw": "<Screen id=\"Interactive_Grid\" title=\"Interactive_Grid\" _order={5}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Interactive_Grid.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Manage_Sample_Data",
+          "title": "Manage_Sample_Data"
+        },
+        "raw": "<Screen id=\"Manage_Sample_Data\" title=\"Manage_Sample_Data\" _order={6}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Manage_Sample_Data.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Non_Tabular_Templates",
+          "title": "Non_Tabular_Templates"
+        },
+        "raw": "<Screen id=\"Non_Tabular_Templates\" title=\"Non_Tabular_Templates\" _order={7}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Non_Tabular_Templates.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Soundex",
+          "title": "Soundex"
+        },
+        "raw": "<Screen id=\"Soundex\" title=\"Soundex\" _order={8}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Soundex.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Administration",
+          "title": "Administration"
+        },
+        "raw": "<Screen id=\"Administration\" title=\"Administration\" _order={9}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Administration.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Analytic_Function_Examples",
+          "title": "Analytic_Function_Examples"
+        },
+        "raw": "<Screen id=\"Analytic_Function_Examples\" title=\"Analytic_Function_Examples\" _order={10}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Analytic_Function_Examples.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Cards",
+          "title": "Cards"
+        },
+        "raw": "<Screen id=\"Cards\" title=\"Cards\" _order={11}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Cards.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Connect_By",
+          "title": "Connect_By"
+        },
+        "raw": "<Screen id=\"Connect_By\" title=\"Connect_By\" _order={12}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Connect_By.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Group_By_Clause",
+          "title": "Group_By_Clause"
+        },
+        "raw": "<Screen id=\"Group_By_Clause\" title=\"Group_By_Clause\" _order={13}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Group_By_Clause.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Help",
+          "title": "Help"
+        },
+        "raw": "<Screen id=\"Help\" title=\"Help\" _order={14}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Help.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Linking_to_Interactive_Grids",
+          "title": "Linking_to_Interactive_Grids"
+        },
+        "raw": "<Screen id=\"Linking_to_Interactive_Grids\" title=\"Linking_to_Interactive_Grids\" _order={15}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Linking_to_Interactive_Grids.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Pivot_Syntax",
+          "title": "Pivot_Syntax"
+        },
+        "raw": "<Screen id=\"Pivot_Syntax\" title=\"Pivot_Syntax\" _order={16}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Pivot_Syntax.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "SQL_Examples",
+          "title": "SQL_Examples"
+        },
+        "raw": "<Screen id=\"SQL_Examples\" title=\"SQL_Examples\" _order={17}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/SQL_Examples.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "String_Functions",
+          "title": "String_Functions"
+        },
+        "raw": "<Screen id=\"String_Functions\" title=\"String_Functions\" _order={18}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/String_Functions.rsx"
+      },
+      {
+        "tag": "Screen",
+        "attributes": {
+          "id": "Use_Cases",
+          "title": "Use_Cases"
+        },
+        "raw": "<Screen id=\"Use_Cases\" title=\"Use_Cases\" _order={19}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Use_Cases.rsx"
+      },
+      {
+        "tag": "ModalFrame",
+        "attributes": {
+          "id": "Maintain_Project_Form",
+          "hidden": "true",
+          "showOverlay": "true"
+        },
+        "raw": "<ModalFrame id=\"Maintain_Project_Form\" hidden={true} showOverlay={true}>",
+        "line": 1,
+        "parents": [],
+        "file": "src/Maintain_Project_Form.rsx"
+      }
+    ],
+    "navigation_evidence": [],
+    "bound_tables": [],
+    "sql_primary_tables": {},
+    "visited_files": [
+      "main.rsx",
+      "functions.rsx",
+      "src/Application_Theme_Style.rsx",
+      "src/Classic_Report.rsx",
+      "src/Drill_Down_IG.rsx",
+      "src/Faceted_Search.rsx",
+      "src/Filtering.rsx",
+      "src/Interactive_Grid.rsx",
+      "src/Manage_Sample_Data.rsx",
+      "src/Non_Tabular_Templates.rsx",
+      "src/Soundex.rsx",
+      "src/Administration.rsx",
+      "src/Analytic_Function_Examples.rsx",
+      "src/Cards.rsx",
+      "src/Connect_By.rsx",
+      "src/Group_By_Clause.rsx",
+      "src/Help.rsx",
+      "src/Linking_to_Interactive_Grids.rsx",
+      "src/Pivot_Syntax.rsx",
+      "src/SQL_Examples.rsx",
+      "src/String_Functions.rsx",
+      "src/Use_Cases.rsx",
+      "src/Maintain_Project_Form.rsx"
+    ],
+    "events": 0,
+    "unresolved_expression_references": []
+  }
+}

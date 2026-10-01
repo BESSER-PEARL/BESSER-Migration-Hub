@@ -92,7 +92,7 @@ first.
 
 ## Try it with the bundled example
 
-Use `examples/mendix_to_powerapps/library.json` as the Mendix upload, pick the
+Use `examples/mendix/base_examples/library_catalog/library.json` as the Mendix upload, pick the
 `MyFirstModule` module, scope **Both**, generate the pivot, then target
 **Oracle APEX** or **Power Apps (Excel)**.
 
