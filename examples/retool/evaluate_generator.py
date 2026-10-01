@@ -82,9 +82,13 @@ def run_scenario(scenario, output_root):
                                    known_fk_columns=known_fk_columns)
     target_gui = audit_gui(out / 'buml_to_retool' / scenario, {t['table'] for t in target_data['tables']})
     target_counts = target_data['counts'] | target_gui['counts']
-    # CSV/RSX export has no native generalization/enum declarations; the
-    # generator doesn't serialize actionType back out (see evaluate.py).
-    target_counts.update(Generalizations=0, Enumerations=0, **{'Action types': 0})
+    # CSV/RSX export has no native generalization/enum declarations. Action
+    # types is NOT forced to 0 here: audit_gui now reconstructs it
+    # independently from the generated RSX's own Events/captions (same logic
+    # as evaluate.py's RQ1 report), so Target gets whatever that
+    # reconstruction finds - see the counting notes below for why this
+    # number is real but still not expected to match Oracle.
+    target_counts.update(Generalizations=0, Enumerations=0)
     dump(out / 'target_inventory.json', {'data': target_data, 'gui': target_gui})
     result = {'scenario': scenario, 'generator': ratios(oracle['counts'], target_counts, DATA_KEYS + GUI_KEYS),
               'dropped_screens': dropped, 'warnings': generator.warnings}
@@ -138,11 +142,21 @@ def main():
               'the oracle\'s association-end role names (e.g. `oowdemostores`) don\'t always '
               'resemble the referenced table\'s name the way `evaluate.py`\'s naming heuristic '
               'expects.',
-              '- Action types: Target is always 0 for the same reason as in `evaluate.py` - the '
-              'generator never serializes `Button.actionType` back into the output. The oracle '
-              'here has real, hand-assigned values (e.g. brookstrut: 75 Cancel, 6 Add, 5 Save, '
-              '3 Delete across 89 buttons), so this gap is not an artifact of this script\'s '
-              'counting - it is a genuine, confirmed generator limitation.',
+              '- Action types: Target is a real reconstructed number here (not forced to 0), using '
+              'the same independent, event-aware classifier `evaluate.py` applies for RQ1. But it '
+              'is NOT expected to match Oracle, and a match or mismatch is not a meaningful '
+              'generator-quality signal in either direction, for a reason specific to these oracle '
+              'scenarios: `Button.actionType` is never serialized by the generator (confirmed - it '
+              'appears only in `migrator/parsers/retool`, never in `migrator/generators/retool`), '
+              'and none of these oracle GUI models wire any `Event`/Transition onto their buttons '
+              '(0 occurrences of `.events` in brookstrut\'s `gui_model.py`), so the generator never '
+              'has executable wiring to emit either - the generated RSX has zero `<Event>` tags on '
+              'these buttons. The Target number is therefore reconstructed from caption text alone, '
+              'which is strictly weaker evidence than whatever basis the oracle file\'s author used '
+              'to hand-assign its values (e.g. brookstrut assigns `Cancel` to 75/89 buttons, '
+              'including ones like "Up" and "Reset_Report" whose caption has no cancel-ish keyword) '
+              '- so Oracle and Target counts can legitimately differ (brookstrut: 4 vs 5) without '
+              'that difference meaning anything about generator correctness.',
               '- Labels is NOT a reliable number in this report: `pivot_inventory`\'s Labels '
               'count excludes a Button when `label == name`, because in parser output that '
               'specific case means a caption-less button fell back to its raw widget id (see '
